@@ -1,0 +1,7 @@
+/* AERIS V31 foundation: small, isolated enhancements only. */
+.aeris-core-status{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:999px;border:1px solid rgba(114,245,213,.18);background:rgba(114,245,213,.05);font-size:.58rem;letter-spacing:.1em;font-weight:900;color:#72f5d5}
+.aeris-core-status i{width:6px;height:6px;border-radius:50%;background:#72f5d5;box-shadow:0 0 12px #72f5d5;display:block}
+.mapNode.aeris-complete{border-color:rgba(9,155,130,.32)}
+.mapNode.aeris-complete:after{content:'✓';position:absolute;right:7px;top:6px;font-size:.65rem;color:#079b82;font-weight:1000}
+.mapNode.aeris-locked{filter:saturate(.5);cursor:not-allowed}
+@media(prefers-reduced-motion:reduce){.aeris-core-status i{box-shadow:none}}
