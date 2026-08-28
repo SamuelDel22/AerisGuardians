@@ -1,0 +1,284 @@
+/* AERIS V49 — Responsive Architecture
+   Design-only pass: no new sections, no content changes, no API/Worker changes. */
+:root{
+  --v49-max:1180px;
+  --v49-gutter:clamp(16px,3vw,34px);
+  --v49-radius:26px;
+  --v49-shadow:0 22px 60px rgba(5,31,39,.12);
+  --v49-dark:#071d26;
+  --v49-dark2:#0d3e49;
+  --v49-mint:#72f5d5;
+  --v49-cyan:#69e8ff;
+  --v49-violet:#9b8cff;
+}
+
+/* ---------- global layout ---------- */
+html{width:100%;overflow-x:hidden;scroll-padding-top:88px}
+body{width:100%;min-width:0;overflow-x:hidden}
+*,*::before,*::after{min-width:0}
+img,video,svg,canvas{max-width:100%;height:auto}
+button,input,textarea,select{font:inherit;max-width:100%}
+button,a{ -webkit-tap-highlight-color:transparent }
+p,h1,h2,h3,h4,h5,h6,small,strong,b,span{overflow-wrap:anywhere}
+.wrap,.heroInner{width:min(var(--v49-max),calc(100% - (var(--v49-gutter) * 2)));margin-inline:auto}
+section{position:relative}
+.top,.v16-head,.missionMapHead,.pathwayHead,.whatIfTop,.aiHeader{min-width:0}
+.top>*:first-child,.v16-head>*:first-child,.missionMapHead>*:first-child{min-width:0}
+
+/* ---------- desktop navigation ---------- */
+.nav{width:min(var(--v49-max),calc(100% - 28px));min-height:62px;gap:10px}
+.brand{min-width:0;flex:0 0 auto}
+.brandText{min-width:0}
+.links{min-width:0;flex:1;justify-content:center}
+.links a{min-height:42px}
+.langSwitch{flex:0 0 auto}
+
+/* ---------- hero ---------- */
+.hero{min-height:clamp(700px,92vh,900px)}
+.heroInner{padding-top:clamp(130px,17vh,170px);padding-bottom:clamp(105px,13vh,145px)}
+.heroLogo{object-fit:cover}
+.hero h1{max-width:980px}
+.hero p{max-width:720px}
+.actions{align-items:center}
+.actions .btn{min-width:0}
+
+/* ---------- information route ---------- */
+.v16-grid{grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr)}
+.v16-card{min-width:0}
+.v16-route{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.v16-route button{min-width:0}
+.v16-route button i{display:block;overflow:hidden}
+.v16-route button img{width:100%;aspect-ratio:1.2;object-fit:cover}
+.v16-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v16-stat{min-width:0}
+.v16-achievements{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+
+/* ---------- content grids ---------- */
+.cards{grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch}
+.card{min-width:0;height:100%}
+.story{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}
+.story>*{min-width:0}
+.photo{min-width:0}
+.gallery{grid-template-columns:minmax(0,1.5fr) repeat(2,minmax(0,1fr))}
+.gallery figure{min-width:0}
+
+/* ---------- evidence ---------- */
+.evidenceGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.evidenceGrid>*{min-width:0}
+.evidenceStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.evidenceCard{min-width:0}
+.pathway{min-width:0}
+.pathwaySteps{min-width:0}
+
+/* ---------- guardian HQ / mission map ---------- */
+.hqGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.missionTelemetry{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.missionTelemetry>div{min-width:0}
+.missionMap{min-width:0}
+.mapNodes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.mapNode{min-width:0}
+.mapIcon{overflow:hidden}
+.mapIcon img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- mercury lab ---------- */
+.labGrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:18px}
+.labVisual,.labInfo,.labShell{min-width:0}
+.labScene{min-width:0}
+.labNode{min-width:0}
+.labPathway{min-width:0}
+.fishExplorer{min-width:0}
+
+/* ---------- scenario ---------- */
+.whatIfCard{min-width:0}
+.whatMetrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.whatMetric{min-width:0}
+.whatSlider{width:100%;display:block}
+
+/* ---------- game ---------- */
+.game{min-width:0}
+.hud{grid-template-columns:minmax(0,1fr) auto auto}
+.question{min-width:0}
+.options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.option{min-width:0;white-space:normal}
+.gameNav .btn{min-width:120px}
+.relics{grid-template-columns:repeat(5,minmax(0,1fr))}
+.relic{min-width:0}
+.legacyGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.legacyBtn{min-width:0}
+.endingStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+
+/* ---------- passport ---------- */
+.passportGrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:18px;align-items:stretch}
+.passportCard,.passportActions{min-width:0}
+.passportStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.passportBadgeRow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+
+/* ---------- AI ---------- */
+.guardianAIBox{width:100%;min-width:0}
+.aiHeader{gap:12px}
+.aiBrand{display:flex;align-items:center;gap:9px;min-width:0}
+.aiBrand img{width:30px;height:30px;object-fit:contain;flex:0 0 auto}
+.aiSuggestions,.v16-aiTools{min-width:0}
+.aiChat{min-width:0;overscroll-behavior:contain}
+.aiMsg{overflow-wrap:anywhere;word-break:normal}
+.aiForm{min-width:0}
+.aiForm input{min-width:0;width:100%}
+
+/* ---------- floating controls ---------- */
+.guardianHqFloating{max-width:calc(100vw - 32px)}
+.guardianHqFloatingText{overflow:hidden;text-overflow:ellipsis}
+.ambient,.soundFX{width:48px;height:48px}
+
+/* ---------- tablet ---------- */
+@media (max-width:980px){
+  .nav{width:calc(100% - 20px)}
+  .links a{padding-inline:8px;font-size:.72rem}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .v16-grid{grid-template-columns:1fr}
+  .v16-route{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .story{grid-template-columns:1fr}
+  .photo{min-height:430px}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gallery figure:first-child{grid-column:1/-1;grid-row:auto;height:420px}
+  .evidenceGrid{grid-template-columns:1fr 1fr}
+  .evidenceGrid>*:first-child{grid-column:1/-1}
+  .labGrid{grid-template-columns:1fr}
+  .hqGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .missionTelemetry{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mapNodes{grid-template-columns:repeat(5,minmax(115px,1fr));overflow-x:auto;padding-bottom:7px;scroll-snap-type:x proximity}
+  .mapNode{scroll-snap-align:start}
+  .whatMetrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .relics{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .passportGrid{grid-template-columns:1fr}
+}
+
+/* ---------- phone ---------- */
+@media (max-width:700px){
+  :root{--v49-gutter:16px;--v49-radius:21px}
+  html{scroll-padding-top:76px}
+  section{padding-block:58px}
+  .nav{top:7px;width:calc(100% - 14px);min-height:56px;padding:7px 8px 7px 10px;border-radius:17px}
+  .brandLogo{width:35px;height:35px}
+  .brandText strong{font-size:.74rem}
+  .brandText small{font-size:.49rem}
+  .nav .links{display:none!important;order:5;flex-basis:100%;width:100%;margin:0;padding:5px 0 2px;gap:5px}
+  .nav .links.open{display:grid!important;grid-template-columns:repeat(3,1fr);margin-top:3px}
+  .nav .links a{min-height:44px;padding:8px 5px;justify-content:center;font-size:.68rem}
+  .aerisNavIcon{width:20px;height:20px;object-fit:contain}
+  .nav .mobileMenu{display:block;flex:0 0 auto;margin:0 2px 0 auto}
+  .nav .langSwitch{position:static;transform:none;margin:0;font-size:.65rem;padding:7px 8px}
+  .hero{min-height:calc(100svh - 4px);min-height:720px}
+  .heroInner{padding-top:120px;padding-bottom:105px}
+  .heroLogo{width:82px;height:82px;border-radius:22px}
+  .hero h1{font-size:clamp(2.65rem,12vw,4.3rem);line-height:.94;max-width:100%}
+  .hero p{font-size:.94rem;line-height:1.55}
+  .classCard{max-width:100%;line-height:1.4}
+  .problemFlow{max-width:100%}
+  .actions{display:grid;grid-template-columns:1fr;width:100%;gap:9px}
+  .actions .btn{width:100%}
+  .live{bottom:12px;max-width:calc(100% - 28px);white-space:normal;text-align:center;line-height:1.3}
+
+  .top{display:block;margin-bottom:22px}
+  .top .lead{margin-top:10px}
+  h2{font-size:clamp(2rem,9.5vw,3rem);line-height:1}
+  .eyebrow,.sourceType{font-size:.65rem}
+
+  .v16-route{display:flex;overflow-x:auto;gap:9px;padding:3px 2px 9px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .v16-route button{flex:0 0 128px;scroll-snap-align:start}
+  .v16-route button img{aspect-ratio:1.35}
+  .v16-detail{line-height:1.5}
+  .v16-stats{grid-template-columns:1fr 1fr}
+  .v16-achievements{grid-template-columns:1fr}
+
+  .cards{grid-template-columns:1fr}
+  .card{padding:20px}
+  .story{gap:12px}
+  .photo{min-height:320px}
+  .dark{padding:23px}
+  .gallery{grid-template-columns:1fr}
+  .gallery figure,.gallery figure:first-child{height:280px;grid-column:auto}
+
+  .evidenceGrid{grid-template-columns:1fr}
+  .evidenceGrid>*:first-child{grid-column:auto}
+  .evidenceStats{grid-template-columns:1fr}
+  .evidenceHero{padding:22px}
+  .pathwayHead{display:block}
+  .pathwayReset{margin-top:12px;width:100%}
+  .pathwaySteps{overflow-x:auto;display:flex;gap:9px;padding-bottom:8px}
+  .pathwaySteps>*{flex:0 0 150px}
+
+  .hqGrid{grid-template-columns:1fr 1fr}
+  .missionTelemetry{grid-template-columns:1fr 1fr}
+  .missionMap{padding:20px}
+  .missionMapHead{display:block}
+  .mapNodes{grid-template-columns:none;display:flex;overflow-x:auto;gap:10px;padding-bottom:8px}
+  .mapNode{flex:0 0 142px}
+  .mapDetail{margin-top:12px}
+
+  .labGrid{grid-template-columns:1fr}
+  .labVisual,.labInfo{width:100%}
+  .labPathway{overflow-x:auto}
+  .fishChoice{grid-template-columns:46px 1fr}
+
+  .whatMetrics{grid-template-columns:1fr 1fr;gap:9px}
+  .whatMetric{padding:13px}
+  .whatLabels{font-size:.65rem}
+
+  .hud{grid-template-columns:1fr 1fr;gap:9px}
+  .hud>div:last-child{grid-column:1/-1}
+  .question{padding:19px}
+  .question h3{font-size:1.18rem}
+  .options{grid-template-columns:1fr}
+  .gameNav{display:grid;grid-template-columns:1fr 1fr}
+  .gameNav .btn{min-width:0;width:100%}
+  .relics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .legacyGrid{grid-template-columns:1fr}
+  .endingStats{grid-template-columns:1fr 1fr 1fr}
+  .scoreBig{font-size:4rem}
+
+  .passportStats{grid-template-columns:1fr 1fr 1fr;gap:7px}
+  .passportBadgeRow{grid-template-columns:1fr 1fr}
+  .passportCard,.passportActions{padding:20px}
+
+  .aiHeader{padding:15px}
+  .aiChat{height:min(52vh,360px);padding:14px 12px}
+  .aiMsg{max-width:94%;font-size:.9rem}
+  .aiForm{padding:11px 12px}
+  .aiForm .btn{flex:0 0 auto;padding-inline:14px}
+  .aiSuggestions,.v16-aiTools{overflow-x:auto;flex-wrap:nowrap!important;padding-inline:12px}
+  .aiSuggestion,.v16-aiTools button{white-space:nowrap;flex:0 0 auto}
+  .aiNote{padding-inline:12px}
+
+  .guardianHqFloating{right:10px;bottom:12px;min-height:48px;padding:5px 12px 5px 7px;gap:7px;font-size:.66rem;letter-spacing:.08em}
+  .guardianHqFloatingIcon{width:36px;height:36px;flex-basis:36px;border-radius:11px}
+  .ambient{left:10px;bottom:12px;width:42px;height:42px}
+  .soundFX{left:10px;bottom:62px;width:42px;height:42px}
+  footer{padding-bottom:90px}
+}
+
+/* ---------- very small phones ---------- */
+@media (max-width:390px){
+  .wrap,.heroInner{width:calc(100% - 26px)}
+  .nav{width:calc(100% - 10px)}
+  .brandText{display:none}
+  .heroInner{padding-top:112px}
+  .heroLogo{width:72px;height:72px}
+  .hero h1{font-size:2.55rem}
+  .problemFlow span{font-size:.58rem}
+  .hqGrid,.missionTelemetry{grid-template-columns:1fr}
+  .whatMetrics{grid-template-columns:1fr}
+  .passportStats{grid-template-columns:1fr}
+  .endingStats{grid-template-columns:1fr}
+  .guardianHqFloatingText{display:none}
+  .guardianHqFloating{width:46px;height:46px;padding:4px;justify-content:center}
+  .guardianHqFloatingIcon{width:36px;height:36px;flex-basis:36px}
+}
+
+/* ---------- accessibility / interaction ---------- */
+@media (hover:hover) and (pointer:fine){
+  .card,.evidenceCard,.whatMetric,.labNode,.mapNode,.relic,.passportCard,.passportActions,.question{will-change:transform}
+}
+:focus-visible{outline:2px solid var(--v49-cyan);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
