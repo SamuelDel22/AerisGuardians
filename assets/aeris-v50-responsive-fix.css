@@ -1,0 +1,135 @@
+/* AERIS V50 — desktop/mobile visual correction pass
+   No sections or functionality changed. Fixes clipping, wrapping, and responsive proportions. */
+
+/* ---------- HERO: never let the highlighted line become a solid rectangle ---------- */
+.hero h1 span{
+  display:inline-block !important;
+  width:auto !important;
+  max-width:100% !important;
+  color:#72f5d5 !important;
+  -webkit-text-fill-color:#72f5d5 !important;
+  background:none !important;
+  -webkit-background-clip:border-box !important;
+  background-clip:border-box !important;
+  text-shadow:0 4px 24px rgba(0,0,0,.34),0 0 26px rgba(32,224,178,.12) !important;
+  white-space:normal !important;
+}
+.hero h1{max-width:1040px;overflow:visible !important}
+.heroInner{width:min(1180px,calc(100% - 48px));}
+.hero{min-height:clamp(700px,94svh,960px)}
+.heroInner{padding-top:clamp(132px,15vh,168px);padding-bottom:clamp(92px,11vh,124px)}
+.hero p{max-width:760px}
+
+/* Keep the hero readable over photographs at every desktop size. */
+.hero:after{pointer-events:none;z-index:1}
+.heroInner{z-index:3}
+.live{z-index:4}
+
+/* ---------- INFORMATION ROUTE: use the full desktop width ---------- */
+.v16-progress .wrap{width:min(1180px,calc(100% - 48px))}
+.v16-grid{
+  grid-template-columns:minmax(0,1.52fr) minmax(310px,.88fr) !important;
+  gap:18px !important;
+  align-items:stretch !important;
+}
+.v16-card{min-width:0 !important;overflow:hidden}
+.v16-route{
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:9px !important;
+}
+.v16-route button{
+  min-width:0 !important;
+  width:100% !important;
+  grid-template-columns:42px minmax(0,1fr) !important;
+}
+.v16-route button b,
+.v16-route button small{min-width:0;overflow-wrap:normal;word-break:normal}
+.v16-route button b{font-size:.72rem !important;line-height:1.15 !important}
+.v16-route button small{font-size:.58rem !important;line-height:1.2 !important}
+.v16-route button i{flex:0 0 42px}
+.v16-detail{min-height:96px}
+.v16-head{align-items:flex-end}
+.v16-head p{max-width:520px}
+
+/* Guardian Knowledge panel: never collapse its content into tiny columns. */
+.v16-card aside,
+aside.v16-card{min-width:0}
+.v16-stats{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+.v16-achievements{grid-template-columns:1fr !important}
+.v16-ach{min-width:0}
+.v16-ach > div{min-width:0}
+.v16-ach strong,.v16-ach small{overflow-wrap:normal;word-break:normal}
+
+/* ---------- IMAGES: contain logos/emblems, cover photographic crops ---------- */
+.heroLogo,.brandLogo,.aerisIntroMark img,.guardianIntroMark img,
+.guardianIdentificationEmblem img,.hqGuardianEmblem img,
+.guardianAvatar img,.guardianSeal img,.guardianEndingIcon img,
+.guardianOrb .relicIcon img,.aerisNavIcon,.destinationIcon{
+  object-fit:contain !important;
+}
+.factPhoto img,.photo img,.gallery img,.mapIcon img,.v16-route button i img{
+  object-fit:cover !important;
+}
+.v16-route button i{overflow:hidden !important}
+
+/* ---------- DESKTOP TYPOGRAPHY ---------- */
+@media (min-width:901px){
+  .v16-progress{padding-block:82px}
+  .v16-card{padding:24px}
+  .v16-route button{padding:12px 8px}
+  .v16-route button i{width:46px;height:46px;flex-basis:46px}
+  .v16-route button{grid-template-columns:46px minmax(0,1fr) !important}
+  .v16-route button b{font-size:.74rem !important}
+  .v16-route button small{font-size:.59rem !important}
+  .v16-detail p{max-width:720px}
+}
+
+/* ---------- TABLET ---------- */
+@media (max-width:900px){
+  .v16-grid{grid-template-columns:1fr !important}
+  .v16-route{grid-template-columns:repeat(5,minmax(118px,1fr)) !important;overflow-x:auto}
+  .v16-route button{grid-template-columns:42px minmax(0,1fr) !important}
+}
+
+/* ---------- PHONE ---------- */
+@media (max-width:700px){
+  .heroInner{width:calc(100% - 28px);padding-top:112px;padding-bottom:100px}
+  .hero{min-height:calc(100svh - 4px);}
+  .hero h1{max-width:100%;font-size:clamp(2.55rem,11.8vw,4.25rem);line-height:.95}
+  .hero h1 span{display:block !important;margin-top:3px}
+  .heroLogo{width:78px;height:78px}
+  .classCard{display:flex;align-items:center;justify-content:center;text-align:center}
+  .problemFlow{align-items:stretch}
+  .problemFlow span{white-space:normal}
+  .actions{position:relative;z-index:5}
+
+  .v16-progress .wrap{width:calc(100% - 28px)}
+  .v16-progress{padding-block:58px}
+  .v16-grid{grid-template-columns:1fr !important}
+  .v16-card{padding:18px !important}
+  .v16-route{display:flex !important;overflow-x:auto !important;gap:8px !important;padding:4px 2px 10px !important}
+  .v16-route button{flex:0 0 148px !important;width:148px !important;grid-template-columns:44px minmax(0,1fr) !important;padding:10px 7px !important}
+  .v16-route button i{width:44px;height:44px;flex-basis:44px}
+  .v16-route button b{font-size:.64rem !important}
+  .v16-route button small{font-size:.53rem !important}
+  .v16-detail{min-height:0 !important}
+  .v16-stats{grid-template-columns:1fr 1fr !important}
+
+  /* Prevent the HQ profile from creating horizontal overflow. */
+  .guardianTop,.hqGuardianTitle{min-width:0}
+  .guardianTop > div,.hqGuardianTitle > div{min-width:0}
+  .profileStats{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+}
+
+@media (max-width:390px){
+  .heroInner{width:calc(100% - 24px)}
+  .heroLogo{width:70px;height:70px}
+  .hero h1{font-size:2.5rem}
+  .v16-progress .wrap{width:calc(100% - 24px)}
+  .v16-route button{flex-basis:138px !important;width:138px !important}
+  .v16-card{padding:15px !important}
+}
+
+/* ---------- HARD SAFETY AGAINST VIEWPORT OVERFLOW ---------- */
+html,body{max-width:100%;overflow-x:hidden !important}
+.v16-progress,.hero,section,footer{max-width:100%;overflow-x:hidden}
