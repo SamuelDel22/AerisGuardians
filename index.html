@@ -803,7 +803,7 @@ body{padding-bottom:92px}
 <link rel="stylesheet" href="assets/aeris-v49-responsive.css">
 <link rel="stylesheet" href="assets/aeris-v50-responsive-fix.css">
 </head>
-<body data-aeris-version="51">
+<body data-aeris-version="51.2">
 <div aria-labelledby="briefingTitle" aria-modal="true" class="guardianBriefing" id="guardianBriefing" role="dialog">
 <div class="introAurora"></div>
 <div class="introGrid"></div>
@@ -2711,7 +2711,9 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opac
   const revealEls=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window&&!reduced){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px'});revealEls.forEach(e=>io.observe(e));}else revealEls.forEach(e=>e.classList.add('show'));
   if(!reduced){for(let i=0;i<14;i++){const p=document.createElement('span');p.className='floatParticle';p.style.left=(Math.random()*100)+'vw';p.style.setProperty('--drift',((Math.random()-.5)*120)+'px');p.style.animationDuration=(10+Math.random()*12)+'s';p.style.animationDelay=(-Math.random()*18)+'s';document.body.appendChild(p)}}
-  const sections=[...document.querySelectorAll('section[id]')],links=[...document.querySelectorAll('#navLinks a')];const update=()=>{if(document.body.classList.contains('aeris-single-mode'))return;let current='information';for(const sec of sections){if(scrollY+window.innerHeight*.32>=sec.offsetTop)current=sec.id}links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current||((current==='guardianAI'||current==='game')&&a.getAttribute('href')==='#'+current)))};addEventListener('scroll',update,{passive:true});update();
+  // V51.2: top navigation is controlled only by the three mode buttons.
+  // Do NOT infer the active mode from page scroll position.
+
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
@@ -3028,6 +3030,27 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
+
+<script id="aeris-v51-2-nav-scroll-lock">
+(function(){
+  function boot(){
+    const body=document.body;
+    const links=[...document.querySelectorAll('#navLinks a')];
+    if(!body || links.length<3) return;
+    const modes=['information','game','chatbot'];
+    function paint(){
+      const mode=modes.includes(body.dataset.aerisMode) ? body.dataset.aerisMode : 'information';
+      links.forEach((a,i)=>a.classList.toggle('active',modes[i]===mode));
+    }
+    paint();
+    window.addEventListener('scroll',paint,{passive:true});
+    window.addEventListener('resize',paint,{passive:true});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+</script>
+
 </body>
 </html>
 
