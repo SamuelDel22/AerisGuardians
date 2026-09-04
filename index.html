@@ -3050,6 +3050,100 @@ load();render();
 const ls=document.getElementById('langSwitch');if(ls)ls.addEventListener('click',()=>setTimeout(render,80));
 })();
 </script>
+
+<style id="aeris-v56-hard-mode-fix">
+/* V56 HARD FIX: HQ is Information-only; it can never overlay Game/Chatbot. */
+body.aeris-single-mode[data-aeris-mode="game"] #hq,
+body.aeris-single-mode[data-aeris-mode="chatbot"] #hq{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+body.aeris-single-mode[data-aeris-mode="game"] #hq .guardianCard,
+body.aeris-single-mode[data-aeris-mode="chatbot"] #hq .guardianCard{display:none!important}
+/* The chatbot itself must be the only visible destination in Chatbot mode. */
+body.aeris-single-mode[data-aeris-mode="chatbot"] #guardianAI{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+body.aeris-single-mode[data-aeris-mode="chatbot"] #guardianAI *{pointer-events:auto}
+</style>
+<script id="aeris-v56-chatbot-hard-fix">
+(function(){
+  'use strict';
+  const CHAT='#guardianAI', FORM='#aiForm', INPUT='#aiInput', BOX='#aiChat';
+  let busy=false;
+
+  function get(id){return document.querySelector(id)}
+  function modeChat(){return document.body && document.body.dataset.aerisMode==='chatbot'}
+  function activateChat(){
+    document.body.classList.add('aeris-single-mode');
+    document.body.dataset.aerisMode='chatbot';
+    document.querySelectorAll('.aerisTopLink').forEach((a,i)=>a.classList.toggle('active',i===2));
+    const chat=get(CHAT); if(chat) chat.style.display='block';
+    const hq=get('#hq'); if(hq){hq.style.display='none';hq.style.visibility='hidden';hq.style.pointerEvents='none'}
+    try{localStorage.setItem('aeris_single_mode','chatbot')}catch(e){}
+  }
+  function add(text,who){
+    const box=get(BOX); if(!box)return;
+    const d=document.createElement('div'); d.className='aiMsg '+(who==='user'?'user':'bot'); d.textContent=text;
+    box.appendChild(d); box.scrollTop=box.scrollHeight;
+  }
+  function language(){return (window.currentLang||'en')==='es'?'es':'en'}
+  function localAnswer(q){
+    const x=q.toLowerCase(); const es=language()==='es';
+    if(/mercur|mercurio/.test(x)) return es?'El mercurio puede liberarse al ambiente por actividades mineras y, una vez en los ecosistemas acuáticos, puede transformarse en metilmercurio y acumularse en peces.':'Mercury can be released into the environment by mining activities and, in aquatic ecosystems, can be transformed into methylmercury and accumulate in fish.';
+    if(/min(ería|ing)|oro|gold/.test(x)) return es?'La minería ilegal puede remover suelo y vegetación y liberar contaminantes al agua. En el Bajo Cauca, el mercurio asociado a la extracción de oro es una preocupación ambiental importante.':'Illegal mining can disturb soil and vegetation and release contaminants into water. In the Bajo Cauca, mercury associated with gold extraction is an important environmental concern.';
+    if(/pez|fish|pescad/.test(x)) return es?'Los peces pueden acumular metilmercurio a través de la cadena alimentaria. Por eso forman parte de una ruta importante de exposición en ecosistemas acuáticos.':'Fish can accumulate methylmercury through the food web. That is why they are an important part of an exposure pathway in aquatic ecosystems.';
+    if(/cauca|caucasia|río|river/.test(x)) return es?'El proyecto se centra en el Río Cauca y el Bajo Cauca, especialmente en los impactos ambientales relacionados con la minería ilegal y el mercurio.':'This project focuses on the Cauca River and the Bajo Cauca, especially environmental impacts associated with illegal mining and mercury.';
+    if(/proteg|cuid|acción|action|community|comunidad/.test(x)) return es?'Una buena acción es aprender de fuentes confiables, compartir información verificada y apoyar el cuidado y monitoreo de los ecosistemas.':'Good actions include learning from reliable sources, sharing verified information, and supporting ecosystem care and monitoring.';
+    return es?'Puedo ayudarte con mercurio, minería ilegal, peces, el Río Cauca, Caucasia y protección ambiental. Prueba con una pregunta más específica.':'I can help with mercury, illegal mining, fish, the Cauca River, Caucasia and environmental protection. Try a more specific question.';
+  }
+  async function handle(e){
+    e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+    if(busy)return false;
+    const input=get(INPUT); if(!input)return false;
+    const q=input.value.trim(); if(!q)return false;
+    activateChat(); add(q,'user'); input.value=''; busy=true;
+    const typing=document.createElement('div'); typing.className='aiMsg bot aiTyping'; typing.textContent=language()==='es'?'Consultando al Guardián…':'Checking the Guardian…'; get(BOX)?.appendChild(typing);
+    try{
+      let answer='';
+      /* Use the project's existing API/local engine when available, but NEVER let a failed request navigate the page. */
+      if(typeof window.aiAnswer==='function'){
+        const candidate=window.aiAnswer(q);
+        if(candidate && !/^No encuentro|^I cannot find/.test(candidate)) answer=candidate;
+      }
+      if(!answer && typeof window.aiAskAPI==='function' && typeof window.aerisWorkerUrl==='function'){
+        try{answer=await window.aiAskAPI(q)}catch(err){console.warn('AERIS chatbot API fallback:',err)}
+      }
+      if(!answer)answer=localAnswer(q);
+      typing.remove(); add(answer,'bot');
+    }catch(err){
+      console.error('AERIS V56 chatbot:',err); typing.remove(); add(localAnswer(q),'bot');
+    }finally{busy=false; input.focus()}
+    return false;
+  }
+  function wire(){
+    const form=get(FORM); if(form && form.dataset.v56Bound!=='1'){
+      form.dataset.v56Bound='1';
+      /* Capture phase guarantees the old broken handler/native submit cannot win. */
+      form.addEventListener('submit',handle,true);
+    }
+    const send=get('#aiSend'); if(send && send.dataset.v56Bound!=='1'){
+      send.dataset.v56Bound='1'; send.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();get(FORM)?.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}))},true);
+    }
+  }
+  function guardHash(){
+    if(location.hash==='#information' && modeChat()){
+      history.replaceState(null,'','#guardianAI');
+    }
+  }
+  document.addEventListener('click',function(e){
+    const link=e.target.closest && e.target.closest('a[href="#guardianAI"]');
+    if(link){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();activateChat();requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,get(CHAT)?.getBoundingClientRect().top+window.scrollY-92||0),behavior:'smooth'}));}
+  },true);
+  document.addEventListener('submit',function(e){
+    if(e.target && e.target.id==='aiForm') handle(e);
+  },true);
+  window.addEventListener('hashchange',guardHash);
+  function boot(){wire();guardHash();if(modeChat())activateChat();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+  new MutationObserver(wire).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body>
 
 <style id="aeris-v54-game-polish">
