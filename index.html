@@ -2662,7 +2662,7 @@ footer .brandLogo{box-shadow:0 10px 30px rgba(102,242,207,.12)}
     what:['08 / ¿Qué pasaría?','Pasa de la presión a la protección.','Mueve el control para explorar una transición conceptual hacia un sistema fluvial más saludable.','SIMULADOR DE ESCENARIO','BAJO PRESIÓN','PROTECCIÓN','PRESIÓN','TRANSICIÓN','PROTECCIÓN','En riesgo','Condición del agua','Expuesto','Presión en la red alimentaria','Vulnerable','Respuesta del ecosistema','Necesaria','Acción comunitaria','Esta visualización muestra una dirección conceptual, no una predicción numérica. La recuperación ambiental real depende de las condiciones locales, el monitoreo, la restauración y la acción sostenida.'],
     game:['07 / Desafío del Guardián','Demuestra que puedes ser un Guardián.','Comprueba la evidencia. Gana energía. Desbloquea tu legado de Guardián.','Desafío del Guardián · iniciando…','GUARDIÁN','¿LISTO?','MISIÓN COMPLETA','MISIÓN COMPLETA · CONOCIMIENTO → ACCIÓN','Título de Guardián:','TU PRÓXIMO PASO','¿Qué tipo de Guardián serás?','Tu puntuación es una parte de la misión. Tu elección define el final.','RESTAURAR','Ayuda a recuperar los ecosistemas.','VERIFICAR','Sigue la evidencia antes de actuar.','PROTEGER','Convierte el conocimiento en acción.','FINAL DEL GUARDIÁN','Guardián del río','Tu misión continúa con evidencia, cuidado y acción.','PUNTUACIÓN','RUTA','RANGO','Continuar misión →','Repetir misión ↻','Volver arriba ↑'],
     passport:['08 / Pasaporte del Guardián','Tu misión se convierte en legado.','Tu progreso permanece en este dispositivo. Completa la experiencia y observa cómo evoluciona tu identidad de Guardián.','PASAPORTE DEL GUARDIÁN DEL CAUCA','PERFIL DE CAMPO · EVIDENCIA PRIMERO','PROGRESO DE MISIÓN','MEJOR PUNTUACIÓN','RELIQUIAS','INSIGNIAS','ESTADO · NOVATO','LOGROS','Desbloquea tu identidad de Guardián.','Actualizar pasaporte ↻'],
-    ai:['11 / IA del Guardián del Cauca','IA del Guardián del Cauca','Haz preguntas sobre el río Cauca, Caucasia, la minería ilegal, el mercurio, los peces y la protección ambiental.','Asistente educativo · Bajo Cauca',' Mercurio',' Minería','🐟 Peces',' Protección','Haz una pregunta sobre el río Cauca...','Enviar','Respuestas educativas basadas en los temas cubiertos en este proyecto. El asistente usa el contexto educativo del proyecto y una API de IA cuando está configurada. No reemplaza las fuentes científicas u oficiales.','INTELIGENCIA DE CAMPO LISTA','El modo de aprendizaje sin conexión sigue disponible.'],
+    ai:['09 / IA del Guardián del Cauca','IA del Guardián del Cauca','Haz preguntas sobre el río Cauca, Caucasia, la minería ilegal, el mercurio, los peces y la protección ambiental.','Asistente educativo · Bajo Cauca',' Mercurio',' Minería','🐟 Peces',' Protección','Haz una pregunta sobre el río Cauca...','Enviar','Respuestas educativas basadas en los temas cubiertos en este proyecto. El asistente usa el contexto educativo del proyecto y una API de IA cuando está configurada. No reemplaza las fuentes científicas u oficiales.','INTELIGENCIA DE CAMPO LISTA','El modo de aprendizaje sin conexión sigue disponible.'],
     moves:['10 / Acciones del Guardián','Pequeñas acciones. Mayor impacto.','Aprende y comparte','Usa información confiable cuando hables sobre problemas ambientales.','Restaura la naturaleza','Apoya la restauración y protección de la vegetación y los cuerpos de agua.','Verifica las afirmaciones','Comprueba las afirmaciones ambientales impactantes antes de compartirlas.','Protejan juntos','Los ríos saludables necesitan personas informadas y acciones responsables.'],
     footer:['Una experiencia educativa interactiva sobre el río Cauca y los impactos ambientales asociados con la minería ilegal.','Fuentes','Créditos de imágenes','Fotografías de campo proporcionadas por el equipo del proyecto · Caucasia, Antioquia. Las imágenes científicas externas mantienen sus créditos correspondientes.','Archivo del río Cauca']
   };
@@ -3199,5 +3199,55 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #aiChat{pointer-events:auto!im
     observer.observe(document.body,{childList:true,subtree:true});
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
+</script>
+
+
+<style id="aeris-v59-language-hardfix">
+/* V59 — language control: English is the default; Spanish translates the full experience. */
+.langSwitch{user-select:none;-webkit-tap-highlight-color:transparent}
+</style>
+<script id="aeris-v59-language-hardfix-script">
+(function(){
+  'use strict';
+  function boot(){
+    const old=document.getElementById('langSwitch');
+    if(!old || old.dataset.v59Bound==='1') return;
+    /* Remove every legacy click handler attached by previous language patches. */
+    const btn=old.cloneNode(true);
+    btn.dataset.v59Bound='1';
+    old.replaceWith(btn);
+
+    function refresh(){
+      try{ if(typeof window.applyLanguage==='function') window.applyLanguage(); }catch(e){}
+      try{ if(typeof window.AERIS_V46_APPLY_LANGUAGE==='function') window.AERIS_V46_APPLY_LANGUAGE(); }catch(e){}
+      try{ if(typeof window.AERIS_V47_APPLY_LANGUAGE==='function') window.AERIS_V47_APPLY_LANGUAGE(); }catch(e){}
+      try{ if(typeof window.updateAlt==='function') window.updateAlt(); }catch(e){}
+      try{ if(typeof window.updateFooterLinks==='function') window.updateFooterLinks(); }catch(e){}
+      try{ if(typeof window.aiRenderSuggestions==='function') window.aiRenderSuggestions(); }catch(e){}
+      try{ if(typeof window.aiWelcome==='function' && document.getElementById('aiChat')?.children.length===0) window.aiWelcome(); }catch(e){}
+      document.documentElement.lang=window.currentLang==='es'?'es':'en';
+      const es=window.currentLang==='es';
+      btn.textContent=es?'🇺🇸 English':'🇪🇸 Español';
+      btn.setAttribute('aria-label',es?'Cambiar a inglés':'Cambiar a español');
+      btn.setAttribute('title',es?'Switch to English':'Switch to Spanish');
+    }
+
+    btn.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      window.currentLang=(window.currentLang||'en')==='en'?'es':'en';
+      /* Keep the legacy language variable synchronized when it exists. */
+      try{ if(typeof lang!=='undefined') lang=window.currentLang; }catch(e){}
+      refresh();
+    },true);
+
+    /* Always open in English. */
+    window.currentLang='en';
+    try{ if(typeof lang!=='undefined') lang='en'; }catch(e){}
+    refresh();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
+  else boot();
 })();
 </script>
