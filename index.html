@@ -1021,8 +1021,16 @@ body{padding-bottom:92px}
 </section>
 <section class="gameSection" id="game"><div class="wrap"><div class="top"><div class="destinationHeading"><img class="destinationIcon gameIcon" src="assets/section-icons/game.png" alt="" aria-hidden="true"><div><div class="eyebrow">09 / Guardian Challenge</div><h2>Prove you can be a Guardian.</h2></div></div><p class="lead">Test the evidence. Earn energy. Unlock your Guardian legacy.</p></div>
 <div class="game">
-<div id="play"><div class="hud"><div><b>Guardian Energy</b> <span class="energy" id="energy">0</span></div><div class="mini">✦ <span id="count">0</span>/5 relics</div><div>⚡ Level <span id="level">1</span> · 🏆 <span id="bestScore">0</span></div></div><div class="bar"><div id="gameProgressBar"></div></div>
-<div class="question"><div class="small" id="quizStatus" style="color:#9fc3c6;margin-bottom:8px">Guardian Challenge · initializing…</div><div class="quizGreeting" id="quizGreeting">GUARDIAN <b id="quizGuardianName">GUARDIAN</b> · READY?</div><div id="label" style="color:var(--mint);font-size:.73rem;font-weight:1000;letter-spacing:.1em">MISSION 1 / 10</div><h3 id="q">Loading mission...</h3><div class="options" id="options"></div><div class="gameNav"><button class="btn ghost" id="back" type="button">← Back</button><button class="btn primary" id="next" type="button">Next →</button></div></div>
+<div id="play"><div class="hud"><div><b>Guardian Energy</b> <span class="energy" id="energy">0</span></div><div class="mini">✦ <span id="count">0</span>/5 relics</div><div>⚡ Level <span id="level">1</span> · 🏆 <span id="bestScore">0</span></div></div>
+<div class="runBar"><div><span class="runLabel">COMBO</span><b id="comboValue">0×</b></div><div class="runTrack"><span id="comboFill"></span></div><div class="runMessage" id="runMessage">Start your streak.</div></div><div class="bar"><div id="gameProgressBar"></div></div>
+<div class="question"><div class="small" id="quizStatus" style="color:#9fc3c6;margin-bottom:8px">Guardian Challenge · initializing…</div><div class="quizGreeting" id="quizGreeting">GUARDIAN <b id="quizGuardianName">GUARDIAN</b> · READY?</div><div id="label" style="color:var(--mint);font-size:.73rem;font-weight:1000;letter-spacing:.1em">MISSION 1 / 10</div><h3 id="q">Loading mission...</h3><div class="options" id="options"></div>
+<div class="gameFeedback" id="gameFeedback" aria-live="polite">
+  <div class="feedbackIcon" id="feedbackIcon">✦</div>
+  <div class="feedbackCopy"><b id="feedbackTitle">Choose your move</b><span id="feedbackText">Your answer becomes part of your Guardian run.</span></div>
+  <div class="feedbackReward" id="feedbackReward">+0 XP</div>
+</div>
+<div class="fieldMoment" id="fieldMoment"><img id="fieldMomentImg" src="assets/field/field-01-river-mining-structure.jpg" alt="Field evidence"><div><b id="fieldMomentTitle">FIELD EVIDENCE</b><span id="fieldMomentText">A real photograph from the Cauca River field record.</span></div></div>
+<div class="gameNav"><button class="btn ghost" id="back" type="button">← Back</button><button class="btn primary" id="next" type="button">Next →</button></div></div>
 <div class="relics" id="relics"></div></div>
 <div class="result" id="result"><div style="color:var(--mint);font-weight:1000;letter-spacing:.1em">MISSION COMPLETE</div><div class="quizGreeting" id="resultGreeting" style="margin-top:8px">GUARDIAN <b id="resultGuardianName">GUARDIAN</b></div><div class="scoreBig" id="finalScore">0/10</div><div class="completionRibbon">MISSION COMPLETE · KNOWLEDGE → ACTION</div><p id="finalText"></p><div class="title">Guardian title: <b id="title">River Rookie</b></div>
 <div class="legacyChoice" hidden="" id="legacyChoice">
@@ -2716,6 +2724,17 @@ section>.wrap>.top{animation:v47HeadingIn .8s cubic-bezier(.2,.8,.2,1) both}
 .whatPercent b{font-variant-numeric:tabular-nums;text-shadow:0 0 22px rgba(102,242,207,.22)}
 .whatMetric{position:relative;overflow:hidden}.whatMetricIcon{display:inline-grid!important;place-items:center;width:46px;height:46px;border-radius:15px;background:rgba(255,255,255,.06)}.whatMetricIcon img{transition:transform .35s ease}.whatMetric:hover .whatMetricIcon img{transform:scale(1.1) rotate(-3deg)}
 
+
+/* V52 Guardian Challenge — game layer */
+.runBar{display:grid;grid-template-columns:auto minmax(110px,1fr) minmax(180px,.8fr);gap:12px;align-items:center;margin:0 0 15px;padding:10px 12px;border:1px solid rgba(114,245,213,.12);background:rgba(0,0,0,.12);border-radius:16px}
+.runLabel{font-size:9px;letter-spacing:.16em;color:#8caeb3;font-weight:1000;display:block}.runBar b{font-size:1.15rem;color:var(--gold)}
+.runTrack{height:7px;background:#fff1;border-radius:99px;overflow:hidden}.runTrack span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mint),var(--gold));border-radius:inherit;transition:width .35s ease}
+.runMessage{font-size:.72rem;color:#b8d0d4;text-align:right}.gameFeedback{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;min-height:58px;margin-top:12px;padding:10px 12px;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:rgba(255,255,255,.035);opacity:.75;transform:translateY(0);transition:.25s ease}.gameFeedback.hot{border-color:rgba(114,245,213,.34);background:linear-gradient(90deg,rgba(114,245,213,.10),rgba(255,209,102,.07));transform:translateY(-2px);box-shadow:0 12px 35px rgba(0,0,0,.14)}
+.feedbackIcon{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:rgba(114,245,213,.12);font-size:18px}.feedbackCopy{min-width:0}.feedbackCopy b{display:block;color:#fff;font-size:.82rem}.feedbackCopy span{display:block;color:#9bb6bb;font-size:.68rem;margin-top:2px;line-height:1.35}.feedbackReward{font-weight:1000;color:var(--mint);font-size:.75rem;white-space:nowrap}.option.correctFlash{animation:answerGood .55s ease;border-color:var(--mint)!important}.option.wrongFlash{animation:answerBad .55s ease;border-color:#ffad8c!important}.question.levelUp{animation:levelPop .55s ease}@keyframes answerGood{50%{transform:scale(1.02);box-shadow:0 0 0 3px rgba(114,245,213,.12),0 10px 30px rgba(114,245,213,.12)}}@keyframes answerBad{50%{transform:translateX(-4px)}}@keyframes levelPop{50%{transform:scale(1.012)}}
+.fieldMoment{margin-top:12px;border-radius:16px;overflow:hidden;position:relative;display:none;border:1px solid rgba(114,245,213,.15);background:#0b3039}.fieldMoment.show{display:grid;grid-template-columns:86px 1fr;animation:momentIn .45s ease}.fieldMoment img{width:86px;height:72px;object-fit:cover;display:block}.fieldMoment div{padding:9px 11px}.fieldMoment b{font-size:.7rem;color:#fff;display:block}.fieldMoment span{font-size:.62rem;color:#9bb6bb;line-height:1.35;display:block;margin-top:3px}@keyframes momentIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:650px){.runBar{grid-template-columns:auto 1fr;}.runMessage{grid-column:1/-1;text-align:left}.gameFeedback{grid-template-columns:auto 1fr}.feedbackReward{grid-column:2}.fieldMoment.show{grid-template-columns:74px 1fr}.fieldMoment img{width:74px;height:68px}}
+@media(prefers-reduced-motion:reduce){.gameFeedback,.fieldMoment.show,.option.correctFlash,.option.wrongFlash,.question.levelUp{animation:none!important}}
+
 /* Challenge = game screen */
 .gameSection{position:relative;overflow:hidden}
 .gameSection:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 25%,rgba(102,242,207,.10),transparent 23%),radial-gradient(circle at 88% 75%,rgba(167,139,250,.09),transparent 26%);pointer-events:none}
@@ -2946,6 +2965,79 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
   else boot();
 })();
+
+/* ===== V52 GUARDIAN CHALLENGE GAMEPLAY ===== */
+(function(){
+  const oldRender=window.render;
+  let combo=0, runXP=0, answered=false;
+  const fieldPhotos=[
+    ['assets/field/field-01-river-mining-structure.jpg','Mining pressure on the river','Field photograph · Cauca River'],
+    ['assets/field/field-03-pipe-riverbank.jpg','Riverbank evidence','Field photograph · Caucasia'],
+    ['assets/field/field-07-egrets-waste.jpg','Life beside the impact','Field photograph · Cauca River'],
+    ['assets/field/field-09-wide-river-waste.jpg','A wider view of the watershed','Field photograph · Caucasia'],
+    ['assets/field/field-05-sunset-riverbank.jpg','The river is worth protecting','Field photograph · Cauca River']
+  ];
+  const $g=id=>document.getElementById(id);
+  function lang(){return (window.currentLang||'en')==='es'?'es':'en'}
+  function txt(en,es){return lang()==='es'?es:en}
+  function setRun(){
+    const c=$g('comboValue'), f=$g('comboFill'), m=$g('runMessage'); if(!c)return;
+    c.textContent=combo+'×'; f.style.width=Math.min(100,combo*20)+'%';
+    m.textContent=combo>=5?txt('LEGENDARY STREAK! Keep it alive.','¡RACHA LEGENDARIA! Mantenla viva.'):
+      combo>=3?txt('Guardian streak activated.','Racha de Guardián activada.'):
+      combo===2?txt('Nice combo. One more!','Buen combo. ¡Una más!'):
+      txt('Start your streak.','Empieza tu racha.');
+  }
+  function feedback(kind, n){
+    const box=$g('gameFeedback'), icon=$g('feedbackIcon'), title=$g('feedbackTitle'), text=$g('feedbackText'), reward=$g('feedbackReward'); if(!box)return;
+    const es=lang()==='es'; box.classList.remove('hot'); void box.offsetWidth; box.classList.add('hot');
+    if(kind==='correct'){
+      const bonus=Math.min(3,Math.max(1,combo-1)); runXP+=10+bonus*5;
+      icon.textContent=combo>=5?'👑':combo>=3?'🔥':'✦';
+      title.textContent=combo>=5?(es?'¡Racha legendaria!':'Legendary streak!'):combo>=3?(es?'¡Racha de Guardián!':'Guardian streak!'):(es?'¡Respuesta correcta!':'Correct move!');
+      text.textContent=combo>=3?(es?`Llevas ${combo} respuestas seguidas. El río tiene un Guardián.`:`${combo} answers in a row. The river has a Guardian.`):(es?'Tu decisión suma energía a la misión.':'Your decision adds energy to the mission.');
+      reward.textContent='+'+(10+bonus*5)+' XP';
+    }else{
+      icon.textContent='↺'; title.textContent=es?'No rompas el ritmo':'Don’t break the run';
+      text.textContent=es?'Aprende del dato y sigue. Una misión se construye respuesta a respuesta.':'Learn from the clue and keep moving. A mission is built one answer at a time.';
+      reward.textContent='+0 XP';
+    }
+    setRun();
+  }
+  function showMoment(idx, streak){
+    const wrap=$g('fieldMoment'); if(!wrap)return;
+    if(streak<2 && idx%3!==2){wrap.classList.remove('show');return;}
+    const p=fieldPhotos[(Math.floor(idx/2)+streak)%fieldPhotos.length];
+    $g('fieldMomentImg').src=p[0]; $g('fieldMomentImg').alt=p[1];
+    $g('fieldMomentTitle').textContent=streak>=3?txt('STREAK UNLOCK · FIELD EVIDENCE','DESBLOQUEO DE RACHA · EVIDENCIA DE CAMPO'):txt('FIELD EVIDENCE','EVIDENCIA DE CAMPO');
+    $g('fieldMomentText').textContent=txt(p[1]+' · '+p[2],p[1]+' · '+p[2]);
+    wrap.classList.remove('show'); void wrap.offsetWidth; wrap.classList.add('show');
+  }
+  window.render=function(){
+    oldRender();
+    answered=answers[i]!==null;
+    const opts=document.querySelectorAll('#options .option');
+    opts.forEach((o,n)=>{o.addEventListener('click',()=>{setTimeout(()=>{if(answers[i]===n){o.classList.add('selected')}} ,0)},{once:true})});
+    const box=$g('gameFeedback'); if(box && !answered){box.classList.remove('hot');$g('feedbackIcon').textContent='✦';$g('feedbackTitle').textContent=txt('Choose your move','Elige tu movimiento');$g('feedbackText').textContent=txt('Your answer becomes part of your Guardian run.','Tu respuesta se convierte en parte de tu misión.');$g('feedbackReward').textContent='+'+runXP+' XP';}
+    setRun();
+  };
+  const baseNext=$('next').onclick;
+  $('next').onclick=function(){
+    if(answers[i]===null)return;
+    const current=i, selected=answers[i], good=selected===missions[i][2];
+    if(good){combo++; feedback('correct',current); showMoment(current,combo); playFX('correct');
+      if(combo===2) showToast(txt('🔥 2× combo!','🔥 ¡Combo 2×!'));
+      if(combo===3) showToast(txt('🔥 Guardian streak x3! Bonus unlocked.','🔥 ¡Racha de Guardián x3! Bono desbloqueado.'));
+      if(combo===5){playFX('level');showToast(txt('👑 LEGENDARY STREAK!','👑 ¡RACHA LEGENDARIA!'));}
+    }else{combo=0;feedback('wrong',current);playFX('wrong');showToast(txt('↺ Streak reset — use the clue and continue.','↺ Racha reiniciada — usa la pista y continúa.'));}
+    // Advance without duplicating the old feedback behavior.
+    if(i<missions.length-1){setTimeout(()=>{i++;render()},520)}else{setTimeout(()=>finish(),620)}
+  };
+  const baseAgain=$('again').onclick;
+  $('again').onclick=function(){combo=0;runXP=0;setRun();if(baseAgain)baseAgain();else{ i=0;answers=Array(missions.length).fill(null);energy=0;$('result').style.display='none';$('play').style.display='block';render();} };
+  setRun();
+})();
+
 </script>
 
 </body>
