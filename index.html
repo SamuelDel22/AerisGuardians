@@ -3271,3 +3271,49 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #aiChat{pointer-events:auto!im
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
+<style id="aeris-v57-hq-floating-mode-fix">
+/* V57: Guardian HQ floating shortcut is Information-only. */
+body.aeris-single-mode:not([data-aeris-mode="information"]) #guardianHqFloating{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+body.aeris-single-mode[data-aeris-mode="information"] #guardianHqFloating{
+  display:inline-flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+</style>
+<script id="aeris-v57-hq-floating-js">
+(function(){
+  'use strict';
+  function sync(){
+    const b=document.body, h=document.getElementById('guardianHqFloating');
+    if(!b||!h)return;
+    const info=b.dataset.aerisMode==='information';
+    h.hidden=!info;
+    h.setAttribute('aria-hidden',String(!info));
+    h.style.display=info?'inline-flex':'none';
+    h.style.visibility=info?'visible':'hidden';
+    h.style.opacity=info?'1':'0';
+    h.style.pointerEvents=info?'auto':'none';
+  }
+  function boot(){
+    sync();
+    const nav=document.getElementById('navLinks');
+    if(nav) nav.addEventListener('click',()=>setTimeout(sync,0),true);
+    document.addEventListener('click',e=>{
+      const b=e.target.closest&&e.target.closest('#guardianHqFloating');
+      if(!b||document.body.dataset.aerisMode!=='information')return;
+      e.preventDefault();e.stopPropagation();
+      const hq=document.getElementById('hq');
+      if(hq) window.scrollTo({top:Math.max(0,hq.getBoundingClientRect().top+window.scrollY-92),behavior:'smooth'});
+    },true);
+    new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['data-aeris-mode','class']});
+    setInterval(sync,500);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
