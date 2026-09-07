@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Cauca Guardians — AERIS Mission</title>
+<title>AERIS V60 — Cauca Guardians Mission</title>
 <style>
 :root{--bg:#061b24;--bg2:#0b3440;--mint:#72f5d5;--cyan:#55d9ff;--lime:#baf47b;--gold:#ffd166;--white:#f5fffc;--ink:#102b32;--muted:#587078;--paper:#f3faf7}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
@@ -874,6 +874,12 @@ body{padding-bottom:92px}
 <a class="aerisTopLink" href="#game" title="Game"><img class="aerisNavIcon" src="assets/section-icons/game.png" alt="Game" aria-hidden="true"><span>Game</span></a>
 <a class="aerisTopLink" href="#guardianAI" title="Chatbot"><img class="aerisNavIcon" src="assets/section-icons/chatbot.png" alt="Chatbot" aria-hidden="true"><span>Chatbot</span></a>
 </div><button class="langSwitch" id="langSwitch" type="button">🇪🇸 Español</button></nav>
+<div class="v60MissionBar" id="v60MissionBar" aria-label="Guardian mission status">
+  <div class="v60MissionIdentity"><span class="v60LiveDot"></span><span id="v60ModeLabel">GUARDIAN MODE</span></div>
+  <div class="v60MissionTrack" aria-hidden="true"><i id="v60ProgressFill"></i></div>
+  <div class="v60MissionStats"><span><b id="v60ProgressText">0%</b><small id="v60ProgressLabel">MISSION</small></span><span><b id="v60XpText">0</b><small id="v60XpLabel">XP</small></span><span><b id="v60RelicText">0/5</b><small id="v60RelicLabel">RELICS</small></span></div>
+</div>
+
 <button aria-label="Toggle ambient sound" class="ambient" id="ambient" title="Toggle ambient sound">♫</button>
 <button aria-label="Toggle game sound effects" class="soundFX" id="soundFX" title="Toggle game sound effects">🔊</button>
 <div class="toast" id="toast"></div>
@@ -3074,6 +3080,58 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #guardianAI *{pointer-events:a
 <style id="aeris-v58-section-cleanup">
 /* V58 — Removed duplicate Guardian HQ, Mission Map, Guardian XP and What If sections. */
 </style>
+
+<style id="aeris-v60-premium">
+/* AERIS V60 — premium polish layer. Additive only: preserves V59 functionality. */
+.v60MissionBar{position:fixed;z-index:97;top:77px;left:50%;transform:translateX(-50%);width:min(1140px,94%);display:grid;grid-template-columns:auto minmax(120px,1fr) auto;gap:14px;align-items:center;padding:7px 10px;border:1px solid rgba(109,242,209,.16);border-radius:14px;background:rgba(4,24,31,.78);backdrop-filter:blur(14px);box-shadow:0 10px 35px rgba(0,0,0,.18);color:#dffbf4;transition:.25s}.v60MissionIdentity{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:1000;letter-spacing:.13em;white-space:nowrap}.v60LiveDot{width:7px;height:7px;border-radius:50%;background:#6df2d1;box-shadow:0 0 12px #6df2d1;animation:v60Pulse 1.5s infinite}.v60MissionTrack{height:5px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.09)}.v60MissionTrack i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#6df2d1,#38d9ff,#b7aaff);transition:width .55s cubic-bezier(.2,.8,.2,1)}.v60MissionStats{display:flex;gap:10px}.v60MissionStats span{display:flex;align-items:baseline;gap:4px}.v60MissionStats b{font-size:10px;color:#ffc857}.v60MissionStats small{font-size:6px;color:#7f9aa2;font-weight:900;letter-spacing:.1em}@keyframes v60Pulse{50%{transform:scale(1.45);opacity:.55}}
+.nav{transition:box-shadow .25s,transform .25s}.nav.scrolled{box-shadow:0 20px 70px rgba(0,0,0,.4),0 0 0 1px rgba(109,242,209,.08)}
+.heroInner{animation:v60HeroIn .9s cubic-bezier(.2,.8,.2,1) both}.hero .tag{animation:v60TagIn .7s .1s both}.hero h1{animation:v60TagIn .8s .18s both}.hero p,.hero .actions{animation:v60TagIn .8s .28s both}@keyframes v60HeroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes v60TagIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* Information cards become interactive intel cards. */
+#information .card{position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}.v60InfoCard{cursor:pointer}.v60InfoCard:after{content:'OPEN INTEL';position:absolute;right:14px;bottom:13px;font-size:7px;letter-spacing:.12em;font-weight:1000;color:#079b82;opacity:0;transform:translateY(4px);transition:.2s}.v60InfoCard:hover{transform:translateY(-6px);border-color:#72f5d577;box-shadow:0 24px 55px rgba(8,52,58,.14)}.v60InfoCard:hover:after{opacity:1;transform:none}.v60IntelPanel{display:none;margin-top:14px;padding:18px;border-radius:19px;border:1px solid #72f5d544;background:linear-gradient(145deg,#eefcf8,#fff);box-shadow:0 15px 40px rgba(7,52,58,.08);animation:v60PanelIn .3s ease}.v60IntelPanel.show{display:block}.v60IntelPanel strong{display:block;color:#07343a;font-size:.8rem;letter-spacing:.08em}.v60IntelPanel p{margin:6px 0 0;color:#587078;line-height:1.55;font-size:.82rem}@keyframes v60PanelIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+/* Stronger game feedback. */
+.guardianGame{transition:box-shadow .3s,transform .3s}.guardianGame.v60Win{box-shadow:0 30px 100px rgba(56,217,255,.22),0 0 0 1px rgba(109,242,209,.12)}.guardianGame.v60Choice{box-shadow:0 30px 100px rgba(255,200,87,.14),0 0 0 1px rgba(255,200,87,.1)}
+/* Passport rank feels like a game profile. */
+.passportCard{position:relative;overflow:hidden}.passportCard:after{content:'AERIS // FIELD PROFILE';position:absolute;right:18px;top:18px;font-size:7px;letter-spacing:.16em;color:#079b82;font-weight:1000;opacity:.55}.passportProgress i{transition:width .8s cubic-bezier(.2,.8,.2,1)}
+@media(max-width:700px){.v60MissionBar{top:61px;width:calc(100% - 18px);grid-template-columns:auto 1fr;gap:8px;padding:6px 8px}.v60MissionStats{grid-column:1/-1;justify-content:space-between}.v60MissionStats span{flex:1;justify-content:center}.heroInner{padding-top:150px!important}.v60InfoCard:after{display:none}}
+@media(prefers-reduced-motion:reduce){.v60MissionBar *,.heroInner,.hero .tag,.hero h1,.hero p,.hero .actions{animation:none!important;transition:none!important}}
+</style>
+<script id="aeris-v60-premium-script">
+(function(){
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+function es(){return (window.currentLang||'en')==='es'}
+function setText(id,en,sp){const e=document.getElementById(id);if(e)e.textContent=es()?sp:en}
+function profile(){let p={best:0,relics:0,energy:0};try{const raw=JSON.parse(localStorage.getItem('aeris_guardian_v4')||'{}');Object.assign(p,raw)}catch(e){};try{p.best=Math.max(Number(p.best)||0,Number(localStorage.getItem('aeris_best_score_v2')||0))}catch(e){};p.relics=Math.max(0,Math.min(5,Number(p.relics)||0));p.energy=Math.max(0,Number(p.energy)||0);return p}
+function updateBar(){
+ const p=profile(), best=Math.min(100,Math.round((p.best/10)*100)), fill=$('#v60ProgressFill');
+ if(fill)fill.style.width=best+'%';
+ const pt=$('#v60ProgressText');if(pt)pt.textContent=best+'%';
+ const xp=$('#v60XpText');if(xp)xp.textContent=p.energy;
+ const rel=$('#v60RelicText');if(rel)rel.textContent=p.relics+'/5';
+ setText('v60ModeLabel','GUARDIAN MODE','MODO GUARDIÁN');setText('v60ProgressLabel','MISSION','MISIÓN');setText('v60XpLabel','XP','XP');setText('v60RelicLabel','RELICS','RELIQUIAS');
+}
+function bindInfo(){
+ const info=document.querySelector('#information');if(!info||info.dataset.v60==='1')return;info.dataset.v60='1';
+ const cards=Array.from(info.querySelectorAll('.cards .card')).slice(0,4);
+ const details=es()?[['Mercurio','El mercurio puede transformarse en metilmercurio y acumularse en los tejidos de los peces.'],['Recuperación','La restauración ambiental busca recuperar vegetación, suelo, agua y funciones del ecosistema.'],['Minería','La alteración del suelo puede aumentar sedimentos y cambiar hábitats ribereños.'],['Cuenca','El agua conecta lugares: lo que ocurre río arriba puede importar río abajo.']]:[['Mercury','Mercury can transform into methylmercury and accumulate in fish tissues.'],['Restoration','Environmental restoration can help recover vegetation, soils, water and ecosystem functions.'],['Mining','Soil disturbance can increase sediment and change riverbank habitats.'],['Watershed','Water connects places: what happens upstream can matter downstream.']];
+ cards.forEach((card,i)=>{card.classList.add('v60InfoCard');card.setAttribute('tabindex','0');card.setAttribute('role','button');let panel=document.createElement('div');panel.className='v60IntelPanel';panel.innerHTML='<strong>'+details[i][0]+'</strong><p>'+details[i][1]+'</p>';card.after(panel);const toggle=()=>{panel.classList.toggle('show');card.setAttribute('aria-expanded',panel.classList.contains('show'));};card.addEventListener('click',toggle);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});});
+}
+function observeGame(){const game=$('#guardianGame');if(!game||game.dataset.v60obs==='1')return;game.dataset.v60obs='1';const ob=new MutationObserver(()=>{updateBar();game.classList.add('v60Choice');clearTimeout(game._v60t);game._v60t=setTimeout(()=>game.classList.remove('v60Choice'),420)});ob.observe(game,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','hidden']});}
+function navPolish(){
+ const nav=$('.nav');if(!nav)return;
+ window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>25),{passive:true});
+ const links=$$('.aerisTopLink');const map=[['#information','information'],['#game','game'],['#guardianAI','guardianAI']];
+ const setActive=id=>links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+ links.forEach(a=>a.addEventListener('click',()=>setActive(a.getAttribute('href').slice(1))));
+ // Keep the navigation click-driven, avoiding the old scroll-position active-state bug.
+}
+function refresh(){updateBar();bindInfo();observeGame();navPolish();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(refresh,120));else setTimeout(refresh,120);
+const old=window.applyLanguage;window.applyLanguage=function(){if(typeof old==='function')old.apply(this,arguments);setTimeout(refresh,30)};
+setInterval(updateBar,900);
+})();
+</script>
+
 </body>
 
 <style id="aeris-v54-game-polish">
