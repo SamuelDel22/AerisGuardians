@@ -942,6 +942,68 @@ body{padding-bottom:92px}
 @media(prefers-reduced-motion:reduce){.introAurora,.introRiver:before,.introRiver:after,.introRiver span,.introParticles i{animation:none!important}}
 </style>
 
+
+<style id="aeris-v60-generated-intro">
+/* AERIS V60 — generated cinematic intro scene. The artwork is kept at its native aspect ratio via background-size:cover; never stretched. */
+.guardianBriefing{
+  --intro-x:0px;
+  --intro-y:0px;
+  background-color:#03131f !important;
+  background-image:url("assets/intro/aeris-guardian-intro.webp") !important;
+  background-repeat:no-repeat !important;
+  background-size:cover !important;
+  background-position:calc(50% + var(--intro-x)) calc(50% + var(--intro-y)) !important;
+  isolation:isolate;
+}
+.guardianBriefing:before{
+  z-index:-1 !important;
+  background:
+    linear-gradient(90deg,rgba(2,10,23,.42) 0%,rgba(2,10,23,.20) 34%,rgba(2,10,23,.52) 100%),
+    linear-gradient(180deg,rgba(2,8,20,.10) 0%,rgba(2,8,20,.22) 44%,rgba(2,8,20,.78) 100%) !important;
+  pointer-events:none;
+}
+.guardianBriefing:after{
+  z-index:-1 !important;
+  background:
+    radial-gradient(circle at 50% 46%,rgba(63,235,255,.10),transparent 30%),
+    radial-gradient(circle at 18% 22%,rgba(84,255,197,.10),transparent 22%),
+    radial-gradient(circle at 84% 25%,rgba(151,104,255,.12),transparent 25%) !important;
+  pointer-events:none;
+}
+/* The generated artwork already contains its own HUD atmosphere. Keep the old decorative layers from stacking over it. */
+.guardianBriefing .introAurora,
+.guardianBriefing .introGrid,
+.guardianBriefing .introParticles,
+.guardianBriefing .introRiver{display:none !important}
+.guardianBriefing .briefingPanel{
+  background:linear-gradient(145deg,rgba(4,19,39,.72),rgba(3,11,29,.80)) !important;
+  border-color:rgba(94,239,255,.34) !important;
+  box-shadow:0 30px 100px rgba(0,0,0,.52),0 0 65px rgba(38,222,255,.12),inset 0 1px rgba(255,255,255,.14) !important;
+  backdrop-filter:blur(18px) saturate(1.25) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.25) !important;
+}
+.guardianBriefing .briefingPanel:after{
+  background:radial-gradient(ellipse at 50% 0%,rgba(72,239,255,.13),transparent 58%) !important;
+}
+.introLangControl{
+  display:inline-flex;align-items:center;gap:7px;
+  min-height:32px;padding:7px 11px;border-radius:999px;
+  border:1px solid rgba(98,239,255,.42);
+  background:rgba(3,17,35,.72);color:#e9fbff;
+  font:900 10px/1 system-ui,sans-serif;letter-spacing:.10em;text-transform:uppercase;
+  cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.22),0 0 18px rgba(63,235,255,.08);
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.introLangControl:hover{transform:translateY(-1px);border-color:rgba(101,255,219,.75);background:rgba(8,34,52,.82)}
+.introLangControl:focus-visible{outline:2px solid #6df2d1;outline-offset:3px}
+.introLangControl .introLangGlobe{font-size:14px;line-height:1}
+@media(max-width:650px){
+  .guardianBriefing{background-position:center center !important}
+  .guardianBriefing:before{background:linear-gradient(180deg,rgba(2,8,20,.08),rgba(2,8,20,.38) 35%,rgba(2,8,20,.90) 100%) !important}
+  .introLangControl{min-height:29px;padding:6px 9px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.introLangControl{transition:none}}
+</style>
 </head>
 <body data-aeris-version="51.2">
 <div aria-labelledby="briefingTitle" aria-modal="true" class="guardianBriefing" id="guardianBriefing" role="dialog">
@@ -952,7 +1014,10 @@ body{padding-bottom:92px}
 <div class="briefingPanel">
 <div class="briefingTop">
 <span class="briefingCode">AERIS // CAUCA GUARDIANS</span>
+<div style="display:flex;align-items:center;gap:8px">
+<button aria-label="Change language" class="introLangControl" id="introLangControl" type="button"><span class="introLangGlobe">◎</span><span id="introLangText">EN</span></button>
 <button class="briefingSkip" id="briefingSkip" type="button">Skip briefing</button>
+</div>
 </div>
 <div aria-label="Project Aeris" class="introBrand">
 <div class="introMark aerisIntroMark"><img src="aeris-logo.jpeg" alt="AERIS logo"></div>
@@ -3197,6 +3262,50 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #guardianAI *{pointer-events:a
 <style id="aeris-v58-section-cleanup">
 /* V58 — Removed duplicate Guardian HQ, Mission Map, Guardian XP and What If sections. */
 </style>
+
+<script id="aeris-v60-generated-intro-interaction">
+(function(){
+  'use strict';
+  const scene=document.getElementById('guardianBriefing');
+  const langButton=document.getElementById('introLangControl');
+  const langText=document.getElementById('introLangText');
+  const realLang=document.getElementById('langSwitch');
+  if(!scene)return;
+  function syncLang(){
+    if(!langText)return;
+    const es=window.currentLang==='es';
+    langText.textContent=es?'ES':'EN';
+    if(langButton)langButton.setAttribute('aria-label',es?'Cambiar idioma':'Change language');
+  }
+  langButton?.addEventListener('click',()=>{
+    realLang?.click();
+    setTimeout(syncLang,0);
+  });
+  syncLang();
+  if(realLang && window.MutationObserver){
+    new MutationObserver(syncLang).observe(realLang,{subtree:true,childList:true,characterData:true});
+  }
+  /* Desktop-only parallax: moves the artwork by a few pixels without moving any UI. */
+  if(!window.matchMedia || !window.matchMedia('(pointer:fine)').matches)return;
+  let raf=0,lastX=0,lastY=0;
+  scene.addEventListener('pointermove',e=>{
+    if(e.pointerType==='touch')return;
+    const x=(e.clientX/window.innerWidth-.5)*12;
+    const y=(e.clientY/window.innerHeight-.5)*8;
+    lastX=x;lastY=y;
+    if(raf)return;
+    raf=requestAnimationFrame(()=>{
+      scene.style.setProperty('--intro-x',lastX.toFixed(1)+'px');
+      scene.style.setProperty('--intro-y',lastY.toFixed(1)+'px');
+      raf=0;
+    });
+  },{passive:true});
+  scene.addEventListener('pointerleave',()=>{
+    scene.style.setProperty('--intro-x','0px');
+    scene.style.setProperty('--intro-y','0px');
+  },{passive:true});
+})();
+</script>
 </body>
 
 <style id="aeris-v54-game-polish">
