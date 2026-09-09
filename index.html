@@ -1082,6 +1082,15 @@ body{padding-bottom:92px}
 @media(prefers-reduced-motion:reduce){.introAurora,.introRiver:before,.introRiver:after,.introRiver span,.introParticles i{animation:none!important}}
 </style>
 
+
+<style id="aeris-v62-territory-square-photos">
+/* V62: Real World photos — remove rounded/circular photo treatment */
+#gallery.fieldGallery, #gallery .fieldGallery { overflow:visible; }
+#gallery .fieldGallery figure,
+#gallery .fieldGallery figure:first-child { border-radius:0 !important; }
+#gallery .fieldGallery figure img { border-radius:0 !important; transform:none !important; }
+#gallery .fieldGallery figure:hover img { transform:none !important; }
+</style>
 </head>
 <body data-aeris-version="51.2">
 <div aria-labelledby="briefingTitle" aria-modal="true" class="guardianBriefing" id="guardianBriefing" role="dialog">
