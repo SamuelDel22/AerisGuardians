@@ -4122,3 +4122,73 @@ footer a{color:var(--cyan)!important}
 @media(prefers-reduced-motion:no-preference){.heroLogo{animation:rpgPulse 2.8s ease-in-out infinite}.card,.v16-route button,.option{transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease,background .15s ease}@keyframes rpgPulse{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 10px #a8ff6055)}}}
 </style>
 
+
+<style id="aeris-v69-pixel-font-rpg">
+/* AERIS V69 — TRUE PIXEL TYPE + LIGHTWEIGHT RPG HUD */
+@font-face{
+  font-family:"Aeris Pixel";
+  src:url("assets/AerisPixel.ttf") format("truetype");
+  font-display:swap;
+  font-weight:400 900;
+  font-style:normal;
+}
+:root{--pixel:"Aeris Pixel",monospace}
+html,body{font-family:var(--pixel)!important}
+body{-webkit-font-smoothing:none!important;-moz-osx-font-smoothing:grayscale!important;text-rendering:geometricPrecision!important}
+/* The reference style: chunky, square, stepped 8-bit letterforms — not Impact/Courier. */
+.brandText strong,.hero h1,h1,h2,h3,.big,.scoreBig,.briefingPanel h1,.passportCard h3,.destinationHeading h2,.gameIntroTop h2{
+  font-family:var(--pixel)!important;font-weight:400!important;letter-spacing:.035em!important;
+}
+.hero h1{font-size:clamp(3.4rem,8vw,7.2rem)!important;line-height:1.02!important;text-shadow:5px 5px 0 #000!important}
+h2{font-size:clamp(1.8rem,4.3vw,4.1rem)!important;line-height:1.08!important;text-shadow:3px 3px 0 #000!important}
+h3{line-height:1.2!important}
+.hero p,.lead,.card,.card p,.gallery figcaption,.evidenceCard,.sourceType,.eyebrow,.aerisTopLink,.btn,.tag,.aerisBadge,.classCard,.live,.option,.hud,.mini,.energy,footer,footer *,.passportCard,.passportActions,.achievement,.gameChoice,.gameResult,.identityInput,.briefingEnter,.toast{
+  font-family:var(--pixel)!important;
+}
+.hero p,.lead,.card p,.evidenceCard p{font-size:clamp(11px,1.15vw,15px)!important;line-height:1.75!important;letter-spacing:.015em!important}
+.aerisTopLink{font-size:10px!important;letter-spacing:.06em!important}
+.btn,.briefingEnter{font-size:11px!important;letter-spacing:.06em!important}
+/* RPG HUD */
+.nav:after{content:"LV 01  •  XP 000/100  •  QUEST ACTIVE"!important;position:absolute!important;right:12px!important;bottom:-9px!important;padding:3px 6px!important;background:#06100c!important;color:var(--gold)!important;border:1px solid #69582a!important;font:400 8px/1 var(--pixel)!important;letter-spacing:.04em!important}
+.heroInner:after{content:"STATUS: ONLINE   //   CLASS: RIVER GUARDIAN"!important;display:block!important;width:max-content!important;max-width:100%;margin-top:18px!important;padding:7px 9px!important;background:#06100de8!important;border:1px solid var(--cyan)!important;color:var(--cyan)!important;font:400 8px/1.4 var(--pixel)!important;letter-spacing:.04em!important}
+/* Turn each screen into an RPG menu without adding heavy DOM or JS. */
+#information:after,#story:after,#facts:after,#gallery:after,#mercury:after,#evidence:after,#game:after,#passport:after,#moves:after{
+ position:absolute!important;right:5%!important;top:28px!important;padding:4px 7px!important;background:#06100de8!important;border:1px solid #355d43!important;color:#6f8e74!important;font:400 7px/1 var(--pixel)!important;letter-spacing:.04em!important;content:"SYSTEM SCREEN"!important;
+}
+#information:after{content:"WORLD MAP // ZONE 01"!important;color:var(--neon)!important;border-color:#4f813e!important}
+#story:after{content:"QUEST LOG // LORE"!important}
+#facts:after{content:"DATABASE // FIELD FACTS"!important}
+#gallery:after{content:"INVENTORY // FIELD FILES"!important}
+#mercury:after{content:"HAZARD LOG // MERCURY"!important;color:#ffcf58!important;border-color:#715c29!important}
+#evidence:after{content:"ARCHIVE // EVIDENCE"!important}
+#game:after{content:"QUEST // ACTIVE"!important;color:var(--cyan)!important;border-color:#3c8377!important}
+#passport:after{content:"STATUS // CHARACTER SHEET"!important}
+#moves:after{content:"ABILITIES // GUARDIAN MOVES"!important}
+/* Character-sheet details */
+.passportCard,.passportActions,.game,.v16-head,.v16-card,.card,.evidenceCard,.dark,.photo,.gallery figure{
+  border-width:2px!important;box-shadow:4px 4px 0 #000!important;
+}
+.passportCard:before{content:"CHARACTER DATA"!important;display:block!important;margin-bottom:10px!important;color:var(--gold)!important;font:400 8px/1 var(--pixel)!important;letter-spacing:.04em!important}
+.gameHud:before{content:"HP ██████████   MP █████   XP ███░░░░░░░"!important;display:block!important;margin-bottom:10px!important;color:var(--neon)!important;font:400 8px/1 var(--pixel)!important;letter-spacing:.02em!important}
+/* Pixel UI separators */
+.card,.v16-card,.evidenceCard,.passportActions,.gameChoice,.option,.btn,.aerisTopLink{position:relative!important}
+.card:after,.v16-card:after,.evidenceCard:after,.passportActions:after{content:""!important;position:absolute!important;right:5px!important;top:5px!important;width:4px!important;height:4px!important;background:var(--neon)!important;box-shadow:-6px 0 0 #31583e!important;opacity:.7!important}
+/* Keep rendering cheap: no blur, giant animated orbs or per-element entrance animation. */
+*,*:before,*:after{animation:none!important;transition-property:transform,opacity,border-color,background-color,color,box-shadow!important;}
+.hero:before,.hero:after,.gameSection:before,.gameSection:after,.floatParticle,.guardianOrb,.passportGlow,.missionTelemetry:after,.mapLine,.labArrow,.labNode.active:after{
+  animation:none!important;filter:none!important;
+}
+.hero:after{background:linear-gradient(180deg,transparent 55%,rgba(2,19,25,.35))!important}
+.gameSection:before,.gameSection:after{display:none!important}
+body:after{background:linear-gradient(rgba(168,255,96,.018) 50%,transparent 50%) 0 0/100% 6px,radial-gradient(circle at center,transparent 50%,rgba(0,0,0,.48) 100%)!important}
+@media(max-width:700px){
+ .nav{height:58px!important;width:calc(100% - 18px)!important}
+ .nav:after{right:8px!important;bottom:-18px!important;font-size:6px!important}
+ .heroInner{padding-top:92px!important}
+ .hero h1{font-size:clamp(2.6rem,14vw,4.4rem)!important}
+ h2{font-size:clamp(1.65rem,9vw,2.7rem)!important}
+ .hero p,.lead,.card p,.evidenceCard p{font-size:10px!important;line-height:1.7!important}
+ #information:after,#story:after,#facts:after,#gallery:after,#mercury:after,#evidence:after,#game:after,#passport:after,#moves:after{position:static!important;display:inline-block!important;margin:0 0 16px 0!important;font-size:6px!important}
+ .heroInner:after{font-size:6px!important;width:auto!important}
+}
+</style>
