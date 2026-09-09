@@ -1082,6 +1082,20 @@ body{padding-bottom:92px}
 @media(prefers-reduced-motion:reduce){.introAurora,.introRiver:before,.introRiver:after,.introRiver span,.introParticles i{animation:none!important}}
 </style>
 
+
+<style id="aeris-territory-clean-final">
+/* FINAL 04 / SEE THE TERRITORY: photos are plain cards, with no circular/oval overlays. */
+#gallery.fieldGallery{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:13px}
+#gallery.fieldGallery .territoryCard{height:280px;margin:0;position:relative;overflow:hidden;background:#0b2630;border:1px solid rgba(98,232,255,.18);border-radius:0;clip-path:none!important;-webkit-clip-path:none!important;mask:none!important;-webkit-mask:none!important}
+#gallery.fieldGallery .territoryCard:first-child{height:573px;grid-row:span 2}
+#gallery.fieldGallery .territoryCard img{display:block;width:100%;height:100%;object-fit:cover;transform:none!important;filter:none!important;transition:none!important;border-radius:0!important}
+#gallery.fieldGallery .territoryCard::before,#gallery.fieldGallery .territoryCard::after{content:none!important;display:none!important;background:none!important;border:0!important;box-shadow:none!important;clip-path:none!important;mask:none!important}
+#gallery.fieldGallery .territoryEvidence{position:absolute;top:12px;left:12px;z-index:4;padding:5px 8px;border-radius:999px;background:rgba(6,27,36,.78);border:1px solid rgba(114,245,213,.25);color:#b8fff0;font-size:.58rem;letter-spacing:.14em;font-weight:800;pointer-events:none}
+#gallery.fieldGallery .territoryCaption{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:45px 14px 13px;background:linear-gradient(transparent,#061b24ee);color:#fff;font-size:.8rem}
+#gallery.fieldGallery .territoryCard:hover img{transform:none!important;filter:none!important}
+@media(max-width:800px){#gallery.fieldGallery{grid-template-columns:1fr 1fr}#gallery.fieldGallery .territoryCard:first-child{grid-column:1/-1;grid-row:auto;height:400px}#gallery.fieldGallery .territoryCard{height:250px}}
+@media(max-width:520px){#gallery.fieldGallery{grid-template-columns:1fr}#gallery.fieldGallery .territoryCard,#gallery.fieldGallery .territoryCard:first-child{height:280px;grid-column:auto}}
+</style>
 </head>
 <body data-aeris-version="51.2">
 <div aria-labelledby="briefingTitle" aria-modal="true" class="guardianBriefing" id="guardianBriefing" role="dialog">
@@ -1187,14 +1201,16 @@ body{padding-bottom:92px}
 <div class="card reveal"><div class="factPhoto"><img src="assets/field/field-04-riverbank-view.jpg" alt="Cauca River in Caucasia"></div><div class="big">1 basin</div><b>Connected territory</b><p class="small">Water connects places: upstream events can matter downstream.</p><div class="photoCredit">Real field photograph · Caucasia, Antioquia</div></div>
 </div></div></section>
 <section id="gallery" style="background:#edf6f3"><div class="wrap"><div class="top"><div><div class="eyebrow">04 / Real world</div><h2>See the territory.</h2></div><p class="lead">Real photographs help turn an environmental issue into something visible.</p></div>
-<div class="gallery fieldGallery"><figure class="reveal"><img alt="Cauca River and riverbank" src="assets/field/field-04-riverbank-view.jpg"/><figcaption><b>The Cauca River</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Mining activity on the Cauca River" src="assets/field/field-02-mining-boat.jpg"/><figcaption><b>Mining activity</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Waste along the Cauca River bank" src="assets/field/field-06-waste-riverbank.jpg"/><figcaption><b>Riverbank waste</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Pipe and waste beside the river" src="assets/field/field-03-pipe-riverbank.jpg"/><figcaption><b>Riverbank pressure</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Egrets near waste on the riverbank" src="assets/field/field-07-egrets-waste.jpg"/><figcaption><b>Wildlife and waste</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Riverbank waste at sunset" src="assets/field/field-05-sunset-riverbank.jpg"/><figcaption><b>Evidence at sunset</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Wide view of the river and waste" src="assets/field/field-09-wide-river-waste.jpg"/><figcaption><b>River in context</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Riverbank with egrets and debris" src="assets/field/field-10-riverbank-egrets.jpg"/><figcaption><b>Life beside the river</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure></div></div></section>
+<div class="gallery fieldGallery">
+<div class="territoryCard reveal"><img alt="Cauca River and riverbank" src="assets/field/field-04-riverbank-view.jpg"/><div class="territoryEvidence">FIELD EVIDENCE</div><div class="territoryCaption"><b>The Cauca River</b><br/>Real field photograph · Caucasia, Antioquia</div></div>
+<div class="territoryCard reveal"><img alt="Mining activity on the Cauca River" src="assets/field/field-02-mining-boat.jpg"/><div class="territoryEvidence">FIELD EVIDENCE</div><div class="territoryCaption"><b>Mining activity</b><br/>Real field photograph · Caucasia, Antioquia</div></div>
+<div class="territoryCard reveal"><img alt="Waste along the Cauca River bank" src="assets/field/field-06-waste-riverbank.jpg"/><div class="territoryEvidence">FIELD EVIDENCE</div><div class="territoryCaption"><b>Riverbank waste</b><br/>Real field photograph · Caucasia, Antioquia</div></div>
+<div class="territoryCard reveal"><img alt="Pipe and waste beside the river" src="assets/field/field-03-pipe-riverbank.jpg"/><div class="territoryEvidence">FIELD EVIDENCE</div><div class="territoryCaption"><b>Riverbank pressure</b><br/>Real field photograph · Caucasia, Antioquia</div></div>
+<div class="territoryCard reveal"><img alt="Egrets near waste on the riverbank" src="assets/field/field-07-egrets-waste.jpg"/><div class="territoryEvidence">FIELD EVIDENCE</div><div class="territoryCaption"><b>Wildlife and waste</b><br/>Real field photograph · Caucasia, Antioquia</div></div>
+<div class="territoryCard reveal"><img alt="Riverbank waste at sunset" src="assets/field/field-05-sunset-riverbank.jpg"/><div class="territoryEvidence">FIELD EVIDENCE</div><div class="territoryCaption"><b>Evidence at sunset</b><br/>Real field photograph · Caucasia, Antioquia</div></div>
+<div class="territoryCard reveal"><img alt="Wide view of the river and waste" src="assets/field/field-09-wide-river-waste.jpg"/><div class="territoryEvidence">FIELD EVIDENCE</div><div class="territoryCaption"><b>River in context</b><br/>Real field photograph · Caucasia, Antioquia</div></div>
+<div class="territoryCard reveal"><img alt="Riverbank with egrets and debris" src="assets/field/field-10-riverbank-egrets.jpg"/><div class="territoryEvidence">FIELD EVIDENCE</div><div class="territoryCaption"><b>Life beside the river</b><br/>Real field photograph · Caucasia, Antioquia</div></div>
+</div></div></section>
 <section id="mercury" style="background:#f6fbfa"><div class="wrap"><div class="top"><div><div class="eyebrow">05 / Mercury and Fish · Cauca River</div><h2>What does mercury do to fish in the Cauca River?</h2></div><p class="lead">In the Bajo Cauca region of Antioquia, gold mining has been an important source of mercury pollution. Studies in the Bajo Cauca River have found methylmercury concentrations in fish exposed to mining areas.</p></div>
 <div class="story"><div class="photo reveal"><img alt="Gold-mining area in Bajo Cauca, Antioquia" src="https://imagenes2.eltiempo.com/files/image_600_455/uploads/2023/03/18/6416254c09dc8.jpeg"/><div class="caption">Bajo Cauca, Antioquia · gold mining and mercury pollution</div></div>
 <div class="dark reveal"><div class="eyebrow" style="color:var(--mint)">What happens in the Cauca</div><h2>Mercury can enter the food chain.</h2><p>In aquatic environments, some mercury can be transformed into methylmercury. This form can build up in fish tissues and increase as it moves from one organism to another through the food web.</p>
@@ -1497,7 +1513,7 @@ function applyLanguage(){
  const s=document.querySelector('#story'); setText('#story .eyebrow',t.storyEyebrow); setText('#story h2',t.storyH2); setText('#story .lead',t.storyLead); setText('#story .caption',t.storyCaption); setText('#story .dark .eyebrow',t.why); setText('#story .dark h2',t.whyH2); setText('#story .dark > p',t.whyP);
  document.querySelectorAll('#story .step').forEach((e,j)=>{e.querySelector('strong').textContent=t.steps[j][0];e.querySelector('span:not(.num)').textContent=t.steps[j][1]}); setText('#story .quote b',t.guardianRule); setText('#story .quote', '<b>'+t.guardianRule+'</b> '+t.guardianRuleP);
  const quick=document.getElementById('facts'); setText('#facts .eyebrow',t.quickEyebrow); setText('#facts h2',t.quickH2); document.querySelectorAll('#facts .card').forEach((e,j)=>{e.querySelector('b').textContent=t.facts[j][0];e.querySelector('.small').textContent=t.facts[j][1]});
- setText('#gallery .eyebrow',t.realEyebrow); setText('#gallery h2',t.realH2); setText('#gallery .lead',t.realLead); document.querySelectorAll('#gallery figure').forEach((e,j)=>{e.querySelector('b').textContent=t.gallery[j][0];e.querySelector('figcaption').innerHTML='<b>'+t.gallery[j][0]+'</b><br>'+t.gallery[j][1]});
+ setText('#gallery .eyebrow',t.realEyebrow); setText('#gallery h2',t.realH2); setText('#gallery .lead',t.realLead); document.querySelectorAll('#gallery .territoryCard').forEach((e,j)=>{e.querySelector('.territoryCaption').innerHTML='<b>'+t.gallery[j][0]+'</b><br>'+t.gallery[j][1]});
  setText('#mercury .eyebrow',t.mercuryEyebrow); setText('#mercury h2',t.mercuryH2); setText('#mercury .top .lead',t.mercuryLead); setText('#mercury .caption',t.mercuryCaption); setText('#mercury .dark .eyebrow',t.mercuryWhy); setText('#mercury .dark h2',t.mercuryWhyH2); setText('#mercury .dark > p',t.mercuryWhyP);
  document.querySelectorAll('#mercury .dark .step').forEach((e,j)=>{e.querySelector('strong').textContent=t.mercurySteps[j][0];e.querySelector('span:not(.num)').textContent=t.mercurySteps[j][1]}); setText('#mercury .dark .quote', '<b>'+t.caucaFact+'</b> '+t.caucaFactP); document.querySelectorAll('#mercury .gallery figure').forEach((e,j)=>{e.querySelector('figcaption').innerHTML='<b>'+t.fishGallery[j][0]+'</b><br>'+t.fishGallery[j][1]}); setText('#mercury > .wrap > .quote', '<b>'+t.whyMatter+'</b> '+t.whyMatterP);
  setText('#game .eyebrow',t.gameEyebrow); setText('#game h2',t.gameH2); setText('#game .lead',t.gameLead); setText('#play .hud b',t.energy); setText('#play .hud .mini', '✦ <span id="count">'+document.getElementById('count').textContent+'</span>/5 '+t.relics); setText('#play .hud > div:last-child',' '+t.level+' <span id="level">'+document.getElementById('level').textContent+'</span>');
@@ -3744,52 +3760,3 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #aiChat{pointer-events:auto!im
   else boot();
 })();
 </script>
-
-<style id="aeris-v62-territory-overlay-fix">
-/* V62 FINAL: remove the giant oval overlay from Information > 04 / Real World > See the territory */
-#gallery.fieldGallery figure::after{
-  content:"FIELD EVIDENCE" !important;
-  position:absolute !important;
-  inset:auto !important;
-  top:12px !important;
-  left:12px !important;
-  right:auto !important;
-  bottom:auto !important;
-  width:max-content !important;
-  height:auto !important;
-  padding:5px 8px !important;
-  border-radius:999px !important;
-  background:rgba(6,27,36,.78) !important;
-  border:1px solid rgba(114,245,213,.25) !important;
-  color:#b8fff0 !important;
-  font-size:.58rem !important;
-  line-height:1.2 !important;
-  letter-spacing:.14em !important;
-  font-weight:800 !important;
-  backdrop-filter:blur(8px) !important;
-  mix-blend-mode:normal !important;
-  transform:none !important;
-  pointer-events:none !important;
-  z-index:3 !important;
-}
-#gallery.fieldGallery figure::before{
-  display:none !important;
-  content:none !important;
-}
-#gallery.fieldGallery img{
-  transform:none !important;
-  filter:none !important;
-  transition:none !important;
-}
-#gallery.fieldGallery figure:hover img{
-  transform:none !important;
-  filter:none !important;
-}
-@media(max-width:520px){
-  #gallery.fieldGallery figure::after{
-    top:9px !important;
-    left:9px !important;
-    font-size:.5rem !important;
-  }
-}
-</style>
