@@ -1083,6 +1083,7 @@ body{padding-bottom:92px}
 </style>
 
 <link rel="stylesheet" href="assets/aeris-v65-rpg.css">
+<link rel="preload" as="image" href="assets/field/field-01-river-mining-structure.jpg" fetchpriority="high"/>
 </head>
 <body data-aeris-version="51.2">
 <div aria-labelledby="briefingTitle" aria-modal="true" class="guardianBriefing" id="guardianBriefing" role="dialog">
@@ -1535,7 +1536,7 @@ nextButton.addEventListener('click',(event)=>{
 document.getElementById('again').onclick=()=>{i=0;answers=Array(missions.length).fill(null);energy=0;document.getElementById('result').style.display='none';document.getElementById('play').style.display='block';render();drawRelics();renderRelicsLanguage();document.getElementById('game').scrollIntoView({behavior:'smooth',block:'center'})};
 // Translate generated unlocked badge and live messages.
 // Keep relic DOM stable during quiz interactions; drawRelics is called only when the collection actually changes.
-const liveTimer=setInterval(()=>{const el=document.getElementById('live');if(el)el.textContent=I18N[lang].messages[Math.floor(Math.random()*I18N[lang].messages.length)]},3000);
+const liveTimer=setInterval(()=>{const el=document.getElementById('live');if(el)el.textContent=I18N[lang].messages[Math.floor(Math.random()*I18N[lang].messages.length)]},10000);
 // Keep image sources exactly as in the original file; only translate accessible text.
 const altMap={
  'aeris-logo.jpeg':['Logo de la orden Aeris','Aeris order logo'],
@@ -2212,7 +2213,7 @@ const oldApply=window.applyLanguage;
 if(oldApply){window.applyLanguage=function(){oldApply();applyV14Text();renderFish();renderWhat();renderPassport();}}
 applyV14Text();
 // Keep passport values fresh while the app runs.
-setInterval(renderPassport,2500);
+setInterval(renderPassport,8000);
 renderFish();renderWhat();renderPassport();
 })();
 </script>
@@ -2259,7 +2260,7 @@ function introMotion(){
 function aiLive(){ aerisHealthCheck(); }
 qs('.sourceVaultCard').forEach(a=>a.addEventListener('click',()=>window.playFX?.('select')));
 introMotion(); telemetry(); aiLive();
-setInterval(telemetry,1600);
+setInterval(telemetry,8000);
 const oldApply=window.applyLanguage; if(oldApply){window.applyLanguage=function(){oldApply();setTimeout(()=>{telemetry();aiLive()},0)}}
 window.addEventListener('storage',telemetry);
 })();
@@ -3594,6 +3595,58 @@ img{max-width:100%;height:auto}
   else optimizeImages();
 })();
 </script>
+
+
+<style id="aeris-v68-performance-only">
+/* V68 PERFORMANCE ONLY
+   Visual assets, filenames and image sources are untouched.
+   This layer reduces GPU/compositing work and unnecessary repainting. */
+html{scroll-behavior:auto!important}
+body{overscroll-behavior-x:none!important}
+body:before{animation:none!important}
+body:after{animation:none!important}
+.nav,.briefingPanel,.guardianIdentity,.live,.tag,.aerisBadge,.classCard{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+img{
+  image-rendering:auto!important;
+  content-visibility:auto;
+}
+.hero img,.heroLogo,.aerisIntroMark img,.guardianIntroMark img,.identityIcon img{
+  content-visibility:visible!important;
+}
+.hero:after{animation:none!important;filter:none!important}
+.hero:before{animation:none!important;mix-blend-mode:normal!important}
+.card,.evidenceCard,.whatMetric,.labNode,.mapNode,.relic,.passportCard,.question,.photo,.gallery figure,.dark,.game,.guardianCard{
+  will-change:auto!important;
+}
+@media(max-width:900px){
+  /* Mobile/iPhone: keep the same V68 look but avoid continuous GPU work. */
+  .aerisNavIcon,.destinationIcon,.aiBrand img,
+  .guardianIntroMark img,.identityIcon.guardianEmblem img,
+  .guardianAvatar img,.whatMetricIcon img,
+  .heroLogo,.passportGlow,.live,.mapNode.active .mapIcon,
+  .missionTelemetry:after,.game:before,.footer:before,
+  .hero h1 span,.mapLine,.labArrow,.labNode.active:after,
+  .a48-orb,.aeris-cursor{
+    animation:none!important;
+  }
+  .btn.primary:after,.briefingEnter:after,
+  .relic.unlocked:after,.xpBar i:after,
+  #gameProgressBar:after,#passportProgressFill:after{
+    display:none!important;
+    animation:none!important;
+  }
+  .hero:after{display:none!important}
+  .heroInner{transform:none!important}
+}
+@media(max-width:520px){
+  /* Smaller paint areas on the smallest screens. */
+  body:after{background:linear-gradient(rgba(168,255,96,.018) 50%,transparent 50%) 0 0/100% 8px!important}
+  .nav{box-shadow:3px 3px 0 #000!important}
+}
+</style>
 
 </body>
 
