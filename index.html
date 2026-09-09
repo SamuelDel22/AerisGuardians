@@ -1082,37 +1082,6 @@ body{padding-bottom:92px}
 @media(prefers-reduced-motion:reduce){.introAurora,.introRiver:before,.introRiver:after,.introRiver span,.introParticles i{animation:none!important}}
 </style>
 
-
-<style id="aeris-v62-territory-remove-all-photo-circles">
-/* 04 / See the territory — clean rectangular photographs.
-   Remove every decorative pseudo-element/mask/rounding applied to these images. */
-#gallery.fieldGallery figure,
-#gallery.fieldGallery figure img{
-  border-radius:0!important;
-}
-#gallery.fieldGallery figure{
-  clip-path:none!important;
-  -webkit-clip-path:none!important;
-  mask:none!important;
-  -webkit-mask:none!important;
-  overflow:hidden!important;
-}
-#gallery.fieldGallery figure::before,
-#gallery.fieldGallery figure::after,
-#gallery.fieldGallery figure img::before,
-#gallery.fieldGallery figure img::after{
-  content:none!important;
-  display:none!important;
-  background:none!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-#gallery.fieldGallery figure:hover,
-#gallery.fieldGallery figure:hover img{
-  transform:none!important;
-  filter:none!important;
-}
-</style>
 </head>
 <body data-aeris-version="51.2">
 <div aria-labelledby="briefingTitle" aria-modal="true" class="guardianBriefing" id="guardianBriefing" role="dialog">
@@ -3775,3 +3744,52 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #aiChat{pointer-events:auto!im
   else boot();
 })();
 </script>
+
+<style id="aeris-v62-territory-overlay-fix">
+/* V62 FINAL: remove the giant oval overlay from Information > 04 / Real World > See the territory */
+#gallery.fieldGallery figure::after{
+  content:"FIELD EVIDENCE" !important;
+  position:absolute !important;
+  inset:auto !important;
+  top:12px !important;
+  left:12px !important;
+  right:auto !important;
+  bottom:auto !important;
+  width:max-content !important;
+  height:auto !important;
+  padding:5px 8px !important;
+  border-radius:999px !important;
+  background:rgba(6,27,36,.78) !important;
+  border:1px solid rgba(114,245,213,.25) !important;
+  color:#b8fff0 !important;
+  font-size:.58rem !important;
+  line-height:1.2 !important;
+  letter-spacing:.14em !important;
+  font-weight:800 !important;
+  backdrop-filter:blur(8px) !important;
+  mix-blend-mode:normal !important;
+  transform:none !important;
+  pointer-events:none !important;
+  z-index:3 !important;
+}
+#gallery.fieldGallery figure::before{
+  display:none !important;
+  content:none !important;
+}
+#gallery.fieldGallery img{
+  transform:none !important;
+  filter:none !important;
+  transition:none !important;
+}
+#gallery.fieldGallery figure:hover img{
+  transform:none !important;
+  filter:none !important;
+}
+@media(max-width:520px){
+  #gallery.fieldGallery figure::after{
+    top:9px !important;
+    left:9px !important;
+    font-size:.5rem !important;
+  }
+}
+</style>
