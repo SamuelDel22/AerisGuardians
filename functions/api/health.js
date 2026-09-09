@@ -1,0 +1,1 @@
+export function onRequestGet(context){const ok=Boolean(context.env.OPENAI_API_KEY);return new Response(JSON.stringify({ok,ai:ok}),{status:ok?200:503,headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"}})}
