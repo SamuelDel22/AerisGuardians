@@ -1136,7 +1136,6 @@ body{padding-bottom:92px}
 <div class="links" id="navLinks">
 <a class="aerisTopLink active" href="#information" title="Information"><img class="aerisNavIcon" src="assets/section-icons/information.png" alt="Information" aria-hidden="true"><span>Information</span></a>
 <a class="aerisTopLink" href="#game" title="Game"><img class="aerisNavIcon" src="assets/section-icons/game.png" alt="Game" aria-hidden="true"><span>Game</span></a>
-<a class="aerisTopLink" href="#guardianAI" title="Chatbot"><img class="aerisNavIcon" src="assets/section-icons/chatbot.png" alt="Chatbot" aria-hidden="true"><span>Chatbot</span></a>
 </div><button class="langSwitch" id="langSwitch" type="button">🇪🇸 Español</button></nav>
 <button aria-label="Toggle ambient sound" class="ambient" id="ambient" title="Toggle ambient sound">♫</button>
 <button aria-label="Toggle game sound effects" class="soundFX" id="soundFX" title="Toggle game sound effects">🔊</button>
@@ -1304,26 +1303,6 @@ body{padding-bottom:92px}
 <div class="achievementList" id="achievementList"></div>
 <button class="btn ghost" data-i18n="refreshPassport" id="passportRefresh" type="button">Refresh passport ↻</button>
 </aside>
-</div>
-</div>
-</section>
-</section>
-<section class="gameSection" id="guardianAI" style="background:linear-gradient(180deg,#071b24 0%,#0b2630 100%);color:white">
-<div class="wrap">
-<div class="top">
-<div class="destinationHeading"><img class="destinationIcon chatbotIcon" src="assets/section-icons/chatbot.png" alt="" aria-hidden="true"><div><div class="eyebrow">09 / Cauca Guardian AI</div><h2>Cauca Guardian AI</h2></div></div>
-<p class="lead">Ask questions about the Cauca River, Caucasia, illegal mining, mercury, fish and environmental protection.</p>
-</div>
-<div class="guardianAIBox">
-<div class="aiHeader"><div><strong class="aiBrand"><img src="assets/section-icons/chatbot.png" alt="" aria-hidden="true"> Cauca Guardian AI</strong><span id="aiStatus">Educational assistant · Bajo Cauca</span></div><div class="aiDot">●</div></div>
-<div class="aiSuggestions" id="aiSuggestions"></div><div class="v16-aiTools" id="v16AITools"><button data-q="What is mercury and why does it matter?" type="button"> Mercury</button><button data-q="How can illegal mining affect the Cauca River?" type="button"> Mining</button><button data-q="Why can fish be part of mercury exposure pathways?" type="button">🐟 Fish</button><button data-q="What can communities do to protect rivers?" type="button"> Protection</button></div>
-<div aria-live="polite" class="aiChat" id="aiChat"></div>
-<form class="aiForm" id="aiForm">
-<input aria-label="Ask Cauca Guardian AI" autocomplete="off" id="aiInput" placeholder="Ask a question about the Cauca River..."/>
-<button class="btn primary" id="aiSend" type="submit">Send</button>
-</form>
-<p class="aiNote" id="aiNote">Educational answers based on the topics covered in this project. The assistant uses the project educational context and an AI API when configured. It does not replace official scientific or government sources.</p>
-<div class="aiPublicStatus"><span class="aiPublicDot"></span><span id="aiPublicStatusText">FIELD INTELLIGENCE READY</span><small>Offline learning mode remains available.</small></div>
 </div>
 </div>
 </section>
@@ -2421,13 +2400,13 @@ body.aeris-single-mode .aerisTopLink.active{background:#72f5d51a;color:#72f5d5}
   const modes={
     information:{target:'information'},
     game:{target:'game'},
-    chatbot:{target:'guardianAI'}
+    
   };
 
   // These are the ONLY page areas that belong to each destination.
   const infoIds=['top','information','story','facts','gallery','mercury','evidence','lab','moves'];
   const gameIds=['game','passport'];
-  const chatbotIds=['guardianAI'];
+  const chatbotIds=[];
 
   function mark(ids,mode){
     ids.forEach(id=>{
@@ -2447,10 +2426,10 @@ body.aeris-single-mode .aerisTopLink.active{background:#72f5d51a;color:#72f5d5}
   const sound=document.getElementById('soundFX');
   if(sound) sound.setAttribute('data-aeris-game-ui','true');
 
-  // Always restore the exact three navigation labels after language changes.
+  // Always restore the exact two navigation labels after language changes.
   function fixNavLabels(){
-    const labels=['Information','Game','Chatbot'];
-    const icons=['assets/section-icons/information.png','assets/section-icons/game.png','assets/section-icons/chatbot.png'];
+    const labels=['Information','Game'];
+    const icons=['assets/section-icons/information.png','assets/section-icons/game.png'];
     navLinks.forEach((a,i)=>{
       if(!a) return;
       let img=a.querySelector('.aerisNavIcon');
@@ -2475,7 +2454,7 @@ body.aeris-single-mode .aerisTopLink.active{background:#72f5d51a;color:#72f5d5}
     if(!modes[mode]) mode='information';
     body.classList.add('aeris-single-mode');
     body.dataset.aerisMode=mode;
-    navLinks.forEach((a,i)=>a.classList.toggle('active',['information','game','chatbot'][i]===mode));
+    navLinks.forEach((a,i)=>a.classList.toggle('active',['information','game'][i]===mode));
     if(sound) sound.style.display=mode==='game'?'grid':'';
     fixNavLabels();
     if(scroll){
@@ -2486,10 +2465,10 @@ body.aeris-single-mode .aerisTopLink.active{background:#72f5d51a;color:#72f5d5}
   }
 
   navLinks.forEach((a,i)=>{
-    const mode=['information','game','chatbot'][i];
+    const mode=['information','game'][i];
     if(!a) return;
     a.setAttribute('role','button');
-    a.setAttribute('aria-label',mode==='information'?'Information':mode==='game'?'Game':'Chatbot');
+    a.setAttribute('aria-label',mode==='information'?'Information':'Game');
     a.addEventListener('click',e=>{
       e.preventDefault();
       activate(mode,true);
@@ -2501,16 +2480,12 @@ body.aeris-single-mode .aerisTopLink.active{background:#72f5d51a;color:#72f5d5}
     if(a.classList.contains('aerisTopLink')) return;
     a.addEventListener('click',e=>{e.preventDefault();activate('game',true)});
   });
-  document.querySelectorAll('a[href="#guardianAI"]').forEach(a=>{
-    if(a.classList.contains('aerisTopLink')) return;
-    a.addEventListener('click',e=>{e.preventDefault();activate('chatbot',true)});
-  });
   document.querySelectorAll('a[href="#information"]').forEach(a=>{
     if(a.classList.contains('aerisTopLink')) return;
     a.addEventListener('click',e=>{e.preventDefault();activate('information',true)});
   });
 
-  // Language switching used to overwrite the three nav labels with Story/Real World/Mercury.
+  // Language switching used to overwrite the two nav labels with Story/Real World/Mercury.
   // Wrap it so the navigation ALWAYS remains Information / Game / Chatbot.
   const originalApplyLanguage=window.applyLanguage;
   if(typeof originalApplyLanguage==='function'){
@@ -3829,3 +3804,112 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #aiChat{pointer-events:auto!im
   }
 }
 </style>
+
+
+<style id="aeris-v66-full-rpg">
+/* AERIS V66 — FULL RETRO RPG REBUILD */
+:root{
+ --ink:#07130f;--ink2:#0b1e17;--panel:#102a20;--panel2:#163b2b;
+ --neon:#a8ff60;--cyan:#57f6df;--gold:#ffd45a;--paper:#d9e8cf;--muted:#91ab99;
+}
+html{scroll-behavior:smooth;background:#050b08!important}
+body{background:#050b08!important;color:var(--paper)!important;font-family:"Courier New",monospace!important;image-rendering:pixelated!important}
+body:after{content:""!important;position:fixed!important;inset:0!important;z-index:99990!important;pointer-events:none!important;background:linear-gradient(rgba(168,255,96,.025) 50%,transparent 50%) 0 0/100% 4px,radial-gradient(circle at center,transparent 45%,rgba(0,0,0,.58) 100%)!important}
+/* TOP HUD */
+.nav{width:min(1180px,calc(100% - 28px))!important;top:14px!important;left:50%!important;transform:translateX(-50%)!important;height:62px!important;padding:7px 10px!important;background:#06100c!important;border:2px solid var(--neon)!important;border-radius:0!important;box-shadow:5px 5px 0 #000,0 0 24px #a8ff6017!important}
+.nav:before{content:"AERIS // GUARDIAN OS  •  BUILD 066"!important;position:absolute!important;left:12px!important;top:-8px!important;padding:0 7px!important;background:#06100c!important;color:var(--neon)!important;font:900 8px/1 "Courier New",monospace!important;letter-spacing:.18em!important}
+.brand{border:1px solid #355e45!important;padding:5px 8px!important;background:#0a1912!important;border-radius:0!important}
+.brandLogo{border-radius:0!important}
+.brandText strong{font-family:Impact,"Arial Black",sans-serif!important;letter-spacing:.08em!important;color:var(--neon)!important}
+.brandText small{color:#709078!important}
+.links{gap:6px!important}
+.aerisTopLink{border:1px solid #294a36!important;background:#091711!important;border-radius:0!important;color:#9eb5a2!important;padding:8px 13px!important;text-transform:uppercase!important;font:900 11px "Courier New",monospace!important;letter-spacing:.1em!important}
+.aerisTopLink.active,.aerisTopLink:hover{background:var(--neon)!important;color:#06100b!important;border-color:var(--neon)!important;box-shadow:3px 3px 0 #000!important}
+.langSwitch{border-radius:0!important;background:#171307!important;color:var(--gold)!important;border:1px solid var(--gold)!important}
+/* HERO = RPG TITLE SCREEN */
+.hero{min-height:100svh!important;background:linear-gradient(90deg,rgba(3,10,7,.94) 0%,rgba(3,10,7,.68) 42%,rgba(3,10,7,.2) 100%),linear-gradient(0deg,#050b08 0%,transparent 38%),url("field/field-01-river-mining-structure.jpg") center/cover!important;display:flex!important;align-items:center!important;position:relative!important;overflow:hidden!important}
+.hero:before{content:""!important;position:absolute!important;inset:0!important;background:linear-gradient(90deg,transparent 49%,rgba(168,255,96,.05) 50%,transparent 51%),linear-gradient(0deg,transparent 49%,rgba(168,255,96,.04) 50%,transparent 51%);background-size:72px 72px!important;opacity:.45!important}
+.heroInner{width:min(1180px,92%)!important;margin:auto!important;padding-top:115px!important;position:relative!important;z-index:2!important}
+.heroLogo{width:78px!important;height:78px!important;object-fit:cover!important;border:2px solid var(--neon)!important;border-radius:0!important;box-shadow:6px 6px 0 #000!important}
+.aerisBadge,.tag,.classCard{border-radius:0!important;font-family:"Courier New",monospace!important;text-transform:uppercase!important;letter-spacing:.1em!important}
+.aerisBadge{background:#07130eE8!important;border:1px solid #4e7657!important;color:var(--gold)!important}
+.tag{background:#07130ee8!important;border:1px solid var(--neon)!important;color:var(--neon)!important}
+.heroKicker{font:900 12px "Courier New",monospace!important;color:var(--cyan)!important;letter-spacing:.25em!important;margin-top:28px!important}
+.hero h1{font-family:Impact,"Arial Black",sans-serif!important;font-size:clamp(4rem,9vw,8.5rem)!important;line-height:.88!important;letter-spacing:.015em!important;text-transform:uppercase!important;color:#efffe7!important;text-shadow:7px 7px 0 #000,0 0 35px #a8ff6024!important;margin:12px 0 24px!important}
+.hero h1 span{color:var(--neon)!important;background:none!important;-webkit-text-fill-color:initial!important}
+.hero p{font:700 16px/1.5 "Courier New",monospace!important;color:#d6e6d2!important;max-width:650px!important}
+.classCard{display:inline-block!important;background:#07130ee8!important;border:1px dashed #6c8e6f!important;color:#9db69e!important;padding:9px 12px!important}
+.problemFlow{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:7px!important;margin:20px 0!important}
+.problemFlow span{padding:8px 10px!important;background:#0b1e16e8!important;border:1px solid #416b4c!important;color:var(--paper)!important;font:900 10px "Courier New",monospace!important;text-transform:uppercase!important}
+.problemFlow span:first-child{border-color:#ff7b61!important;color:#ff9a84!important}.problemFlow span:last-child{border-color:var(--cyan)!important;color:var(--cyan)!important}.problemFlow b{color:var(--gold)!important}
+.btn{border-radius:0!important;font:900 12px "Courier New",monospace!important;text-transform:uppercase!important;letter-spacing:.12em!important;padding:13px 17px!important;box-shadow:5px 5px 0 #000!important}
+.primary{background:var(--neon)!important;color:#06100b!important;border:2px solid #d9ffb9!important}.ghost{background:#07130fee!important;color:var(--paper)!important;border:2px solid #76937b!important}
+.live{position:absolute!important;right:30px!important;bottom:28px!important;border:1px solid var(--cyan)!important;border-radius:0!important;background:#06100de8!important;color:var(--cyan)!important;font:900 9px "Courier New",monospace!important;text-transform:uppercase!important;letter-spacing:.1em!important}
+/* SECTIONS = GAME SCREENS */
+section{background:#07110d!important;color:var(--paper)!important;border-top:1px solid #234332!important;padding-top:96px!important;padding-bottom:96px!important;position:relative!important}
+section:nth-of-type(even),section:nth-of-type(odd){background:#07110d!important}
+section:before{content:""!important;position:absolute!important;left:5%!important;right:5%!important;top:0!important;height:2px!important;background:linear-gradient(90deg,transparent,var(--neon),transparent)!important;opacity:.35!important}
+.wrap{width:min(1180px,92%)!important}
+.top{margin-bottom:32px!important}
+.eyebrow{font:900 10px "Courier New",monospace!important;color:var(--neon)!important;letter-spacing:.2em!important;text-transform:uppercase!important}
+h2{font-family:Impact,"Arial Black",sans-serif!important;color:#ecffe4!important;text-transform:uppercase!important;letter-spacing:.025em!important;font-size:clamp(2.4rem,5vw,5rem)!important;line-height:.95!important;text-shadow:4px 4px 0 #000!important}
+.lead{color:#9db3a1!important;font-family:"Courier New",monospace!important}
+/* mission map */
+.v16-progress{background:#06100c!important}
+.v16-head,.v16-card{border:2px solid #355d43!important;border-radius:0!important;background:#0a1b13!important;box-shadow:6px 6px 0 #000!important}
+.v16-head{padding:20px!important}.v16-grid{gap:16px!important}.v16-card{padding:16px!important}
+.sourceType{color:var(--gold)!important;font:900 9px "Courier New",monospace!important;letter-spacing:.16em!important}
+.v16-route button{background:#081710!important;border:1px solid #385c42!important;border-radius:0!important;color:var(--paper)!important;box-shadow:3px 3px 0 #000!important}
+.v16-route button:hover,.v16-route button.on{border-color:var(--neon)!important;background:#102c1e!important;transform:translateY(-2px)!important}
+.v16-route i{border-radius:0!important;border:1px solid #365c43!important}
+/* info cards */
+.cards{gap:14px!important}.card{border:1px solid #385e43!important;border-radius:0!important;background:linear-gradient(145deg,#0b2117,#08150f)!important;box-shadow:4px 4px 0 #000!important;color:var(--paper)!important}
+.card:before{content:"▣ DATA NODE"!important;display:block!important;color:#587960!important;font:900 8px "Courier New",monospace!important;letter-spacing:.15em!important;margin-bottom:10px!important}
+.card:after{content:""!important}.card:hover{transform:translate(-3px,-3px)!important;border-color:var(--neon)!important;box-shadow:7px 7px 0 #000,0 0 20px #a8ff6015!important}
+.big,.scoreBig{color:var(--neon)!important;font-family:Impact,"Arial Black",sans-serif!important}
+/* photo/evidence = scanned field files */
+.photo,.gallery figure,.evidenceCard,.dark{border-radius:0!important;border:2px solid #355d43!important;background:#091710!important;box-shadow:5px 5px 0 #000!important}
+.gallery figure:after{border-radius:0!important;inset:auto 10px 10px auto!important;width:auto!important;height:auto!important;content:"FIELD FILE"!important;padding:4px 6px!important;background:#06100ddf!important;color:var(--neon)!important;font:900 8px "Courier New",monospace!important;letter-spacing:.1em!important}
+.gallery figcaption{font-family:"Courier New",monospace!important;background:linear-gradient(transparent,#040b07f5)!important}
+/* mercury panel */
+#mercury{background:linear-gradient(180deg,#08150f,#06100c)!important}
+#mercury .top:before{content:"⚠  HAZARD LOG // MERCURY";display:block;color:#ff9b6f;font:900 10px "Courier New",monospace;letter-spacing:.16em;margin-bottom:8px}
+/* GAME = quest screen */
+.gameSection{background:#040b08!important}
+.game{border:2px solid var(--gold)!important;border-radius:0!important;background:linear-gradient(145deg,#0b1b13,#08130e)!important;box-shadow:8px 8px 0 #000,0 0 30px #ffd45a12!important}
+.hud{border-bottom:1px dashed #55745a!important}.energy,.mini{font-family:"Courier New",monospace!important;color:var(--gold)!important}
+.bar{border-radius:0!important;background:#020604!important;border:1px solid #3c5942!important}.bar div{background:linear-gradient(90deg,var(--neon),var(--cyan))!important}
+.question{border:2px solid #46684d!important;border-radius:0!important;background:#07130d!important;box-shadow:5px 5px 0 #000!important}
+.question:before{content:"QUEST // ACTIVE // CHOOSE YOUR MOVE"!important;color:var(--gold)!important;font:900 9px "Courier New",monospace!important;letter-spacing:.16em!important}
+.option{border-radius:0!important;background:#0b2016!important;border:1px solid #45694c!important;color:var(--paper)!important;font-family:"Courier New",monospace!important;box-shadow:2px 2px 0 #000!important}
+.option:hover,.option.selected{background:#153822!important;border-color:var(--neon)!important;box-shadow:4px 4px 0 #000!important}
+.relic{border-radius:0!important;background:#07130d!important;border-color:#395b41!important}.relic.unlocked{border-color:var(--gold)!important;background:#182b16!important;box-shadow:0 0 18px #ffd45a16!important}
+.result{border-radius:0!important;background:#0b1b12!important;border:2px solid var(--gold)!important}
+/* passport = character sheet */
+.passportSection{background:#06100c!important}
+.guardianCard{border-radius:0!important;border:2px solid var(--cyan)!important;background:#081812!important;box-shadow:7px 7px 0 #000!important}
+/* moves */
+#moves .card b{color:var(--neon)!important;font:900 15px "Courier New",monospace!important;text-transform:uppercase!important}
+/* footer */
+footer{background:#030806!important;border-top:2px solid #355d43!important;color:#819a89!important}
+footer h3{color:var(--gold)!important;font-family:"Courier New",monospace!important;text-transform:uppercase!important}
+footer a{color:var(--cyan)!important}
+/* briefing = actual RPG start menu */
+.guardianBriefing{background:#020604!important}
+.guardianBriefing:after{content:"AERIS ORDER // CAUCA RIVER QUEST\A\A PRESS ENTER TO BEGIN"!important;white-space:pre;position:absolute;left:50%;bottom:5%;transform:translateX(-50%);color:#64816a;font:900 9px "Courier New",monospace;letter-spacing:.16em;text-align:center;z-index:3}
+.briefingPanel{border:2px solid var(--neon)!important;border-radius:0!important;background:#06100c!important;box-shadow:10px 10px 0 #000,0 0 50px #a8ff6014!important}
+.briefingPanel h1{font-family:Impact,"Arial Black",sans-serif!important;color:var(--neon)!important;text-transform:uppercase!important;text-shadow:4px 4px 0 #000!important}
+.briefingMission,.briefingIdentity{border-radius:0!important;background:#0a1c13!important;border:1px solid #3b6346!important}
+.briefingEnter{border-radius:0!important;background:var(--neon)!important;color:#06100b!important;border:2px solid #e1ffc4!important;box-shadow:5px 5px 0 #000!important;font-family:"Courier New",monospace!important;text-transform:uppercase!important;font-weight:900!important}
+.identityInput{border-radius:0!important;background:#020604!important;border:1px solid #4a704f!important;color:var(--neon)!important;font-family:"Courier New",monospace!important}
+/* controls */
+.ambient,.soundFX{border-radius:0!important;background:#07130e!important;border:1px solid #476c4e!important;color:var(--neon)!important}
+.toast{border-radius:0!important;background:#06100c!important;border:1px solid var(--neon)!important;color:var(--paper)!important;font-family:"Courier New",monospace!important}
+@media(max-width:700px){
+ .nav{height:auto!important;min-height:58px!important}.brandText small{display:none}.links{flex:1!important}.aerisTopLink{padding:9px 8px!important;font-size:9px!important}.langSwitch{font-size:9px!important}
+ .heroInner{padding-top:135px!important}.hero h1{font-size:clamp(3.3rem,15vw,5.5rem)!important}.heroLogo{width:62px!important;height:62px!important}.live{right:12px!important;bottom:12px!important}
+ section{padding-top:72px!important;padding-bottom:72px!important}.problemFlow{gap:5px!important}.problemFlow span{font-size:8px!important;padding:7px!important}.btn{font-size:10px!important;padding:11px!important}
+}
+@media(prefers-reduced-motion:no-preference){.heroLogo{animation:rpgPulse 2.8s ease-in-out infinite}.card,.v16-route button,.option{transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease,background .15s ease}@keyframes rpgPulse{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 10px #a8ff6055)}}}
+</style>
+
