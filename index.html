@@ -3753,3 +3753,32 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #aiChat{pointer-events:auto!im
   else boot();
 })();
 </script>
+
+<style id="aeris-v62-territory-remove-all-circle-overlays">
+/* Final fix: remove every decorative circular/elliptical overlay from 04 / See the territory. */
+#gallery .fieldGallery,
+#gallery .fieldGallery figure,
+#gallery .fieldGallery figure img,
+#gallery .fieldGallery figcaption{
+  clip-path:none !important;
+  -webkit-clip-path:none !important;
+  mask:none !important;
+  -webkit-mask:none !important;
+}
+#gallery .fieldGallery figure::before{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+#gallery .fieldGallery figure img{
+  border-radius:0 !important;
+  transform:none !important;
+  filter:none !important;
+}
+#gallery .fieldGallery figure:hover img{
+  transform:none !important;
+  filter:none !important;
+}
+</style>
