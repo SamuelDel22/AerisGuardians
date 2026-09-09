@@ -1814,10 +1814,8 @@ window.AERIS_CONFIG = window.AERIS_CONFIG || { workerUrl: '' };
 function aerisWorkerUrl(){
   const configured=(window.AERIS_CONFIG.workerUrl||'').trim().replace(/\/$/,'');
   if(configured) return configured;
-  // If the site itself is served from the Worker, same-origin is correct.
-  if(location.hostname.endsWith('.workers.dev') || location.hostname.includes('.workers.')) return location.origin;
-  // Otherwise keep the browser on same-origin so the offline fallback remains safe.
-  return '';
+  // V63: use the same Cloudflare Pages origin for the server-side AI function.
+  return location.origin;
 }
 async function aerisHealthCheck(){
   const base=aerisWorkerUrl();
