@@ -3601,6 +3601,161 @@ img{max-width:100%;height:auto}
 .decisionActions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;min-height:44px}.decisionActions>span{font-size:.54rem;font-weight:1000;letter-spacing:.14em;color:#7e9db8}.confirmMove{border:1px solid rgba(56,217,255,.42);border-radius:12px;padding:11px 16px;background:linear-gradient(135deg,rgba(183,170,255,.2),rgba(56,217,255,.12));color:#eafcff;font-size:.62rem;font-weight:1000;letter-spacing:.1em;cursor:pointer;transition:.2s}.confirmMove:hover:not(:disabled){transform:translateY(-2px);border-color:#38d9ff;box-shadow:0 10px 25px rgba(56,217,255,.13)}.confirmMove:disabled{opacity:.35;cursor:not-allowed}.gameChoice.selected{transform:translateY(-3px) scale(1.01);border-color:#ffc857;background:linear-gradient(145deg,rgba(255,200,87,.16),rgba(56,217,255,.1));box-shadow:0 0 0 1px rgba(255,200,87,.16),0 14px 32px rgba(0,0,0,.2)}.gameChoice.selected:before{background:rgba(255,200,87,.1)}.consequenceIcon{font-size:.48rem!important;letter-spacing:.08em;font-weight:1000;width:56px!important}.guardianGame.sceneIn .sceneCard{animation:sceneIn .5s cubic-bezier(.2,.8,.2,1)}.guardianGame.sceneIn .gameChoice{animation:choiceIn .45s both}.guardianGame.sceneIn .gameChoice:nth-child(2){animation-delay:.06s}.guardianGame.sceneIn .gameChoice:nth-child(3){animation-delay:.12s}@keyframes sceneIn{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}@keyframes choiceIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.guardianGame.flashGood .consequence{animation:impactGood .45s ease}.guardianGame.flashBad .consequence{animation:impactBad .45s ease}@keyframes impactGood{50%{box-shadow:0 0 0 3px rgba(114,245,213,.1),0 12px 35px rgba(114,245,213,.1)}}@keyframes impactBad{50%{transform:translateX(-3px)}}
 @media(max-width:560px){.decisionActions{align-items:stretch;flex-direction:column}.decisionActions>span{text-align:center}.confirmMove{width:100%}.consequence{align-items:flex-start;flex-wrap:wrap}.impactPills{width:100%;margin-left:0;justify-content:flex-start}}
 </style>
+
+<style id="aeris-v68-pixel-typography">
+/* AERIS V68 — PIXEL / RETRO TYPOGRAPHY LAYER
+   No external fonts: keeps loading fast and avoids network/font lag. */
+:root{
+  --pixel-shadow:#020604;
+  --pixel-green:#a8ff60;
+  --pixel-cyan:#57f6df;
+  --pixel-gold:#ffd45a;
+}
+html,body,
+button,input,textarea,select{
+  font-family:"Courier New", "SFMono-Regular", Menlo, Consolas, monospace !important;
+  -webkit-font-smoothing:none !important;
+  font-synthesis:none !important;
+  font-variant-ligatures:none !important;
+}
+body{letter-spacing:.018em}
+
+/* Pixel-display treatment for all important game text */
+.hero h1,
+.briefingPanel h1,
+section h2,
+.sectionTitle,
+.brandText strong,
+.guardianBriefing h1,
+.questTitle,
+.card h3,
+.card b,
+.v16-route button,
+.btn,
+.briefingEnter,
+.nav a,
+.langSwitch,
+.badge,
+.live,
+.eyebrow,
+.kicker,
+.missionTag,
+.questTag,
+.dataLabel,
+.relicName,
+.result strong,
+footer h3{
+  font-family:"Courier New", "SFMono-Regular", Menlo, Consolas, monospace !important;
+  font-weight:900 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.055em !important;
+}
+
+/* Large RPG titles: chunky, stepped, arcade-like without loading a web font */
+.hero h1,
+.briefingPanel h1{
+  font-weight:900 !important;
+  letter-spacing:.035em !important;
+  line-height:.92 !important;
+  text-shadow:
+    3px 0 0 var(--pixel-shadow),
+    -3px 0 0 var(--pixel-shadow),
+    0 3px 0 var(--pixel-shadow),
+    0 -3px 0 var(--pixel-shadow),
+    5px 5px 0 var(--pixel-shadow) !important;
+}
+section h2,
+.sectionTitle{
+  text-shadow:3px 3px 0 var(--pixel-shadow) !important;
+  line-height:1 !important;
+}
+
+/* Buttons become chunky 16-bit UI controls */
+.btn,
+.briefingEnter,
+.v16-route button,
+.nav a,
+.langSwitch{
+  border-radius:0 !important;
+  image-rendering:pixelated !important;
+  box-shadow:4px 4px 0 #020604 !important;
+  text-shadow:1px 1px 0 rgba(0,0,0,.9) !important;
+}
+.btn:hover,
+.briefingEnter:hover,
+.v16-route button:hover,
+.nav a:hover{
+  transform:translate(-2px,-2px) !important;
+  box-shadow:6px 6px 0 #020604 !important;
+}
+
+/* RPG labels use compact pixel-console spacing */
+.brandText small,
+.live,
+.eyebrow,
+.kicker,
+.missionTag,
+.questTag,
+.dataLabel,
+.badge{
+  font-size:.72rem !important;
+  line-height:1.25 !important;
+}
+
+/* Dialogue / information text remains readable, but gets a terminal feel */
+.card p,
+section p,
+.storyText,
+.factText,
+.fieldCaption,
+.briefingPanel p,
+.guardianBriefing p,
+footer p,
+li{
+  font-family:"Courier New", "SFMono-Regular", Menlo, Consolas, monospace !important;
+  letter-spacing:.015em !important;
+}
+
+/* Make the retro HUD feel deliberately pixel-built */
+.nav,
+.card,
+.guardianCard,
+.briefingPanel,
+.relic,
+.result,
+.v16-route button,
+.option,
+.fieldGallery figure,
+.problemFlow span{
+  border-radius:0 !important;
+}
+
+/* Tiny pixel corner cuts on panels */
+.card,
+.guardianCard,
+.briefingPanel,
+.relic,
+.result{
+  clip-path:polygon(
+    0 7px,7px 7px,7px 0,calc(100% - 7px) 0,calc(100% - 7px) 7px,100% 7px,
+    100% calc(100% - 7px),calc(100% - 7px) calc(100% - 7px),calc(100% - 7px) 100%,
+    7px 100%,7px calc(100% - 7px),0 calc(100% - 7px)
+  ) !important;
+}
+
+/* Remove expensive text/box animation while scrolling; keep the page snappy */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+@media(max-width:700px){
+  body{letter-spacing:0}
+  .hero h1,.briefingPanel h1{letter-spacing:.02em !important;text-shadow:2px 0 0 var(--pixel-shadow),-2px 0 0 var(--pixel-shadow),0 2px 0 var(--pixel-shadow),2px 2px 0 var(--pixel-shadow) !important}
+  section h2,.sectionTitle{font-size:clamp(1.55rem,8vw,2.35rem) !important}
+  .btn,.briefingEnter,.v16-route button{letter-spacing:.035em !important}
+}
+</style>
+
 </html>
 
 <style id="aeris-v51-mobile-hq-fix">
