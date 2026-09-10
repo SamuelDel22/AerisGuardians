@@ -1095,6 +1095,15 @@ body{padding-bottom:92px}
 .arcadeMenu{width:min(550px,100%);display:grid;gap:14px}.arcadeMenu[hidden],.arcadeStartContent[hidden]{display:none}.arcadeMenuTitle{font-size:clamp(15px,3vw,23px);letter-spacing:.14em;color:var(--arcade-cyan);margin-bottom:4px}.arcadeOption{display:flex;align-items:center;justify-content:center;min-height:74px;border:3px solid #d9fbff;background:linear-gradient(180deg,#214f99,#132c69);box-shadow:6px 6px 0 #000;color:#fff;text-decoration:none;font:900 clamp(19px,4vw,30px) "Courier New",monospace;letter-spacing:.08em;cursor:pointer}.arcadeOption:hover{background:linear-gradient(180deg,#3f77c8,#1e438e);color:var(--arcade-mint);transform:translate(-2px,-2px);box-shadow:8px 8px 0 #000}.arcadeOption:before{content:'▶';font-size:.72em;margin-right:.7em;color:var(--arcade-mint)}.arcadeBack{border:0;background:none;color:#bedfff;font:900 12px "Courier New",monospace;letter-spacing:.1em;cursor:pointer;padding:8px}
 @media(max-width:560px){.guardianBriefing.arcadeStart{padding:9px}.arcadePanel{min-height:calc(100vh - 18px);padding:25px 14px}.arcadeMeta{top:3px;font-size:8px}.arcadeTitle{font-size:clamp(54px,18vw,88px)}.arcadeSubtitle{margin-top:24px}.arcadeOption{min-height:64px}.arcadeRiver{bottom:62px}}
 @media(prefers-reduced-motion:reduce){.arcadeStartBtn{animation:none}}
+/* Keeps the title screen opaque on mobile and adds low-cost RPG HUD detail. */
+html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-behavior:none!important;height:100%!important}
+.guardianBriefing.arcadeStart{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;min-height:100vh!important;z-index:2147483647!important;visibility:visible!important;contain:layout paint style;background-color:#02061b!important;touch-action:manipulation}
+.guardianBriefing.arcadeStart.hide{visibility:hidden!important;pointer-events:none!important;opacity:0!important}
+.guardianBriefing.arcadeStart .arcadePanel{height:100%;min-height:0;max-height:100dvh;overflow:hidden}.guardianBriefing.arcadeStart .arcadePanel:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.16) 3px 4px);mix-blend-mode:screen}.guardianBriefing.arcadeStart .arcadePanel:after{content:"";position:absolute;top:10%;right:5%;width:92px;height:92px;border:3px solid #78eaff;border-radius:50%;box-shadow:0 0 0 8px #78eaff1c,0 0 0 17px #78eaff0d;opacity:.7;animation:arcadeRadar 3s steps(4,end) infinite}
+.arcadeRpgHud{position:absolute;left:0;right:0;bottom:88px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}.arcadeHudCard{width:31%;border:2px solid #5d95c8;background:#050d2ccc;box-shadow:4px 4px 0 #000;padding:8px 5px;color:#bdefff;font-size:clamp(7px,1.4vw,10px);font-weight:900;letter-spacing:.06em}.arcadeHudCard b{display:block;color:var(--arcade-mint);font-size:1.2em;margin-top:3px}.arcadeHudCard:nth-child(2) b{color:#ffd36e}.arcadeHudCard:nth-child(3) b{color:#ff7e9d}.arcadeStartContent{position:relative;z-index:1;animation:arcadeEnter .65s steps(6,end) both}.arcadeTitle{animation:arcadeTitleDrop .8s steps(7,end) both}.arcadeKicker{animation:arcadeSignal 2s steps(2,end) infinite}.arcadeSubtitle{position:relative}.arcadeSubtitle:before,.arcadeSubtitle:after{content:'✦';color:#ffd36e;padding:0 .65em}.arcadeMenu{position:relative;z-index:2;animation:arcadeEnter .35s steps(4,end) both}.arcadeMenuTitle:before,.arcadeMenuTitle:after{content:'══';color:var(--arcade-mint);padding:0 .5em}.arcadeOption{transition:none}.arcadeOption:hover,.arcadeOption:focus-visible{animation:arcadeOptionFlash .55s steps(2,end) infinite}.arcadeOption:first-of-type{border-color:#80e8ff}.arcadeOption:nth-of-type(2){border-color:#b7ff83;background:linear-gradient(180deg,#386d58,#183e36)}
+@keyframes arcadeEnter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@keyframes arcadeTitleDrop{0%{opacity:0;transform:translateY(-22px)}65%{opacity:1;transform:translateY(3px)}100%{transform:none}}@keyframes arcadeRadar{50%{transform:scale(1.12);opacity:.35}}@keyframes arcadeSignal{50%{color:#fff;opacity:.65}}@keyframes arcadeOptionFlash{50%{filter:brightness(1.35)}}
+@media(max-width:560px){.guardianBriefing.arcadeStart .arcadePanel{padding-top:18px;padding-bottom:18px}.guardianBriefing.arcadeStart .arcadePanel:after{width:52px;height:52px;right:7%;top:14%}.arcadeRpgHud{bottom:61px}.arcadeHudCard{padding:6px 3px;font-size:6px;box-shadow:2px 2px 0 #000}.arcadeSubtitle:before,.arcadeSubtitle:after{padding:0 .3em}.arcadeRiver{left:3%;right:3%}}
+@media(prefers-reduced-motion:reduce){.arcadeStartContent,.arcadeTitle,.arcadeKicker,.guardianBriefing.arcadeStart .arcadePanel:after{animation:none!important}}
 </style>
 </head>
 <body data-aeris-version="51.2">
@@ -1102,6 +1111,11 @@ body{padding-bottom:92px}
   <div class="arcadePanel">
     <div class="arcadeMeta"><span>P1 <b>■ ■ ■</b></span><span>RÍO CAUCA // ONLINE</span><span>P2 <b>■ ■ ■</b></span></div>
     <div aria-hidden="true" class="arcadeRiver"></div>
+    <div aria-hidden="true" class="arcadeRpgHud">
+      <div class="arcadeHudCard">MISSION<b>GUARDIAN</b></div>
+      <div class="arcadeHudCard">RIVER XP<b>+ 100</b></div>
+      <div class="arcadeHudCard">THREAT<b>Hg ALERT</b></div>
+    </div>
     <div class="arcadeStartContent" id="arcadeStartContent">
       <p class="arcadeKicker">CAUCA GUARDIANS</p>
       <h1 class="arcadeTitle" id="arcadeTitle">AERIS</h1>
@@ -1946,6 +1960,8 @@ applyLanguage();updateAlt();updateFooterLinks();
   // V68 arcade start replaces the briefing while keeping the existing two destinations.
   const arcadeOverlay=document.getElementById('guardianBriefing');
   if(arcadeOverlay?.classList.contains('arcadeStart')){
+    document.documentElement.classList.add('arcadeIntroOpen');
+    document.body.classList.add('arcadeIntroOpen');
     const start=document.getElementById('arcadeStartButton');
     const startContent=document.getElementById('arcadeStartContent');
     const menu=document.getElementById('arcadeMenu');
@@ -1954,6 +1970,8 @@ applyLanguage();updateAlt();updateFooterLinks();
     const closeMenu=()=>{menu.hidden=true;startContent.hidden=false;start?.focus()};
     const enterMode=(mode)=>{
       const destination=document.querySelector(`#navLinks .aerisTopLink[href="#${mode}"]`);
+      document.documentElement.classList.remove('arcadeIntroOpen');
+      document.body.classList.remove('arcadeIntroOpen');
       arcadeOverlay.classList.add('hide');
       setTimeout(()=>arcadeOverlay.remove(),450);
       if(destination) destination.click();
