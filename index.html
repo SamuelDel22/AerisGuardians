@@ -1083,55 +1083,39 @@ body{padding-bottom:92px}
 </style>
 
 <link rel="stylesheet" href="assets/aeris-v65-rpg.css">
-<link rel="preload" as="image" href="assets/field/field-01-river-mining-structure.jpg" fetchpriority="high"/>
+<style id="aeris-v68-arcade-start">
+/* V68 start screen: CSS-only pixel scenery, no added assets or network requests. */
+.guardianBriefing.arcadeStart{--arcade-ink:#03071b;--arcade-sky:#08153d;--arcade-blue:#1556a1;--arcade-cyan:#8af5ff;--arcade-mint:#a9ff80;--arcade-red:#e83d68;display:grid!important;place-items:center;padding:18px;background:linear-gradient(#02061b 0 47%,#0d3672 47% 63%,#040614 63%);font-family:"Courier New",monospace!important;isolation:isolate}
+.guardianBriefing.arcadeStart:before{content:"";position:absolute;inset:0;z-index:-2;opacity:.75;background-image:radial-gradient(circle at 7% 14%,#fff 0 1px,transparent 1.6px),radial-gradient(circle at 19% 30%,#b9eaff 0 1px,transparent 1.7px),radial-gradient(circle at 81% 12%,#fff 0 1px,transparent 1.6px),radial-gradient(circle at 92% 38%,#d5f7ff 0 1px,transparent 1.7px),linear-gradient(145deg,transparent 47%,#b8e9ff 48% 49%,transparent 50%) 8% 18%/56px 56px;image-rendering:pixelated}
+.guardianBriefing.arcadeStart:after{content:"";position:absolute;z-index:-1;left:0;right:0;bottom:0;height:39%;background:linear-gradient(153deg,transparent 0 20%,#07101b 20% 27%,transparent 27% 34%,#07101b 34% 46%,transparent 46%),linear-gradient(27deg,transparent 0 24%,#07101b 24% 31%,transparent 31% 43%,#07101b 43% 55%,transparent 55%),repeating-linear-gradient(90deg,#02040b 0 22px,#dbe7d9 22px 28px,#02040b 28px 50px);background-size:140px 62px,180px 70px,72px 22px;background-position:center 0,center 0,center bottom;background-repeat:repeat-x}
+.arcadePanel{position:relative;width:min(780px,100%);min-height:min(620px,calc(100vh - 36px));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:34px 22px;box-sizing:border-box}
+.arcadeMeta{position:absolute;top:10px;left:0;right:0;display:flex;justify-content:space-between;color:#ff6386;font-size:clamp(9px,1.7vw,13px);font-weight:900;letter-spacing:.08em}.arcadeMeta b{color:var(--arcade-mint)}
+.arcadeRiver{position:absolute;z-index:-1;bottom:72px;left:10%;right:10%;height:95px;opacity:.65;background:repeating-linear-gradient(175deg,transparent 0 13px,#78dcff 14px 17px,transparent 18px 29px);transform:perspective(280px) rotateX(55deg)}
+.arcadeKicker{color:var(--arcade-cyan);font-size:clamp(10px,2vw,14px);letter-spacing:.18em;font-weight:900;margin:0 0 13px}.arcadeTitle{font-family:Impact,"Arial Black",sans-serif;font-size:clamp(57px,15vw,132px);line-height:.72;letter-spacing:-.07em;margin:0;color:#e9ffff;text-transform:uppercase;text-shadow:0 4px 0 #37aac7,0 8px 0 #1a2c71,0 12px 0 var(--arcade-red),0 16px 0 #781b45,7px 18px 0 #000}.arcadeSubtitle{font-size:clamp(13px,2.8vw,21px);font-weight:900;letter-spacing:.17em;margin:28px 0 16px;color:#fff;text-shadow:3px 3px 0 #15215c}.arcadeStartBtn{border:0;background:transparent;color:#fff;font:900 clamp(16px,3.5vw,27px) "Courier New",monospace;letter-spacing:.12em;padding:15px;cursor:pointer;text-shadow:3px 3px 0 #d93661;animation:arcadeBlink 1.1s steps(2,end) infinite}.arcadeStartBtn:focus-visible,.arcadeOption:focus-visible{outline:3px solid var(--arcade-mint);outline-offset:4px}@keyframes arcadeBlink{50%{opacity:.35}}.arcadeHint{font-size:10px;letter-spacing:.1em;color:#a8c9e8;margin:6px 0 0}
+.arcadeMenu{width:min(550px,100%);display:grid;gap:14px}.arcadeMenu[hidden],.arcadeStartContent[hidden]{display:none}.arcadeMenuTitle{font-size:clamp(15px,3vw,23px);letter-spacing:.14em;color:var(--arcade-cyan);margin-bottom:4px}.arcadeOption{display:flex;align-items:center;justify-content:center;min-height:74px;border:3px solid #d9fbff;background:linear-gradient(180deg,#214f99,#132c69);box-shadow:6px 6px 0 #000;color:#fff;text-decoration:none;font:900 clamp(19px,4vw,30px) "Courier New",monospace;letter-spacing:.08em;cursor:pointer}.arcadeOption:hover{background:linear-gradient(180deg,#3f77c8,#1e438e);color:var(--arcade-mint);transform:translate(-2px,-2px);box-shadow:8px 8px 0 #000}.arcadeOption:before{content:'▶';font-size:.72em;margin-right:.7em;color:var(--arcade-mint)}.arcadeBack{border:0;background:none;color:#bedfff;font:900 12px "Courier New",monospace;letter-spacing:.1em;cursor:pointer;padding:8px}
+@media(max-width:560px){.guardianBriefing.arcadeStart{padding:9px}.arcadePanel{min-height:calc(100vh - 18px);padding:25px 14px}.arcadeMeta{top:3px;font-size:8px}.arcadeTitle{font-size:clamp(54px,18vw,88px)}.arcadeSubtitle{margin-top:24px}.arcadeOption{min-height:64px}.arcadeRiver{bottom:62px}}
+@media(prefers-reduced-motion:reduce){.arcadeStartBtn{animation:none}}
+</style>
 </head>
 <body data-aeris-version="51.2">
-<div aria-labelledby="briefingTitle" aria-modal="true" class="guardianBriefing" id="guardianBriefing" role="dialog">
-<div class="introAurora"></div>
-<div class="introGrid"></div>
-<div aria-hidden="true" class="introParticles"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<div aria-hidden="true" class="introRiver"><span></span><span></span><span></span></div>
-<div class="briefingPanel">
-<div class="briefingTop">
-<span class="briefingCode">AERIS // CAUCA GUARDIANS</span>
-<button class="briefingSkip" id="briefingSkip" type="button">Skip briefing</button>
-</div>
-<div aria-label="Project Aeris" class="introBrand">
-<div class="introMark aerisIntroMark"><img src="aeris-logo.jpeg" alt="AERIS logo"></div>
-<div><strong>PROJECT AERIS</strong><small>EXPLORE · VERIFY · PROTECT</small></div>
-</div>
-<div class="introTelemetry" aria-hidden="true"><span><i></i> RIVER SIGNAL</span><span>BAJO CAUCA · FIELD MODE</span><span>● LIVE</span></div>
-<div class="briefingKicker" id="briefingKicker">MISSION DETECTED</div>
-<h1 id="briefingTitle">THE RIVER NEEDS A <span>GUARDIAN.</span></h1>
-<p id="briefingText">Follow the evidence. Discover the mercury pathway. Protect the Cauca.</p>
-<div aria-label="Guardian relics" class="guardianActivation">
-<div class="activationHead">
-<div><small>GUARDIAN RELICS · OPTIONAL</small><strong id="activationStatus">0 / 5 ACTIVATED</strong></div>
-<span id="activationSignal">SYSTEMS STANDBY</span>
-</div>
-<div aria-label="Activate the five Guardian relics" class="guardianOrbs" role="group">
-<button aria-label="Activate Water Core" class="guardianOrb" data-guardian="water-core" type="button"><span class="orbIcon relicIcon"><img src="assets/relics/water-core.png" alt="Water Core"></span><b>WATER CORE</b><small>Clean Water</small></button>
-<button aria-label="Activate Life Seed" class="guardianOrb" data-guardian="life-seed" type="button"><span class="orbIcon relicIcon"><img src="assets/relics/life-seed.png" alt="Life Seed"></span><b>LIFE SEED</b><small>Restoration</small></button>
-<button aria-label="Activate River Shield" class="guardianOrb" data-guardian="river-shield" type="button"><span class="orbIcon relicIcon"><img src="assets/relics/river-shield.png" alt="River Shield"></span><b>RIVER SHIELD</b><small>Protection</small></button>
-<button aria-label="Activate Immortality Rune" class="guardianOrb" data-guardian="immortality-rune" type="button"><span class="orbIcon relicIcon"><img src="assets/relics/immortality-rune.png" alt="Immortality Rune"></span><b>IMMORTALITY RUNE</b><small>Enduring Care</small></button>
-<button aria-label="Activate Cauca Crown" class="guardianOrb" data-guardian="cauca-crown" type="button"><span class="orbIcon relicIcon"><img src="assets/relics/cauca-crown.png" alt="Cauca Crown"></span><b>CAUCA CROWN</b><small>Master Guardian</small></button>
-</div>
-</div>
-<div class="briefingMission"><div><small>YOUR MISSION</small><strong id="briefingMissionText">Follow the evidence. Protect the river.</strong><span class="missionSubline">EXPLORE → VERIFY → ACT</span></div><div class="briefingSignal">● ONLINE</div></div>
-<div aria-label="Guardian identification" class="briefingIdentity">
-<div class="briefingIdentityTop"><span class="identityCode" id="identityCode">GUARDIAN IDENTIFICATION</span><span class="briefingSignal">● READY</span></div>
-<div class="briefingIdentityRow">
-<div class="identityIcon guardianEmblem guardianIdentificationEmblem"><img src="assets/guardian/cauca-guardian-emblem.png" alt="Cauca Guardian emblem"></div>
-<div class="briefingIdentityCopy"><h2 id="identityTitle">What should we call you?</h2><p id="identityText">Choose a first name for your Guardian profile. It stays on this device — no account, no sign-up.</p></div>
-</div>
-<label class="sr-only" for="guardianNameInput">Guardian first name</label>
-<input autocomplete="given-name" class="identityInput" id="guardianNameInput" inputmode="text" maxlength="24" placeholder="Enter your first name"/>
-<div aria-live="polite" class="identityError" id="identityError"></div>
-<div class="identityNote" id="identityNote">First name only. Stored locally on this device.</div>
-</div>
-<button class="briefingEnter" id="briefingEnter" type="button"><span id="briefingEnterText">ENTER THE MISSION</span><b>→</b></button>
-<div class="briefingHint" id="briefingHint">No account. No data collection. Just learn and play.</div>
-</div>
+<div aria-labelledby="arcadeTitle" aria-modal="true" class="guardianBriefing arcadeStart" id="guardianBriefing" role="dialog">
+  <div class="arcadePanel">
+    <div class="arcadeMeta"><span>P1 <b>■ ■ ■</b></span><span>RÍO CAUCA // ONLINE</span><span>P2 <b>■ ■ ■</b></span></div>
+    <div aria-hidden="true" class="arcadeRiver"></div>
+    <div class="arcadeStartContent" id="arcadeStartContent">
+      <p class="arcadeKicker">CAUCA GUARDIANS</p>
+      <h1 class="arcadeTitle" id="arcadeTitle">AERIS</h1>
+      <p class="arcadeSubtitle">THE RIVER NEEDS A GUARDIAN</p>
+      <button aria-controls="arcadeMenu" class="arcadeStartBtn" id="arcadeStartButton" type="button">PRESS START</button>
+      <p class="arcadeHint">EXPLORE · VERIFY · PROTECT</p>
+    </div>
+    <div aria-label="Choose a destination" class="arcadeMenu" hidden id="arcadeMenu">
+      <div class="arcadeMenuTitle">SELECT MISSION</div>
+      <a class="arcadeOption" data-arcade-mode="information" href="#information">INFORMATION</a>
+      <a class="arcadeOption" data-arcade-mode="game" href="#game">GAME</a>
+      <button class="arcadeBack" id="arcadeBack" type="button">← BACK</button>
+    </div>
+  </div>
 </div>
 <nav class="nav"><a class="brand" href="#top"><img alt="Aeris order logo" class="brandLogo" src="aeris-logo.jpeg"/><span class="brandText"><strong>AERIS</strong><small>CAUCA // GUARDIANS</small></span></a><button aria-label="Open menu" class="mobileMenu" id="mobileMenu">☰</button>
 <div class="links" id="navLinks">
@@ -1536,7 +1520,7 @@ nextButton.addEventListener('click',(event)=>{
 document.getElementById('again').onclick=()=>{i=0;answers=Array(missions.length).fill(null);energy=0;document.getElementById('result').style.display='none';document.getElementById('play').style.display='block';render();drawRelics();renderRelicsLanguage();document.getElementById('game').scrollIntoView({behavior:'smooth',block:'center'})};
 // Translate generated unlocked badge and live messages.
 // Keep relic DOM stable during quiz interactions; drawRelics is called only when the collection actually changes.
-const liveTimer=setInterval(()=>{const el=document.getElementById('live');if(el)el.textContent=I18N[lang].messages[Math.floor(Math.random()*I18N[lang].messages.length)]},10000);
+const liveTimer=setInterval(()=>{const el=document.getElementById('live');if(el)el.textContent=I18N[lang].messages[Math.floor(Math.random()*I18N[lang].messages.length)]},3000);
 // Keep image sources exactly as in the original file; only translate accessible text.
 const altMap={
  'aeris-logo.jpeg':['Logo de la orden Aeris','Aeris order logo'],
@@ -1959,6 +1943,31 @@ applyLanguage();updateAlt();updateFooterLinks();
 </script>
 <script id="aeris-v5-mission">
 (function(){
+  // V68 arcade start replaces the briefing while keeping the existing two destinations.
+  const arcadeOverlay=document.getElementById('guardianBriefing');
+  if(arcadeOverlay?.classList.contains('arcadeStart')){
+    const start=document.getElementById('arcadeStartButton');
+    const startContent=document.getElementById('arcadeStartContent');
+    const menu=document.getElementById('arcadeMenu');
+    const back=document.getElementById('arcadeBack');
+    const openMenu=()=>{startContent.hidden=true;menu.hidden=false;menu.querySelector('.arcadeOption')?.focus()};
+    const closeMenu=()=>{menu.hidden=true;startContent.hidden=false;start?.focus()};
+    const enterMode=(mode)=>{
+      const destination=document.querySelector(`#navLinks .aerisTopLink[href="#${mode}"]`);
+      arcadeOverlay.classList.add('hide');
+      setTimeout(()=>arcadeOverlay.remove(),450);
+      if(destination) destination.click();
+      else document.getElementById(mode)?.scrollIntoView({behavior:'smooth',block:'start'});
+    };
+    start?.addEventListener('click',openMenu);
+    back?.addEventListener('click',closeMenu);
+    menu?.querySelectorAll('[data-arcade-mode]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();enterMode(link.dataset.arcadeMode)}));
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Enter' && !startContent.hidden){event.preventDefault();openMenu()}
+      if(event.key==='Escape' && !menu.hidden){event.preventDefault();closeMenu()}
+    });
+    return;
+  }
   const overlay=document.getElementById('guardianBriefing');
   const enter=document.getElementById('briefingEnter');
   const skip=document.getElementById('briefingSkip');
@@ -2213,7 +2222,7 @@ const oldApply=window.applyLanguage;
 if(oldApply){window.applyLanguage=function(){oldApply();applyV14Text();renderFish();renderWhat();renderPassport();}}
 applyV14Text();
 // Keep passport values fresh while the app runs.
-setInterval(renderPassport,8000);
+setInterval(renderPassport,2500);
 renderFish();renderWhat();renderPassport();
 })();
 </script>
@@ -2260,7 +2269,7 @@ function introMotion(){
 function aiLive(){ aerisHealthCheck(); }
 qs('.sourceVaultCard').forEach(a=>a.addEventListener('click',()=>window.playFX?.('select')));
 introMotion(); telemetry(); aiLive();
-setInterval(telemetry,8000);
+setInterval(telemetry,1600);
 const oldApply=window.applyLanguage; if(oldApply){window.applyLanguage=function(){oldApply();setTimeout(()=>{telemetry();aiLive()},0)}}
 window.addEventListener('storage',telemetry);
 })();
@@ -3596,58 +3605,6 @@ img{max-width:100%;height:auto}
 })();
 </script>
 
-
-<style id="aeris-v68-performance-only">
-/* V68 PERFORMANCE ONLY
-   Visual assets, filenames and image sources are untouched.
-   This layer reduces GPU/compositing work and unnecessary repainting. */
-html{scroll-behavior:auto!important}
-body{overscroll-behavior-x:none!important}
-body:before{animation:none!important}
-body:after{animation:none!important}
-.nav,.briefingPanel,.guardianIdentity,.live,.tag,.aerisBadge,.classCard{
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-}
-img{
-  image-rendering:auto!important;
-  content-visibility:auto;
-}
-.hero img,.heroLogo,.aerisIntroMark img,.guardianIntroMark img,.identityIcon img{
-  content-visibility:visible!important;
-}
-.hero:after{animation:none!important;filter:none!important}
-.hero:before{animation:none!important;mix-blend-mode:normal!important}
-.card,.evidenceCard,.whatMetric,.labNode,.mapNode,.relic,.passportCard,.question,.photo,.gallery figure,.dark,.game,.guardianCard{
-  will-change:auto!important;
-}
-@media(max-width:900px){
-  /* Mobile/iPhone: keep the same V68 look but avoid continuous GPU work. */
-  .aerisNavIcon,.destinationIcon,.aiBrand img,
-  .guardianIntroMark img,.identityIcon.guardianEmblem img,
-  .guardianAvatar img,.whatMetricIcon img,
-  .heroLogo,.passportGlow,.live,.mapNode.active .mapIcon,
-  .missionTelemetry:after,.game:before,.footer:before,
-  .hero h1 span,.mapLine,.labArrow,.labNode.active:after,
-  .a48-orb,.aeris-cursor{
-    animation:none!important;
-  }
-  .btn.primary:after,.briefingEnter:after,
-  .relic.unlocked:after,.xpBar i:after,
-  #gameProgressBar:after,#passportProgressFill:after{
-    display:none!important;
-    animation:none!important;
-  }
-  .hero:after{display:none!important}
-  .heroInner{transform:none!important}
-}
-@media(max-width:520px){
-  /* Smaller paint areas on the smallest screens. */
-  body:after{background:linear-gradient(rgba(168,255,96,.018) 50%,transparent 50%) 0 0/100% 8px!important}
-  .nav{box-shadow:3px 3px 0 #000!important}
-}
-</style>
-
 </body>
 
 <style id="aeris-v54-game-polish">
@@ -4174,4 +4131,3 @@ footer a{color:var(--cyan)!important}
 }
 @media(prefers-reduced-motion:no-preference){.heroLogo{animation:rpgPulse 2.8s ease-in-out infinite}.card,.v16-route button,.option{transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease,background .15s ease}@keyframes rpgPulse{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 10px #a8ff6055)}}}
 </style>
-
