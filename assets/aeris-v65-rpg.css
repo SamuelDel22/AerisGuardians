@@ -1,0 +1,100 @@
+/* AERIS V65 — RETRO RPG VISUAL OVERHAUL
+   Visual-only layer: preserves existing content and interactions. */
+:root{
+  --rpg-bg:#07100d;--rpg-panel:#0c1914;--rpg-panel2:#10231a;
+  --rpg-green:#8cff66;--rpg-lime:#c8ff72;--rpg-cyan:#5ff4dc;
+  --rpg-gold:#ffd75a;--rpg-purple:#b58cff;--rpg-red:#ff6b6b;
+  --rpg-text:#eaffdf;--rpg-muted:#91aa98;
+  --rpg-pixel:0 0 0 1px rgba(140,255,102,.18),0 10px 0 rgba(0,0,0,.25);
+}
+html{background:var(--rpg-bg)!important}
+body{
+  font-family:"Courier New",ui-monospace,monospace!important;
+  background:#08110d!important;color:#17251d!important;
+}
+body:before{z-index:9998!important;opacity:.16!important;pointer-events:none!important;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0,rgba(255,255,255,.035) 1px,transparent 1px,transparent 4px)!important;mix-blend-mode:screen!important}
+body:after{content:"";position:fixed;inset:0;z-index:9997;pointer-events:none;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.34) 100%);}
+/* pixel-style corners */
+.nav,.card,.dark,.game,.question,.result,.aiChat,.missionMap,.guardianCard,.evidenceCard,.photo,.gallery figure,.v16-card,.aerisModeBar,.pathway,.briefingPanel{
+  border-radius:4px!important;box-shadow:var(--rpg-pixel)!important;
+}
+.nav{
+  top:12px!important;width:min(1160px,94%)!important;
+  background:rgba(5,13,10,.94)!important;border:1px solid var(--rpg-green)!important;
+  box-shadow:0 0 0 1px #000,0 0 28px rgba(140,255,102,.08)!important;
+}
+.nav:before{content:"◈ AERIS // GUARDIAN SYSTEM";position:absolute;left:10px;top:-9px;background:#07100d;color:var(--rpg-green);font-size:9px;font-weight:900;letter-spacing:.14em;padding:0 7px}
+.logo{border-radius:2px!important;background:var(--rpg-green)!important;color:#07100d!important;box-shadow:0 0 18px rgba(140,255,102,.25)!important}
+.links a,.aerisTopLink{font-family:inherit!important;text-transform:uppercase!important;letter-spacing:.04em!important}
+.aerisTopLink.active{color:#07100d!important;background:var(--rpg-green)!important;box-shadow:none!important}
+.langSwitch{border-radius:2px!important;border-color:var(--rpg-gold)!important;color:var(--rpg-gold)!important;background:#201b08!important}
+.hero{
+  min-height:100vh!important;
+  background:linear-gradient(180deg,rgba(3,10,7,.35),rgba(3,10,7,.78) 55%,#06100b 100%),url("field/field-01-river-mining-structure.jpg") center/cover!important;
+}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,10,7,.8),transparent 65%),repeating-linear-gradient(0deg,transparent 0 5px,rgba(140,255,102,.025) 5px 6px);pointer-events:none}
+.heroInner{padding-top:180px!important}
+.hero .tag,.tag{border-radius:2px!important;border:1px solid var(--rpg-green)!important;background:#07100dd9!important;color:var(--rpg-green)!important;font-family:inherit!important}
+.dot{background:var(--rpg-green)!important;box-shadow:0 0 14px var(--rpg-green)!important}
+.hero h1{font-family:Impact,"Arial Black",sans-serif!important;text-transform:uppercase!important;letter-spacing:.015em!important;text-shadow:5px 5px 0 #06100b,0 0 28px rgba(140,255,102,.18)!important}
+.hero h1 span{color:var(--rpg-green)!important;background:none!important;-webkit-text-fill-color:initial!important}
+.hero p{font-family:inherit!important;color:#d7e9d2!important;max-width:720px}
+.btn{border-radius:2px!important;font-family:inherit!important;text-transform:uppercase!important;letter-spacing:.07em!important;border:1px solid transparent!important;box-shadow:3px 3px 0 #000!important}
+.primary{background:var(--rpg-green)!important;color:#07100d!important;border-color:#d5ffbe!important}
+.ghost{background:#07100de8!important;color:var(--rpg-text)!important;border-color:#759d72!important}
+.live{border-radius:2px!important;background:#07100df0!important;border:1px solid var(--rpg-cyan)!important;color:var(--rpg-cyan)!important}
+section{background:#09130f!important;color:var(--rpg-text)!important;position:relative}
+section:nth-of-type(odd),section:nth-of-type(even){background:#09130f!important}
+section:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--rpg-green),transparent);opacity:.35}
+.wrap{position:relative}
+.eyebrow{font-family:inherit!important;color:var(--rpg-green)!important;letter-spacing:.16em!important}
+h2{font-family:Impact,"Arial Black",sans-serif!important;text-transform:uppercase!important;letter-spacing:.025em!important;color:var(--rpg-text)!important;text-shadow:3px 3px 0 #020604!important}
+.lead,.small,.card p,.dark p{color:var(--rpg-muted)!important}
+.cards{gap:12px!important}
+.card{background:linear-gradient(145deg,#0c1c15,#09140f)!important;border:1px solid #385f3d!important;color:var(--rpg-text)!important;position:relative;overflow:hidden}
+.card:after{content:"+ DATA";position:absolute;right:10px;top:9px;color:#496d4d;font-size:8px;font-weight:900}
+.card:hover{border-color:var(--rpg-green)!important;transform:translate(-2px,-3px)!important;box-shadow:4px 4px 0 #020604,0 0 22px rgba(140,255,102,.09)!important}
+.big{color:var(--rpg-green)!important;font-family:Impact,"Arial Black",sans-serif!important}
+.story{gap:12px!important}.photo{border:1px solid #385f3d!important}.dark{background:linear-gradient(145deg,#0b1c14,#101f18)!important;border:1px solid #385f3d!important}
+.gallery{gap:10px!important}.gallery figure{border:1px solid #385f3d!important}.gallery figcaption,.caption{font-family:inherit!important;background:linear-gradient(transparent,rgba(4,12,8,.96))!important}
+.gameSection{background:#060e0a!important}
+.game{background:linear-gradient(145deg,#0b1c14,#101f18)!important;border:1px solid var(--rpg-green)!important}
+.hud{border-bottom:1px dashed #4b754e;padding-bottom:12px}
+.energy,.mini{font-family:inherit!important;color:var(--rpg-gold)!important}
+.bar{border-radius:1px!important;background:#030806!important;border:1px solid #3b593f;padding:2px;height:13px!important}
+.bar div{background:linear-gradient(90deg,var(--rpg-green),var(--rpg-cyan))!important}
+.question{background:#08140e!important;border:1px solid #527956!important}
+.question:before{content:"QUEST // ACTIVE";display:block;color:var(--rpg-gold);font-size:9px;letter-spacing:.15em;margin-bottom:8px}
+.option{border-radius:2px!important;background:#0d2117!important;border:1px solid #3e6843!important;color:var(--rpg-text)!important;font-family:inherit!important}
+.option:hover,.option.selected{background:#17351f!important;border-color:var(--rpg-green)!important;box-shadow:3px 3px 0 #020604!important}
+.relic{border-radius:2px!important;background:#07130d!important;border-color:#36533a!important}.relic.unlocked{background:#132b18!important;border-color:var(--rpg-gold)!important;box-shadow:0 0 20px rgba(255,215,90,.08)!important}
+.result{background:#091a10!important;border-color:var(--rpg-gold)!important}.scoreBig{font-family:Impact,"Arial Black",sans-serif!important;color:var(--rpg-green)!important}
+/* chatbot as a terminal */
+.aiChat{background:#050b08!important;border:1px solid #527956!important}
+.aiHeader{background:#0c1c14!important;border-bottom:1px dashed #527956!important}
+.aiMsg{border-radius:2px!important;font-family:inherit!important}.aiMsg.bot{background:#0b1b13!important;border:1px solid #294d31!important;color:#dff5da!important}.aiMsg.user{background:#8cff66!important;color:#06100b!important;border-radius:2px!important}
+.aiForm{background:#07100d!important;border-top:1px dashed #385f3d!important}.aiForm input{border-radius:2px!important;background:#030806!important;border-color:#385f3d!important;color:var(--rpg-green)!important;font-family:inherit!important}.aiForm input:focus{border-color:var(--rpg-green)!important;box-shadow:0 0 0 2px rgba(140,255,102,.08)!important}
+.aiSuggestion{border-radius:2px!important;background:#0b1b13!important;border-color:#385f3d!important;color:var(--rpg-green)!important;font-family:inherit!important}
+.aiSuggestion:hover{background:#132b18!important;border-color:var(--rpg-green)!important}
+.aerisModeBar{background:#050d09!important;border-color:#385f3d!important}.aerisModeTab{font-family:inherit!important}.aerisModeTab.active{background:#12301b!important;color:var(--rpg-green)!important}.aerisModeTab.active:after{background:var(--rpg-green)!important}
+.v16-progress{background:#060e0a!important}.v16-card{background:#0b1913!important;border-color:#385f3d!important}.v16-route button{background:#07130d!important;border-color:#36533a!important;border-radius:2px!important;font-family:inherit!important}.v16-route button.on,.v16-route button:hover{border-color:var(--rpg-green)!important;background:#11291a!important;box-shadow:3px 3px 0 #020604!important}.v16-route i{border-radius:2px!important;background:#102118!important}.v16-stat{background:#07130d!important;border-color:#36533a!important;border-radius:2px!important}.v16-stat b{color:var(--rpg-green)!important}
+footer{background:#040906!important;border-top:1px solid #385f3d!important}
+/* RPG labels and status chips */
+section .top:after{content:"STATUS: ONLINE  •  REGION: BAJO CAUCA";font-size:8px;color:#55735a;letter-spacing:.12em;align-self:flex-end;white-space:nowrap}
+/* Briefing = game start screen */
+.guardianBriefing{background:#030806!important}
+.guardianBriefing:before{background:radial-gradient(circle,#8cff6620,transparent 50%)!important}
+.briefingPanel{background:#07120c!important;border:1px solid var(--rpg-green)!important;box-shadow:8px 8px 0 #020604,0 0 50px rgba(140,255,102,.08)!important;border-radius:2px!important}
+.briefingPanel h1{font-family:Impact,"Arial Black",sans-serif!important;text-transform:uppercase!important;color:#f0ffe9!important}.briefingPanel>p{font-family:inherit!important;color:#9bb39f!important}.briefingMission{border-radius:2px!important;background:#0b1b13!important;border-color:#385f3d!important}.briefingEnter{border-radius:2px!important;background:var(--rpg-green)!important;color:#06100b!important;font-family:inherit!important;box-shadow:4px 4px 0 #020604!important}
+/* pixel cursor */
+a,button{cursor:crosshair!important}
+@media(max-width:900px){
+  section .top:after{display:block;margin-top:12px}
+  .nav:before{display:none}.heroInner{padding-top:150px!important}
+}
+@media(max-width:600px){
+  .hero{min-height:92svh!important}.hero h1{font-size:clamp(3rem,15vw,5rem)!important}
+  .nav{width:calc(100% - 14px)!important}.nav .brand{max-width:44%}.nav .brand span{font-size:11px}
+  section .top:after{font-size:7px}.card:after{display:none}
+}
+@media(prefers-reduced-motion:reduce){body:after{display:none}}
