@@ -3899,3 +3899,125 @@ footer a{color:var(--cyan)!important}
   map();applyLang();
 })();
 </script>
+
+<style id="aeris-v73-intro-lock-fix">
+/* V73 — intro is a true modal layer: it owns the viewport until a choice is made. */
+html.aeris-intro-lock,
+html.aeris-intro-lock body{overflow:hidden!important;overscroll-behavior:none!important}
+body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!important;width:100%!important;top:var(--aeris-scroll-lock-top,0px)!important;touch-action:none!important}
+.guardianBriefing.arcadeStart{
+  position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;
+  margin:0!important;padding:0!important;z-index:2147483647!important;
+  overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important;
+  pointer-events:auto!important;
+}
+.guardianBriefing.arcadeStart .arcadePanel,
+.guardianBriefing.arcadeStart .arcadeWorld,
+.guardianBriefing.arcadeStart .arcadePanel *{box-sizing:border-box}
+.guardianBriefing.arcadeStart .arcadePanel{width:100vw!important;height:100dvh!important;max-height:none!important;min-height:0!important;overflow:hidden!important}
+.guardianBriefing.arcadeStart .arcadeStartBtn,
+.guardianBriefing.arcadeStart .arcadeOption,
+.guardianBriefing.arcadeStart .arcadeBack{pointer-events:auto!important;touch-action:manipulation!important}
+.guardianBriefing.arcadeStart.hide{pointer-events:none!important}
+</style>
+<script id="aeris-v73-intro-lock-fix-script">
+(function(){
+  'use strict';
+  const overlay=document.getElementById('guardianBriefing');
+  const start=document.getElementById('arcadeStartButton');
+  const startContent=document.getElementById('arcadeStartContent');
+  const menu=document.getElementById('arcadeMenu');
+  const back=document.getElementById('arcadeBack');
+  if(!overlay||!start||!startContent||!menu)return;
+
+  let lockedY=0;
+  let introOpen=!overlay.classList.contains('hide');
+  let scrollLocked=false;
+
+  function lockScroll(){
+    if(scrollLocked)return;
+    lockedY=window.scrollY||document.documentElement.scrollTop||0;
+    document.documentElement.classList.add('aeris-intro-lock');
+    document.body.classList.add('aeris-intro-lock');
+    document.body.style.setProperty('--aeris-scroll-lock-top',(-lockedY)+'px');
+    scrollLocked=true;
+  }
+  function unlockScroll(){
+    if(!scrollLocked)return;
+    document.documentElement.classList.remove('aeris-intro-lock');
+    document.body.classList.remove('aeris-intro-lock');
+    document.body.style.removeProperty('--aeris-scroll-lock-top');
+    window.scrollTo(0,lockedY);
+    scrollLocked=false;
+  }
+  function showMenu(){
+    menu.hidden=false;
+    startContent.hidden=true;
+    requestAnimationFrame(()=>menu.querySelector('.arcadeOption')?.focus());
+    window.playFX?.('select');
+  }
+  function showStart(){
+    menu.hidden=true;
+    startContent.hidden=false;
+    start.focus();
+  }
+  function closeIntro(target){
+    if(!introOpen)return;
+    introOpen=false;
+    overlay.classList.add('hide');
+    overlay.setAttribute('aria-hidden','true');
+    unlockScroll();
+    if(target){
+      // Let the hash/navigation happen after the modal has released the viewport.
+      requestAnimationFrame(()=>{
+        if(target==='information'||target==='game'){
+          const el=document.getElementById(target);
+          if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+          history.replaceState(null,'','#'+target);
+        }
+      });
+    }
+  }
+
+  // Lock immediately, before the first touch/scroll event can reach the page underneath.
+  lockScroll();
+  overlay.setAttribute('aria-hidden','false');
+
+  start.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();showMenu();});
+  back?.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();showStart();});
+
+  menu.querySelectorAll('.arcadeOption').forEach(function(option){
+    option.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      const target=option.dataset.arcadeMode || (option.getAttribute('href')||'').replace('#','');
+      closeIntro(target);
+    });
+  });
+
+  // Keep wheel/touch/keyboard from scrolling the underlying page while the intro owns the screen.
+  ['wheel','touchmove'].forEach(type=>overlay.addEventListener(type,e=>{if(introOpen)e.preventDefault();},{passive:false}));
+  overlay.addEventListener('scroll',e=>{if(introOpen)overlay.scrollTop=0},{passive:true});
+  document.addEventListener('keydown',function(e){
+    if(!introOpen)return;
+    if(e.key==='Escape'){
+      e.preventDefault();
+      showStart();
+    }
+    if(e.key==='Enter' && document.activeElement===start){
+      e.preventDefault();
+      showMenu();
+    }
+  });
+  window.addEventListener('resize',()=>{if(introOpen)window.scrollTo(0,lockedY)});
+
+  // Prevent old scripts from accidentally re-enabling page scrolling while intro is visible.
+  const observer=new MutationObserver(()=>{
+    if(introOpen){
+      if(!document.documentElement.classList.contains('aeris-intro-lock'))lockScroll();
+      if(overlay.classList.contains('hide'))overlay.classList.remove('hide');
+    }
+  });
+  observer.observe(overlay,{attributes:true,attributeFilter:['class']});
+})();
+</script>
