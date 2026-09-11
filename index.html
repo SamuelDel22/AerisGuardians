@@ -1253,60 +1253,49 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
 </div>
 </div></section>
 </section>
-<section class="gameSection" id="game">
+<section class="gameSection aerisGameRpg" id="game">
 <div class="wrap">
   <div class="top gameIntroTop">
-    <div class="destinationHeading"><img class="destinationIcon gameIcon" src="assets/section-icons/game.png" alt="" aria-hidden="true"><div><div class="eyebrow">07 / Guardian Adventure</div><h2>Become the Guardian.</h2></div></div>
-    <p class="lead">This is not a quiz. Make choices, see the consequences and protect the Cauca River.</p>
+    <div class="destinationHeading"><img class="destinationIcon gameIcon" src="assets/section-icons/game.png" alt="" aria-hidden="true"><div><div class="eyebrow">07 / CAUCA GUARDIANS RPG</div><h2>Choose your mission.</h2></div></div>
+    <p class="lead">Explore the Bajo Cauca map, complete each mission and unlock the next chapter.</p>
   </div>
 
-  <div class="guardianGame" id="guardianGame">
-    <div class="retroScanlines" aria-hidden="true"></div>
-    <div class="gameHud">
-      <div class="hudIdentity"><span class="hudDot"></span><div><small>GUARDIAN MODE</small><b id="gName">GUARDIAN</b></div></div>
-      <div class="hudStat"><small>GUARDIAN ENERGY</small><b id="gEnergy">0</b></div>
-      <div class="hudStat"><small>MISSION</small><b><span id="gStep">1</span>/<span id="gTotal">8</span></b></div>
-      <div class="hudStat streakHud"><small>STREAK</small><b id="gStreak">0×</b></div>
+  <div class="rpgGameShell" id="rpgGameShell">
+    <div class="rpgMapScreen" id="rpgMapScreen">
+      <div class="rpgMapTopbar"><div><span class="rpgKicker">AERIS // GUARDIAN OS</span><h3>BAJO CAUCA — MISSION MAP</h3></div><div class="rpgStats"><span>MISSION <b id="rpgProgress">1 / 5</b></span><span>XP <b id="rpgXP">0</b></span></div></div>
+      <div class="rpgMapViewport">
+        <img id="rpgMapImage" src="assets/rpg/bajo-cauca-mission-map.png" alt="Retro mission map inspired by the Bajo Cauca and Río Cauca">
+        <div class="rpgMapScan" aria-hidden="true"></div>
+        <div class="rpgMapMarkers" id="rpgMapMarkers"></div>
+        <div class="rpgMapLegend"><b>MISSION STATUS</b><span><i class="dot available"></i> AVAILABLE</span><span><i class="dot locked"></i> LOCKED</span><span><i class="dot done"></i> COMPLETED</span></div>
+      </div>
+      <div class="rpgMapFooter"><span>RÍO CAUCA · BAJO CAUCA · ANTIOQUIA</span><span>SELECT A MISSION TO CONTINUE</span></div>
     </div>
 
-    <div class="gameWorld">
-      <aside class="relicPanel">
-        <div class="relicPanelTitle"><span>RELIC VAULT</span><b id="gRelicCount">0/5</b></div>
-        <div class="relicGrid" id="gRelics"></div>
-        <div class="guardianMeters">
-          <div><span>RIVER</span><i><em id="mRiver"></em></i><b id="mRiverTxt">50</b></div>
-          <div><span>LIFE</span><i><em id="mLife"></em></i><b id="mLifeTxt">50</b></div>
-          <div><span>COMMUNITY</span><i><em id="mPeople"></em></i><b id="mPeopleTxt">50</b></div>
+    <div class="rpgDossier" id="rpgDossier" hidden>
+      <button class="rpgBack" id="rpgBackMap" type="button">← BACK TO MAP</button>
+      <div class="rpgDossierGrid">
+        <div class="rpgMissionArt"><img id="rpgDossierImage" src="assets/field/field-01-river-mining-structure.jpg" alt="Mission scenario"><div class="rpgArtBadge" id="rpgDossierBadge">MISSION 1</div></div>
+        <div class="rpgDossierCopy"><span class="rpgKicker" id="rpgDossierLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgDossierTitle">River Pressure</h3><p id="rpgDossierStory"></p><div class="rpgBossCard"><img id="rpgDossierBoss" src="assets/rpg/dredge.svg" alt="Mission boss"><div><small>BOSS</small><strong id="rpgDossierBossName">The Polluter</strong><span id="rpgDossierBossType">ENVIRONMENTAL PRESSURE</span></div></div><div class="rpgMissionMeta"><span>REWARD <b id="rpgDossierReward">+100 XP</b></span><span>RELIC <b id="rpgDossierRelic">WATER CORE</b></span></div><button class="rpgStartBtn" id="rpgStartMission" type="button">START MISSION <span>▶</span></button></div>
+      </div>
+    </div>
+
+    <div class="rpgMissionPlay" id="rpgMissionPlay" hidden>
+      <div class="rpgPlayTop"><button class="rpgBack" id="rpgQuitMission" type="button">← MAP</button><span id="rpgPlayMissionLabel">MISSION 1</span><span>XP <b id="rpgPlayXP">0</b></span></div>
+      <div class="rpgPlayStage">
+        <div class="rpgScene"><img id="rpgSceneImage" src="assets/field/field-01-river-mining-structure.jpg" alt="Mission scenario"><div class="rpgSceneOverlay"><span id="rpgSceneLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgSceneTitle">River Pressure</h3></div></div>
+        <div class="rpgBattlePanel">
+          <div class="rpgBossHead"><div><small>BOSS ENCOUNTER</small><h3 id="rpgBossName">The Polluter</h3></div><span id="rpgBossLevel">LV. 10</span></div>
+          <div class="rpgBossVisual"><img id="rpgBossImage" src="assets/rpg/dredge.svg" alt="Boss"><div class="rpgBossAura"></div></div>
+          <div class="rpgHp"><div><span>THREAT</span><b id="rpgHpText">100%</b></div><i><em id="rpgHpBar"></em></i></div>
+          <div class="rpgDialogue"><img src="assets/rpg/guardian.svg" alt="Guardian"><div><small>GUARDIAN</small><p id="rpgDialogueText"></p></div></div>
+          <div class="rpgChoices" id="rpgChoices"></div>
         </div>
-      </aside>
-
-      <main class="scenarioStage">
-        <div class="stageHeader"><span class="missionChip" id="gType">FIELD EVENT</span><span id="gLocation">BAJO CAUCA · CAUCASIA</span></div>
-        <div class="sceneCard">
-          <div class="sceneImageWrap"><img id="gImage" src="assets/field/field-06-waste-riverbank.jpg" alt="Cauca River field evidence"><div class="imageTag">FIELD EVIDENCE</div><div class="pixelCorner"></div></div>
-          <div class="sceneCopy"><div class="sceneKicker" id="gKicker">A RIVER MOMENT</div><h3 id="gTitle">Loading...</h3><p id="gStory">Loading the next Guardian event.</p></div>
-        </div>
-        <div class="choicePrompt"><span>YOUR MOVE</span><b id="gPrompt">What do you do?</b></div>
-        <div class="choiceGrid" id="gChoices"></div>
-        <div class="decisionActions"><span id="gSelectionHint">SELECT A MOVE</span><button class="confirmMove" id="gConfirm" type="button" disabled>CONFIRM MOVE</button></div>
-        <div class="consequence" id="gConsequence" aria-live="polite">
-          <div class="consequenceIcon" id="gConIcon">IMPACT</div><div><strong id="gConTitle">Choose a move</strong><p id="gConText">Your decision will shape the river.</p></div><div class="impactPills" id="gImpact"></div>
-        </div>
-        <button class="nextScene" id="gNext" type="button" disabled>CONTINUE →</button>
-      </main>
+      </div>
     </div>
 
-    <div class="relicUnlock" id="gUnlock" aria-live="polite" hidden>
-      <div class="unlockBurst">RELIC</div><div><small>RELIC ACTIVATED</small><h3 id="gUnlockName">WATER CORE</h3><p id="gUnlockText">Clean Water relic added to your vault.</p></div><img id="gUnlockImg" src="assets/relics/water-core.png" alt="Water Core">
-    </div>
-
-    <div class="gameResult" id="gResult" hidden>
-      <div class="resultBadge">GUARDIAN RUN COMPLETE</div><h3 id="gResultTitle">The river remembers your choices.</h3><p id="gResultText"></p>
-      <div class="resultGrid"><div><small>ENERGY</small><b id="rEnergy">0</b></div><div><small>BEST MOVES</small><b id="rBest">0/8</b></div><div><small>RELICS</small><b id="rRelics">0/5</b></div><div><small>RANK</small><b id="rRank">ROOKIE</b></div></div>
-      <div class="endingChoice"><span>CHOOSE YOUR GUARDIAN LEGACY</span><div><button data-path="restore">RESTORE</button><button data-path="protect">PROTECT</button><button data-path="inspire">INSPIRE</button></div></div>
-      <div class="endingMessage" id="gEnding" hidden></div>
-      <button class="nextScene replay" id="gReplay" type="button">PLAY AGAIN ↻</button>
-    </div>
+    <div class="rpgComplete" id="rpgComplete" hidden>
+      <div class="rpgCompleteIcon">✓</div><span class="rpgKicker">MISSION COMPLETE</span><h3 id="rpgCompleteTitle">River protected.</h3><p id="rpgCompleteText"></p><div class="rpgRewardRow"><div><small>XP</small><b id="rpgCompleteXP">+100</b></div><div><small>RELIC</small><b id="rpgCompleteRelic">WATER CORE</b></div><div><small>NEXT</small><b id="rpgCompleteNext">ZARAGOZA</b></div></div><button class="rpgContinue" id="rpgContinueMap" type="button">RETURN TO MAP →</button></div>
   </div>
 </div>
 </section>
@@ -1980,128 +1969,7 @@ applyLanguage();updateAlt();updateFooterLinks();
   window.applyLanguage();
 })();
 </script>
-<script id="aeris-v5-mission">
-(function(){
-  // V68 arcade start replaces the briefing while keeping the existing two destinations.
-  const arcadeOverlay=document.getElementById('guardianBriefing');
-  if(arcadeOverlay?.classList.contains('arcadeStart')){
-    document.documentElement.classList.add('arcadeIntroOpen');
-    document.body.classList.add('arcadeIntroOpen');
-    const start=document.getElementById('arcadeStartButton');
-    const startContent=document.getElementById('arcadeStartContent');
-    const menu=document.getElementById('arcadeMenu');
-    const back=document.getElementById('arcadeBack');
-    const openMenu=()=>{startContent.hidden=true;menu.hidden=false;menu.querySelector('.arcadeOption')?.focus()};
-    const closeMenu=()=>{menu.hidden=true;startContent.hidden=false;start?.focus()};
-    const enterMode=(mode)=>{
-      const destination=document.querySelector(`#navLinks .aerisTopLink[href="#${mode}"]`);
-      document.documentElement.classList.remove('arcadeIntroOpen');
-      document.body.classList.remove('arcadeIntroOpen');
-      arcadeOverlay.classList.add('hide');
-      setTimeout(()=>arcadeOverlay.remove(),450);
-      if(destination) destination.click();
-      else document.getElementById(mode)?.scrollIntoView({behavior:'smooth',block:'start'});
-    };
-    start?.addEventListener('click',openMenu);
-    back?.addEventListener('click',closeMenu);
-    menu?.querySelectorAll('[data-arcade-mode]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();enterMode(link.dataset.arcadeMode)}));
-    document.addEventListener('keydown',event=>{
-      if(event.key==='Enter' && !startContent.hidden){event.preventDefault();openMenu()}
-      if(event.key==='Escape' && !menu.hidden){event.preventDefault();closeMenu()}
-    });
-    return;
-  }
-  const overlay=document.getElementById('guardianBriefing');
-  const enter=document.getElementById('briefingEnter');
-  const skip=document.getElementById('briefingSkip');
-  let stored='';
-  try{stored=sessionStorage.getItem('aeris_briefing_seen')||''}catch(e){stored=''}
-  const els={k:document.getElementById('briefingKicker'),title:document.getElementById('briefingTitle'),text:document.getElementById('briefingText'),mission:document.getElementById('briefingMissionText'),enter:document.getElementById('briefingEnterText'),hint:document.getElementById('briefingHint'),skip};
-  const copy={en:{k:'MISSION DETECTED',title:'The river needs a Guardian.',text:'Follow the evidence. Discover the mercury pathway. Protect the Cauca.',mission:'Follow the evidence. Protect the river.',enter:'ENTER THE MISSION',hint:'No account. No data collection. Just learn and play.',skip:'Skip briefing'},es:{k:'MISIÓN DETECTADA',title:'El río necesita un Guardián.',text:'Descubre cómo el mercurio puede moverse por la red alimentaria — y usa la evidencia para proteger el Cauca.',mission:'Sigue la evidencia. Protege el río.',enter:'ENTRAR A LA MISIÓN',hint:'Sin cuenta. Sin recopilación de datos. Solo aprende y juega.',skip:'Saltar introducción'}};
-  function lang(){return window.currentLang==='es'?'es':'en'}
-const i18nV14={en:{fishModule:'FISH EXPLORER',fishTitle:'Choose a fish and inspect its role.',fishLead:'This is a learning model, not a risk calculator. Species can differ in diet, habitat and exposure.',passportEyebrow:'08 / Guardian Passport',passportTitle:'Your mission becomes a legacy.',passportLead:'Your progress stays on this device. Complete the experience and see your Guardian identity evolve.',passportCardLabel:'CAUCA GUARDIAN PASSPORT',passportProgressLabel:'MISSION PROGRESS',passScore:'BEST SCORE',passRelics:'RELICS',passBadges:'BADGES',achievements:'ACHIEVEMENTS',achievementTitle:'Unlock your Guardian identity.',refreshPassport:'Refresh passport ↻'},es:{fishModule:'EXPLORADOR DE PECES',fishTitle:'Elige un pez y observa su papel.',fishLead:'Este es un modelo educativo, no una calculadora de riesgo. Las especies pueden diferir en dieta, hábitat y exposición.',passportEyebrow:'08 / Pasaporte del Guardián',passportTitle:'Tu misión se convierte en legado.',passportLead:'Tu progreso permanece en este dispositivo. Completa la experiencia y observa cómo evoluciona tu identidad de Guardián.',passportCardLabel:'PASAPORTE DEL GUARDIÁN DEL CAUCA',passportProgressLabel:'PROGRESO DE MISIÓN',passScore:'MEJOR PUNTAJE',passRelics:'RELIQUIAS',passBadges:'INSIGNIAS',achievements:'LOGROS',achievementTitle:'Desbloquea tu identidad de Guardián.',refreshPassport:'Actualizar pasaporte ↻'}};
-function applyV14Text(){const t=i18nV14[lang()];qs('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k]})}
-  function paint(){const c=copy[lang()];Object.keys(els).forEach(k=>{if(els[k]&&c[k])els[k].textContent=c[k]})}
-  const identity=null;
-  const nameInput=document.getElementById('guardianNameInput');
-  const identityStart=null;
-  const identityClose=null;
-  const identityError=document.getElementById('identityError');
-  const NAME_KEY='aeris_guardian_name_v6';
-  const safeName=(value)=>String(value||'').replace(/[^\p{L}\p{M}\s'-]/gu,'').trim().replace(/\s+/g,' ').slice(0,24);
-  function getName(){let n='';try{n=localStorage.getItem(NAME_KEY)||''}catch(e){}return safeName(n)||'Guardian'}
-  function setName(value){const n=safeName(value);if(n){try{localStorage.setItem(NAME_KEY,n)}catch(e){}}return n||'Guardian'}
-  function paintIdentity(){
-    const es=lang()==='es';
-    const c=es?{code:'IDENTIFICACIÓN DEL GUARDIÁN',title:'¿Cómo te llamamos?',text:'Escribe tu nombre de pila para personalizar tu misión. Se queda en este dispositivo.',ph:'Escribe tu nombre',note:'Solo nombre de pila. Guardado localmente en este dispositivo.',err:'Escribe un nombre para continuar.'}:{code:'GUARDIAN IDENTIFICATION',title:'What should we call you?',text:'Enter your first name to personalize your mission. It stays on this device.',ph:'Enter your first name',note:'First name only. Stored locally on this device.',err:'Enter a name to continue.'};
-    document.getElementById('identityCode').textContent=c.code;document.getElementById('identityTitle').textContent=c.title;document.getElementById('identityText').textContent=c.text;nameInput.placeholder=c.ph;document.getElementById('identityNote').textContent=c.note;if(identityError)identityError.textContent='';
-  }
-  function updateGuardianName(){
-    const n=getName();
-    ['guardianName','quizGuardianName','resultGuardianName'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n});
-    const av=document.getElementById('guardianAvatar');if(av)av.dataset.guardianName=n;
-    const end=document.getElementById('endingGuardianName');if(end)end.textContent=' '+n;
-    document.querySelectorAll('[data-guardian-name]').forEach(el=>el.textContent=n);
-  }
-  function startMission(){
-    if(!nameInput)return;
-    const n=safeName(nameInput.value);
-    if(!n){if(identityError)identityError.textContent=(lang()==='es'?'Escribe un nombre para continuar.':'Enter a name to continue.');nameInput.focus();nameInput.classList.add('guardianNamePulse');setTimeout(()=>nameInput.classList.remove('guardianNamePulse'),700);return}
-    setName(n);updateGuardianName();
-    try{sessionStorage.setItem('aeris_briefing_seen','1')}catch(e){}
-    if(overlay){overlay.classList.add('hide');setTimeout(()=>overlay.remove(),450)}
-    // Always return to the actual website start — never to the section underneath the intro.
-    try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
-    const goTop=()=>{window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0};
-    goTop();requestAnimationFrame(()=>requestAnimationFrame(goTop));
-    const avatar=document.getElementById('guardianAvatar');avatar?.classList.add('guardianNamePulse');setTimeout(()=>avatar?.classList.remove('guardianNamePulse'),850);
-  }
-  function skipBriefing(){
-    setName('Guardian');updateGuardianName();
-    try{sessionStorage.setItem('aeris_briefing_seen','1')}catch(e){}
-    if(overlay){overlay.classList.add('hide');setTimeout(()=>overlay.remove(),450)}
-    try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
-    const goTop=()=>{window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0};
-    goTop();requestAnimationFrame(()=>requestAnimationFrame(goTop));
-  }
-  paint();paintIdentity();
-  let existing='';try{existing=localStorage.getItem(NAME_KEY)||''}catch(e){}
-  if(nameInput)nameInput.value=existing;
-  updateGuardianName();
-  if(stored && !existing){/* Keep the briefing visible so a new session can still identify the Guardian. */}
-  else if(stored && existing){overlay.classList.add('hide');setTimeout(()=>overlay.remove(),450)}
-  enter?.addEventListener('click',startMission);skip?.addEventListener('click',skipBriefing);
-  nameInput?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();startMission()}});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.classList.contains('hide'))skipBriefing()});
-  const originalApply=window.applyLanguage;
-  if(originalApply){window.applyLanguage=function(){originalApply();paint();paintIdentity();updateGuardianName()}}
-
-  const legacyChoice=document.getElementById('legacyChoice'), legacyEnding=document.getElementById('legacyEnding');
-  const endData={
-    restore:{en:['','RESTORATION GUARDIAN','You chose recovery. You see the river as a living system worth restoring.','RESTORE','RESTORER'],es:['','GUARDIÁN DE RESTAURACIÓN','Elegiste recuperar. Ves el río como un sistema vivo que merece ser restaurado.','RESTAURAR','RESTAURADOR']},
-    verify:{en:['','EVIDENCE GUARDIAN','You chose evidence. You check claims before turning concern into action.','VERIFY','EVIDENCE SCOUT'],es:['','GUARDIÁN DE EVIDENCIA','Elegiste la evidencia. Compruebas las afirmaciones antes de convertir la preocupación en acción.','VERIFICAR','EXPLORADOR DE EVIDENCIA']},
-    protect:{en:['','RIVER DEFENDER','You chose protection. You turn what you learned into responsible action.','PROTECT','RIVER DEFENDER'],es:['','DEFENSOR DEL RÍO','Elegiste proteger. Conviertes lo aprendido en una acción responsable.','PROTEGER','DEFENSOR DEL RÍO']}
-  };
-  function showLegacyChoice(){if(!legacyChoice)return;legacyChoice.hidden=false;legacyEnding.hidden=true;legacyChoice.scrollIntoView({behavior:'smooth',block:'center'})}
-  function chooseEnding(path){
-    const es=lang()==='es', d=endData[path][es?'es':'en'];
-    legacyChoice.hidden=true;legacyEnding.hidden=false;
-    document.getElementById('endingIcon').textContent=d[0];document.getElementById('endingTitle').textContent=d[1];document.getElementById('endingText').textContent=d[2];document.getElementById('endingPath').textContent=d[3];document.getElementById('endingRank').textContent=d[4];
-    document.getElementById('endingScore').textContent=document.getElementById('finalScore')?.textContent||'0/10';
-    localStorage.setItem('aeris_guardian_path_v5',path);
-    document.getElementById('endingContinue').textContent=es?'Continuar misión →':'Continue mission →';updateGuardianName();
-    legacyEnding.classList.add('missionPulse');setTimeout(()=>legacyEnding.classList.remove('missionPulse'),1300);legacyEnding.scrollIntoView({behavior:'smooth',block:'center'});
-  }
-  document.querySelectorAll('.legacyBtn').forEach(b=>b.addEventListener('click',()=>chooseEnding(b.dataset.ending)));
-  document.getElementById('endingContinue')?.addEventListener('click',()=>document.getElementById('passport')?.scrollIntoView({behavior:'smooth',block:'start'}));
-  const baseFinish=window.finish;
-  window.finish=function(){baseFinish();setTimeout(showLegacyChoice,450)};
-
-  // Keep the choice UI bilingual without adding another heavy text layer.
-  const oldApply2=window.applyLanguage;
-  if(oldApply2){window.applyLanguage=function(){oldApply2();const es=lang()==='es';document.getElementById('legacyEyebrow').textContent=es?'TU SIGUIENTE PASO':'YOUR NEXT MOVE';document.getElementById('legacyTitle').textContent=es?'¿Qué tipo de Guardián serás?':'What kind of Guardian will you be?';document.getElementById('legacyIntro').textContent=es?'Tu puntaje es una parte de la misión. Tu elección cambia el final.':'Your score is one part of the mission. Your choice shapes the ending.';document.querySelectorAll('.legacyBtn').forEach((b)=>{const p=b.dataset.ending;const map={restore:es?['RESTAURAR','Ayuda a los ecosistemas a recuperarse.']:['RESTORE','Help ecosystems recover.'],verify:es?['VERIFICAR','Sigue la evidencia antes de actuar.']:['VERIFY','Follow evidence before acting.'],protect:es?['PROTEGER','Convierte conocimiento en acción.']:['PROTECT','Turn knowledge into action.']};b.querySelector('strong').textContent=map[p][0];b.querySelector('small').textContent=map[p][1]});document.getElementById('endingEyebrow').textContent=es?'FINAL DEL GUARDIÁN':'GUARDIAN ENDING'}}
-})();
-</script><script id="aeris-v6-identity-failsafe">
+<script id="aeris-v6-identity-failsafe">
 (function(){
   // V6.1: Guardian identification lives inside the briefing. The main mission button saves the name and continues into the mission.
 })();
@@ -3055,217 +2923,10 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 })();
 </script>
 
-<script id="aeris-v51-2-nav-scroll-lock">
-(function(){
-  function boot(){
-    const body=document.body;
-    const links=[...document.querySelectorAll('#navLinks a')];
-    if(!body || links.length<3) return;
-    const modes=['information','game','chatbot'];
-    function paint(){
-      const mode=modes.includes(body.dataset.aerisMode) ? body.dataset.aerisMode : 'information';
-      links.forEach((a,i)=>a.classList.toggle('active',modes[i]===mode));
-    }
-    paint();
-    window.addEventListener('scroll',paint,{passive:true});
-    window.addEventListener('resize',paint,{passive:true});
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
-  else boot();
-})();
-
-/* ===== V52 GUARDIAN CHALLENGE GAMEPLAY ===== */
-(function(){
-  const oldRender=window.render;
-  let combo=0, runXP=0, answered=false;
-  const fieldPhotos=[
-    ['assets/field/field-01-river-mining-structure.jpg','Mining pressure on the river','Field photograph · Cauca River'],
-    ['assets/field/field-03-pipe-riverbank.jpg','Riverbank evidence','Field photograph · Caucasia'],
-    ['assets/field/field-07-egrets-waste.jpg','Life beside the impact','Field photograph · Cauca River'],
-    ['assets/field/field-09-wide-river-waste.jpg','A wider view of the watershed','Field photograph · Caucasia'],
-    ['assets/field/field-05-sunset-riverbank.jpg','The river is worth protecting','Field photograph · Cauca River']
-  ];
-  const $g=id=>document.getElementById(id);
-  function lang(){return (window.currentLang||'en')==='es'?'es':'en'}
-  function txt(en,es){return lang()==='es'?es:en}
-  function setRun(){
-    const c=$g('comboValue'), f=$g('comboFill'), m=$g('runMessage'); if(!c)return;
-    c.textContent=combo+'×'; f.style.width=Math.min(100,combo*20)+'%';
-    m.textContent=combo>=5?txt('LEGENDARY STREAK! Keep it alive.','¡RACHA LEGENDARIA! Mantenla viva.'):
-      combo>=3?txt('Guardian streak activated.','Racha de Guardián activada.'):
-      combo===2?txt('Nice combo. One more!','Buen combo. ¡Una más!'):
-      txt('Start your streak.','Empieza tu racha.');
-  }
-  function feedback(kind, n){
-    const box=$g('gameFeedback'), icon=$g('feedbackIcon'), title=$g('feedbackTitle'), text=$g('feedbackText'), reward=$g('feedbackReward'); if(!box)return;
-    const es=lang()==='es'; box.classList.remove('hot'); void box.offsetWidth; box.classList.add('hot');
-    if(kind==='correct'){
-      const bonus=Math.min(3,Math.max(1,combo-1)); runXP+=10+bonus*5;
-      icon.textContent=combo>=5?'':combo>=3?'':'✦';
-      title.textContent=combo>=5?(es?'¡Racha legendaria!':'Legendary streak!'):combo>=3?(es?'¡Racha de Guardián!':'Guardian streak!'):(es?'¡Respuesta correcta!':'Correct move!');
-      text.textContent=combo>=3?(es?`Llevas ${combo} respuestas seguidas. El río tiene un Guardián.`:`${combo} answers in a row. The river has a Guardian.`):(es?'Tu decisión suma energía a la misión.':'Your decision adds energy to the mission.');
-      reward.textContent='+'+(10+bonus*5)+' XP';
-    }else{
-      icon.textContent='↺'; title.textContent=es?'No rompas el ritmo':'Don’t break the run';
-      text.textContent=es?'Aprende del dato y sigue. Una misión se construye respuesta a respuesta.':'Learn from the clue and keep moving. A mission is built one answer at a time.';
-      reward.textContent='+0 XP';
-    }
-    setRun();
-  }
-  function showMoment(idx, streak){
-    const wrap=$g('fieldMoment'); if(!wrap)return;
-    if(streak<2 && idx%3!==2){wrap.classList.remove('show');return;}
-    const p=fieldPhotos[(Math.floor(idx/2)+streak)%fieldPhotos.length];
-    $g('fieldMomentImg').src=p[0]; $g('fieldMomentImg').alt=p[1];
-    $g('fieldMomentTitle').textContent=streak>=3?txt('STREAK UNLOCK · FIELD EVIDENCE','DESBLOQUEO DE RACHA · EVIDENCIA DE CAMPO'):txt('FIELD EVIDENCE','EVIDENCIA DE CAMPO');
-    $g('fieldMomentText').textContent=txt(p[1]+' · '+p[2],p[1]+' · '+p[2]);
-    wrap.classList.remove('show'); void wrap.offsetWidth; wrap.classList.add('show');
-  }
-  window.render=function(){
-    oldRender();
-    answered=answers[i]!==null;
-    const opts=document.querySelectorAll('#options .option');
-    opts.forEach((o,n)=>{o.addEventListener('click',()=>{setTimeout(()=>{if(answers[i]===n){o.classList.add('selected')}} ,0)},{once:true})});
-    const box=$g('gameFeedback'); if(box && !answered){box.classList.remove('hot');$g('feedbackIcon').textContent='✦';$g('feedbackTitle').textContent=txt('Choose your move','Elige tu movimiento');$g('feedbackText').textContent=txt('Your answer becomes part of your Guardian run.','Tu respuesta se convierte en parte de tu misión.');$g('feedbackReward').textContent='+'+runXP+' XP';}
-    setRun();
-  };
-  const baseNext=$('next').onclick;
-  $('next').onclick=function(){
-    if(answers[i]===null)return;
-    const current=i, selected=answers[i], good=selected===missions[i][2];
-    if(good){combo++; feedback('correct',current); showMoment(current,combo); playFX('correct');
-      if(combo===2) showToast(txt(' 2× combo!',' ¡Combo 2×!'));
-      if(combo===3) showToast(txt(' Guardian streak x3! Bonus unlocked.',' ¡Racha de Guardián x3! Bono desbloqueado.'));
-      if(combo===5){playFX('level');showToast(txt(' LEGENDARY STREAK!',' ¡RACHA LEGENDARIA!'));}
-    }else{combo=0;feedback('wrong',current);playFX('wrong');showToast(txt('↺ Streak reset — use the clue and continue.','↺ Racha reiniciada — usa la pista y continúa.'));}
-    // Advance without duplicating the old feedback behavior.
-    if(i<missions.length-1){setTimeout(()=>{i++;render()},520)}else{setTimeout(()=>finish(),620)}
-  };
-  const baseAgain=$('again').onclick;
-  $('again').onclick=function(){combo=0;runXP=0;setRun();if(baseAgain)baseAgain();else{ i=0;answers=Array(missions.length).fill(null);energy=0;$('result').style.display='none';$('play').style.display='block';render();} };
-  setRun();
-})();
-
-</script>
 
 
-<script id="aeris-v54-guardian-adventure-js">
-(function(){
-const root=document.getElementById('guardianGame'); if(!root)return;
-const $=id=>document.getElementById(id);
-const field='assets/field/';
-const relics=[
- ['water-core.png','WATER CORE','Clean Water',2],['life-seed.png','LIFE SEED','Restoration',4],['river-shield.png','RIVER SHIELD','Protection',6],['immortality-rune.png','IMMORTALITY RUNE','Enduring Care',8],['cauca-crown.png','CAUCA CROWN','Master Guardian',10]
-];
-const events=[
- {type:'FIELD EVENT',img:'field-06-waste-riverbank.jpg',k:'RIVERBANK ALERT',title:'Someone is leaving waste beside the river.',story:'You notice bags and containers being left close to the water. You can act, but your response matters as much as your intention.',prompt:'Choose your move.',choices:[
-  ['A','Speak calmly','Ask the person to stop and explain the impact of leaving waste near the river.',{river:8,life:5,people:8},'COMMUNITY MOVE','You chose a direct but respectful response. It can prevent more waste without creating a confrontation.'],
-  ['B','Document and report','From a safe distance, document what you see and use a responsible local reporting channel.',{river:10,life:6,people:5},'EVIDENCE MOVE','You turned an observation into useful evidence while keeping a safe distance.'],
-  ['C','Walk away','Leave the situation and assume somebody else will handle it.',{river:-7,life:-5,people:-4},'LOW IMPACT','Nothing changes at the site. A Guardian does not have to solve everything alone, but should know when to act responsibly.'] ]},
- {type:'FIELD EVENT',img:'field-03-pipe-riverbank.jpg',k:'RIVERBANK SCAN',title:'A pipe reaches toward the river.',story:'You spot a pipe and a disturbed riverbank. You do not know what is flowing through it. Investigate without making direct contact.',prompt:'What do you do first?',choices:[
-  ['A','Observe and record','Take notes or a photo from a safe place. Do not touch the pipe or liquid.',{river:7,life:5,people:4},'EVIDENCE MOVE','You collected information without exposing yourself to an unknown substance.'],
-  ['B','Inspect by touching','Get close and touch the pipe to find out what is inside.',{river:-3,life:-2,people:-6},'UNSAFE MOVE','Curiosity is useful, but unknown materials should not be handled directly.'],
-  ['C','Break the pipe','Destroy it so nothing can reach the river.',{river:-5,life:-4,people:-7},'HIGH RISK','Acting without knowing what the pipe is can create new hazards and damage evidence.'] ]},
- {type:'GUARDIAN CHOICE',img:'field-02-mining-boat.jpg',k:'MINING PRESSURE',title:'You see mining activity on the river.',story:'A boat is working near the riverbank. Mining can alter soils and, in some contexts, introduce hazardous substances such as mercury.',prompt:'What is your next move?',choices:[
-  ['A','Check the facts','Look for reliable information before making a claim about what you observed.',{river:7,life:7,people:6},'SCIENCE MOVE','You separated an observation from a conclusion. Good environmental decisions start with evidence.'],
-  ['B','Share an unverified claim','Tell people the entire river is poisoned without checking the evidence.',{river:-3,life:-2,people:-6},'MISINFORMATION','The issue deserves attention, but a claim should match the evidence available.'],
-  ['C','Intervene directly','Approach the machinery and try to stop the activity yourself.',{river:-2,life:-4,people:-8},'UNSAFE MOVE','Direct intervention can put people at risk. Responsible reporting is a safer route.'] ]},
- {type:'WILDLIFE EVENT',img:'field-07-egrets-waste.jpg',k:'WILDLIFE WATCH',title:'Birds are feeding beside a pile of waste.',story:'You see wildlife using a riverbank that also contains litter. The visible problem is the condition of the habitat.',prompt:'How do you respond?',choices:[
-  ['A','Support habitat restoration','Focus on reducing waste and supporting a cleaner, safer riverbank.',{river:8,life:10,people:6},'LIFE MOVE','You focused on the habitat instead of disturbing the animals.'],
-  ['B','Chase the birds away','Move the birds so the area looks cleaner.',{river:-1,life:-6,people:0},'MISSED PRIORITY','The wildlife is not the source of the problem. The habitat pressure is the priority.'],
-  ['C','Document with context','Take a photo from a respectful distance and explain what it shows before sharing it.',{river:4,life:5,people:4},'DOCUMENTATION MOVE','Good documentation can make an environmental problem visible without turning the image into a misleading claim.'] ]},
- {type:'SCIENCE EVENT',img:'field-04-riverbank-view.jpg',k:'FISH & MERCURY',title:'A friend says the river color proves mercury is present.',story:'Water appearance can tell you something about conditions, but it cannot identify a specific contaminant by itself.',prompt:'What do you say?',choices:[
-  ['A','Ask for evidence','Explain that mercury needs appropriate measurement and analysis; color alone is not proof.',{river:6,life:8,people:8},'SCIENCE MOVE','You kept the conversation evidence-based and avoided confusing appearance with measurement.'],
-  ['B','Repeat the claim','Say that brown water proves mercury contamination.',{river:-2,life:-2,people:-7},'MISINFORMATION','Color alone cannot establish the presence of mercury.'],
-  ['C','Dismiss the topic','Say environmental science is too complicated to discuss.',{river:0,life:0,people:-3},'MISSED MOVE','Complex topics can still be explained clearly when observations and evidence are separated.'] ]},
- {type:'COMMUNITY EVENT',img:'field-05-sunset-riverbank.jpg',k:'COMMUNITY SIGNAL',title:'Your class wants to help the river.',story:'Everyone has ideas. Your first move will decide whether the group has a useful foundation for future action.',prompt:'Launch the first mission.',choices:[
-  ['A','Map the problem','Document littered areas, observations and risks before planning action.',{river:7,life:6,people:10},'TEAM MOVE','A shared map turns concern into organized action and gives the group a common starting point.'],
-  ['B','Start immediately','Begin a cleanup without planning, sorting or safe procedures.',{river:3,life:3,people:-5},'PARTIAL MOVE','The intention is positive, but field actions work better with planning and safe procedures.'],
-  ['C','Only make a viral post','Focus on attention online without collecting evidence or planning action.',{river:0,life:-1,people:3},'LOW IMPACT','Awareness helps most when it connects to evidence and a practical next step.'] ]},
- {type:'GUARDIAN PUZZLE',img:'field-09-wide-river-waste.jpg',k:'SPOT THE PRIORITY',title:'You can fund only one action this week.',story:'The riverbank has visible waste, while the community also needs reliable information about water quality. Choose the foundation with the greatest long-term value.',prompt:'Where do you invest?',choices:[
-  ['A','Monitoring and evidence','Support responsible monitoring and documentation first.',{river:9,life:7,people:9},'STRATEGIC MOVE','Reliable evidence helps communities understand what is happening and choose stronger actions.'],
-  ['B','Only paint a sign','Create a visible message but collect no information.',{river:1,life:0,people:4},'COMMUNICATION MOVE','Communication matters, but it becomes stronger when it is connected to evidence.'],
-  ['C','Ignore the river','Use the resources for something unrelated.',{river:-8,life:-6,people:-6},'LOST PRIORITY','The environmental problem remains without attention, evidence or sustained action.'] ]},
- {type:'DECISION EVENT',img:'field-01-river-mining-structure.jpg',k:'CLAIM CHECK',title:'A post says: “One photo proves the whole river is contaminated.”',story:'You have a powerful field photograph, but one image cannot establish every cause, contaminant or condition across an entire watershed.',prompt:'How do you improve the post?',choices:[
-  ['A','Add location and context','State what the image shows, where it was taken and what it does not prove.',{river:7,life:6,people:9},'EVIDENCE MOVE','Context makes field evidence more useful and reduces the risk of overstating what one image can prove.'],
-  ['B','Make the headline stronger','Use the strongest possible claim so more people share it.',{river:-2,life:-1,people:-6},'OVERSTATEMENT','A stronger headline is not stronger evidence. Clear limits make environmental communication more trustworthy.'],
-  ['C','Delete all evidence','Remove the photo because environmental topics are difficult.',{river:-1,life:-1,people:-3},'MISSED OPPORTUNITY','Evidence is valuable when it is presented honestly and with appropriate context.'] ]},
- {type:'FIELD EVENT',img:'field-05-sunset-riverbank.jpg',k:'THE SAFE RESPONSE',title:'You find an unknown substance near the water.',story:'You cannot identify it by sight. Your priority is to avoid unnecessary contact and preserve useful information for people who can assess it.',prompt:'Choose the safest first step.',choices:[
-  ['A','Keep distance and record','Stay away, document the location from a safe point and report the observation.',{river:8,life:8,people:8},'SAFE EVIDENCE','You protected yourself while preserving information that can support a proper assessment.'],
-  ['B','Touch and smell it','Get close to identify the substance yourself.',{river:-4,life:-7,people:-6},'UNSAFE MOVE','Unknown substances should not be identified through direct contact.'],
-  ['C','Pour it into the river','Move the substance away without knowing what it is.',{river:-8,life:-8,people:-7},'HARMFUL MOVE','Moving an unknown substance into the river could spread the problem.'] ]},
- {type:'COMMUNITY EVENT',img:'field-07-egrets-waste.jpg',k:'TEAM DECISION',title:'Your group has one hour to improve the riverbank.',story:'You have limited time. A good Guardian team chooses an action that is useful, organized and safe.',prompt:'What is the strongest plan?',choices:[
-  ['A','Divide roles and document','Assign safe observation, documentation, waste sorting and reporting roles.',{river:8,life:8,people:10},'TEAM MOVE','Clear roles make a short field action more organized and useful.'],
-  ['B','Everyone rushes in','Tell everyone to start moving material immediately.',{river:2,life:2,people:-6},'POORLY PLANNED','Speed without organization can create avoidable problems.'],
-  ['C','Do nothing','Wait for somebody else to organize the group.',{river:-3,life:-3,people:-4},'LOST MOMENT','A small, organized action can be more useful than waiting for a perfect plan.'] ]},
- {type:'FINAL EVENT',img:'field-10-riverbank-egrets.jpg',k:'FINAL DECISION',title:'The river gives you one final choice.',story:'You have seen the territory, gathered evidence and made decisions. Now choose the principle you will carry beyond the game.',prompt:'What is your Guardian legacy?',choices:[
-  ['A','Restore','Keep supporting restoration, healthier riverbanks and habitat recovery.',{river:10,life:10,people:7},'LEGACY MOVE','You chose long-term recovery and continued care for the territory.'],
-  ['B','Protect','Use evidence, responsible reporting and community action.',{river:9,life:8,people:10},'LEGACY MOVE','You turned evidence into responsible protection and community care.'],
-  ['C','Inspire','Teach others what you learned and encourage evidence-based decisions.',{river:7,life:7,people:10},'LEGACY MOVE','You carried the lesson beyond the screen by helping others think critically.'] ]}
-];
-let state={step:0,energy:0,streak:0,best:0,river:50,life:50,people:50,selected:null,confirmed:false,score:0};
-function lang(){return window.currentLang||document.documentElement.lang||'en'}
-function tr(en,es){return lang()==='es'?es:en}
-function name(){try{return localStorage.getItem('aeris_guardian_name_v6')||'Guardian'}catch(e){return 'Guardian'}}
-function load(){try{const p=JSON.parse(localStorage.getItem('aeris_guardian_v4')||'{}');state.best=Number(p.best)||0}catch(e){} }
-function save(){try{localStorage.setItem('aeris_guardian_v4',JSON.stringify({best:Math.max(state.best,state.score),relics:relics.filter(r=>state.energy>=r[3]).length,energy:state.energy}))}catch(e){}}
-function meter(id,val){val=Math.max(0,Math.min(100,val));$(id).style.width=val+'%'}
-function renderMeters(){meter('mRiver',state.river);meter('mLife',state.life);meter('mPeople',state.people);$('mRiverTxt').textContent=state.river;$('mLifeTxt').textContent=state.life;$('mPeopleTxt').textContent=state.people}
-function renderRelics(){
- $('gRelics').innerHTML=relics.map(r=>`<div class="guardianRelic ${state.energy>=r[3]?'on':''}"><img src="assets/relics/${r[0]}" alt="${r[1]}"><b>${r[1]}</b><small>${r[2]}</small></div>`).join('');
- $('gRelicCount').textContent=relics.filter(r=>state.energy>=r[3]).length+'/5';
-}
-function render(){
- if(state.step>=events.length)return finish();
- const e=events[state.step];
- $('gName').textContent=name().toUpperCase();$('gEnergy').textContent=state.energy;$('gStep').textContent=state.step+1;$('gTotal').textContent=events.length;$('gStreak').textContent=state.streak+'×';
- $('gType').textContent=e.type;$('gLocation').textContent='BAJO CAUCA · CAUCASIA';$('gKicker').textContent=e.k;$('gTitle').textContent=e.title;$('gStory').textContent=e.story;$('gPrompt').textContent=e.prompt;$('gImage').src=field+e.img;
- $('gChoices').innerHTML=e.choices.map((c,n)=>`<button class="gameChoice" type="button" data-choice="${n}"><span class="choiceKey">${c[0]}</span><strong>${c[1]}</strong><small>${c[2]}</small></button>`).join('');
- $('gConsequence').classList.remove('show');$('gConfirm').disabled=true;$('gSelectionHint').textContent=tr('SELECT A MOVE','SELECCIONA UN MOVIMIENTO');$('gNext').disabled=true;$('gNext').textContent=state.step===events.length-1?tr('FINISH RUN →','TERMINAR MISIÓN →'):tr('CONTINUE →','CONTINUAR →');
- renderMeters();renderRelics();
- root.classList.remove('sceneIn');void root.offsetWidth;root.classList.add('sceneIn');
-}
-function choose(n){
- if(state.confirmed)return;
- state.selected=n;
- document.querySelectorAll('.gameChoice').forEach((b,i)=>{b.classList.toggle('selected',i===n)});
- $('gConfirm').disabled=false;$('gSelectionHint').textContent=tr('MOVE READY — CONFIRM WHEN READY','MOVIMIENTO LISTO — CONFIRMA CUANDO ESTÉS LISTO');
-}
-function confirmMove(){
- if(state.selected===null||state.confirmed)return;
- state.confirmed=true;
- const e=events[state.step],c=e.choices[state.selected],impact=c[3];
- const beforeRelicCount=relics.filter(r=>state.energy>=r[3]).length;
- document.querySelectorAll('.gameChoice').forEach(b=>b.disabled=true);$('gConfirm').disabled=true;
- state.river=Math.max(0,Math.min(100,state.river+impact.river));state.life=Math.max(0,Math.min(100,state.life+impact.life));state.people=Math.max(0,Math.min(100,state.people+impact.people));
- const total=impact.river+impact.life+impact.people;const positive=total>=8;const neutral=total>=2;
- state.streak=positive?state.streak+1:0;state.score+=positive?1:0;state.energy+=positive?(state.streak>=3?2:1):0;state.best=Math.max(state.best,state.score);
- $('gStreak').textContent=state.streak+'×';$('gEnergy').textContent=state.energy;renderMeters();renderRelics();
- const tone=positive?'strong':neutral?'moderate':'risky';
- $('gConIcon').textContent=tone.toUpperCase();$('gConTitle').textContent=c[4];$('gConText').textContent=c[5];
- $('gImpact').innerHTML=[['RIVER',impact.river],['LIFE',impact.life],['COMMUNITY',impact.people]].map(x=>`<span class="impactPill ${x[1]>=0?'good':'bad'}">${x[0]} ${x[1]>=0?'+':''}${x[1]}</span>`).join('');
- $('gConsequence').classList.add('show');$('gNext').disabled=false;$('gSelectionHint').textContent=tr('DECISION LOCKED','DECISIÓN CONFIRMADA');
- root.classList.remove('flashGood','flashBad');void root.offsetWidth;root.classList.add(positive?'flashGood':'flashBad');
- if(state.streak>=2)showToast(tr('Guardian streak '+state.streak+'×','Racha de Guardián '+state.streak+'×'));else if(positive)showToast(tr('Strong move — Guardian Energy +'+(state.streak>=3?2:1),'Movimiento fuerte — Energía de Guardián +'+(state.streak>=3?2:1)));else if(neutral)showToast(tr('Measured move — see the impact below','Movimiento medido — mira el impacto abajo'));else showToast(tr('Risk detected — learn from the consequence','Riesgo detectado — aprende de la consecuencia'));
- const afterRelicCount=relics.filter(r=>state.energy>=r[3]).length;if(afterRelicCount>beforeRelicCount)showUnlock(afterRelicCount-1);
-}
-function showUnlock(idx){const r=relics[idx];$('gUnlockImg').src='assets/relics/'+r[0];$('gUnlockName').textContent=r[1];$('gUnlockText').textContent=tr(r[2]+' relic added to your vault.','Reliquia de '+r[2].toLowerCase()+' añadida a tu bóveda.');$('gUnlock').hidden=false;setTimeout(()=>{$('gUnlock').hidden=true},1800)}
-function finish(){
- $('gUnlock').hidden=true;$('gResult').hidden=false;$('gStep').textContent=events.length;$('rEnergy').textContent=state.energy;$('rBest').textContent=state.score+'/'+events.length;$('rRelics').textContent=relics.filter(r=>state.energy>=r[3]).length+'/5';
- const rank=state.score>=9?'RIVER LEGEND':state.score>=6?'RIVER GUARDIAN':state.score>=3?'FIELD GUARDIAN':'ROOKIE';$('rRank').textContent=rank;
- $('gResultTitle').textContent=state.score>=9?tr('The Cauca has a new legend.','El Cauca tiene un nuevo legendario.'):state.score>=6?tr('You built a strong Guardian run.','Construiste una gran misión de Guardián.'):state.score>=3?tr('Your decisions shaped the river.','Tus decisiones cambiaron el rumbo del río.'):tr('Every Guardian starts with one move.','Todo Guardián empieza con un movimiento.');
- $('gResultText').textContent=tr('You made decisions, saw consequences and built a Guardian path instead of simply answering a quiz.','Tomaste decisiones, viste consecuencias y construiste un camino de Guardián en lugar de simplemente responder un quiz.');save();
-}
-function showToast(msg){let t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(showToast.t);showToast.t=setTimeout(()=>t.classList.remove('show'),1900)}
-$('gChoices').addEventListener('click',e=>{const b=e.target.closest('.gameChoice');if(b)choose(Number(b.dataset.choice))});
-$('gConfirm').addEventListener('click',confirmMove);
-$('gNext').addEventListener('click',()=>{if(state.confirmed){state.step++;state.selected=null;state.confirmed=false;render()}});
-$('gReplay').addEventListener('click',()=>{state={step:0,energy:0,streak:0,best:state.best,river:50,life:50,people:50,selected:null,confirmed:false,score:0};$('gResult').hidden=true;render();document.getElementById('game')?.scrollIntoView?.({behavior:'smooth',block:'center'})});
-document.querySelectorAll('.endingChoice button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.endingChoice button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const path=b.dataset.path;const msgs={restore:tr('Your legacy: Restore. You leave the mission focused on recovery, habitats and healthier riverbanks.','Tu legado: Restaurar. Dejas la misión enfocada en recuperación, hábitats y riberas saludables.'),protect:tr('Your legacy: Protect. You turn evidence into responsible action and community care.','Tu legado: Proteger. Conviertes la evidencia en acción responsable y cuidado comunitario.'),inspire:tr('Your legacy: Inspire. You carry the evidence to other people and encourage others to verify before sharing.','Tu legado: Inspirar. Llevas la evidencia a otras personas y animas a verificar antes de compartir.')};$('gEnding').textContent=msgs[path];$('gEnding').hidden=false}));
-load();render();
-const ls=document.getElementById('langSwitch');if(ls)ls.addEventListener('click',()=>setTimeout(render,80));
-})();
-</script>
+
+
 
 <style id="aeris-v56-hard-mode-fix">
 /* V56 HARD FIX: HQ is Information-only; it can never overlay Game/Chatbot. */
@@ -4174,3 +3835,67 @@ footer a{color:var(--cyan)!important}
 }
 @media(prefers-reduced-motion:no-preference){.heroLogo{animation:rpgPulse 2.8s ease-in-out infinite}.card,.v16-route button,.option{transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease,background .15s ease}@keyframes rpgPulse{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 10px #a8ff6055)}}}
 </style>
+
+<style id="aeris-rpg-map-v72">
+/* AERIS RPG MAP — real mission selector. The map is the GAME screen. */
+.aerisGameRpg .gameIntroTop{display:none}
+.aerisGameRpg{background:#050a18;min-height:100vh;padding:34px 0 48px;color:#effaff}
+.rpgGameShell{max-width:1220px;margin:0 auto;border:2px solid #36d9ff;border-radius:18px;overflow:hidden;background:#071124;box-shadow:0 18px 55px rgba(0,0,0,.38),inset 0 0 0 1px rgba(255,255,255,.05)}
+.rpgMapScreen{display:block}
+.rpgMapTopbar,.rpgPlayTop{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:14px 18px;background:linear-gradient(90deg,#07152f,#0c2040 55%,#07152f);border-bottom:1px solid rgba(54,217,255,.28)}
+.rpgKicker{font:900 10px/1.2 "Courier New",monospace;letter-spacing:.18em;color:#72f5d5}.rpgMapTopbar h3{margin:4px 0 0;font:900 clamp(18px,2.6vw,28px)/1 "Courier New",monospace;color:#fff;letter-spacing:.06em;text-shadow:3px 3px #102f67}.rpgStats{display:flex;gap:8px}.rpgStats span,.rpgPlayTop>span{font:900 10px "Courier New",monospace;color:#9bb7ce;border:1px solid rgba(255,255,255,.1);padding:8px 10px;background:#07101f}.rpgStats b,.rpgPlayTop b{color:#ffc857}
+.rpgMapViewport{position:relative;aspect-ratio:16/9;min-height:520px;overflow:hidden;background:#061321}.rpgMapViewport>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;image-rendering:auto;transform:scale(1.002)}
+.rpgMapViewport:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,8,22,.1),transparent 30%,rgba(0,8,22,.16)),radial-gradient(circle at 50% 45%,transparent 45%,rgba(1,6,18,.28));mix-blend-mode:multiply}
+.rpgMapScan{position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 5px);opacity:.25;animation:mapScan 8s linear infinite}
+.rpgMapMarkers{position:absolute;inset:0;z-index:4}
+.rpgMarker{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border:3px solid #fff;border-radius:50%;background:#07152f;box-shadow:0 0 0 5px rgba(54,217,255,.16),0 8px 25px rgba(0,0,0,.5);color:#fff;cursor:pointer;display:grid;place-items:center;font:900 14px "Courier New",monospace;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;touch-action:manipulation}.rpgMarker:before{content:"";position:absolute;inset:-9px;border:2px solid rgba(255,255,255,.22);border-radius:50%;animation:markerPulse 1.8s ease-out infinite}.rpgMarker:hover,.rpgMarker:focus-visible{transform:translate(-50%,-50%) scale(1.13);box-shadow:0 0 0 7px rgba(54,217,255,.22),0 10px 32px rgba(0,0,0,.55);outline:none}.rpgMarker.available{background:#0d3f4a;border-color:#72f5d5;color:#72f5d5}.rpgMarker.locked{background:#111827;border-color:#708096;color:#a1afbd;filter:grayscale(1);cursor:not-allowed}.rpgMarker.completed{background:#0b4b38;border-color:#8effd8;color:#8effd8}.rpgMarker.current{animation:currentMarker 1.4s ease-in-out infinite}.rpgMarkerLabel{position:absolute;top:50px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:5px 8px;background:rgba(3,10,25,.94);border:1px solid rgba(54,217,255,.38);color:#fff;font:900 9px "Courier New",monospace;letter-spacing:.06em;box-shadow:3px 3px 0 #02040c}.rpgMarker.locked .rpgMarkerLabel{color:#9aa8b5;border-color:rgba(255,255,255,.12)}
+.rpgMapLegend{position:absolute;z-index:5;left:18px;bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 12px;background:rgba(3,10,25,.92);border:1px solid rgba(54,217,255,.28);font:900 9px "Courier New",monospace;color:#d7e7f2;box-shadow:5px 5px 0 rgba(0,0,0,.45)}.rpgMapLegend b{color:#ffc857}.rpgMapLegend span{display:flex;align-items:center;gap:5px}.dot{width:8px;height:8px;border-radius:50%;display:inline-block}.dot.available{background:#72f5d5}.dot.locked{background:#667587}.dot.done{background:#8effd8}
+.rpgMapFooter{display:flex;justify-content:space-between;gap:15px;padding:10px 15px;background:#030814;color:#7fa6bf;font:900 9px "Courier New",monospace;letter-spacing:.1em;border-top:1px solid rgba(54,217,255,.18)}
+.rpgDossier,.rpgMissionPlay,.rpgComplete{min-height:600px;background:radial-gradient(circle at 80% 10%,rgba(56,217,255,.12),transparent 28%),linear-gradient(145deg,#071024,#11153a 55%,#062d38);padding:18px}.rpgDossier[hidden],.rpgMissionPlay[hidden],.rpgComplete[hidden]{display:none!important}.rpgBack{border:1px solid rgba(114,245,213,.4);background:#07162b;color:#aeefff;padding:9px 12px;font:900 10px "Courier New",monospace;cursor:pointer}.rpgBack:hover{border-color:#72f5d5;color:#fff}.rpgDossierGrid{max-width:1080px;margin:24px auto;display:grid;grid-template-columns:1.08fr .92fr;border:1px solid rgba(54,217,255,.25);background:rgba(255,255,255,.035);box-shadow:0 20px 55px rgba(0,0,0,.3);overflow:hidden}.rpgMissionArt{min-height:520px;position:relative;background:#06111f}.rpgMissionArt>img{width:100%;height:100%;min-height:520px;object-fit:cover;display:block}.rpgArtBadge{position:absolute;left:14px;top:14px;padding:7px 9px;background:#08142a;border:2px solid #ffc857;color:#ffc857;font:900 10px "Courier New",monospace;box-shadow:4px 4px 0 #02040c}.rpgDossierCopy{padding:34px;display:flex;flex-direction:column;justify-content:center}.rpgDossierCopy h3{font:900 clamp(30px,4vw,56px)/.95 Impact,"Arial Black",sans-serif;margin:9px 0 15px;color:#fff;text-transform:uppercase;text-shadow:4px 4px #152d64}.rpgDossierCopy>p{color:#b9cede;line-height:1.65;font-size:14px;margin:0 0 20px}.rpgBossCard{display:flex;align-items:center;gap:15px;padding:12px;border:1px solid rgba(255,107,138,.3);background:rgba(255,70,100,.06);margin-bottom:13px}.rpgBossCard img{width:72px;height:72px;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 0 10px rgba(255,80,110,.2))}.rpgBossCard small,.rpgBossCard span{display:block;font:900 9px "Courier New",monospace;letter-spacing:.1em}.rpgBossCard small{color:#ff718d}.rpgBossCard strong{display:block;color:#fff;font:900 16px "Courier New",monospace;margin:4px 0}.rpgBossCard span{color:#8da9bd}.rpgMissionMeta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}.rpgMissionMeta span{padding:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);font:900 8px "Courier New",monospace;color:#7e9db8}.rpgMissionMeta b{display:block;color:#ffc857;font-size:11px;margin-top:5px}.rpgStartBtn,.rpgContinue{border:2px solid #72f5d5;background:linear-gradient(135deg,#123d54,#0c293e);color:#fff;padding:14px 18px;font:900 13px "Courier New",monospace;letter-spacing:.08em;cursor:pointer;box-shadow:5px 5px 0 #02040c;transition:transform .15s ease,box-shadow .15s ease}.rpgStartBtn:hover,.rpgContinue:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #02040c;color:#72f5d5}.rpgStartBtn span{float:right;color:#ffc857}
+.rpgPlayStage{max-width:1120px;margin:18px auto;display:grid;grid-template-columns:1.1fr .9fr;min-height:590px;border:1px solid rgba(54,217,255,.3);background:#050d1c;overflow:hidden}.rpgScene{position:relative;min-height:590px;overflow:hidden}.rpgScene>img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05) contrast(1.04)}.rpgScene:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(2,7,20,.92));pointer-events:none}.rpgSceneOverlay{position:absolute;z-index:2;left:22px;right:22px;bottom:22px}.rpgSceneOverlay span{font:900 9px "Courier New",monospace;color:#72f5d5;letter-spacing:.15em}.rpgSceneOverlay h3{margin:6px 0 0;color:#fff;font:900 clamp(26px,4vw,48px)/.95 Impact,"Arial Black",sans-serif;text-shadow:4px 4px #12275b}.rpgBattlePanel{padding:24px;background:linear-gradient(180deg,#09152a,#10132f);border-left:1px solid rgba(255,255,255,.08)}.rpgBossHead{display:flex;justify-content:space-between;gap:12px;align-items:end}.rpgBossHead small{color:#ff718d;font:900 9px "Courier New",monospace;letter-spacing:.15em}.rpgBossHead h3{margin:5px 0 0;color:#fff;font:900 21px "Courier New",monospace}.rpgBossHead>span{padding:6px 8px;color:#ffc857;border:1px solid rgba(255,200,87,.3);font:900 9px "Courier New",monospace}.rpgBossVisual{position:relative;height:190px;display:grid;place-items:center;margin:8px 0}.rpgBossVisual img{width:175px;height:175px;object-fit:contain;z-index:2;filter:drop-shadow(0 12px 18px rgba(0,0,0,.5));animation:bossFloat 2.4s ease-in-out infinite}.rpgBossAura{position:absolute;width:145px;height:145px;border-radius:50%;background:radial-gradient(circle,rgba(255,72,103,.23),transparent 67%);animation:bossAura 2.1s ease-in-out infinite}.rpgHp>div{display:flex;justify-content:space-between;font:900 9px "Courier New",monospace;color:#9bb3c6}.rpgHp i{display:block;height:12px;background:#160e19;border:1px solid rgba(255,107,138,.25);margin-top:6px;overflow:hidden}.rpgHp em{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff4d6d,#ff9a5f);transition:width .4s ease}.rpgDialogue{display:flex;gap:10px;margin:16px 0;padding:11px;border:1px solid rgba(54,217,255,.2);background:rgba(54,217,255,.045)}.rpgDialogue img{width:52px;height:52px;object-fit:contain;align-self:flex-start}.rpgDialogue small{font:900 8px "Courier New",monospace;color:#72f5d5}.rpgDialogue p{margin:4px 0 0;color:#d5e4ef;font:700 11px/1.5 "Courier New",monospace}.rpgChoices{display:grid;gap:8px}.rpgChoice{position:relative;text-align:left;padding:12px 13px 12px 40px;border:1px solid rgba(255,255,255,.1);background:#0b1830;color:#fff;cursor:pointer;font:900 10px/1.35 "Courier New",monospace;transition:.15s}.rpgChoice:before{content:attr(data-key);position:absolute;left:12px;top:11px;color:#ffc857}.rpgChoice:hover,.rpgChoice:focus-visible{border-color:#72f5d5;background:#102845;transform:translateX(3px);outline:none}.rpgChoice.good{border-color:#72f5d5;background:#0c3a37}.rpgChoice.bad{border-color:#ff718d;background:#34152a}.rpgChoice:disabled{cursor:default}.rpgComplete{display:grid;place-items:center;text-align:center;padding:60px 20px}.rpgCompleteIcon{width:90px;height:90px;border:3px solid #72f5d5;border-radius:50%;display:grid;place-items:center;color:#72f5d5;font:900 44px "Courier New",monospace;box-shadow:0 0 40px rgba(114,245,213,.15);animation:completePulse 1.5s ease-in-out infinite}.rpgComplete h3{font:900 clamp(28px,4vw,50px)/1 Impact,"Arial Black",sans-serif;color:#fff;margin:16px 0 8px;text-shadow:4px 4px #123265}.rpgComplete p{max-width:680px;color:#b9cede;line-height:1.6;margin:0 auto 22px}.rpgRewardRow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(700px,100%);margin-bottom:20px}.rpgRewardRow>div{padding:14px;border:1px solid rgba(54,217,255,.2);background:rgba(255,255,255,.035)}.rpgRewardRow small{display:block;color:#7e9db8;font:900 8px "Courier New",monospace}.rpgRewardRow b{display:block;color:#ffc857;font:900 12px "Courier New",monospace;margin-top:5px}
+@keyframes markerPulse{0%{transform:scale(.75);opacity:.7}75%,100%{transform:scale(1.45);opacity:0}}@keyframes currentMarker{50%{box-shadow:0 0 0 8px rgba(114,245,213,.2),0 10px 30px rgba(0,0,0,.5)}}@keyframes mapScan{from{transform:translateY(-8px)}to{transform:translateY(8px)}}@keyframes bossFloat{50%{transform:translateY(-6px)}}@keyframes bossAura{50%{transform:scale(1.13);opacity:.7}}@keyframes completePulse{50%{transform:scale(1.06);box-shadow:0 0 55px rgba(114,245,213,.22)}}
+@media(max-width:850px){.rpgMapViewport{aspect-ratio:auto;height:62vh;min-height:420px}.rpgMapLegend{left:9px;bottom:9px}.rpgDossierGrid,.rpgPlayStage{grid-template-columns:1fr}.rpgMissionArt,.rpgMissionArt>img{min-height:300px;height:300px}.rpgScene,.rpgScene>img{min-height:310px;height:310px}.rpgBattlePanel{border-left:0;border-top:1px solid rgba(255,255,255,.08)}.rpgMapTopbar{align-items:flex-start}.rpgStats{flex-direction:column}.rpgMarker{width:39px;height:39px;font-size:12px}.rpgMarkerLabel{top:43px;font-size:8px}}
+@media(max-width:560px){.aerisGameRpg{padding:12px 0 28px}.rpgGameShell{border-radius:12px}.rpgMapTopbar{padding:11px;display:block}.rpgStats{display:flex;flex-direction:row;margin-top:9px}.rpgStats span{flex:1}.rpgMapViewport{height:58vh;min-height:380px}.rpgMapLegend{font-size:7px;gap:7px;max-width:calc(100% - 18px)}.rpgMapFooter{display:block;font-size:7px;line-height:1.5}.rpgMapFooter span{display:block}.rpgMarker{width:34px;height:34px;border-width:2px}.rpgMarkerLabel{top:38px;display:none}.rpgDossier,.rpgMissionPlay{padding:11px}.rpgDossierCopy{padding:22px 16px}.rpgDossierCopy h3{font-size:34px}.rpgMissionMeta{grid-template-columns:1fr}.rpgBossVisual{height:145px}.rpgBossVisual img{width:130px;height:130px}.rpgRewardRow{grid-template-columns:1fr}.rpgPlayTop{padding:10px}.rpgPlayTop>span{font-size:8px;padding:7px}.rpgSceneOverlay{left:13px;right:13px;bottom:13px}}
+@media(prefers-reduced-motion:reduce){.rpgMapScan,.rpgMarker:before,.rpgMarker.current,.rpgBossVisual img,.rpgBossAura,.rpgCompleteIcon{animation:none!important}}
+</style>
+<script id="aeris-rpg-map-v72-js">
+(function(){
+  const missions=[
+    {name:'River Pressure',location:'Caucasia · Río Cauca',boss:'The Polluter',type:'RIVER PRESSURE',img:'assets/field/field-04-riverbank-view.jpg',bossImg:'assets/rpg/waste.svg',reward:100,relic:'Water Core',desc:'The riverbank shows visible pressure from waste and environmental disturbance. Build a responsible response based on observation, evidence and community care.',dialogue:'The river is not just scenery. Your first move is to protect it without creating a new risk.'},
+    {name:'Illegal Mining',location:'Zaragoza · Río Cauca',boss:'The Excavator',type:'ILLEGAL MINING',img:'assets/field/field-01-river-mining-structure.jpg',bossImg:'assets/rpg/dredge.svg',reward:150,relic:'River Shield',desc:'Mining activity can alter soil, vegetation and river systems. Separate what you can observe from what needs evidence before acting.',dialogue:'You see mining pressure near the water. Evidence first. Stay safe. Choose your move.'},
+    {name:'Mercury Contamination',location:'Nechí · Cauca watershed',boss:'The Mercury Serpent',type:'MERCURY CONTAMINATION',img:'assets/field/field-02-mining-boat.jpg',bossImg:'assets/rpg/mercury.svg',reward:200,relic:'Life Seed',desc:'Mercury can enter aquatic food webs in mining-affected contexts. The challenge is to understand the evidence instead of guessing from appearances.',dialogue:'A claim about mercury needs measurement and scientific evidence. Knowledge is your strongest tool.'},
+    {name:'Waste & Pollution',location:'Cáceres · Riverbank',boss:'The Waste Lord',type:'WASTE & POLLUTION',img:'assets/field/field-06-waste-riverbank.jpg',bossImg:'assets/rpg/waste.svg',reward:250,relic:'Immortality Rune',desc:'Waste on the riverbank affects habitat quality. Organize a safe, practical response and keep the focus on the river and its living systems.',dialogue:'The waste is visible. Your mission is to turn concern into a clear and responsible action.'},
+    {name:'Habitat Loss',location:'Tarazá · Bajo Cauca',boss:'The Deforester',type:'HABITAT LOSS',img:'assets/field/field-09-wide-river-waste.jpg',bossImg:'assets/rpg/forest.svg',reward:300,relic:'Cauca Crown',desc:'Healthy riverbanks and connected habitats support biodiversity. Your final mission is about long-term restoration and community stewardship.',dialogue:'The final zone needs more than one quick fix. Think about the future of the river.'}
+  ];
+  const root=document.getElementById('rpgGameShell'); if(!root)return;
+  const $=id=>document.getElementById(id); const key='aeris_rpg_campaign_v1';
+  let progress=0,xp=0,selected=0,threat=100,started=false;
+  try{const s=JSON.parse(localStorage.getItem(key)||'{}');progress=Math.max(0,Math.min(5,Number(s.progress)||0));xp=Math.max(0,Number(s.xp)||0)}catch(e){}
+  function save(){try{localStorage.setItem(key,JSON.stringify({progress,xp}))}catch(e){}}
+  function lang(){return window.currentLang==='es'?'es':'en'}
+  const tr=(en,es)=>lang()==='es'?es:en;
+  function map(){
+    $('rpgMapScreen').hidden=false;$('rpgDossier').hidden=true;$('rpgMissionPlay').hidden=true;$('rpgComplete').hidden=true;
+    $('rpgProgress').textContent=Math.min(progress+1,5)+' / 5';$('rpgXP').textContent=xp;
+    $('rpgMapMarkers').innerHTML=missions.map((m,i)=>{const done=i<progress,avail=i===progress,locked=i>progress;return `<button type="button" class="rpgMarker ${done?'completed':locked?'locked':'available'} ${avail?'current':''}" style="left:${[42,65,61,31,50][i]}%;top:${[19,34,55,65,82][i]}%" data-i="${i}" ${locked?'disabled':''} aria-label="${m.name}">${done?'✓':locked?'🔒':i+1}<span class="rpgMarkerLabel">${i+1}. ${m.name}</span></button>`}).join('');
+  }
+  function dossier(i){selected=i;const m=missions[i];$('rpgMapScreen').hidden=true;$('rpgDossier').hidden=false;$('rpgMissionPlay').hidden=true;$('rpgComplete').hidden=true;$('rpgDossierImage').src=m.img;$('rpgDossierBadge').textContent='MISSION '+(i+1);$('rpgDossierLocation').textContent=m.location;$('rpgDossierTitle').textContent=m.name;$('rpgDossierStory').textContent=m.desc;$('rpgDossierBoss').src=m.bossImg;$('rpgDossierBossName').textContent=m.boss;$('rpgDossierBossType').textContent=m.type;$('rpgDossierReward').textContent='+'+m.reward+' XP';$('rpgDossierRelic').textContent=m.relic;$('rpgStartMission').disabled=i>progress}
+  function play(){const m=missions[selected];started=true;threat=100;$('rpgDossier').hidden=true;$('rpgMapScreen').hidden=true;$('rpgMissionPlay').hidden=false;$('rpgPlayMissionLabel').textContent='MISSION '+(selected+1)+' // '+m.name.toUpperCase();$('rpgPlayXP').textContent=xp;$('rpgSceneImage').src=m.img;$('rpgSceneLocation').textContent=m.location;$('rpgSceneTitle').textContent=m.name;$('rpgBossName').textContent=m.boss;$('rpgBossLevel').textContent='LV. '+(10+selected*3);$('rpgBossImage').src=m.bossImg;$('rpgDialogueText').textContent=m.dialogue;$('rpgHpBar').style.width='100%';$('rpgHpText').textContent='100%';$('rpgChoices').innerHTML=[
+    [tr('A · Document and verify','A · Documenta y verifica'),tr('Observe from a safe distance, record what you can and verify the claim.','Observa desde una distancia segura, registra lo que puedas y verifica la afirmación.'),18,true],
+    [tr('B · Act without evidence','B · Actúa sin evidencia'),tr('Jump to a conclusion and spread it before checking the facts.','Saca una conclusión y compártela antes de comprobar los datos.'),8,false],
+    [tr('C · Protect and organize','C · Protege y organiza'),tr('Choose a safe, community-minded action based on evidence and the situation.','Elige una acción segura y comunitaria basada en la evidencia y la situación.'),24,true]
+  ].map((c,n)=>`<button type="button" class="rpgChoice" data-key="${String.fromCharCode(65+n)}" data-damage="${c[2]}" data-good="${c[3]}"><b>${c[0]}</b><br><span>${c[1]}</span></button>`).join('')}
+  function complete(){const m=missions[selected];progress=Math.max(progress,selected+1);xp+=m.reward;save();$('rpgMissionPlay').hidden=true;$('rpgComplete').hidden=false;$('rpgCompleteTitle').textContent=tr('Mission complete. The next zone is waiting.','Misión completada. La siguiente zona te espera.');$('rpgCompleteText').textContent=tr('You used evidence, responsible choices and environmental awareness to move the Guardian campaign forward.','Usaste evidencia, decisiones responsables y conciencia ambiental para avanzar en la campaña del Guardián.');$('rpgCompleteXP').textContent='+'+m.reward;$('rpgCompleteRelic').textContent=m.relic;$('rpgCompleteNext').textContent=progress<5?missions[progress].location.split(' · ')[0]:tr('CAMPAIGN COMPLETE','CAMPAÑA COMPLETADA')}
+  root.addEventListener('click',e=>{
+    const marker=e.target.closest('.rpgMarker'); if(marker&&!marker.disabled){dossier(Number(marker.dataset.i));return}
+    if(e.target.closest('#rpgBackMap')){map();return}
+    if(e.target.closest('#rpgStartMission')){play();return}
+    if(e.target.closest('#rpgQuitMission')){map();return}
+    if(e.target.closest('#rpgContinueMap')){map();return}
+    const choice=e.target.closest('.rpgChoice'); if(choice&&!choice.disabled){document.querySelectorAll('.rpgChoice').forEach(b=>b.disabled=true);const good=choice.dataset.good==='true';choice.classList.add(good?'good':'bad');threat=Math.max(0,threat-Number(choice.dataset.damage));$('rpgHpBar').style.width=threat+'%';$('rpgHpText').textContent=threat+'%';$('rpgDialogueText').textContent=good?tr('Strong Guardian move. The evidence is useful and the response stays responsible.','Buen movimiento de Guardián. La evidencia es útil y la respuesta se mantiene responsable.'):tr('That move creates a weaker outcome. Learn from the consequence and keep going.','Ese movimiento produce un resultado más débil. Aprende de la consecuencia y continúa.');setTimeout(complete,700)}
+  });
+  function applyLang(){if(!root)return;document.querySelector('.aerisGameRpg .eyebrow').textContent=tr('07 / CAUCA GUARDIANS RPG','07 / RPG CAUCA GUARDIANS');document.querySelector('.aerisGameRpg h2').textContent=tr('Choose your mission.','Elige tu misión.');document.querySelector('.aerisGameRpg .lead').textContent=tr('Explore the Bajo Cauca map, complete each mission and unlock the next chapter.','Explora el mapa del Bajo Cauca, completa cada misión y desbloquea el siguiente capítulo.');if(!$('rpgMapScreen').hidden)map()}
+  window.addEventListener('aeris:language',applyLang);const ls=document.getElementById('langSwitch');if(ls)ls.addEventListener('click',()=>setTimeout(applyLang,100));
+  map();applyLang();
+})();
+</script>
