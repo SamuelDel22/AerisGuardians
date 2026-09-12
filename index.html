@@ -4056,6 +4056,17 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
 })();
 </script>
 
+<style id="aeris-guardian-size-fix-v77">
+/* V77 — keep the Guardian small enough to never cover the mission artwork. */
+.aerisGameRpg .rpgScene > img.rpgGuardianField{position:absolute!important;z-index:3!important;left:clamp(8px,4vw,48px)!important;bottom:clamp(10px,4vw,34px)!important;width:clamp(82px,18vw,205px)!important;height:auto!important;max-width:34%!important;max-height:52%!important;object-fit:contain!important;object-position:center bottom!important;display:block!important;border:0!important;background:transparent!important;filter:drop-shadow(0 9px 13px rgba(0,0,0,.55))!important;animation:guardianFieldFloat 3.2s ease-in-out infinite;pointer-events:none!important}
+.aerisGameRpg .rpgScene:has(> img.rpgGuardianField) .rpgSceneOverlay{left:clamp(12px,3vw,28px)!important;padding-left:clamp(105px,19vw,220px)!important}
+.aerisGameRpg .rpgDialogue > img{flex:0 0 auto!important;width:64px!important;height:78px!important;max-width:64px!important;max-height:78px!important;object-fit:contain!important}
+.aerisGameRpg .rpgVictoryGuardian img{width:min(220px,48vw)!important;height:175px!important;max-width:70%!important;object-fit:contain!important}
+@media(max-width:700px){.aerisGameRpg .rpgScene > img.rpgGuardianField{left:6px!important;bottom:10px!important;width:clamp(72px,24vw,132px)!important;max-width:29%!important;max-height:44%!important}.aerisGameRpg .rpgScene:has(> img.rpgGuardianField) .rpgSceneOverlay{padding-left:clamp(84px,27vw,155px)!important}.aerisGameRpg .rpgDialogue > img{width:54px!important;height:66px!important;max-width:54px!important;max-height:66px!important}}
+@media(max-width:560px){.aerisGameRpg .rpgScene > img.rpgGuardianField{left:4px!important;bottom:8px!important;width:clamp(64px,23vw,108px)!important;max-width:26%!important;max-height:40%!important}.aerisGameRpg .rpgScene:has(> img.rpgGuardianField) .rpgSceneOverlay{padding-left:clamp(72px,25vw,130px)!important}}
+@media(prefers-reduced-motion:reduce){.aerisGameRpg .rpgScene > img.rpgGuardianField{animation:none!important}}
+</style>
+
 <style id="aeris-rpg-mission-direct-v76">
 /* V76 — mission selection enters the mission screen directly. No dossier below the map. */
 .aerisGameRpg .rpgGameShell{position:relative}
