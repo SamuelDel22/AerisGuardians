@@ -1276,7 +1276,7 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
       <button class="rpgBack" id="rpgBackMap" type="button">← BACK TO MAP</button>
       <div class="rpgDossierGrid">
         <div class="rpgMissionArt"><img id="rpgDossierImage" src="assets/field/field-01-river-mining-structure.jpg" alt="Mission scenario"><div class="rpgArtBadge" id="rpgDossierBadge">MISSION 1</div></div>
-        <div class="rpgDossierCopy"><span class="rpgKicker" id="rpgDossierLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgDossierTitle">River Pressure</h3><p id="rpgDossierStory"></p><div class="rpgBossCard"><img id="rpgDossierBoss" src="assets/rpg/dredge.svg" alt="Mission boss"><div><small>BOSS</small><strong id="rpgDossierBossName">The Polluter</strong><span id="rpgDossierBossType">ENVIRONMENTAL PRESSURE</span></div></div><div class="rpgMissionMeta"><span>REWARD <b id="rpgDossierReward">+100 XP</b></span><span>RELIC <b id="rpgDossierRelic">WATER CORE</b></span></div><button class="rpgStartBtn" id="rpgStartMission" type="button">START MISSION <span>▶</span></button></div>
+        <div class="rpgDossierCopy"><span class="rpgKicker" id="rpgDossierLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgDossierTitle">River Pressure</h3><p id="rpgDossierStory"></p><div class="rpgBossCard"><img id="rpgDossierBoss" src="assets/rpg/bosses/boss-excavator.png" alt="Mission boss"><div><small>BOSS</small><strong id="rpgDossierBossName">The Polluter</strong><span id="rpgDossierBossType">ENVIRONMENTAL PRESSURE</span></div></div><div class="rpgMissionMeta"><span>REWARD <b id="rpgDossierReward">+100 XP</b></span><span>RELIC <b id="rpgDossierRelic">WATER CORE</b></span></div><button class="rpgStartBtn" id="rpgStartMission" type="button">START MISSION <span>▶</span></button></div>
       </div>
     </div>
 
@@ -1286,7 +1286,7 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
         <div class="rpgScene"><img id="rpgSceneImage" src="assets/field/field-01-river-mining-structure.jpg" alt="Mission scenario"><div class="rpgSceneOverlay"><span id="rpgSceneLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgSceneTitle">River Pressure</h3></div></div>
         <div class="rpgBattlePanel">
           <div class="rpgBossHead"><div><small>BOSS ENCOUNTER</small><h3 id="rpgBossName">The Polluter</h3></div><span id="rpgBossLevel">LV. 10</span></div>
-          <div class="rpgBossVisual"><img id="rpgBossImage" src="assets/rpg/dredge.svg" alt="Boss"><div class="rpgBossAura"></div></div>
+          <div class="rpgBossVisual"><img id="rpgBossImage" src="assets/rpg/bosses/boss-excavator.png" alt="Boss"><div class="rpgBossAura"></div></div>
           <div class="rpgHp"><div><span>THREAT</span><b id="rpgHpText">100%</b></div><i><em id="rpgHpBar"></em></i></div>
           <div class="rpgDialogue"><img src="assets/rpg/guardian.svg" alt="Guardian"><div><small>GUARDIAN</small><p id="rpgDialogueText"></p></div></div>
           <div class="rpgChoices" id="rpgChoices"></div>
@@ -3309,6 +3309,25 @@ img{max-width:100%;height:auto}
 })();
 </script>
 
+
+<style id="aeris-boss-art-v74">
+.rpgBossCard img,.rpgBossVisual img{
+  image-rendering:auto!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  border:1px solid rgba(54,217,255,.24);
+  background:#06111f;
+}
+.rpgBossCard img{width:92px!important;height:68px!important;border-radius:2px;}
+.rpgBossVisual img{width:min(92%,420px)!important;height:190px!important;object-fit:contain!important;border:0!important;background:transparent!important;animation:bossArtFloat 2.8s ease-in-out infinite;}
+.rpgBossVisual{overflow:hidden;}
+.rpgBossVisual:before{content:"";position:absolute;inset:8px 8%;background:linear-gradient(90deg,transparent,rgba(54,217,255,.08),transparent);transform:translateX(-120%);animation:bossScan 4.5s linear infinite;pointer-events:none;}
+@keyframes bossArtFloat{50%{transform:translateY(-5px) scale(1.015)}}
+@keyframes bossScan{to{transform:translateX(120%)}}
+@media(max-width:560px){.rpgBossVisual img{height:150px!important}.rpgBossCard img{width:82px!important;height:62px!important}}
+@media(prefers-reduced-motion:reduce){.rpgBossVisual img{animation:none!important}.rpgBossVisual:before{animation:none!important}}
+</style>
+
 </body>
 
 <style id="aeris-v54-game-polish">
@@ -3861,11 +3880,11 @@ footer a{color:var(--cyan)!important}
 <script id="aeris-rpg-map-v72-js">
 (function(){
   const missions=[
-    {name:'River Pressure',location:'Caucasia · Río Cauca',boss:'The Polluter',type:'RIVER PRESSURE',img:'assets/field/field-04-riverbank-view.jpg',bossImg:'assets/rpg/waste.svg',reward:100,relic:'Water Core',desc:'The riverbank shows visible pressure from waste and environmental disturbance. Build a responsible response based on observation, evidence and community care.',dialogue:'The river is not just scenery. Your first move is to protect it without creating a new risk.'},
-    {name:'Illegal Mining',location:'Zaragoza · Río Cauca',boss:'The Excavator',type:'ILLEGAL MINING',img:'assets/field/field-01-river-mining-structure.jpg',bossImg:'assets/rpg/dredge.svg',reward:150,relic:'River Shield',desc:'Mining activity can alter soil, vegetation and river systems. Separate what you can observe from what needs evidence before acting.',dialogue:'You see mining pressure near the water. Evidence first. Stay safe. Choose your move.'},
-    {name:'Mercury Contamination',location:'Nechí · Cauca watershed',boss:'The Mercury Serpent',type:'MERCURY CONTAMINATION',img:'assets/field/field-02-mining-boat.jpg',bossImg:'assets/rpg/mercury.svg',reward:200,relic:'Life Seed',desc:'Mercury can enter aquatic food webs in mining-affected contexts. The challenge is to understand the evidence instead of guessing from appearances.',dialogue:'A claim about mercury needs measurement and scientific evidence. Knowledge is your strongest tool.'},
-    {name:'Waste & Pollution',location:'Cáceres · Riverbank',boss:'The Waste Lord',type:'WASTE & POLLUTION',img:'assets/field/field-06-waste-riverbank.jpg',bossImg:'assets/rpg/waste.svg',reward:250,relic:'Immortality Rune',desc:'Waste on the riverbank affects habitat quality. Organize a safe, practical response and keep the focus on the river and its living systems.',dialogue:'The waste is visible. Your mission is to turn concern into a clear and responsible action.'},
-    {name:'Habitat Loss',location:'Tarazá · Bajo Cauca',boss:'The Deforester',type:'HABITAT LOSS',img:'assets/field/field-09-wide-river-waste.jpg',bossImg:'assets/rpg/forest.svg',reward:300,relic:'Cauca Crown',desc:'Healthy riverbanks and connected habitats support biodiversity. Your final mission is about long-term restoration and community stewardship.',dialogue:'The final zone needs more than one quick fix. Think about the future of the river.'}
+    {name:'River Pressure',location:'Caucasia · Río Cauca',boss:'The Polluter',type:'RIVER PRESSURE',img:'assets/field/field-04-riverbank-view.jpg',bossImg:'assets/rpg/bosses/boss-polluter.png',reward:100,relic:'Water Core',desc:'The riverbank shows visible pressure from waste and environmental disturbance. Build a responsible response based on observation, evidence and community care.',dialogue:'The river is not just scenery. Your first move is to protect it without creating a new risk.'},
+    {name:'Illegal Mining',location:'Zaragoza · Río Cauca',boss:'The Excavator',type:'ILLEGAL MINING',img:'assets/field/field-01-river-mining-structure.jpg',bossImg:'assets/rpg/bosses/boss-excavator.png',reward:150,relic:'River Shield',desc:'Mining activity can alter soil, vegetation and river systems. Separate what you can observe from what needs evidence before acting.',dialogue:'You see mining pressure near the water. Evidence first. Stay safe. Choose your move.'},
+    {name:'Mercury Contamination',location:'Nechí · Cauca watershed',boss:'The Mercury Serpent',type:'MERCURY CONTAMINATION',img:'assets/field/field-02-mining-boat.jpg',bossImg:'assets/rpg/bosses/boss-mercury-serpent.png',reward:200,relic:'Life Seed',desc:'Mercury can enter aquatic food webs in mining-affected contexts. The challenge is to understand the evidence instead of guessing from appearances.',dialogue:'A claim about mercury needs measurement and scientific evidence. Knowledge is your strongest tool.'},
+    {name:'Waste & Pollution',location:'Cáceres · Riverbank',boss:'The Waste Lord',type:'WASTE & POLLUTION',img:'assets/field/field-06-waste-riverbank.jpg',bossImg:'assets/rpg/bosses/boss-waste-lord.png',reward:250,relic:'Immortality Rune',desc:'Waste on the riverbank affects habitat quality. Organize a safe, practical response and keep the focus on the river and its living systems.',dialogue:'The waste is visible. Your mission is to turn concern into a clear and responsible action.'},
+    {name:'Habitat Loss',location:'Tarazá · Bajo Cauca',boss:'The Deforester',type:'HABITAT LOSS',img:'assets/field/field-09-wide-river-waste.jpg',bossImg:'assets/rpg/bosses/boss-deforester.png',reward:300,relic:'Cauca Crown',desc:'Healthy riverbanks and connected habitats support biodiversity. Your final mission is about long-term restoration and community stewardship.',dialogue:'The final zone needs more than one quick fix. Think about the future of the river.'}
   ];
   const root=document.getElementById('rpgGameShell'); if(!root)return;
   const $=id=>document.getElementById(id); const key='aeris_rpg_campaign_v1';
