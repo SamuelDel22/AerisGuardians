@@ -1283,19 +1283,19 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
     <div class="rpgMissionPlay" id="rpgMissionPlay" hidden>
       <div class="rpgPlayTop"><button class="rpgBack" id="rpgQuitMission" type="button">← MAP</button><span id="rpgPlayMissionLabel">MISSION 1</span><span>XP <b id="rpgPlayXP">0</b></span></div>
       <div class="rpgPlayStage">
-        <div class="rpgScene"><img id="rpgSceneImage" src="assets/field/field-01-river-mining-structure.jpg" alt="Mission scenario"><div class="rpgSceneOverlay"><span id="rpgSceneLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgSceneTitle">River Pressure</h3></div></div>
+        <div class="rpgScene"><img class="rpgGuardianField" src="assets/rpg/guardian/guardian-field.png" alt="Guardian in the field"><img id="rpgSceneImage" src="assets/field/field-01-river-mining-structure.jpg" alt="Mission scenario"><div class="rpgSceneOverlay"><span id="rpgSceneLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgSceneTitle">River Pressure</h3></div></div>
         <div class="rpgBattlePanel">
           <div class="rpgBossHead"><div><small>BOSS ENCOUNTER</small><h3 id="rpgBossName">The Polluter</h3></div><span id="rpgBossLevel">LV. 10</span></div>
           <div class="rpgBossVisual"><img id="rpgBossImage" src="assets/rpg/bosses/boss-excavator.png" alt="Boss"><div class="rpgBossAura"></div></div>
           <div class="rpgHp"><div><span>THREAT</span><b id="rpgHpText">100%</b></div><i><em id="rpgHpBar"></em></i></div>
-          <div class="rpgDialogue"><img src="assets/rpg/guardian.svg" alt="Guardian"><div><small>GUARDIAN</small><p id="rpgDialogueText"></p></div></div>
+          <div class="rpgDialogue"><img src="assets/rpg/guardian/guardian-ready.png" alt="Guardian"><div><small>GUARDIAN</small><p id="rpgDialogueText"></p></div></div>
           <div class="rpgChoices" id="rpgChoices"></div>
         </div>
       </div>
     </div>
 
     <div class="rpgComplete" id="rpgComplete" hidden>
-      <div class="rpgCompleteIcon">✓</div><span class="rpgKicker">MISSION COMPLETE</span><h3 id="rpgCompleteTitle">River protected.</h3><p id="rpgCompleteText"></p><div class="rpgRewardRow"><div><small>XP</small><b id="rpgCompleteXP">+100</b></div><div><small>RELIC</small><b id="rpgCompleteRelic">WATER CORE</b></div><div><small>NEXT</small><b id="rpgCompleteNext">ZARAGOZA</b></div></div><button class="rpgContinue" id="rpgContinueMap" type="button">RETURN TO MAP →</button></div>
+      <div class="rpgVictoryGuardian"><img src="assets/rpg/guardian/guardian-victory.png" alt="Guardian victory pose"></div><div class="rpgCompleteIcon">✓</div><span class="rpgKicker">MISSION COMPLETE</span><h3 id="rpgCompleteTitle">River protected.</h3><p id="rpgCompleteText"></p><div class="rpgRewardRow"><div><small>XP</small><b id="rpgCompleteXP">+100</b></div><div><small>RELIC</small><b id="rpgCompleteRelic">WATER CORE</b></div><div><small>NEXT</small><b id="rpgCompleteNext">ZARAGOZA</b></div></div><button class="rpgContinue" id="rpgContinueMap" type="button">RETURN TO MAP →</button></div>
   </div>
 </div>
 </section>
@@ -3326,6 +3326,21 @@ img{max-width:100%;height:auto}
 @keyframes bossScan{to{transform:translateX(120%)}}
 @media(max-width:560px){.rpgBossVisual img{height:150px!important}.rpgBossCard img{width:82px!important;height:62px!important}}
 @media(prefers-reduced-motion:reduce){.rpgBossVisual img{animation:none!important}.rpgBossVisual:before{animation:none!important}}
+</style>
+
+
+<style id="aeris-guardian-art-v75">
+/* V75 Guardian character art — extracted from the approved sprite sheet. */
+.rpgGuardianField{position:absolute;z-index:3;left:clamp(12px,4vw,55px);bottom:clamp(18px,5vw,44px);width:clamp(120px,19vw,235px);max-height:52%;height:auto;object-fit:contain;object-position:bottom left;image-rendering:auto;filter:drop-shadow(0 10px 16px rgba(0,0,0,.55));animation:guardianFieldFloat 3.2s ease-in-out infinite;pointer-events:none}
+.rpgScene:has(.rpgGuardianField) .rpgSceneOverlay{padding-left:clamp(145px,20vw,250px)}
+.rpgDialogue>img{width:64px!important;height:78px!important;object-fit:contain!important;background:transparent!important;border:0!important;filter:drop-shadow(0 8px 12px rgba(0,0,0,.45));animation:guardianDialogueFloat 3s ease-in-out infinite}
+.rpgVictoryGuardian{min-height:180px;display:grid;place-items:end center;margin-bottom:-8px;overflow:hidden}
+.rpgVictoryGuardian img{width:min(250px,55vw);height:190px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 12px 18px rgba(0,0,0,.5));animation:guardianVictoryFloat 2.4s ease-in-out infinite}
+@keyframes guardianFieldFloat{50%{transform:translateY(-5px)}}
+@keyframes guardianDialogueFloat{50%{transform:translateY(-3px)}}
+@keyframes guardianVictoryFloat{50%{transform:translateY(-7px) scale(1.015)}}
+@media(max-width:700px){.rpgGuardianField{width:clamp(100px,27vw,165px);left:8px;bottom:18px;max-height:43%}.rpgScene:has(.rpgGuardianField) .rpgSceneOverlay{padding-left:clamp(105px,29vw,180px)}.rpgDialogue>img{width:54px!important;height:66px!important}.rpgVictoryGuardian{min-height:150px}.rpgVictoryGuardian img{height:160px;width:min(210px,62vw)}}
+@media(prefers-reduced-motion:reduce){.rpgGuardianField,.rpgDialogue>img,.rpgVictoryGuardian img{animation:none!important}}
 </style>
 
 </body>
