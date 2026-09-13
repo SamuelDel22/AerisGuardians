@@ -1277,6 +1277,8 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
       <div class="rpgMapTopbar"><div><span class="rpgKicker">AERIS // GUARDIAN OS</span><h3>BAJO CAUCA — MISSION MAP</h3></div><div class="rpgStats"><span>MISSION <b id="rpgProgress">1 / 5</b></span><span>XP <b id="rpgXP">0</b></span></div></div>
       <div class="rpgMapViewport">
         <img id="rpgMapImage" src="assets/rpg/bajo-cauca-mission-map.png" alt="Retro mission map inspired by the Bajo Cauca and Río Cauca">
+        <div class="rpgMapRetroFX" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <svg class="rpgMapRoute" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="42,19 65,34 61,55 31,65 50,82" /></svg>
         <div class="rpgMapScan" aria-hidden="true"></div>
         <div class="rpgMapMarkers" id="rpgMapMarkers"></div>
         <div class="rpgMapLegend"><b>MISSION STATUS</b><span><i class="dot available"></i> AVAILABLE</span><span><i class="dot locked"></i> LOCKED</span><span><i class="dot done"></i> COMPLETED</span></div>
@@ -4129,6 +4131,33 @@ footer a{color:var(--cyan)!important}
 @media(max-width:560px){.aerisGameRpg{padding:12px 0 28px}.rpgGameShell{border-radius:12px}.rpgMapTopbar{padding:11px;display:block}.rpgStats{display:flex;flex-direction:row;margin-top:9px}.rpgStats span{flex:1}.rpgMapViewport{height:58vh;min-height:380px}.rpgMapLegend{font-size:7px;gap:7px;max-width:calc(100% - 18px)}.rpgMapFooter{display:block;font-size:7px;line-height:1.5}.rpgMapFooter span{display:block}.rpgMarker{width:34px;height:34px;border-width:2px}.rpgMarkerLabel{top:38px;display:none}.rpgDossier,.rpgMissionPlay{padding:11px}.rpgDossierCopy{padding:22px 16px}.rpgDossierCopy h3{font-size:34px}.rpgMissionMeta{grid-template-columns:1fr}.rpgBossVisual{height:145px}.rpgBossVisual img{width:130px;height:130px}.rpgRewardRow{grid-template-columns:1fr}.rpgPlayTop{padding:10px}.rpgPlayTop>span{font-size:8px;padding:7px}.rpgSceneOverlay{left:13px;right:13px;bottom:13px}}
 @media(prefers-reduced-motion:reduce){.rpgMapScan,.rpgMarker:before,.rpgMarker.current,.rpgBossVisual img,.rpgBossAura,.rpgCompleteIcon{animation:none!important}}
 </style>
+<style id="aeris-v87-map-true-retro">
+/* V87 — true retro/RPG map: preserve original 3:2 art ratio and animate like a 16-bit world map. */
+.aerisGameRpg .rpgMapViewport{aspect-ratio:3/2;min-height:0;background:#061321;image-rendering:auto;isolation:isolate}
+.aerisGameRpg .rpgMapViewport>img{object-fit:cover;transform:scale(1);animation:mapWorldBreathe 7s steps(7,end) infinite;transform-origin:50% 52%}
+.aerisGameRpg .rpgMapViewport:after{background:linear-gradient(180deg,rgba(0,8,22,.04),transparent 30%,rgba(0,8,22,.12)),radial-gradient(circle at 50% 45%,transparent 52%,rgba(1,6,18,.24));mix-blend-mode:multiply}
+.aerisGameRpg .rpgMapScan{opacity:.18;animation:retroCRT 2.8s steps(2,end) infinite}
+.aerisGameRpg .rpgMapRetroFX{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;opacity:.9}
+.aerisGameRpg .rpgMapRetroFX span{position:absolute;width:3px;height:3px;background:#ffc857;box-shadow:3px 0 #ffc857,0 3px #72f5d5;opacity:0;animation:mapFirefly 3.8s steps(8,end) infinite}
+.aerisGameRpg .rpgMapRetroFX span:nth-child(1){left:18%;top:22%;animation-delay:-.4s}.aerisGameRpg .rpgMapRetroFX span:nth-child(2){left:29%;top:48%;animation-delay:-1.1s}.aerisGameRpg .rpgMapRetroFX span:nth-child(3){left:53%;top:24%;animation-delay:-2.1s}.aerisGameRpg .rpgMapRetroFX span:nth-child(4){left:72%;top:43%;animation-delay:-.8s}.aerisGameRpg .rpgMapRetroFX span:nth-child(5){left:84%;top:67%;animation-delay:-2.7s}.aerisGameRpg .rpgMapRetroFX span:nth-child(6){left:44%;top:70%;animation-delay:-1.7s}.aerisGameRpg .rpgMapRetroFX span:nth-child(7){left:13%;top:73%;animation-delay:-3.2s}.aerisGameRpg .rpgMapRetroFX span:nth-child(8){left:67%;top:82%;animation-delay:-1.4s}
+.aerisGameRpg .rpgMapRoute{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible;filter:drop-shadow(0 2px 0 rgba(0,0,0,.8))}
+.aerisGameRpg .rpgMapRoute polyline{fill:none;stroke:#ffc857;stroke-width:.7;stroke-dasharray:1.5 2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.78;animation:routeDash 2.8s steps(10,end) infinite}
+.aerisGameRpg .rpgMarker{z-index:5;border-radius:5px;width:42px;height:42px;box-shadow:4px 4px 0 rgba(0,0,0,.55),0 0 0 3px rgba(7,21,47,.85);transition:transform .12s steps(2,end),filter .12s steps(2,end),box-shadow .12s steps(2,end)}
+.aerisGameRpg .rpgMarker:before{inset:-7px;border-radius:6px;border:2px dashed rgba(255,200,87,.6);animation:markerRetroRing 1.6s steps(4,end) infinite}
+.aerisGameRpg .rpgMarker.current{animation:markerCurrentRetro 1.15s steps(3,end) infinite}
+.aerisGameRpg .rpgMarker.completed{box-shadow:4px 4px 0 rgba(0,0,0,.55),0 0 0 3px rgba(114,245,213,.22)}
+.aerisGameRpg .rpgMarkerLabel{top:48px;border:2px solid #ffc857;box-shadow:4px 4px 0 #02040c;padding:5px 8px;font-size:8px;letter-spacing:.04em}
+@keyframes mapWorldBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.012)}}
+@keyframes retroCRT{0%,100%{opacity:.14}50%{opacity:.24}}
+@keyframes mapFirefly{0%,100%{opacity:0;transform:translate(0,0)}30%{opacity:.9}60%{opacity:.25;transform:translate(8px,-5px)}80%{opacity:.8;transform:translate(-4px,4px)}}
+@keyframes routeDash{to{stroke-dashoffset:-12}}
+@keyframes markerRetroRing{0%{transform:scale(.7);opacity:.8}70%{transform:scale(1.15);opacity:.18}100%{transform:scale(1.25);opacity:0}}
+@keyframes markerCurrentRetro{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.09)}}
+@media(max-width:850px){.aerisGameRpg .rpgMapViewport{height:auto;min-height:0;aspect-ratio:3/2}.aerisGameRpg .rpgMarker{width:38px;height:38px;font-size:11px}.aerisGameRpg .rpgMarkerLabel{top:44px}}
+@media(max-width:560px){.aerisGameRpg .rpgMapViewport{height:auto;min-height:0;aspect-ratio:3/2}.aerisGameRpg .rpgMapTopbar h3{font-size:17px;line-height:1.05}.aerisGameRpg .rpgMarker{width:32px;height:32px;border-width:2px;font-size:10px;box-shadow:3px 3px 0 rgba(0,0,0,.55),0 0 0 2px rgba(7,21,47,.85)}.aerisGameRpg .rpgMarker:before{inset:-6px}.aerisGameRpg .rpgMapLegend{bottom:8px;left:8px;padding:7px 8px;max-width:calc(100% - 16px);background:rgba(3,10,25,.88)}.aerisGameRpg .rpgMapFooter{padding:8px 10px}.aerisGameRpg .rpgMapRoute polyline{stroke-width:.85;stroke-dasharray:1.2 2.8}.aerisGameRpg .rpgMapRetroFX span{width:2px;height:2px;box-shadow:2px 0 #ffc857,0 2px #72f5d5}}
+@media(prefers-reduced-motion:reduce){.aerisGameRpg .rpgMapViewport>img,.aerisGameRpg .rpgMapScan,.aerisGameRpg .rpgMapRetroFX span,.aerisGameRpg .rpgMapRoute polyline,.aerisGameRpg .rpgMarker:before,.aerisGameRpg .rpgMarker.current{animation:none!important}}
+</style>
+
 <script id="aeris-rpg-live-v78-js">
 (function(){
   const missions=[
