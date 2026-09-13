@@ -1136,6 +1136,17 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
       <div class="caucaBridge"><span></span><span></span><span></span><b>CAUCASIA</b></div>
       <div class="pixelPollution"></div><div class="pixelReed"></div>
     </div>
+    <div aria-hidden="true" class="aerisIntroFX">
+      <div class="introScanBeam"></div>
+      <div class="introReticle"><i></i><b></b><em></em></div>
+      <div class="introParticles">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="introCorner introCornerTL"></div><div class="introCorner introCornerTR"></div>
+      <div class="introCorner introCornerBL"></div><div class="introCorner introCornerBR"></div>
+      <div class="introBoot"><span>BOOTING AERIS OS</span><b>██████████</b></div>
+      <div class="introSignal"><span></span><span></span><span></span><span></span><b>CAUCA LINK</b></div>
+    </div>
     <div aria-hidden="true" class="arcadeRpgHud">
       <div class="arcadeHudCard">MISSION<b>GUARDIAN</b></div>
       <div class="arcadeHudCard">RIVER XP<b>+ 100</b></div>
@@ -1147,6 +1158,7 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
       <p class="arcadeSubtitle">THE RIVER NEEDS A GUARDIAN</p>
       <button aria-controls="arcadeMenu" class="arcadeStartBtn" id="arcadeStartButton" type="button">PRESS START</button>
       <p class="arcadeHint">EXPLORE · VERIFY · PROTECT</p>
+      <div class="arcadeBootLine"><span>AREA:</span> BAJO CAUCA <i></i><span>STATUS:</span> READY</div>
     </div>
     <div aria-label="Choose a destination" class="arcadeMenu" hidden id="arcadeMenu">
       <div class="arcadeMenuTitle">SELECT MISSION</div>
@@ -4233,12 +4245,17 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
     scrollLocked=false;
   }
   function showMenu(){
+    overlay.classList.remove('introMenuMode');
+    void overlay.offsetWidth;
+    overlay.classList.add('introMenuMode');
     menu.hidden=false;
     startContent.hidden=true;
     requestAnimationFrame(()=>menu.querySelector('.arcadeOption')?.focus());
     window.playFX?.('select');
+    setTimeout(()=>overlay.classList.remove('introMenuMode'),900);
   }
   function showStart(){
+    overlay.classList.remove('introMenuMode');
     menu.hidden=true;
     startContent.hidden=false;
     start.focus();
@@ -4304,6 +4321,51 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
 })();
 </script>
 
+
+<style id="aeris-v84-intro-epic-detail">
+/* V84 — cinematic RPG intro: boot sequence, scan beam, particles, targeting reticle and layered pixel motion. */
+.guardianBriefing.arcadeStart{--intro-cyan:#78efff;--intro-mint:#b9ff83;--intro-gold:#ffd36e;--intro-pink:#ff648d;--intro-blue:#2453a6;isolation:isolate}
+.aerisIntroFX{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.guardianBriefing.arcadeStart .arcadeWorld{z-index:0}
+.guardianBriefing.arcadeStart .arcadeStartContent,.guardianBriefing.arcadeStart .arcadeMeta,.guardianBriefing.arcadeStart .arcadeRpgHud,.guardianBriefing.arcadeStart .arcadeMenu{z-index:4}
+.introScanBeam{position:absolute;left:-15%;right:-15%;top:-18%;height:3px;background:linear-gradient(90deg,transparent,#78efff 25%,#fff 50%,#78efff 75%,transparent);box-shadow:0 0 12px #78efff,0 0 36px #78efff;opacity:.0;animation:introScan 6s linear infinite}
+.introScanBeam:after{content:"";position:absolute;left:0;right:0;top:0;height:42px;background:linear-gradient(180deg,#78efff20,transparent);transform:translateY(-1px)}
+.introReticle{position:absolute;left:50%;top:45%;width:150px;height:150px;transform:translate(-50%,-50%);opacity:.20;animation:introReticlePulse 3.4s ease-in-out infinite}
+.introReticle:before,.introReticle:after{content:"";position:absolute;inset:0;border:1px solid #78efff55;border-radius:50%;box-shadow:0 0 30px #78efff16}
+.introReticle:after{inset:23px;border-color:#b9ff8344;animation:introReticleSpin 8s linear infinite}
+.introReticle i,.introReticle b,.introReticle em{position:absolute;display:block;background:#78efff}
+.introReticle i{left:50%;top:-7px;width:1px;height:18px;box-shadow:0 139px #78efff}
+.introReticle b{top:50%;left:-7px;width:18px;height:1px;box-shadow:139px 0 #78efff}
+.introReticle em{left:50%;top:50%;width:4px;height:4px;transform:translate(-50%,-50%);box-shadow:0 0 12px #fff}
+.introParticles{position:absolute;inset:0}
+.introParticles i{position:absolute;width:3px;height:3px;background:#b9ff83;box-shadow:0 0 8px #b9ff83;image-rendering:pixelated;animation:introParticleFloat var(--d,4.8s) steps(5,end) infinite;animation-delay:var(--delay,0s);opacity:.0}
+.introParticles i:nth-child(1){left:8%;top:24%;--d:5.1s;--delay:-2s}.introParticles i:nth-child(2){left:17%;top:67%;--d:4.3s;--delay:-1s}.introParticles i:nth-child(3){left:28%;top:17%;--d:6s;--delay:-4s}.introParticles i:nth-child(4){left:39%;top:74%;--d:4.8s;--delay:-2.5s}.introParticles i:nth-child(5){left:51%;top:23%;--d:5.7s;--delay:-3.5s}.introParticles i:nth-child(6){left:61%;top:66%;--d:4.2s;--delay:-.5s}.introParticles i:nth-child(7){left:73%;top:18%;--d:5.4s;--delay:-1.8s}.introParticles i:nth-child(8){left:83%;top:71%;--d:4.6s;--delay:-3s}.introParticles i:nth-child(9){left:91%;top:31%;--d:6.2s;--delay:-5s}.introParticles i:nth-child(10){left:47%;top:55%;--d:5s;--delay:-1.2s;background:#78efff;box-shadow:0 0 8px #78efff}.introParticles i:nth-child(11){left:12%;top:48%;--d:4.1s;--delay:-2.7s;background:#ffd36e;box-shadow:0 0 8px #ffd36e}.introParticles i:nth-child(12){left:88%;top:56%;--d:5.9s;--delay:-4.2s;background:#ff648d;box-shadow:0 0 8px #ff648d}
+.introCorner{position:absolute;width:46px;height:46px;border-color:#78efff66;border-style:solid;opacity:.75}.introCornerTL{left:18px;top:48px;border-width:2px 0 0 2px}.introCornerTR{right:18px;top:48px;border-width:2px 2px 0 0}.introCornerBL{left:18px;bottom:54px;border-width:0 0 2px 2px}.introCornerBR{right:18px;bottom:54px;border-width:0 2px 2px 0}
+.introBoot{position:absolute;left:18px;bottom:14px;color:#7ca9c7;font:900 7px/1.3 "Courier New",monospace;letter-spacing:.12em;text-align:left}.introBoot b{display:block;color:#b9ff83;letter-spacing:-.08em;margin-top:3px;animation:introBootLoad 3.2s steps(10,end) infinite}
+.introSignal{position:absolute;right:18px;bottom:14px;display:flex;align-items:flex-end;gap:3px;color:#78efff;font:900 7px "Courier New",monospace;letter-spacing:.08em}.introSignal span{display:block;width:4px;background:#78efff;box-shadow:0 0 7px #78efff;animation:introBars 1.1s steps(3,end) infinite}.introSignal span:nth-child(1){height:7px}.introSignal span:nth-child(2){height:11px;animation-delay:.12s}.introSignal span:nth-child(3){height:15px;animation-delay:.24s}.introSignal span:nth-child(4){height:19px;animation-delay:.36s}.introSignal b{margin-left:5px;align-self:center}
+.arcadeBootLine{margin:8px auto 0;color:#83a9c9;font:900 7px "Courier New",monospace;letter-spacing:.1em;text-transform:uppercase;opacity:.8}.arcadeBootLine span{color:#78efff}.arcadeBootLine i{display:inline-block;width:5px;height:5px;margin:0 8px;background:#b9ff83;box-shadow:0 0 9px #b9ff83;animation:introStatus 1s steps(2,end) infinite}
+.arcadeTitle{position:relative;filter:drop-shadow(0 0 0 #78efff)}
+.arcadeTitle:after{content:"AERIS";position:absolute;inset:0;color:#78efff;opacity:0;pointer-events:none;clip-path:inset(0 0 55% 0);transform:translate(2px,-1px);animation:introGlitch 4.7s steps(2,end) infinite}
+.arcadeKicker{position:relative}.arcadeKicker:before{content:"/// SIGNAL LOCKED ///";position:absolute;left:50%;top:-16px;transform:translateX(-50%);font-size:6px;letter-spacing:.14em;color:#b9ff83;opacity:.65;white-space:nowrap;animation:introSignal 2.4s steps(2,end) infinite}
+.guardianBriefing.arcadeStart.introMenuMode:before{animation:introMenuFlash .8s steps(3,end) both}
+.guardianBriefing.arcadeStart.introMenuMode .introScanBeam{animation:introMenuScan .8s linear both}
+.guardianBriefing.arcadeStart.introMenuMode .introReticle{animation:introMenuReticle .8s steps(5,end) both}
+@keyframes introScan{0%{top:-18%;opacity:0}8%{opacity:.75}48%{opacity:.55}58%{opacity:.15}100%{top:118%;opacity:0}}
+@keyframes introReticlePulse{50%{opacity:.32;transform:translate(-50%,-50%) scale(1.05)}}
+@keyframes introReticleSpin{to{transform:rotate(360deg)}}
+@keyframes introParticleFloat{0%{opacity:0;transform:translate(0,12px) scale(.5)}25%{opacity:.85}70%{opacity:.65;transform:translate(7px,-15px) scale(1)}100%{opacity:0;transform:translate(-3px,-27px) scale(.4)}}
+@keyframes introBootLoad{0%,15%{clip-path:inset(0 100% 0 0)}60%{clip-path:inset(0 0 0 0)}100%{opacity:.35}}
+@keyframes introBars{50%{transform:scaleY(.55);opacity:.45}}
+@keyframes introStatus{50%{opacity:.25}}
+@keyframes introSignal{50%{opacity:.25;transform:translateX(-50%) translateX(2px)}}
+@keyframes introGlitch{0%,91%,100%{opacity:0}92%{opacity:.75;transform:translate(5px,-1px)}93%{opacity:0;transform:translate(-3px,1px)}94%{opacity:.5;transform:translate(2px,0)}}
+@keyframes introMenuFlash{0%{opacity:1}18%{background:radial-gradient(circle at 50% 48%,#dffcff 0 2%,transparent 18%)}35%{background:#78efff18}100%{opacity:.75}}
+@keyframes introMenuScan{0%{top:-18%;opacity:1}100%{top:118%;opacity:0}}
+@keyframes introMenuReticle{0%{opacity:.6;transform:translate(-50%,-50%) scale(.75)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.6)}}
+@media(max-width:560px){.introReticle{width:105px;height:105px;top:38%;opacity:.15}.introCorner{width:27px;height:27px}.introCornerTL,.introCornerTR{top:35px}.introCornerBL,.introCornerBR{bottom:39px}.introBoot{left:9px;bottom:8px;font-size:5px}.introSignal{right:9px;bottom:8px;font-size:5px}.introSignal span{width:3px}.introSignal span:nth-child(1){height:5px}.introSignal span:nth-child(2){height:8px}.introSignal span:nth-child(3){height:11px}.introSignal span:nth-child(4){height:14px}.arcadeBootLine{font-size:5.5px}.arcadeKicker:before{top:-11px;font-size:5px}}
+@media(prefers-reduced-motion:reduce){.introScanBeam,.introReticle,.introReticle:after,.introParticles i,.introBoot b,.introSignal span,.arcadeBootLine i,.arcadeTitle:after,.arcadeKicker:before{animation:none!important}.introParticles i{opacity:.35!important}.introScanBeam{display:none}}
+</style>
+
 <style id="aeris-v81-dialogue-safe-zone">
 /* V81 — mobile dialogue sits in the open lane between Guardian and boss; never over the Guardian face. */
 @media(max-width:560px){
@@ -4360,5 +4422,227 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
  .aerisGameRpg .rpgScene,.aerisGameRpg .rpgScene>img{height:42vh;min-height:280px}
  .aerisGameRpg .rpgMissionPlay{padding:7px}
  .aerisGameRpg .rpgBattlePanel{padding:14px}
+}
+</style>
+
+<style id="aeris-v85-retro-rpg-intro">
+/* =========================================================
+   AERIS V85 — TRUE 16-BIT / RETRO RPG TITLE SCREEN
+   Removes V84 sci-fi scanner language and restores a game-like
+   pixel title screen with hard-edged animation and atmosphere.
+   ========================================================= */
+.guardianBriefing.arcadeStart{
+  --r:#ff4f73;--c:#54e8ff;--g:#b7ff67;--y:#ffd35c;
+  background:#050817!important;
+  image-rendering:pixelated;
+}
+
+/* V84 elements removed: no scanner, reticle, boot-console or futuristic corners. */
+.guardianBriefing.arcadeStart .introScanBeam,
+.guardianBriefing.arcadeStart .introReticle,
+.guardianBriefing.arcadeStart .introBoot,
+.guardianBriefing.arcadeStart .introSignal,
+.guardianBriefing.arcadeStart .introCorner{display:none!important}
+
+/* Classic CRT overlay — subtle enough to preserve the pixel art. */
+.guardianBriefing.arcadeStart .arcadePanel:before{
+  content:""!important;
+  position:absolute!important;inset:0!important;z-index:8!important;
+  pointer-events:none!important;opacity:.18!important;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.12) 0 1px,transparent 1px 4px)!important;
+  mix-blend-mode:screen!important;
+}
+.guardianBriefing.arcadeStart .arcadePanel:after{
+  content:""!important;
+  position:absolute!important;inset:8px!important;z-index:9!important;
+  pointer-events:none!important;
+  border:3px solid rgba(184,239,255,.42)!important;
+  box-shadow:inset 0 0 0 2px rgba(3,8,22,.8),inset 0 0 0 5px rgba(255,255,255,.08),0 0 0 2px #02030a!important;
+}
+
+/* Pixelated horizon: the existing world becomes the actual game title backdrop. */
+.guardianBriefing.arcadeStart .arcadeWorld{
+  background:#08133a!important;
+  filter:none!important;
+  transform:none!important;
+}
+.guardianBriefing.arcadeStart .arcadeWorld:before{
+  height:47%!important;
+  opacity:1!important;
+  background:
+    repeating-linear-gradient(172deg,transparent 0 14px,#63dbe8 15px 17px,transparent 18px 30px),
+    linear-gradient(180deg,#236a91 0 9%,#167d9f 9% 44%,#0a3c5a 44% 100%)!important;
+  animation:retroWaterShift 7s steps(8,end) infinite!important;
+}
+.guardianBriefing.arcadeStart .arcadeWorld:after{
+  height:31%!important;
+  background:#101f30!important;
+  clip-path:polygon(0 52%,4% 35%,9% 50%,14% 21%,19% 45%,25% 30%,31% 52%,38% 17%,45% 43%,52% 29%,59% 51%,67% 19%,74% 44%,82% 27%,89% 49%,96% 22%,100% 40%,100% 100%,0 100%)!important;
+  animation:retroHorizon 5.5s steps(4,end) infinite!important;
+}
+
+/* Pixel stars and moon, layered behind the title. */
+.guardianBriefing.arcadeStart .arcadeWorld .pixelSky{
+  position:absolute!important;inset:0!important;bottom:auto!important;
+  height:60%!important;z-index:0!important;
+  background:
+    radial-gradient(circle at 8% 18%,#fff 0 1px,transparent 2px),
+    radial-gradient(circle at 18% 34%,#b9eaff 0 1px,transparent 2px),
+    radial-gradient(circle at 29% 11%,#fff 0 1px,transparent 2px),
+    radial-gradient(circle at 42% 27%,#b9eaff 0 1px,transparent 2px),
+    radial-gradient(circle at 58% 15%,#fff 0 1px,transparent 2px),
+    radial-gradient(circle at 71% 31%,#d9f8ff 0 1px,transparent 2px),
+    radial-gradient(circle at 84% 12%,#fff 0 1px,transparent 2px),
+    radial-gradient(circle at 94% 36%,#b9eaff 0 1px,transparent 2px)!important;
+  opacity:.78!important;
+  animation:retroStars 4s steps(2,end) infinite!important;
+}
+.guardianBriefing.arcadeStart .pixelSky:after{
+  content:"";position:absolute;right:12%;top:15%;width:62px;height:62px;
+  background:#ffd978;border:4px solid #ffeeb0;
+  box-shadow:8px 0 0 #f0bd5a,8px 8px 0 #f0bd5a,0 8px 0 #f0bd5a;
+  clip-path:polygon(20% 0,80% 0,100% 20%,100% 80%,80% 100%,20% 100%,0 80%,0 20%);
+  opacity:.9;animation:moonBob 3.8s steps(4,end) infinite;
+}
+
+/* Give the clouds genuine old-school parallax instead of modern smooth motion. */
+.guardianBriefing.arcadeStart .pixelCloud{animation:retroCloud 9s steps(18,end) infinite!important}
+.guardianBriefing.arcadeStart .cloudTwo{animation-duration:13s!important;animation-delay:-4s!important}
+.guardianBriefing.arcadeStart .cloudThree{animation-duration:16s!important;animation-delay:-8s!important}
+
+/* Title card: hard pixel shadows + one-time arcade entrance. */
+.guardianBriefing.arcadeStart .arcadeStartContent{
+  z-index:5!important;
+  animation:retroTitleCard .7s steps(6,end) both!important;
+}
+.guardianBriefing.arcadeStart .arcadeKicker{
+  color:#ffd35c!important;
+  text-shadow:2px 2px 0 #5b2443!important;
+  animation:retroKicker 1.8s steps(2,end) infinite!important;
+}
+.guardianBriefing.arcadeStart .arcadeKicker:before{
+  content:"★  CAUCA GUARDIANS  ★"!important;
+  color:#b7ff67!important;
+  animation:retroBadge 2.2s steps(2,end) infinite!important;
+}
+.guardianBriefing.arcadeStart .arcadeTitle{
+  font-family:Impact,"Arial Black",sans-serif!important;
+  color:#fff!important;
+  filter:none!important;
+  text-shadow:
+    4px 0 0 #ff4f73,
+    -4px 0 0 #54e8ff,
+    0 5px 0 #3aa9c7,
+    0 10px 0 #1c3c85,
+    0 15px 0 #090c20,
+    6px 17px 0 #000!important;
+  animation:retroLogoDrop .85s steps(7,end) both,retroLogoIdle 3.2s steps(2,end) 1s infinite!important;
+}
+.guardianBriefing.arcadeStart .arcadeTitle:after{display:none!important}
+.guardianBriefing.arcadeStart .arcadeSubtitle{
+  color:#fff!important;
+  text-shadow:3px 3px 0 #111b51!important;
+  letter-spacing:.13em!important;
+}
+.guardianBriefing.arcadeStart .arcadeSubtitle:before,
+.guardianBriefing.arcadeStart .arcadeSubtitle:after{content:"◆"!important;color:#ffd35c!important}
+
+/* PRESS START = the classic blinking arcade attract-mode prompt. */
+.guardianBriefing.arcadeStart .arcadeStartBtn{
+  position:relative!important;
+  margin-top:4px!important;
+  color:#fff!important;
+  text-shadow:3px 3px 0 #c92f5a!important;
+  border-top:3px solid transparent!important;
+  border-bottom:3px solid transparent!important;
+  animation:retroPressStart .9s steps(2,end) infinite!important;
+}
+.guardianBriefing.arcadeStart .arcadeStartBtn:before,
+.guardianBriefing.arcadeStart .arcadeStartBtn:after{
+  content:"";position:absolute;top:50%;width:34px;height:3px;background:#b7ff67;
+  box-shadow:0 5px 0 #54e8ff;transform:translateY(-50%);
+}
+.guardianBriefing.arcadeStart .arcadeStartBtn:before{right:100%;margin-right:10px}
+.guardianBriefing.arcadeStart .arcadeStartBtn:after{left:100%;margin-left:10px}
+.guardianBriefing.arcadeStart .arcadeHint{
+  color:#9bbddd!important;text-shadow:2px 2px 0 #08102b!important;
+}
+.guardianBriefing.arcadeStart .arcadeBootLine{
+  color:#b7cce2!important;border-top:2px solid #263b63;padding-top:7px;
+}
+
+/* Three little status cards become a JRPG-style status strip. */
+.guardianBriefing.arcadeStart .arcadeRpgHud{
+  z-index:4!important;bottom:83px!important;gap:10px!important;
+  animation:retroHudRise .65s steps(5,end) .25s both!important;
+}
+.guardianBriefing.arcadeStart .arcadeHudCard{
+  border:2px solid #547eaa!important;
+  background:#07132c!important;
+  box-shadow:4px 4px 0 #02040b!important;
+  color:#a9c9e5!important;
+  text-shadow:2px 2px 0 #02040b!important;
+}
+.guardianBriefing.arcadeStart .arcadeHudCard b{color:#b7ff67!important}
+.guardianBriefing.arcadeStart .arcadeHudCard:nth-child(2) b{color:#ffd35c!important}
+.guardianBriefing.arcadeStart .arcadeHudCard:nth-child(3) b{color:#ff6b88!important}
+
+/* Tiny foreground fireflies / river motes use hard 1-2px steps. */
+.guardianBriefing.arcadeStart .introParticles i{
+  width:3px!important;height:3px!important;border-radius:0!important;
+  animation:introParticleFloat var(--d,4.8s) steps(5,end) infinite!important;
+}
+
+/* Mission menu becomes a classic RPG command window. */
+.guardianBriefing.arcadeStart.introMenuMode .arcadeMenu{
+  animation:retroMenuOpen .42s steps(5,end) both!important;
+}
+.guardianBriefing.arcadeStart.introMenuMode .arcadeStartContent{animation:none!important}
+.guardianBriefing.arcadeStart.introMenuMode .arcadeWorld:after{animation:retroBattleFlash .55s steps(3,end) both!important}
+.guardianBriefing.arcadeStart .arcadeMenu{
+  border:4px solid #d8f7ff!important;
+  box-shadow:6px 6px 0 #000,0 0 0 3px #2a477d!important;
+  background:#08142d!important;
+}
+.guardianBriefing.arcadeStart .arcadeMenuTitle{text-shadow:2px 2px 0 #132f68!important}
+.guardianBriefing.arcadeStart .arcadeOption{
+  border:3px solid #d8f7ff!important;
+  box-shadow:5px 5px 0 #000!important;
+}
+
+@keyframes retroTitleCard{0%{opacity:0;transform:translateY(18px)}60%{opacity:1;transform:translateY(-2px)}100%{opacity:1;transform:none}}
+@keyframes retroLogoDrop{0%{opacity:0;transform:translateY(-34px) scaleY(.55)}45%{opacity:1;transform:translateY(4px) scaleY(1.04)}100%{transform:none}}
+@keyframes retroLogoIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes retroPressStart{0%,49%{opacity:1}50%,100%{opacity:.25}}
+@keyframes retroKicker{50%{transform:translateY(-1px)}}
+@keyframes retroBadge{0%,70%,100%{opacity:.72}71%,85%{opacity:.15}}
+@keyframes retroHudRise{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:none}}
+@keyframes retroWaterShift{0%{background-position:0 0,0 0}50%{background-position:12px 6px,0 0}100%{background-position:0 0,0 0}}
+@keyframes retroHorizon{0%,100%{transform:translateX(0)}50%{transform:translateX(-6px)}}
+@keyframes retroStars{0%,100%{opacity:.62}50%{opacity:.9}}
+@keyframes moonBob{50%{transform:translateY(-3px)}}
+@keyframes retroCloud{0%{transform:translateX(-12px)}50%{transform:translateX(12px)}100%{transform:translateX(-12px)}}
+@keyframes retroMenuOpen{0%{opacity:0;transform:scale(.92) translateY(14px);clip-path:inset(50% 0 50% 0)}60%{opacity:1;transform:scale(1.01) translateY(-2px);clip-path:inset(0)}100%{transform:none;clip-path:inset(0)}}
+@keyframes retroBattleFlash{0%{filter:brightness(2)}35%{filter:brightness(1.5)}100%{filter:none}}
+
+@media(max-width:560px){
+  .guardianBriefing.arcadeStart .arcadePanel:after{inset:5px!important;border-width:2px!important;box-shadow:inset 0 0 0 2px #02030a,0 0 0 1px #02030a!important}
+  .guardianBriefing.arcadeStart .pixelSky:after{width:38px;height:38px;right:9%;top:12%;border-width:3px;box-shadow:5px 0 0 #f0bd5a,5px 5px 0 #f0bd5a,0 5px 0 #f0bd5a}
+  .guardianBriefing.arcadeStart .arcadeTitle{text-shadow:3px 0 0 #ff4f73,-3px 0 0 #54e8ff,0 4px 0 #3aa9c7,0 8px 0 #1c3c85,0 12px 0 #090c20,4px 14px 0 #000!important}
+  .guardianBriefing.arcadeStart .arcadeStartBtn:before,.guardianBriefing.arcadeStart .arcadeStartBtn:after{width:20px;height:2px;box-shadow:0 4px 0 #54e8ff}
+  .guardianBriefing.arcadeStart .arcadeRpgHud{bottom:59px!important;gap:5px!important}
+  .guardianBriefing.arcadeStart .arcadeHudCard{box-shadow:2px 2px 0 #000!important;padding:5px 3px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .guardianBriefing.arcadeStart .arcadeStartContent,
+  .guardianBriefing.arcadeStart .arcadeTitle,
+  .guardianBriefing.arcadeStart .arcadeKicker,
+  .guardianBriefing.arcadeStart .arcadeStartBtn,
+  .guardianBriefing.arcadeStart .arcadeRpgHud,
+  .guardianBriefing.arcadeStart .arcadeWorld:before,
+  .guardianBriefing.arcadeStart .arcadeWorld:after,
+  .guardianBriefing.arcadeStart .pixelSky,
+  .guardianBriefing.arcadeStart .pixelSky:after,
+  .guardianBriefing.arcadeStart .pixelCloud{animation:none!important}
 }
 </style>
