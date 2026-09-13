@@ -3418,6 +3418,130 @@ img{max-width:100%;height:auto}
 @media(prefers-reduced-motion:reduce){.aerisGameRpg .rpgGuardianPlayer.moving img{animation:none!important}}
 </style>
 
+
+<style id="aeris-v82-epic-world-fx">
+/* V82 — cinematic retro RPG environment animation. Uses the existing level art only; no new image assets. */
+.aerisGameRpg .rpgWorld{--fx-speed:1;--fx-accent:rgba(114,245,213,.45)}
+.aerisGameRpg .rpgSceneBackground{animation:rpgBgDrift 18s ease-in-out infinite alternate;transform-origin:center center}
+.aerisGameRpg .rpgEnvFX{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;mix-blend-mode:screen}
+.aerisGameRpg .rpgEnvFX:before,.aerisGameRpg .rpgEnvFX:after{content:"";position:absolute;inset:-12%;pointer-events:none}
+.aerisGameRpg .rpgEnvFX:before{background:linear-gradient(115deg,transparent 0 37%,rgba(255,255,255,.045) 44%,transparent 51%);animation:rpgLightSweep 9s linear infinite}
+.aerisGameRpg .rpgEnvFX:after{background:radial-gradient(ellipse at 50% 78%,transparent 0 42%,rgba(0,0,0,.16) 75%,rgba(0,0,0,.32) 100%);mix-blend-mode:multiply}
+.aerisGameRpg .rpgFxWave{position:absolute;left:-10%;right:-10%;bottom:16%;height:26%;opacity:.42;background:repeating-linear-gradient(175deg,transparent 0 12px,rgba(114,245,213,.15) 13px,transparent 15px 28px);filter:blur(.2px);animation:rpgWaveFlow 4.8s linear infinite}
+.aerisGameRpg .rpgFxWave.wave2{bottom:23%;opacity:.23;animation-duration:7s;animation-direction:reverse}
+.aerisGameRpg .rpgFxHaze{position:absolute;left:-15%;right:-15%;bottom:0;height:45%;background:linear-gradient(180deg,transparent,rgba(155,220,205,.08));filter:blur(8px);animation:rpgHaze 8s ease-in-out infinite alternate}
+.aerisGameRpg .rpgFxParticle{position:absolute;display:block;opacity:0;will-change:transform,opacity;image-rendering:pixelated}
+.aerisGameRpg .rpgFxParticle.water{width:2px;height:2px;border-radius:50%;background:rgba(176,255,239,.9);box-shadow:0 0 6px rgba(114,245,213,.7);animation:rpgWaterParticle var(--dur,3.8s) linear infinite}
+.aerisGameRpg .rpgFxParticle.dust{width:3px;height:3px;border-radius:50%;background:rgba(225,185,122,.62);filter:blur(.2px);animation:rpgDustParticle var(--dur,5.5s) ease-out infinite}
+.aerisGameRpg .rpgFxParticle.mercury{width:3px;height:3px;border-radius:50%;background:rgba(215,242,255,.9);box-shadow:0 0 9px rgba(160,220,255,.85);animation:rpgMercuryParticle var(--dur,3.2s) ease-in-out infinite}
+.aerisGameRpg .rpgFxParticle.trash{width:7px;height:3px;border:1px solid rgba(230,218,191,.48);background:rgba(230,218,191,.2);animation:rpgTrashParticle var(--dur,6.5s) ease-in-out infinite}
+.aerisGameRpg .rpgFxParticle.leaf{width:5px;height:3px;border-radius:80% 10% 80% 10%;background:rgba(120,170,100,.7);animation:rpgLeafParticle var(--dur,7s) ease-in-out infinite}
+.aerisGameRpg.fx-mission-1 .rpgFxWave{display:block}
+.aerisGameRpg.fx-mission-2 .rpgFxHaze{background:linear-gradient(180deg,transparent,rgba(210,166,104,.13))}
+.aerisGameRpg.fx-mission-3 .rpgWorldVignette{box-shadow:inset 0 0 90px rgba(110,210,255,.12)}
+.aerisGameRpg.fx-mission-4 .rpgFxHaze{background:linear-gradient(180deg,transparent,rgba(180,220,185,.09))}
+.aerisGameRpg.fx-mission-5 .rpgFxHaze{background:linear-gradient(180deg,rgba(100,180,100,.05),transparent 70%)}
+.aerisGameRpg.fx-moving .rpgSceneBackground{animation:rpgBgDash .42s ease-out both}
+.aerisGameRpg.fx-moving .rpgEnvFX{animation:rpgWorldDash .42s ease-out both}
+.aerisGameRpg.fx-encounter .rpgSceneBackground{animation:rpgBossApproach 1.05s cubic-bezier(.2,.75,.2,1) both}
+.aerisGameRpg.fx-encounter .rpgEnvFX:before{animation:rpgEncounterSweep .7s ease-out both}
+.aerisGameRpg.fx-hit .rpgWorld{animation:rpgWorldHit .28s steps(2,end) both}
+.aerisGameRpg.fx-hit .rpgBossAura{animation:rpgBossHit .38s ease-out both}
+.aerisGameRpg.fx-good .rpgWorld:after{content:"";position:absolute;inset:0;z-index:19;pointer-events:none;background:rgba(114,245,213,.16);animation:rpgGoodFlash .55s ease-out both}
+.aerisGameRpg.fx-bad .rpgWorld:after{content:"";position:absolute;inset:0;z-index:19;pointer-events:none;background:rgba(255,80,110,.18);animation:rpgBadFlash .55s ease-out both}
+@keyframes rpgBgDrift{0%{transform:scale(1.02) translate3d(-.3%,0,0)}100%{transform:scale(1.065) translate3d(.6%,-.4%,0)}}
+@keyframes rpgBgDash{0%{transform:scale(1.055) translateX(0)}100%{transform:scale(1.075) translateX(-1.2%)}}
+@keyframes rpgLightSweep{0%{transform:translateX(-45%) rotate(1deg);opacity:0}15%{opacity:.65}45%,100%{transform:translateX(45%) rotate(1deg);opacity:0}}
+@keyframes rpgWaveFlow{to{transform:translateX(8%)} }
+@keyframes rpgHaze{0%{transform:translate3d(-3%,0,0);opacity:.35}100%{transform:translate3d(3%,-3%,0);opacity:.75}}
+@keyframes rpgWaterParticle{0%{opacity:0;transform:translate3d(0,16px,0) scale(.6)}18%{opacity:.75}72%{opacity:.3}100%{opacity:0;transform:translate3d(24px,-28px,0) scale(1.1)}}
+@keyframes rpgDustParticle{0%{opacity:0;transform:translate3d(0,12px,0) scale(.4)}20%{opacity:.55}100%{opacity:0;transform:translate3d(var(--dx,18px),-70px,0) scale(1.25)}}
+@keyframes rpgMercuryParticle{0%,100%{opacity:0;transform:translate3d(0,8px,0) scale(.5)}45%{opacity:.9}70%{opacity:.35}100%{transform:translate3d(var(--dx,10px),-42px,0) scale(1.35)}}
+@keyframes rpgTrashParticle{0%{opacity:0;transform:translate3d(0,0,0) rotate(0)}18%{opacity:.65}55%{opacity:.4}100%{opacity:0;transform:translate3d(var(--dx,70px),var(--dy,-24px),0) rotate(160deg)}}
+@keyframes rpgLeafParticle{0%{opacity:0;transform:translate3d(0,-10px,0) rotate(0)}15%{opacity:.7}50%{opacity:.5}100%{opacity:0;transform:translate3d(var(--dx,80px),var(--dy,80px),0) rotate(300deg)}}
+@keyframes rpgWorldDash{0%{transform:translateX(0);filter:brightness(1)}50%{transform:translateX(-3px);filter:brightness(1.08)}100%{transform:translateX(0);filter:brightness(1)}}
+@keyframes rpgBossApproach{0%{transform:scale(1.04);filter:saturate(1.05) contrast(1.03) brightness(1)}100%{transform:scale(1.09);filter:saturate(1.16) contrast(1.08) brightness(.92)}}
+@keyframes rpgEncounterSweep{0%{opacity:0;transform:translateX(-25%)}50%{opacity:1}100%{opacity:0;transform:translateX(25%)}}
+@keyframes rpgWorldHit{0%,100%{transform:translate(0)}25%{transform:translate(-3px,1px)}50%{transform:translate(3px,-1px)}75%{transform:translate(-2px,0)}}
+@keyframes rpgBossHit{0%{transform:scale(.85);opacity:.4}45%{transform:scale(1.28);opacity:1}100%{transform:scale(1);opacity:.75}}
+@keyframes rpgGoodFlash{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
+@keyframes rpgBadFlash{0%{opacity:0}12%{opacity:1}32%{opacity:.2}100%{opacity:0}}
+@media(max-width:560px){
+  .aerisGameRpg .rpgSceneBackground{animation-duration:22s}
+  .aerisGameRpg .rpgFxWave{bottom:18%;height:22%;opacity:.3}
+  .aerisGameRpg .rpgFxHaze{height:38%}
+  .aerisGameRpg .rpgFxParticle{transform-origin:center}
+  .aerisGameRpg .rpgFxParticle.trash{width:5px;height:2px}
+}
+@media(prefers-reduced-motion:reduce){
+  .aerisGameRpg .rpgSceneBackground,.aerisGameRpg .rpgEnvFX,.aerisGameRpg .rpgFxWave,.aerisGameRpg .rpgFxHaze,.aerisGameRpg .rpgFxParticle{animation:none!important}
+}
+</style>
+<script id="aeris-v82-epic-world-fx-js">
+(function(){
+  const shell=document.getElementById('rpgGameShell');
+  const world=document.getElementById('rpgWorld');
+  if(!shell||!world)return;
+  const img=document.getElementById('rpgSceneImage');
+  if(!img)return;
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let fxTimer=0;
+  function missionFromSrc(){
+    const m=(img.getAttribute('src')||'').match(/mission-(\d+)/);
+    return m?Number(m[1]):1;
+  }
+  function makeFX(){
+    let fx=world.querySelector('.rpgEnvFX');
+    if(fx)fx.remove();
+    fx=document.createElement('div');fx.className='rpgEnvFX';fx.setAttribute('aria-hidden','true');
+    fx.innerHTML='<div class="rpgFxHaze"></div><div class="rpgFxWave"></div><div class="rpgFxWave wave2"></div>';
+    world.appendChild(fx);
+    const type=['water','dust','mercury','trash','leaf'][missionFromSrc()-1]||'water';
+    const count=reduced?0:(type==='trash'||type==='leaf'?10:14);
+    for(let i=0;i<count;i++){
+      const p=document.createElement('i');p.className='rpgFxParticle '+type;
+      p.style.left=(8+Math.random()*84)+'%';
+      p.style.top=(20+Math.random()*62)+'%';
+      p.style.setProperty('--dur',(3.2+Math.random()*4.2).toFixed(2)+'s');
+      p.style.animationDelay=(-Math.random()*6).toFixed(2)+'s';
+      p.style.setProperty('--dx',((Math.random()-.2)*100).toFixed(0)+'px');
+      p.style.setProperty('--dy',((Math.random()-.15)*100).toFixed(0)+'px');
+      fx.appendChild(p);
+    }
+    shell.classList.remove('fx-mission-1','fx-mission-2','fx-mission-3','fx-mission-4','fx-mission-5');
+    shell.classList.add('fx-mission-'+missionFromSrc());
+  }
+  function pulse(cls,duration=700){
+    shell.classList.remove(cls);void shell.offsetWidth;shell.classList.add(cls);
+    clearTimeout(fxTimer);fxTimer=setTimeout(()=>shell.classList.remove(cls),duration);
+  }
+  function refresh(){makeFX();}
+  const observer=new MutationObserver(()=>{
+    clearTimeout(window.__aerisV82Refresh);
+    window.__aerisV82Refresh=setTimeout(refresh,30);
+  });
+  observer.observe(img,{attributes:true,attributeFilter:['src']});
+  refresh();
+  shell.addEventListener('click',e=>{
+    if(e.target.closest('.rpgMoveBtn'))pulse('fx-moving',430);
+    if(e.target.closest('.rpgChoice')){
+      const good=e.target.closest('.rpgChoice')?.dataset.good==='true';
+      pulse('fx-hit',420);setTimeout(()=>pulse(good?'fx-good':'fx-bad',520),40);
+    }
+    if(e.target.closest('#rpgQuitMission'))shell.classList.remove('fx-encounter','fx-moving','fx-hit','fx-good','fx-bad');
+  });
+  const encounter=document.getElementById('rpgEncounter');
+  if(encounter){
+    const eo=new MutationObserver(()=>{
+      if(!encounter.hidden)pulse('fx-encounter',1050);
+    });
+    eo.observe(encounter,{attributes:true,attributeFilter:['hidden']});
+  }
+  window.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='d'||e.key==='D'||e.key==='ArrowLeft'||e.key==='a'||e.key==='A')pulse('fx-moving',430);
+  });
+})();
+</script>
 </body>
 
 <style id="aeris-v54-game-polish">
