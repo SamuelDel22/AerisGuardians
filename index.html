@@ -4646,3 +4646,81 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
   .guardianBriefing.arcadeStart .pixelCloud{animation:none!important}
 }
 </style>
+<style id="aeris-v86-true-rpg-gameplay">
+/* V86 — deeper 16-bit RPG feel: character motion, environmental depth, footsteps, combat beats. */
+.aerisGameRpg .rpgWorld{isolation:isolate}
+.aerisGameRpg .rpgSceneBackground{image-rendering:auto;will-change:transform,filter}
+.aerisGameRpg .rpgWorld::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(5,9,18,.06),transparent 32%,rgba(2,6,12,.18));mix-blend-mode:multiply}
+.aerisGameRpg .rpgGuardianPlayer{will-change:left,transform;transition:left .14s cubic-bezier(.2,.8,.2,1)}
+.aerisGameRpg .rpgGuardianPlayer::before{content:"";position:absolute;bottom:5%;left:50%;width:64%;height:16px;transform:translateX(-50%);background:rgba(0,0,0,.5);border-radius:50%;filter:blur(4px);z-index:-2;animation:rpgShadowBreath 1.1s steps(3,end) infinite}
+.aerisGameRpg .rpgGuardianPlayer:not(.moving) img{animation:rpgGuardianIdle86 1.8s steps(4,end) infinite}
+.aerisGameRpg .rpgGuardianPlayer.moving img{animation:rpgGuardianRun86 .22s steps(2,end) infinite!important}
+.aerisGameRpg .rpgGuardianPlayer.moving{animation:rpgGuardianBodyRun86 .22s steps(2,end) infinite}
+.aerisGameRpg .rpgGuardianPlayer.atBoss img{animation:rpgGuardianBattleStance86 .7s steps(4,end) infinite!important}
+.aerisGameRpg .rpgBossField img{will-change:transform;animation:rpgBossIdle86 1.35s steps(4,end) infinite}
+.aerisGameRpg .rpgBossField::before{content:"";position:absolute;bottom:8%;left:50%;width:80%;height:8px;transform:translateX(-50%);background:rgba(255,65,95,.35);border-radius:50%;filter:blur(5px);animation:rpgBossShadow86 1.2s ease-in-out infinite}
+.aerisGameRpg .rpgBossAura{animation:rpgBossAura86 1.25s steps(4,end) infinite!important}
+.aerisGameRpg .rpgWorld.rpgActionPulse .rpgGuardianPlayer{animation:rpgActionGuardian86 .38s steps(3,end) both}
+.aerisGameRpg .rpgWorld.rpgActionPulse .rpgBossField{animation:rpgActionBoss86 .38s steps(3,end) both}
+.aerisGameRpg .rpgWorld.rpgActionPulse .rpgSceneBackground{animation:rpgActionScene86 .38s steps(3,end) both}
+.aerisGameRpg .rpgPixelBurst{position:absolute;z-index:24;width:5px;height:5px;background:#ffc857;box-shadow:8px 0 #fff,16px 4px #ff718d,-6px 9px #72f5d5,12px 12px #ffc857;pointer-events:none;animation:rpgBurst86 .5s steps(5,end) both}
+.aerisGameRpg .rpgFootDust{position:absolute;z-index:6;width:6px;height:4px;background:rgba(235,220,185,.7);box-shadow:7px -2px rgba(235,220,185,.45);pointer-events:none;animation:rpgDustKick86 .38s steps(4,end) both}
+.aerisGameRpg .rpgSlash{position:absolute;z-index:25;width:90px;height:26px;border-top:3px solid #fff;border-right:3px solid #ffc857;transform:rotate(-18deg) skewX(-18deg);filter:drop-shadow(0 0 5px rgba(255,200,87,.8));pointer-events:none;animation:rpgSlash86 .34s steps(4,end) both}
+.aerisGameRpg .rpgDamageText{position:absolute;z-index:26;color:#fff;font:900 14px "Courier New",monospace;text-shadow:2px 2px 0 #111;pointer-events:none;animation:rpgDamage86 .65s steps(5,end) both}
+.aerisGameRpg .rpgEnvFX{z-index:3!important}
+.aerisGameRpg .rpgFxParticle{image-rendering:pixelated;filter:none!important}
+.aerisGameRpg .rpgFxParticle::after{content:""}
+.aerisGameRpg.fx-mission-1 .rpgEnvFX{background:linear-gradient(180deg,transparent 55%,rgba(75,210,190,.06))}
+.aerisGameRpg.fx-mission-2 .rpgEnvFX{background:radial-gradient(circle at 65% 55%,rgba(210,155,82,.08),transparent 34%)}
+.aerisGameRpg.fx-mission-3 .rpgEnvFX{background:radial-gradient(circle at 55% 50%,rgba(95,205,255,.11),transparent 30%)}
+.aerisGameRpg.fx-mission-4 .rpgEnvFX{background:linear-gradient(90deg,transparent,rgba(215,190,145,.07),transparent)}
+.aerisGameRpg.fx-mission-5 .rpgEnvFX{background:radial-gradient(ellipse at 50% 30%,rgba(110,190,105,.08),transparent 45%)}
+@keyframes rpgGuardianIdle86{0%,100%{transform:translateY(0)}25%{transform:translateY(-1px)}50%{transform:translateY(0)}75%{transform:translateY(1px)}}
+@keyframes rpgGuardianRun86{0%{transform:translateY(0) translateX(-1px)}50%{transform:translateY(-3px) translateX(1px)}100%{transform:translateY(0) translateX(-1px)}}
+@keyframes rpgGuardianBodyRun86{0%,100%{transform:translateX(-50%) rotate(0)}50%{transform:translateX(-50%) rotate(-1deg)}}
+@keyframes rpgGuardianBattleStance86{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(-2px) scale(1.01)}50%{transform:translateY(0) scale(.99)}75%{transform:translateY(1px) scale(1.01)}}
+@keyframes rpgBossIdle86{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(-3px) scale(1.015)}50%{transform:translateY(0) scale(1)}75%{transform:translateY(2px) scale(.99)}}
+@keyframes rpgBossShadow86{0%,100%{transform:translateX(-50%) scaleX(.9);opacity:.3}50%{transform:translateX(-50%) scaleX(1.1);opacity:.55}}
+@keyframes rpgBossAura86{0%,100%{transform:scale(.92);opacity:.5}50%{transform:scale(1.12);opacity:.95}}
+@keyframes rpgShadowBreath{0%,100%{transform:translateX(-50%) scaleX(.9);opacity:.35}50%{transform:translateX(-50%) scaleX(1.08);opacity:.55}}
+@keyframes rpgActionGuardian86{0%{transform:translateX(-50%)}30%{transform:translateX(calc(-50% - 6px)) scale(1.04)}55%{transform:translateX(calc(-50% + 4px)) scale(.98)}100%{transform:translateX(-50%)}}
+@keyframes rpgActionBoss86{0%{transform:scale(1)}35%{transform:scale(1.09) translateX(4px)}60%{transform:scale(.96) translateX(-3px)}100%{transform:scale(1)}}
+@keyframes rpgActionScene86{0%{transform:scale(1)}40%{transform:scale(1.025) translateX(-2px)}70%{transform:scale(1.01) translateX(2px)}100%{transform:scale(1)}}
+@keyframes rpgBurst86{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}18%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + 28px),calc(-50% - 24px)) scale(1.8)}}
+@keyframes rpgDustKick86{0%{opacity:0;transform:scale(.3)}30%{opacity:.8}100%{opacity:0;transform:translate(-14px,-8px) scale(1.7)}}
+@keyframes rpgSlash86{0%{opacity:0;transform:translate(-12px,8px) rotate(-18deg) scale(.3)}30%{opacity:1}100%{opacity:0;transform:translate(22px,-5px) rotate(-18deg) scale(1.15)}}
+@keyframes rpgDamage86{0%{opacity:0;transform:translateY(5px) scale(.7)}20%{opacity:1}100%{opacity:0;transform:translateY(-28px) scale(1.1)}}
+@media(max-width:560px){
+ .aerisGameRpg .rpgGuardianPlayer:not(.moving) img{animation-duration:2s}
+ .aerisGameRpg .rpgPixelBurst{width:3px;height:3px;box-shadow:5px 0 #fff,10px 3px #ff718d,-4px 6px #72f5d5}
+ .aerisGameRpg .rpgSlash{width:60px;height:18px}
+ .aerisGameRpg .rpgDamageText{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ .aerisGameRpg .rpgGuardianPlayer img,.aerisGameRpg .rpgGuardianPlayer,.aerisGameRpg .rpgBossField img,.aerisGameRpg .rpgBossAura,.aerisGameRpg .rpgBossField::before,.aerisGameRpg .rpgGuardianPlayer::before{animation:none!important}
+}
+</style>
+<script id="aeris-v86-rpg-action-fx">
+(function(){
+ const world=document.getElementById('rpgWorld'); const shell=document.getElementById('rpgGameShell');
+ if(!world||!shell)return;
+ const player=()=>document.getElementById('rpgGuardianPlayer');
+ function burst(x,y,kind){
+   const el=document.createElement('i'); el.className=kind==='dust'?'rpgFootDust':'rpgPixelBurst'; el.style.left=x+'%';el.style.top=y+'%';world.appendChild(el);setTimeout(()=>el.remove(),700);
+ }
+ function actionFX(good){
+   world.classList.remove('rpgActionPulse');void world.offsetWidth;world.classList.add('rpgActionPulse');
+   const b=document.getElementById('rpgBossField'), p=player();
+   if(b){const r=b.getBoundingClientRect(),wr=world.getBoundingClientRect();const x=(r.left+r.width*.5-wr.left)/wr.width*100,y=(r.top+r.height*.38-wr.top)/wr.height*100;
+     const slash=document.createElement('i');slash.className='rpgSlash';slash.style.left=(x-7)+'%';slash.style.top=(y-3)+'%';world.appendChild(slash);setTimeout(()=>slash.remove(),450);
+     const dmg=document.createElement('b');dmg.className='rpgDamageText';dmg.textContent=good?'−25':'−10';dmg.style.left=(x+2)+'%';dmg.style.top=(y-8)+'%';world.appendChild(dmg);setTimeout(()=>dmg.remove(),750);
+     for(let i=0;i<4;i++)setTimeout(()=>burst(x+(Math.random()*8-4),y+(Math.random()*8-4),'burst'),i*45);
+   }
+ }
+ shell.addEventListener('click',e=>{
+   if(e.target.closest('.rpgMoveBtn')){const p=player();if(p){const r=p.getBoundingClientRect(),wr=world.getBoundingClientRect();burst((r.left+r.width*.5-wr.left)/wr.width*100,(r.bottom-wr.top)/wr.height*100,'dust')}}
+   if(e.target.closest('.rpgChoice')){const good=e.target.closest('.rpgChoice')?.dataset.good==='true';setTimeout(()=>actionFX(good),35)}
+ });
+ window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'||e.key==='a'||e.key==='A'||e.key==='d'||e.key==='D'){const p=player();if(p){const r=p.getBoundingClientRect(),wr=world.getBoundingClientRect();burst((r.left+r.width*.5-wr.left)/wr.width*100,(r.bottom-wr.top)/wr.height*100,'dust')}}});
+})();
+</script>
