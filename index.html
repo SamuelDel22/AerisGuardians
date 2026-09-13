@@ -1303,7 +1303,7 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
           </div>
           <div class="rpgGuardianPlayer" id="rpgGuardianPlayer" tabindex="0" role="img" aria-label="Guardian player character">
             <div class="rpgPlayerGlow"></div>
-            <img src="assets/rpg/guardian/guardian-field.png" alt="Guardian">
+            <img src="assets/rpg/guardian/guardian-idle.png" alt="Guardian player">
           </div>
           <div class="rpgDialogue rpgWorldDialogue" id="rpgWorldDialogue">
             <img src="assets/rpg/guardian/guardian-ready.png" alt="Guardian">
@@ -3394,6 +3394,28 @@ img{max-width:100%;height:auto}
 @media(max-width:560px){.aerisGameRpg .rpgPlayStage{min-height:520px}.aerisGameRpg .rpgWorld{height:68vh;min-height:520px}.aerisGameRpg .rpgWorldHud{display:block}.aerisGameRpg .rpgObjective{display:inline-block;margin-top:7px;padding:6px 8px;font-size:7px}.aerisGameRpg .rpgBossField{left:73%;bottom:25%;width:26%;height:34%;min-width:72px}.aerisGameRpg .rpgBossField img{width:92px;height:105px}.aerisGameRpg .rpgBossNameplate{display:none}.aerisGameRpg .rpgBossMarker{font-size:6px}.aerisGameRpg .rpgGuardianPlayer{bottom:24%;width:78px;height:110px}.aerisGameRpg .rpgWorldDialogue{left:8px;bottom:78px;width:calc(100% - 16px);padding:7px 8px}.aerisGameRpg .rpgWorldDialogue img{width:34px;height:40px}.aerisGameRpg .rpgWorldDialogue p{font-size:7.5px}.aerisGameRpg .rpgControls{right:9px;bottom:13px}.aerisGameRpg .rpgMoveBtn{width:46px;height:46px}.aerisGameRpg .rpgControls span{display:none}.aerisGameRpg .rpgProgressRail{left:9px;transform:none;bottom:29px;width:45%;}.aerisGameRpg .rpgProgressRail b{left:auto;right:-31px}.aerisGameRpg .rpgEncounter{bottom:8px;width:calc(100% - 16px);padding:10px}.aerisGameRpg .rpgEncounterHead{font-size:7px}.aerisGameRpg .rpgEncounterCopy strong{font-size:12px}.aerisGameRpg .rpgEncounterCopy p{font-size:7.5px}.aerisGameRpg .rpgEncounter .rpgChoice{padding:8px 8px 8px 30px;min-height:0}.aerisGameRpg .rpgEncounter .rpgChoice b{font-size:8px}.aerisGameRpg .rpgEncounter .rpgChoice span{font-size:7px}.aerisGameRpg .rpgEncounter .rpgChoice:before{left:8px;top:8px}}
 @media(prefers-reduced-motion:reduce){.aerisGameRpg .rpgBossField img,.aerisGameRpg .rpgBossAura,.aerisGameRpg .rpgAmbient i,.aerisGameRpg .rpgGuardianPlayer.moving img{animation:none!important}}
 </style>
+
+<style id="aeris-v79-mobile-guardian-fix">
+/* V79 — correct player direction + clean transparent player art. */
+.aerisGameRpg .rpgGuardianPlayer img{
+  transform:none!important;
+  transform-origin:center bottom!important;
+  background:transparent!important;
+  mix-blend-mode:normal!important;
+}
+/* The supplied idle pose already faces right. Moving right therefore keeps the natural pose. */
+.aerisGameRpg .rpgGuardianPlayer.facingLeft img{transform:scaleX(-1)!important}
+.aerisGameRpg .rpgGuardianPlayer.moving img{animation:rpgPlayerStepV79 .18s steps(2,end) infinite!important}
+@keyframes rpgPlayerStepV79{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.aerisGameRpg .rpgGuardianPlayer.facingLeft.moving img{animation:rpgPlayerStepLeftV79 .18s steps(2,end) infinite!important}
+@keyframes rpgPlayerStepLeftV79{0%,100%{transform:scaleX(-1) translateY(0)}50%{transform:scaleX(-1) translateY(-3px)}}
+@media(max-width:560px){
+  .aerisGameRpg .rpgGuardianPlayer{width:74px!important;height:112px!important;bottom:24%!important}
+  .aerisGameRpg .rpgGuardianPlayer img{object-fit:contain!important;object-position:center bottom!important}
+}
+@media(prefers-reduced-motion:reduce){.aerisGameRpg .rpgGuardianPlayer.moving img{animation:none!important}}
+</style>
+
 </body>
 
 <style id="aeris-v54-game-polish">
