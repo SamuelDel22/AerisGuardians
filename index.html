@@ -3491,6 +3491,65 @@ img{max-width:100%;height:auto}
 })();
 </script>
 
+
+<style id="aeris-v97-guardian-life">
+/* V97 — richer pixel-RPG character life: readable, lightweight, no new assets. */
+.aerisGameRpg .rpgGuardianPlayer{--face:1;will-change:left,transform}
+.aerisGameRpg .rpgGuardianPlayer.facingLeft{--face:-1}
+.aerisGameRpg .rpgGuardianPlayer img{transform:scaleX(var(--face));transform-origin:50% 100%;}
+.aerisGameRpg .rpgGuardianPlayer.moving img{animation:a97Walk .28s steps(4,end) infinite!important}
+.aerisGameRpg .rpgGuardianPlayer.facingLeft.moving img{animation:a97WalkLeft .28s steps(4,end) infinite!important}
+.aerisGameRpg .rpgGuardianPlayer.moving{animation:a97Body .28s steps(4,end) infinite}
+.aerisGameRpg .rpgGuardianPlayer.moving::after{animation:a97Shadow .28s steps(3,end) infinite}
+@keyframes a97Walk{0%,100%{transform:scaleX(1) translateY(0)}25%{transform:scaleX(1) translateY(-2px)}50%{transform:scaleX(1) translateY(0)}75%{transform:scaleX(1) translateY(-3px)}}
+@keyframes a97WalkLeft{0%,100%{transform:scaleX(-1) translateY(0)}25%{transform:scaleX(-1) translateY(-2px)}50%{transform:scaleX(-1) translateY(0)}75%{transform:scaleX(-1) translateY(-3px)}}
+@keyframes a97Body{0%,100%{transform:translateX(-50%) rotate(0)}25%{transform:translateX(-50%) rotate(-1.1deg)}50%{transform:translateX(-50%) rotate(.7deg)}75%{transform:translateX(-50%) rotate(-.5deg)}}
+@keyframes a97Shadow{0%,100%{transform:translateX(-50%) scaleX(.82);opacity:.28}50%{transform:translateX(-50%) scaleX(1.12);opacity:.5}}
+.a97-dust{position:absolute;z-index:6;width:5px;height:5px;background:#d6c39b;box-shadow:6px 1px 0 #aa8d68,3px -4px 0 #eadbbd;image-rendering:pixelated;pointer-events:none;animation:a97Dust .42s steps(4,end) forwards}
+.a97-dust.big{width:7px;height:7px;opacity:.75}
+@keyframes a97Dust{0%{opacity:.75;transform:translate(0,0) scale(1)}35%{opacity:.65}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.45)}}
+.a97-step-mark{position:absolute;z-index:5;width:3px;height:3px;background:rgba(226,205,162,.7);pointer-events:none;animation:a97Mark .5s steps(3,end) forwards}
+@keyframes a97Mark{0%{opacity:.65;transform:scale(1)}100%{opacity:0;transform:translateY(-5px) scale(.35)}}
+.aerisGameRpg .rpgGuardianPlayer.a97-land{animation:a97Land .18s steps(2,end)}
+@keyframes a97Land{0%{transform:translateX(-50%) translateY(-3px)}60%{transform:translateX(-50%) translateY(1px)}100%{transform:translateX(-50%) translateY(0)}}
+@media(max-width:560px){.aerisGameRpg .rpgGuardianPlayer.moving img,.aerisGameRpg .rpgGuardianPlayer.facingLeft.moving img{animation-duration:.31s!important}.a97-dust{transform-origin:center}}
+@media(prefers-reduced-motion:reduce){.a97-dust,.a97-step-mark{display:none!important}.aerisGameRpg .rpgGuardianPlayer.moving,.aerisGameRpg .rpgGuardianPlayer.moving img,.aerisGameRpg .rpgGuardianPlayer.moving::after{animation:none!important}}
+</style>
+<script id="aeris-v97-guardian-life-script">
+(function(){
+  const player=document.getElementById('rpgGuardianPlayer'); const world=document.getElementById('rpgWorld');
+  if(!player||!world)return;
+  let lastX=8, stepCount=0;
+  function puff(){
+    const r=player.getBoundingClientRect(), wr=world.getBoundingClientRect();
+    for(let i=0;i<3;i++){
+      const d=document.createElement('i'); d.className='a97-dust'+(i===0?' big':'');
+      d.style.left=(r.left-wr.left+r.width*.42+Math.random()*12)+'px';
+      d.style.top=(r.top-wr.top+r.height*.86+Math.random()*8)+'px';
+      d.style.setProperty('--dx',((Math.random()-.5)*18)+'px');
+      d.style.setProperty('--dy',(-5-Math.random()*10)+'px');
+      world.appendChild(d); setTimeout(()=>d.remove(),500);
+    }
+  }
+  function mark(){
+    const r=player.getBoundingClientRect(),wr=world.getBoundingClientRect(),m=document.createElement('i');m.className='a97-step-mark';
+    m.style.left=(r.left-wr.left+r.width*.46+(Math.random()*8-4))+'px';m.style.top=(r.top-wr.top+r.height*.92)+'px';world.appendChild(m);setTimeout(()=>m.remove(),550);
+  }
+  const oldMove=window.aerisRpgMove;
+  window.aerisRpgMove=function(dir){
+    const before=parseFloat(player.style.left)||lastX;
+    oldMove(dir);
+    const after=parseFloat(player.style.left)||before;
+    if(after!==before){
+      stepCount++; puff(); if(stepCount%2===0)mark();
+      player.classList.remove('a97-land'); void player.offsetWidth; player.classList.add('a97-land');
+      setTimeout(()=>player.classList.remove('a97-land'),190);
+      world.classList.add('a95-moving'); clearTimeout(window.__a97WorldTimer); window.__a97WorldTimer=setTimeout(()=>world.classList.remove('a95-moving'),150);
+    }
+    lastX=after;
+  };
+})();
+</script>
 <style id="aeris-v93-joystick-fix">
 /* V93 — working movement bridge + compact translucent joystick. */
 .aerisGameRpg .rpgWheelArc{display:none!important}
@@ -4213,7 +4272,7 @@ footer a{color:var(--cyan)!important}
     if(encounter||completed)return;
     const old=playerX;
     // V94: smaller steps + slower cadence so mobile joystick feels controllable.
-    const step=2.35;
+    const step=2.8;
     playerX=Math.max(6,Math.min(78,playerX+(dir==='right'?step:-step)));
     $('rpgGuardianPlayer').style.left=playerX+'%';
     $('rpgGuardianPlayer').classList.add('moving');
@@ -4847,7 +4906,7 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
   const hub=wheel.querySelector('.rpgWheelHub');
   let pointerId=null,holdTimer=null,activeDir=null,dragMoved=false;
   // V94: deliberate, gamepad-like response. A larger dead zone and slower repeat prevent runaway speed.
-  const DEAD=12, REPEAT=160;
+  const DEAD=12, REPEAT=145;
   function canMove(){const play=document.getElementById('rpgMissionPlay');return play&&!play.hidden&&typeof window.aerisRpgMove==='function'}
   function moveOnce(dir){if(canMove())window.aerisRpgMove(dir)}
   function setHub(dx,dy){
