@@ -3183,7 +3183,7 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #guardianAI *{pointer-events:a
 }
 @media(max-width:390px){
   .heroInner{padding-top:96px;padding-bottom:79px}
-  .heroLogo{width:70px;height:70px}
+  .heroLogo{width:62px;height:62px}
   .hero h1{font-size:2.55rem!important}
   .hero p{font-size:.87rem!important}
   .problemFlow span{font-size:.55rem!important}
@@ -3490,6 +3490,21 @@ img{max-width:100%;height:auto}
   shell.addEventListener('click',e=>{if(e.target.closest('#rpgQuitMission'))clear()});
 })();
 </script>
+
+<style id="aeris-v93-joystick-fix">
+/* V93 — working movement bridge + compact translucent joystick. */
+.aerisGameRpg .rpgWheelArc{display:none!important}
+@media(max-width:560px){
+  .aerisGameRpg .rpgWheelControls{width:72px!important;height:72px!important;left:10px!important;bottom:12px!important}
+  .aerisGameRpg .rpgWheel{width:66px!important;height:66px!important}
+  .aerisGameRpg .rpgWheelHub{width:27px!important;height:27px!important}
+}
+@media(max-width:390px){
+  .aerisGameRpg .rpgWheelControls{width:66px!important;height:66px!important;left:8px!important;bottom:10px!important}
+  .aerisGameRpg .rpgWheel{width:60px!important;height:60px!important}
+  .aerisGameRpg .rpgWheelHub{width:25px!important;height:25px!important}
+}
+</style>
 </body>
 
 <style id="aeris-v54-game-polish">
@@ -4110,6 +4125,8 @@ footer a{color:var(--cyan)!important}
     clearTimeout(window.__aerisMoveTimer);window.__aerisMoveTimer=setTimeout(()=>$('rpgGuardianPlayer').classList.remove('moving'),180);
     if(playerX>=74)startEncounter();
   }
+  window.aerisMove=move;
+  window.aerisRpgMove=move;
   function startEncounter(){if(encounter)return;encounter=true;playerX=76;$('rpgGuardianPlayer').style.left=playerX+'%';$('rpgGuardianPlayer').classList.remove('moving');$('rpgGuardianPlayer').classList.add('atBoss');$('rpgObjective').textContent=tr('BOSS ENCOUNTER','ENFRENTAMIENTO CON EL BOSS');$('rpgControls').hidden=true;$('rpgDialogueText').textContent=tr('The threat has entered combat range. Prepare your response.','La amenaza entró en rango de combate. Prepara tu respuesta.');const enc=$('rpgEncounter');enc.classList.add('cinematic-wait');enc.hidden=false;root.classList.remove('boss-cinematic');void root.offsetWidth;root.classList.add('boss-cinematic');clearTimeout(window.__aerisBossIntro);window.__aerisBossIntro=setTimeout(()=>{enc.classList.remove('cinematic-wait');$('rpgDialogueText').textContent=tr('You reached the boss. Read the situation and choose your move.','Llegaste al boss. Lee la situación y elige tu movimiento.');$('rpgEncounterTitle').textContent=tr('Choose your response.','Elige tu respuesta.');$('rpgChoices').querySelector('button')?.focus({preventScroll:true});},1250);}
   function complete(points){if(completed)return;completed=true;const m=missions[selected];const earned=Math.max(0,Number(points)||0);progress=Math.max(progress,selected+1);xp+=earned;save();$('rpgMissionPlay').hidden=true;$('rpgComplete').hidden=false;$('rpgCompleteTitle').textContent=tr('Mission complete. Returning to the map...','Misión completada. Regresando al mapa...');$('rpgCompleteText').textContent=tr('Excellent choice. The threat was reduced through observation, evidence and responsible action.','Excelente elección. La amenaza fue reducida mediante observación, evidencia y acción responsable.');$('rpgCompleteXP').textContent='+'+earned;$('rpgCompleteRelic').textContent=isEs()?m.relicEs:m.relic;$('rpgCompleteNext').textContent=progress<5?missions[progress].location.split(' · ')[0]:tr('CAMPAIGN COMPLETE','CAMPAÑA COMPLETADA');clearTimeout(window.__aerisMapReturn);window.__aerisMapReturn=setTimeout(map,2200)}
   root.addEventListener('click',e=>{
@@ -4637,97 +4654,90 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
  .aerisGameRpg .rpgGuardianPlayer img,.aerisGameRpg .rpgGuardianPlayer,.aerisGameRpg .rpgBossField img,.aerisGameRpg .rpgBossAura,.aerisGameRpg .rpgBossField::before,.aerisGameRpg .rpgGuardianPlayer::before{animation:none!important}
 }
 </style>
-<style id="aeris-v92-mobile-joystick">
-/* V92 — compact translucent mobile joystick. No emoji glyphs; CSS-only directional marks. */
+<style id="aeris-v93-mobile-joystick">
+/* V93 — compact, translucent mobile RPG joystick. Functional drag control; no emoji/glyph arrows. */
 .aerisGameRpg .rpgWheelControls{
-  position:absolute!important;left:12px!important;right:auto!important;bottom:16px!important;
-  width:84px;height:84px;display:flex!important;align-items:center;justify-content:center;z-index:22;
+  position:absolute!important;left:12px!important;right:auto!important;bottom:12px!important;
+  width:72px;height:72px;display:flex!important;align-items:center;justify-content:center;z-index:22;
   pointer-events:none;
 }
 .aerisGameRpg .rpgWheel{
-  position:relative;width:78px;height:78px;border-radius:50%;
-  border:2px solid rgba(114,245,213,.72);
-  background:radial-gradient(circle at 50% 45%,rgba(47,61,68,.82) 0 28%,rgba(25,35,42,.76) 29% 67%,rgba(8,15,20,.58) 68% 100%);
-  box-shadow:0 3px 0 rgba(0,0,0,.5),0 0 0 2px rgba(0,0,0,.45),0 0 10px rgba(54,217,255,.14),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -4px 0 rgba(0,0,0,.32);
-  touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer;pointer-events:auto;opacity:.82;
+  position:relative;width:68px;height:68px;border-radius:50%;
+  border:2px solid rgba(114,245,213,.62);
+  background:radial-gradient(circle at 50% 44%,rgba(55,69,75,.72) 0 28%,rgba(25,35,42,.68) 29% 68%,rgba(5,12,17,.48) 69% 100%);
+  box-shadow:0 3px 0 rgba(0,0,0,.45),0 0 0 2px rgba(0,0,0,.35),0 0 9px rgba(54,217,255,.10),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -3px 0 rgba(0,0,0,.28);
+  touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer;pointer-events:auto;opacity:.72;
 }
-.aerisGameRpg .rpgWheel:before{content:"";position:absolute;inset:7px;border:1px dashed rgba(194,211,218,.16);border-radius:50%;pointer-events:none}
-.aerisGameRpg .rpgWheel:after{content:"";position:absolute;inset:2px;border-radius:50%;border:1px solid rgba(255,255,255,.08);pointer-events:none}
-.aerisGameRpg .rpgWheel.is-active{opacity:.98;filter:brightness(1.08)}
+.aerisGameRpg .rpgWheel:before{content:"";position:absolute;inset:6px;border:1px dashed rgba(194,211,218,.13);border-radius:50%;pointer-events:none}
+.aerisGameRpg .rpgWheel:after{content:"";position:absolute;inset:2px;border-radius:50%;border:1px solid rgba(255,255,255,.06);pointer-events:none}
+.aerisGameRpg .rpgWheel.is-active{opacity:.94;filter:brightness(1.06)}
 .aerisGameRpg .rpgWheelHub{
-  position:absolute;left:50%;top:50%;width:32px;height:32px;transform:translate(-50%,-50%);
-  border:2px solid rgba(154,166,173,.88);border-radius:50%;
-  background:radial-gradient(circle at 36% 28%,#9ca5aa 0 7%,#717b82 27%,#4b565d 64%,#333d43 100%);
-  box-shadow:0 2px 0 #11181c,0 0 0 2px rgba(20,29,34,.9),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -3px 0 rgba(0,0,0,.32);
+  position:absolute;left:50%;top:50%;width:28px;height:28px;transform:translate(-50%,-50%);
+  border:2px solid rgba(154,166,173,.78);border-radius:50%;
+  background:radial-gradient(circle at 35% 27%,#9ca5aa 0 7%,#707a81 27%,#4a555c 64%,#303a40 100%);
+  box-shadow:0 2px 0 #11181c,0 0 0 2px rgba(20,29,34,.82),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -3px 0 rgba(0,0,0,.28);
   pointer-events:none;will-change:transform;
 }
-/* Direction indicators are CSS triangles, never emoji characters. */
-.aerisGameRpg .rpgWheelArc{position:absolute;z-index:3;top:50%;width:0;height:0;transform:translateY(-50%);pointer-events:none;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.55))}
-.aerisGameRpg .rpgWheelArc.arcLeft{left:10px;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:9px solid rgba(202,216,221,.82)}
-.aerisGameRpg .rpgWheelArc.arcRight{right:10px;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:9px solid rgba(202,216,221,.82)}
-.aerisGameRpg .rpgWheelNotch{position:absolute;z-index:2;left:50%;width:4px;height:9px;transform:translateX(-50%);background:rgba(112,126,133,.72);box-shadow:1px 1px 0 rgba(0,0,0,.65);pointer-events:none}
-.aerisGameRpg .rpgWheelNotch.notchTop{top:8px}.aerisGameRpg .rpgWheelNotch.notchBottom{bottom:8px}
-.aerisGameRpg .rpgWheelControls::after{content:"MOVE";position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);padding:2px 5px;background:rgba(5,14,20,.62);border:1px solid rgba(114,245,213,.34);color:rgba(184,246,226,.78);font:900 5px/1 "Courier New",monospace;letter-spacing:.1em;box-shadow:2px 2px 0 rgba(0,0,0,.35);pointer-events:none}
+/* The reference uses a clean disc; direction marks are intentionally invisible. */
+.aerisGameRpg .rpgWheelArc,.aerisGameRpg .rpgWheelNotch{display:none!important}
+.aerisGameRpg .rpgWheelControls::after{content:""}
 @media(max-width:560px){
-  .aerisGameRpg .rpgWheelControls{left:10px!important;bottom:12px!important;width:82px;height:82px}
-  .aerisGameRpg .rpgWheel{width:76px;height:76px}
-  .aerisGameRpg .rpgWheelHub{width:31px;height:31px}
-  .aerisGameRpg .rpgWheelArc.arcLeft{left:9px}.aerisGameRpg .rpgWheelArc.arcRight{right:9px}
+  .aerisGameRpg .rpgWheelControls{left:9px!important;bottom:10px!important;width:66px;height:66px}
+  .aerisGameRpg .rpgWheel{width:62px;height:62px}
+  .aerisGameRpg .rpgWheelHub{width:26px;height:26px}
 }
 @media(max-width:390px){
-  .aerisGameRpg .rpgWheelControls{left:8px!important;bottom:10px!important;width:76px;height:76px}
-  .aerisGameRpg .rpgWheel{width:70px;height:70px}
-  .aerisGameRpg .rpgWheelHub{width:29px;height:29px}
-  .aerisGameRpg .rpgWheelArc.arcLeft{left:8px;border-top-width:5px;border-bottom-width:5px;border-right-width:8px}
-  .aerisGameRpg .rpgWheelArc.arcRight{right:8px;border-top-width:5px;border-bottom-width:5px;border-left-width:8px}
-  .aerisGameRpg .rpgWheelNotch{height:8px;width:4px}
-  .aerisGameRpg .rpgWheelControls::after{font-size:4.5px}
+  .aerisGameRpg .rpgWheelControls{left:7px!important;bottom:8px!important;width:60px;height:60px}
+  .aerisGameRpg .rpgWheel{width:56px;height:56px}
+  .aerisGameRpg .rpgWheelHub{width:24px;height:24px}
 }
 @media(prefers-reduced-motion:reduce){.aerisGameRpg .rpgWheelHub{transition:none!important}}
 </style>
-<script id="aeris-v92-mobile-joystick-script">
+<script id="aeris-v93-mobile-joystick-script">
 (function(){
   const wheel=document.getElementById('rpgMoveWheel'); if(!wheel)return;
   const hub=wheel.querySelector('.rpgWheelHub');
-  let pointerId=null,lastX=0,lastY=0,holdTimer=null,activeDir=null;
-  const DEAD=9, STEP=13;
-  function canMove(){const play=document.getElementById('rpgMissionPlay');return play&&!play.hidden&&typeof move==='function'}
+  let pointerId=null,holdTimer=null,activeDir=null,dragMoved=false;
+  const DEAD=7, REPEAT=145;
+  function canMove(){const play=document.getElementById('rpgMissionPlay');return play&&!play.hidden&&typeof window.aerisRpgMove==='function'}
+  function moveOnce(dir){if(canMove())window.aerisRpgMove(dir)}
   function setHub(dx,dy){
     if(!hub)return;
-    const max=9, len=Math.hypot(dx,dy)||1, k=Math.min(max/len,1);
+    const max=8,len=Math.hypot(dx,dy)||1,k=Math.min(max/len,1);
     hub.style.transform='translate(calc(-50% + '+(dx*k)+'px),calc(-50% + '+(dy*k)+'px))';
   }
   function resetHub(){if(hub)hub.style.transform='translate(-50%,-50%)'}
-  function moveOnce(dir){if(!canMove())return;move(dir)}
   function stopHold(){clearInterval(holdTimer);holdTimer=null;activeDir=null}
   function startHold(dir){
-    stopHold();activeDir=dir;moveOnce(dir);
-    holdTimer=setInterval(()=>{if(activeDir)moveOnce(activeDir)},170);
+    if(!dir)return;stopHold();activeDir=dir;moveOnce(dir);
+    holdTimer=setInterval(()=>{if(activeDir)moveOnce(activeDir)},REPEAT);
   }
-  function release(){stopHold();if(wheel)wheel.classList.remove('is-active');resetHub();pointerId=null}
+  function release(){stopHold();wheel.classList.remove('is-active');resetHub();pointerId=null}
+  function directionFromEvent(e){
+    const r=wheel.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    return e.clientX-cx;
+  }
   wheel.addEventListener('pointerdown',e=>{
     if(pointerId!==null)return;
-    pointerId=e.pointerId;wheel.setPointerCapture?.(e.pointerId);wheel.classList.add('is-active');
-    const r=wheel.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
-    lastX=e.clientX;lastY=e.clientY;
-    const dx=e.clientX-cx,dy=e.clientY-cy;
-    if(Math.abs(dx)>DEAD){setHub(Math.max(-9,Math.min(9,dx)),Math.max(-4,Math.min(4,dy)));startHold(dx>0?'right':'left')}
+    pointerId=e.pointerId;dragMoved=false;wheel.setPointerCapture?.(e.pointerId);wheel.classList.add('is-active');
+    const dx=directionFromEvent(e); setHub(Math.max(-8,Math.min(8,dx)),0);
+    if(Math.abs(dx)>DEAD){activeDir=dx>0?'right':'left';startHold(activeDir)}
   });
   wheel.addEventListener('pointermove',e=>{
     if(e.pointerId!==pointerId)return;
-    const dx=e.clientX-lastX,dy=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;
     const r=wheel.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
-    const fromX=e.clientX-cx,fromY=e.clientY-cy;
-    setHub(Math.max(-9,Math.min(9,fromX)),Math.max(-9,Math.min(9,fromY)));
-    if(Math.abs(dx)>=STEP){startHold(dx>0?'right':'left')}
-    else if(Math.abs(fromX)<DEAD && Math.abs(dy)<DEAD){stopHold()}
+    const dx=e.clientX-cx,dy=e.clientY-cy;
+    if(Math.abs(dx)>3||Math.abs(dy)>3)dragMoved=true;
+    setHub(Math.max(-8,Math.min(8,dx)),Math.max(-8,Math.min(8,dy)));
+    if(Math.abs(dx)>DEAD){startHold(dx>0?'right':'left')}
+    else stopHold();
   });
-  wheel.addEventListener('pointerup',release);
+  wheel.addEventListener('pointerup',e=>release());
   wheel.addEventListener('pointercancel',release);
   wheel.addEventListener('lostpointercapture',release);
   wheel.addEventListener('click',e=>{
-    if(pointerId!==null)return;
-    const r=wheel.getBoundingClientRect();moveOnce(e.clientX<r.left+r.width/2?'left':'right');
+    if(dragMoved)return;
+    const dx=directionFromEvent(e); if(Math.abs(dx)>DEAD)moveOnce(dx>0?'right':'left');
   });
   wheel.addEventListener('keydown',e=>{
     if(e.key==='ArrowLeft'||e.key==='a'||e.key==='A'){e.preventDefault();moveOnce('left')}
