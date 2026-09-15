@@ -4120,9 +4120,18 @@ footer a{color:var(--cyan)!important}
   }
   function move(dir){
     if(encounter||completed)return;
-    const old=playerX;playerX=Math.max(6,Math.min(78,playerX+(dir==='right'?4:-4)));$('rpgGuardianPlayer').style.left=playerX+'%';$('rpgGuardianPlayer').classList.add('moving');$('rpgGuardianPlayer').classList.toggle('facingLeft',dir==='left');$('rpgDistanceFill').style.width=playerX+'%';$('rpgDistanceText').textContent=Math.round(playerX)+'%';
-    if(playerX>old)playFX('step');
-    clearTimeout(window.__aerisMoveTimer);window.__aerisMoveTimer=setTimeout(()=>$('rpgGuardianPlayer').classList.remove('moving'),180);
+    const old=playerX;
+    // V94: smaller steps + slower cadence so mobile joystick feels controllable.
+    const step=2.05;
+    playerX=Math.max(6,Math.min(78,playerX+(dir==='right'?step:-step)));
+    $('rpgGuardianPlayer').style.left=playerX+'%';
+    $('rpgGuardianPlayer').classList.add('moving');
+    $('rpgGuardianPlayer').classList.toggle('facingLeft',dir==='left');
+    $('rpgDistanceFill').style.width=playerX+'%';
+    $('rpgDistanceText').textContent=Math.round(playerX)+'%';
+    if(playerX!==old)playFX('step');
+    clearTimeout(window.__aerisMoveTimer);
+    window.__aerisMoveTimer=setTimeout(()=>$('rpgGuardianPlayer').classList.remove('moving'),260);
     if(playerX>=74)startEncounter();
   }
   window.aerisMove=move;
@@ -4693,12 +4702,61 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
 }
 @media(prefers-reduced-motion:reduce){.aerisGameRpg .rpgWheelHub{transition:none!important}}
 </style>
+<style id="aeris-v94-movement-feel">
+/* V94 — slower joystick response + stronger 16-bit walking animation. */
+.aerisGameRpg .rpgGuardianPlayer{
+  transition:left .22s steps(3,end),transform .22s steps(2,end);
+  will-change:left,transform;
+}
+.aerisGameRpg .rpgGuardianPlayer.moving img{
+  animation:rpgGuardianWalkV94 .32s steps(4,end) infinite!important;
+}
+.aerisGameRpg .rpgGuardianPlayer.moving{
+  animation:rpgGuardianBodyV94 .32s steps(4,end) infinite;
+}
+.aerisGameRpg .rpgGuardianPlayer.moving::before{
+  animation:rpgShadowWalkV94 .32s steps(3,end) infinite;
+}
+@keyframes rpgGuardianWalkV94{
+  0%{transform:translateY(0) translateX(-1px) scaleY(1)}
+  25%{transform:translateY(-2px) translateX(1px) scaleY(.995)}
+  50%{transform:translateY(0) translateX(2px) scaleY(1)}
+  75%{transform:translateY(-1px) translateX(0) scaleY(.995)}
+  100%{transform:translateY(0) translateX(-1px) scaleY(1)}
+}
+@keyframes rpgGuardianBodyV94{
+  0%,100%{transform:translateX(-50%) rotate(0deg)}
+  25%{transform:translateX(-50%) rotate(-1.2deg)}
+  50%{transform:translateX(-50%) rotate(0.7deg)}
+  75%{transform:translateX(-50%) rotate(-.6deg)}
+}
+@keyframes rpgShadowWalkV94{
+  0%,100%{transform:translateX(-50%) scaleX(.86);opacity:.3}
+  50%{transform:translateX(-50%) scaleX(1.08);opacity:.52}
+}
+.aerisGameRpg .rpgGuardianPlayer.moving::after{
+  animation:rpgFootprintV94 .32s steps(2,end) infinite;
+}
+@keyframes rpgFootprintV94{
+  0%,100%{opacity:.18;transform:translateX(-50%) scaleX(.9)}
+  50%{opacity:.42;transform:translateX(-50%) scaleX(1.02)}
+}
+@media(max-width:560px){
+  .aerisGameRpg .rpgGuardianPlayer{transition:left .24s steps(3,end),transform .24s steps(2,end)}
+  .aerisGameRpg .rpgGuardianPlayer.moving img{animation-duration:.36s!important}
+  .aerisGameRpg .rpgGuardianPlayer.moving{animation-duration:.36s}
+}
+@media(prefers-reduced-motion:reduce){
+  .aerisGameRpg .rpgGuardianPlayer,.aerisGameRpg .rpgGuardianPlayer.moving,.aerisGameRpg .rpgGuardianPlayer.moving img,.aerisGameRpg .rpgGuardianPlayer.moving::before,.aerisGameRpg .rpgGuardianPlayer.moving::after{animation:none!important;transition:none!important}
+}
+</style>
 <script id="aeris-v93-mobile-joystick-script">
 (function(){
   const wheel=document.getElementById('rpgMoveWheel'); if(!wheel)return;
   const hub=wheel.querySelector('.rpgWheelHub');
   let pointerId=null,holdTimer=null,activeDir=null,dragMoved=false;
-  const DEAD=7, REPEAT=145;
+  // V94: deliberate, gamepad-like response. A larger dead zone and slower repeat prevent runaway speed.
+  const DEAD=12, REPEAT=190;
   function canMove(){const play=document.getElementById('rpgMissionPlay');return play&&!play.hidden&&typeof window.aerisRpgMove==='function'}
   function moveOnce(dir){if(canMove())window.aerisRpgMove(dir)}
   function setHub(dx,dy){
@@ -4709,7 +4767,11 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
   function resetHub(){if(hub)hub.style.transform='translate(-50%,-50%)'}
   function stopHold(){clearInterval(holdTimer);holdTimer=null;activeDir=null}
   function startHold(dir){
-    if(!dir)return;stopHold();activeDir=dir;moveOnce(dir);
+    if(!dir)return;
+    if(activeDir===dir && holdTimer)return;
+    stopHold();
+    activeDir=dir;
+    moveOnce(dir);
     holdTimer=setInterval(()=>{if(activeDir)moveOnce(activeDir)},REPEAT);
   }
   function release(){stopHold();wheel.classList.remove('is-active');resetHub();pointerId=null}
@@ -4729,8 +4791,12 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
     const dx=e.clientX-cx,dy=e.clientY-cy;
     if(Math.abs(dx)>3||Math.abs(dy)>3)dragMoved=true;
     setHub(Math.max(-8,Math.min(8,dx)),Math.max(-8,Math.min(8,dy)));
-    if(Math.abs(dx)>DEAD){startHold(dx>0?'right':'left')}
-    else stopHold();
+    if(Math.abs(dx)>DEAD){
+      const nextDir=dx>0?'right':'left';
+      if(nextDir!==activeDir)startHold(nextDir);
+    } else if(activeDir) {
+      stopHold();
+    }
   });
   wheel.addEventListener('pointerup',e=>release());
   wheel.addEventListener('pointercancel',release);
