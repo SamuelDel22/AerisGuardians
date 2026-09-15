@@ -1284,10 +1284,12 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
             <div class="rpgEncounterCopy"><strong id="rpgEncounterTitle">Choose your response.</strong><p id="rpgEncounterPrompt">The situation is in front of you. Pick the move that protects the river.</p></div>
             <div class="rpgChoices" id="rpgChoices"></div>
           </div>
-          <div class="rpgControls" id="rpgControls" aria-label="Movement controls">
-            <button type="button" class="rpgMoveBtn" data-move="left" aria-label="Move left">◀</button>
-            <button type="button" class="rpgMoveBtn rpgMoveMain" data-move="right" aria-label="Move right">▶</button>
-            <span>MOVE</span>
+          <div class="rpgControls rpgWheelControls" id="rpgControls" aria-label="Retro movement wheel">
+            <div class="rpgWheel" id="rpgMoveWheel" role="slider" tabindex="0" aria-label="Move Guardian left or right" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8">
+              <div class="rpgWheelNotch notchTop"></div><div class="rpgWheelNotch notchBottom"></div>
+              <div class="rpgWheelArc arcLeft">◀</div><div class="rpgWheelArc arcRight">▶</div>
+              <div class="rpgWheelHub"><span>MOVE</span><b>↔</b></div>
+            </div>
           </div>
           <div class="rpgProgressRail" aria-hidden="true"><i id="rpgDistanceFill"></i><b id="rpgDistanceText">0%</b></div>
         </div>
@@ -4635,7 +4637,53 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
  .aerisGameRpg .rpgGuardianPlayer img,.aerisGameRpg .rpgGuardianPlayer,.aerisGameRpg .rpgBossField img,.aerisGameRpg .rpgBossAura,.aerisGameRpg .rpgBossField::before,.aerisGameRpg .rpgGuardianPlayer::before{animation:none!important}
 }
 </style>
-<script id="aeris-v86-rpg-action-fx">
+<style id="aeris-v90-retro-movement-wheel">
+/* V90 — replace mobile arrow controls with a tactile retro RPG steering wheel. */
+.aerisGameRpg .rpgWheelControls{right:14px;bottom:48px;display:flex;align-items:center;justify-content:center;z-index:18}
+.aerisGameRpg .rpgWheel{position:relative;width:88px;height:88px;border:3px solid #72f5d5;border-radius:50%;background:
+  radial-gradient(circle at 50% 50%,rgba(114,245,213,.12) 0 24%,transparent 25%),
+  repeating-conic-gradient(from 0deg,rgba(114,245,213,.18) 0 8deg,transparent 8deg 22deg),
+  #07121b;box-shadow:5px 5px 0 rgba(0,0,0,.5),inset 0 0 0 3px rgba(3,8,14,.9),inset 0 0 18px rgba(114,245,213,.12);touch-action:none;user-select:none;cursor:grab;transform:rotate(0deg);transition:transform .12s steps(2,end)}
+.aerisGameRpg .rpgWheel:before{content:"";position:absolute;inset:7px;border:1px dashed rgba(114,245,213,.42);border-radius:50%;pointer-events:none}
+.aerisGameRpg .rpgWheel:after{content:"STEER";position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);padding:2px 5px;background:#07121b;border:1px solid rgba(114,245,213,.45);color:#72f5d5;font:900 6px/1 "Courier New",monospace;letter-spacing:.12em}
+.aerisGameRpg .rpgWheel:active{cursor:grabbing}
+.aerisGameRpg .rpgWheelHub{position:absolute;left:50%;top:50%;width:39px;height:39px;transform:translate(-50%,-50%);border:2px solid #ffc857;border-radius:50%;background:#0a1822;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 0 0 3px #162c37;pointer-events:none}
+.aerisGameRpg .rpgWheelHub span{font:900 5px/1 "Courier New",monospace;color:#ffc857;letter-spacing:.08em}.aerisGameRpg .rpgWheelHub b{font:900 15px/1 "Courier New",monospace;color:#fff;margin-top:2px}
+.aerisGameRpg .rpgWheelArc{position:absolute;top:50%;transform:translateY(-50%);font:900 12px/1 "Courier New",monospace;color:#72f5d5;text-shadow:2px 2px 0 #07121b;pointer-events:none}.aerisGameRpg .arcLeft{left:8px}.aerisGameRpg .arcRight{right:8px}
+.aerisGameRpg .rpgWheelNotch{position:absolute;left:50%;width:4px;height:9px;transform:translateX(-50%);background:#ffc857;box-shadow:2px 2px 0 #101010;pointer-events:none}.aerisGameRpg .notchTop{top:2px}.aerisGameRpg .notchBottom{bottom:2px}
+@media(max-width:560px){
+ .aerisGameRpg .rpgWheelControls{right:10px;bottom:8px}
+ .aerisGameRpg .rpgWheel{width:78px;height:78px;border-width:3px}
+ .aerisGameRpg .rpgWheelHub{width:34px;height:34px}.aerisGameRpg .rpgWheelHub b{font-size:13px}.aerisGameRpg .rpgWheelArc{font-size:10px}.aerisGameRpg .rpgWheel:after{bottom:-13px;font-size:5px}
+}
+@media(max-width:390px){.aerisGameRpg .rpgWheelControls{right:8px;bottom:7px}.aerisGameRpg .rpgWheel{width:72px;height:72px}.aerisGameRpg .rpgWheelHub{width:31px;height:31px}.aerisGameRpg .rpgWheelHub span{font-size:4.5px}.aerisGameRpg .rpgWheelHub b{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.aerisGameRpg .rpgWheel{transition:none!important}}
+</style>
+<script id="aeris-v90-rpg-wheel">
+(function(){
+ const wheel=document.getElementById('rpgMoveWheel');
+ if(!wheel)return;
+ let active=false,lastX=0,accum=0,lastMove=0;
+ const threshold=18, cooldown=120;
+ function steer(dir){
+   const play=document.getElementById('rpgMissionPlay');
+   if(!play||play.hidden)return;
+   const now=performance.now();
+   if(now-lastMove<cooldown)return;
+   lastMove=now;
+   if(typeof move==='function') move(dir);
+   wheel.style.transform=dir==='right'?'rotate(16deg)':'rotate(-16deg)';
+   clearTimeout(wheel.__snap);wheel.__snap=setTimeout(()=>wheel.style.transform='rotate(0deg)',120);
+ }
+ wheel.addEventListener('pointerdown',e=>{active=true;lastX=e.clientX;accum=0;wheel.setPointerCapture?.(e.pointerId);});
+ wheel.addEventListener('pointermove',e=>{if(!active)return;const dx=e.clientX-lastX;lastX=e.clientX;accum+=dx;if(accum>=threshold){steer('right');accum=0}else if(accum<=-threshold){steer('left');accum=0}});
+ wheel.addEventListener('pointerup',()=>{active=false;accum=0});
+ wheel.addEventListener('pointercancel',()=>{active=false;accum=0});
+ wheel.addEventListener('click',e=>{const r=wheel.getBoundingClientRect();steer(e.clientX<r.left+r.width/2?'left':'right')});
+ wheel.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a'||e.key==='A'){e.preventDefault();steer('left')}if(e.key==='ArrowRight'||e.key==='d'||e.key==='D'){e.preventDefault();steer('right')}});
+})();
+</script>
+<style id="aeris-v86-rpg-action-fx-marker">
 (function(){
  const world=document.getElementById('rpgWorld'); const shell=document.getElementById('rpgGameShell');
  if(!world||!shell)return;
@@ -4653,7 +4701,7 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
    }
  }
  shell.addEventListener('click',e=>{
-   if(e.target.closest('.rpgMoveBtn')){const p=player();if(p){const r=p.getBoundingClientRect(),wr=world.getBoundingClientRect();burst((r.left+r.width*.5-wr.left)/wr.width*100,(r.bottom-wr.top)/wr.height*100,'dust')}}
+   if(e.target.closest('#rpgMoveWheel')){const p=player();if(p){const r=p.getBoundingClientRect(),wr=world.getBoundingClientRect();burst((r.left+r.width*.5-wr.left)/wr.width*100,(r.bottom-wr.top)/wr.height*100,'dust')}}
    if(e.target.closest('.rpgChoice')){const good=e.target.closest('.rpgChoice')?.dataset.good==='true';setTimeout(()=>actionFX(good),35)}
  });
  window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'||e.key==='a'||e.key==='A'||e.key==='d'||e.key==='D'){const p=player();if(p){const r=p.getBoundingClientRect(),wr=world.getBoundingClientRect();burst((r.left+r.width*.5-wr.left)/wr.width*100,(r.bottom-wr.top)/wr.height*100,'dust')}}});
