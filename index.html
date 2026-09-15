@@ -3505,6 +3505,97 @@ img{max-width:100%;height:auto}
   .aerisGameRpg .rpgWheelHub{width:25px!important;height:25px!important}
 }
 </style>
+
+<!-- AERIS V95 — living retro layer + original 8-bit quest soundtrack -->
+<audio id="aerisRetroBgm" loop preload="auto" aria-label="AERIS retro game soundtrack">
+  <source src="assets/audio/aeris-retro-quest.wav" type="audio/wav">
+</audio>
+<style id="aeris-v95-retro-life">
+/* V95: whole-site retro animation pass. Subtle, pixel-first, no sci-fi scanner. */
+:root{--a95-mint:#72f5d5;--a95-cyan:#55d9ff;--a95-gold:#ffd166;--a95-lime:#b8ff42}
+html{scroll-behavior:smooth}
+body{position:relative;overflow-x:hidden}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.035;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.22) 4px),linear-gradient(90deg,transparent 0 50%,rgba(114,245,213,.025) 50%);mix-blend-mode:screen}
+.a95-pixel-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.a95-pixel-layer i{position:absolute;width:3px;height:3px;background:var(--a95-mint);opacity:0;image-rendering:pixelated;animation:a95PixelFloat var(--d,7s) steps(8,end) infinite;animation-delay:var(--delay,0s)}
+.a95-pixel-layer i:nth-child(3n){background:var(--a95-gold);width:2px;height:2px}.a95-pixel-layer i:nth-child(4n){background:var(--a95-cyan)}
+@keyframes a95PixelFloat{0%,100%{opacity:0;transform:translate3d(0,18px,0)}20%{opacity:.55}65%{opacity:.25}100%{transform:translate3d(var(--x,20px),-90px,0)}}
+/* Section/card life: small frame-based movement instead of glossy web motion. */
+body.aeris-retro-live main>section{will-change:transform}
+body.aeris-retro-live main>section.a95-visible{animation:a95SectionIn .5s steps(4,end) both}
+@keyframes a95SectionIn{0%{opacity:.72;transform:translateY(8px)}100%{opacity:1;transform:none}}
+body.aeris-retro-live .card,body.aeris-retro-live .v16-card,body.aeris-retro-live .sourceVaultCard,body.aeris-retro-live .mapNode{transition:transform .16s steps(2,end),box-shadow .16s steps(2,end),border-color .16s steps(2,end)}
+body.aeris-retro-live .card:hover,body.aeris-retro-live .v16-card:hover,body.aeris-retro-live .sourceVaultCard:hover,body.aeris-retro-live .mapNode:hover{transform:translateY(-3px);box-shadow:4px 5px 0 rgba(0,0,0,.16)}
+body.aeris-retro-live .btn,body.aeris-retro-live button{transition:transform .12s steps(2,end),filter .12s steps(2,end)}
+body.aeris-retro-live .btn:hover,body.aeris-retro-live button:hover{filter:saturate(1.08)}
+body.aeris-retro-live .aerisTopLink.active{animation:a95NavBlink 1.4s steps(2,end) infinite}
+@keyframes a95NavBlink{50%{box-shadow:inset 0 -2px 0 var(--a95-lime)}}
+/* Game: readable pixel action language. */
+.aerisGameRpg .rpgWorld{isolation:isolate}
+.aerisGameRpg .rpgSceneBackground{image-rendering:auto;backface-visibility:hidden}
+.aerisGameRpg .rpgWorld.a95-moving .rpgSceneBackground{animation:a95SceneStep .16s steps(2,end) both}
+@keyframes a95SceneStep{0%{transform:scale(1.04) translateX(0)}50%{transform:scale(1.043) translateX(-2px)}100%{transform:scale(1.04) translateX(0)}}
+.aerisGameRpg .rpgGuardianPlayer.a95-jump img{animation:a95StepHop .18s steps(2,end) both!important}
+@keyframes a95StepHop{0%{transform:translateY(0)}45%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+.a95-step-puff{position:absolute;z-index:8;width:4px;height:4px;background:#d8c49c;box-shadow:5px 1px 0 #a88b66,9px -2px 0 #e4d5b4;pointer-events:none;animation:a95Puff .42s steps(4,end) forwards}
+@keyframes a95Puff{0%{opacity:.7;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx,10px),-8px) scale(.5)}}
+.a95-game-music{position:absolute;z-index:30;right:12px;top:12px;border:1px solid rgba(114,245,213,.42);background:rgba(3,10,18,.68);color:#c9f8e9;font:900 7px/1 "Courier New",monospace;letter-spacing:.08em;padding:7px 9px;min-width:54px;box-shadow:3px 3px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:manipulation;backdrop-filter:blur(3px)}
+.a95-game-music.on{color:var(--a95-lime);border-color:rgba(184,255,66,.65);box-shadow:0 0 0 1px rgba(184,255,66,.08),3px 3px 0 rgba(0,0,0,.35)}
+@media(max-width:560px){body:after{opacity:.025}.a95-pixel-layer i{opacity:.7}.a95-game-music{right:8px;top:8px;padding:6px 8px;min-width:50px}.aerisGameRpg .rpgWorld.a95-moving .rpgSceneBackground{animation-duration:.13s}}
+@media(prefers-reduced-motion:reduce){body:after{display:none}.a95-pixel-layer{display:none}body.aeris-retro-live main>section.a95-visible{animation:none!important}.aerisGameRpg .rpgWorld.a95-moving .rpgSceneBackground,.aerisGameRpg .rpgGuardianPlayer.a95-jump img,.a95-step-puff{animation:none!important}}
+</style>
+<script id="aeris-v95-retro-life-script">
+(function(){
+  'use strict';
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  document.body.classList.add('aeris-retro-live');
+  if(!reduce){
+    const layer=document.createElement('div');layer.className='a95-pixel-layer';layer.setAttribute('aria-hidden','true');
+    for(let i=0;i<18;i++){const p=document.createElement('i');p.style.left=(3+Math.random()*94)+'%';p.style.top=(55+Math.random()*45)+'%';p.style.setProperty('--x',(-18+Math.random()*36)+'px');p.style.setProperty('--d',(5.5+Math.random()*5)+'s');p.style.setProperty('--delay',(-Math.random()*7)+'s');layer.appendChild(p)}
+    document.body.appendChild(layer);
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('a95-visible')}),{threshold:.08});
+    document.querySelectorAll('main>section').forEach(s=>io.observe(s));
+  }
+  const audio=document.getElementById('aerisRetroBgm');
+  if(!audio)return;
+  audio.volume=.22;
+  let musicOn=true;
+  try{musicOn=localStorage.getItem('aeris_retro_music')!=='off'}catch(e){}
+  function sync(){if(musicOn){audio.play().catch(()=>{});}else{audio.pause();} const b=document.getElementById('a95MusicToggle');if(b){b.classList.toggle('on',musicOn);b.textContent=musicOn?'MUSIC ON':'MUSIC OFF'}}
+  function start(){if(!musicOn)return;audio.play().catch(()=>{});}
+  // Browsers require a user gesture. The first intentional tap unlocks the original soundtrack.
+  document.addEventListener('pointerdown',start,{once:true,passive:true});
+  const obs=new MutationObserver(()=>{if(document.body.dataset.aerisMode==='game')start()});
+  obs.observe(document.body,{attributes:true,attributeFilter:['data-aeris-mode']});
+  const game=document.getElementById('game');
+  if(game){
+    const b=document.createElement('button');b.id='a95MusicToggle';b.className='a95-game-music on';b.type='button';b.textContent='MUSIC ON';b.setAttribute('aria-label','Toggle retro game music');game.querySelector('.rpgMissionPlay')?.appendChild(b);
+    b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();musicOn=!musicOn;try{localStorage.setItem('aeris_retro_music',musicOn?'on':'off')}catch(x){}sync()});
+  }
+  // If the Game is already active, start as soon as the page permits it.
+  if(document.body.dataset.aerisMode==='game')start();
+  // Faster than V94, but still controlled: 160ms repeat cadence.
+  const wheel=document.getElementById('rpgMoveWheel');
+  if(wheel){
+    const oldSetInterval=window.setInterval; // retained only to document the intentional cadence change
+    wheel.dataset.aerisRepeat='160ms';
+  }
+  const originalMove=window.aerisRpgMove;
+  if(typeof originalMove==='function'){
+    window.aerisRpgMove=function(dir){
+      originalMove(dir);
+      const world=document.getElementById('rpgWorld'),p=document.getElementById('rpgGuardianPlayer');
+      if(!world||!p)return;
+      world.classList.remove('a95-moving');void world.offsetWidth;world.classList.add('a95-moving');
+      p.classList.remove('a95-jump');void p.offsetWidth;p.classList.add('a95-jump');
+      setTimeout(()=>p.classList.remove('a95-jump'),220);
+      const wr=world.getBoundingClientRect(),pr=p.getBoundingClientRect();
+      const puff=document.createElement('i');puff.className='a95-step-puff';puff.style.left=((pr.left+pr.width*.48-wr.left)/wr.width*100)+'%';puff.style.top=((pr.bottom-wr.top)/wr.height*100-2)+'%';puff.style.setProperty('--dx',(dir==='right'?8:-8)+'px');world.appendChild(puff);setTimeout(()=>puff.remove(),460);
+      setTimeout(()=>world.classList.remove('a95-moving'),190);
+    };
+  }
+})();
+</script>
 </body>
 
 <style id="aeris-v54-game-polish">
@@ -4122,7 +4213,7 @@ footer a{color:var(--cyan)!important}
     if(encounter||completed)return;
     const old=playerX;
     // V94: smaller steps + slower cadence so mobile joystick feels controllable.
-    const step=2.05;
+    const step=2.35;
     playerX=Math.max(6,Math.min(78,playerX+(dir==='right'?step:-step)));
     $('rpgGuardianPlayer').style.left=playerX+'%';
     $('rpgGuardianPlayer').classList.add('moving');
@@ -4756,7 +4847,7 @@ body.aeris-intro-lock{position:fixed!important;left:0!important;right:0!importan
   const hub=wheel.querySelector('.rpgWheelHub');
   let pointerId=null,holdTimer=null,activeDir=null,dragMoved=false;
   // V94: deliberate, gamepad-like response. A larger dead zone and slower repeat prevent runaway speed.
-  const DEAD=12, REPEAT=190;
+  const DEAD=12, REPEAT=160;
   function canMove(){const play=document.getElementById('rpgMissionPlay');return play&&!play.hidden&&typeof window.aerisRpgMove==='function'}
   function moveOnce(dir){if(canMove())window.aerisRpgMove(dir)}
   function setHub(dx,dy){
