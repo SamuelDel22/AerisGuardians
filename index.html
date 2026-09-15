@@ -1123,6 +1123,20 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
 @media(max-width:680px){.pixelSky{bottom:34%}.pixelCloud{opacity:.55}.cloudTwo{right:1%;top:23%;transform:scale(.55)}.cloudThree{display:none}.pixelMountains{bottom:34%;height:23%}.caucaBridge{left:2%;right:2%;bottom:36%;transform:scaleY(.72);transform-origin:bottom}.caucaBridge b{font-size:7px}.animeGuardian{left:3%;bottom:8%;transform:scale(.58);transform-origin:bottom left}.pixelPollution{right:4%;bottom:12%;transform:scale(.67)}.pixelReed{display:none}.arcadeWorld:before{height:46%}.arcadeWorld:after{height:27%}}
 @media(prefers-reduced-motion:reduce){.pixelSky i,.pixelCloud,.animeGuardian,.guardianAura,.guardianOrbital{animation:none!important}}
 </style>
+
+<style id="aeris-v96-encounter-dock">
+/* V96 — keep the combat situation/options in the unused dark area below the playable scene. */
+.aerisGameRpg .rpgMissionPlay{display:flex!important;flex-direction:column;gap:12px;overflow:visible}
+.aerisGameRpg .rpgMissionPlay .rpgPlayStage{flex:0 0 auto}
+.aerisGameRpg .rpgEncounterDock{position:relative!important;left:auto!important;bottom:auto!important;transform:none!important;z-index:30;width:min(980px,calc(100% - 24px));margin:0 auto 4px;padding:12px 14px;background:linear-gradient(180deg,rgba(4,10,22,.96),rgba(2,7,16,.94));border:2px solid rgba(255,200,87,.78);box-shadow:6px 6px 0 rgba(0,0,0,.5);backdrop-filter:blur(4px);opacity:1;visibility:visible}
+.aerisGameRpg .rpgEncounterDock[hidden]{display:none!important}
+.aerisGameRpg .rpgEncounterDock.cinematic-wait{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(12px) scale(.98)!important}
+.aerisGameRpg .rpgEncounterDock .rpgEncounterCopy{margin:6px 0 8px}
+.aerisGameRpg .rpgEncounterDock .rpgChoices{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.aerisGameRpg .rpgEncounterDock .rpgChoice{min-height:68px}
+@media(max-width:850px){.aerisGameRpg .rpgEncounterDock{width:calc(100% - 20px)}.aerisGameRpg .rpgEncounterDock .rpgChoices{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.aerisGameRpg .rpgMissionPlay{gap:8px;padding-bottom:14px}.aerisGameRpg .rpgEncounterDock{width:calc(100% - 14px);margin:0 auto;padding:9px 10px;border-width:1px;box-shadow:4px 4px 0 rgba(0,0,0,.45)}.aerisGameRpg .rpgEncounterDock .rpgEncounterHead{font-size:7px}.aerisGameRpg .rpgEncounterDock .rpgEncounterCopy{margin:5px 0 6px}.aerisGameRpg .rpgEncounterDock .rpgEncounterCopy strong{font-size:11px}.aerisGameRpg .rpgEncounterDock .rpgEncounterCopy p{font-size:7px;line-height:1.3}.aerisGameRpg .rpgEncounterDock .rpgChoices{grid-template-columns:1fr;gap:5px}.aerisGameRpg .rpgEncounterDock .rpgChoice{min-height:48px;padding:7px 8px 7px 28px}.aerisGameRpg .rpgEncounterDock .rpgChoice b{font-size:8px;margin-bottom:2px}.aerisGameRpg .rpgEncounterDock .rpgChoice span{font-size:6.7px;line-height:1.25}.aerisGameRpg .rpgEncounterDock .rpgChoice:before{left:7px;top:7px}}
+</style>
 </head>
 <body data-aeris-version="51.2">
 <div aria-labelledby="arcadeTitle" aria-modal="true" class="guardianBriefing arcadeStart" id="guardianBriefing" role="dialog">
@@ -1279,11 +1293,6 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
             <div class="rpgBossCinematicFlash"></div>
             <div class="rpgBossCinematicTitle"><span>WARNING</span><strong>BOSS ENCOUNTER</strong><small>GUARDIAN VS. THREAT</small></div>
           </div>
-          <div class="rpgEncounter" id="rpgEncounter" hidden>
-            <div class="rpgEncounterHead"><span>BOSS ENCOUNTER</span><b id="rpgThreatText">THREAT 100%</b></div><div class="rpgScoreRule" aria-live="polite"><span>GOOD CHOICE <b>+XP</b> · BAD CHOICE <b>+0 XP</b></span><small>Only a responsible choice clears the mission.</small></div>
-            <div class="rpgEncounterCopy"><strong id="rpgEncounterTitle">Choose your response.</strong><p id="rpgEncounterPrompt">The situation is in front of you. Pick the move that protects the river.</p></div>
-            <div class="rpgChoices" id="rpgChoices"></div>
-          </div>
           <div class="rpgControls rpgWheelControls" id="rpgControls" aria-label="Retro game movement wheel">
             <div class="rpgWheel" id="rpgMoveWheel" role="slider" tabindex="0" aria-label="Move Guardian with the mobile joystick" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8">
               <div class="rpgWheelNotch notchTop"></div><div class="rpgWheelNotch notchBottom"></div>
@@ -1293,6 +1302,12 @@ html.arcadeIntroOpen,body.arcadeIntroOpen{overflow:hidden!important;overscroll-b
           </div>
           <div class="rpgProgressRail" aria-hidden="true"><i id="rpgDistanceFill"></i><b id="rpgDistanceText">0%</b></div>
         </div>
+      </div>
+      <div class="rpgEncounter rpgEncounterDock" id="rpgEncounter" hidden>
+        <div class="rpgEncounterHead"><span>BOSS ENCOUNTER</span><b id="rpgThreatText">THREAT 100%</b></div>
+        <div class="rpgScoreRule" aria-live="polite"><span>GOOD CHOICE <b>+XP</b> · BAD CHOICE <b>+0 XP</b></span><small>Only a responsible choice clears the mission.</small></div>
+        <div class="rpgEncounterCopy"><strong id="rpgEncounterTitle">Choose your response.</strong><p id="rpgEncounterPrompt">The situation is in front of you. Pick the move that protects the river.</p></div>
+        <div class="rpgChoices" id="rpgChoices"></div>
       </div>
     </div>
 
