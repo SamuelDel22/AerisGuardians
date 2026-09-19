@@ -1221,8 +1221,133 @@ body.aeris-v98-ready button:active,.rpgChoice:active{transform:translateY(2px)}
   }
 }
 </style>
+
+<style id="aeris-v100-desktop-grounded-rpg">
+/* V100 — desktop alignment + grounded 16-bit movement + living page polish */
+.aerisGameRpg .rpgMissionPlay,
+.aerisGameRpg .rpgPlayStage,
+.aerisGameRpg .rpgWorld{
+  width:100%;
+  max-width:100%;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box;
+}
+@media(min-width:851px){
+  .aerisGameRpg .rpgPlayStage{min-height:0!important;height:auto!important;overflow:visible!important}
+  .aerisGameRpg .rpgWorld{
+    height:clamp(560px,72vh,760px)!important;
+    min-height:560px!important;
+    max-height:760px!important;
+    overflow:hidden!important;
+  }
+  .aerisGameRpg .rpgEncounter{
+    left:50%!important;
+    right:auto!important;
+    width:min(760px,calc(100% - 32px))!important;
+    max-width:calc(100% - 32px)!important;
+    transform:translateX(-50%)!important;
+    box-sizing:border-box!important;
+  }
+  .aerisGameRpg .rpgEncounter .rpgChoices{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .aerisGameRpg .rpgEncounter .rpgChoice{
+    min-width:0!important;
+    max-width:100%!important;
+    overflow-wrap:anywhere!important;
+  }
+}
+/* Feet stay visually planted: the sprite bobs only minimally while the shadow follows it. */
+.aerisGameRpg .rpgGuardianPlayer{
+  transform:translateX(-50%);
+  transform-origin:50% 100%;
+  will-change:left,transform;
+}
+.aerisGameRpg .rpgGuardianPlayer img{
+  transform-origin:50% 100%;
+}
+.aerisGameRpg .rpgGuardianPlayer.moving img{
+  animation:rpgGroundedWalkV100 .28s steps(4,end) infinite!important;
+}
+.aerisGameRpg .rpgGuardianPlayer.moving{
+  animation:rpgGroundedBodyV100 .28s steps(4,end) infinite!important;
+}
+.aerisGameRpg .rpgGuardianPlayer:after{
+  animation:rpgGroundedShadowV100 .28s steps(4,end) infinite;
+}
+.aerisGameRpg .rpgGuardianPlayer:not(.moving):not(.atBoss) img{
+  animation:rpgGroundedIdleV100 2.4s steps(6,end) infinite!important;
+}
+@keyframes rpgGroundedWalkV100{
+  0%,100%{transform:translateY(0) scaleY(1)}
+  25%{transform:translateY(-1px) scaleY(.998)}
+  50%{transform:translateY(0) scaleY(1)}
+  75%{transform:translateY(-1px) scaleY(.998)}
+}
+@keyframes rpgGroundedBodyV100{
+  0%,100%{transform:translateX(-50%) rotate(0deg)}
+  25%{transform:translateX(-50%) rotate(-.7deg)}
+  50%{transform:translateX(-50%) rotate(.4deg)}
+  75%{transform:translateX(-50%) rotate(-.4deg)}
+}
+@keyframes rpgGroundedShadowV100{
+  0%,100%{transform:translateX(-50%) scaleX(.92);opacity:.38}
+  50%{transform:translateX(-50%) scaleX(1.08);opacity:.55}
+}
+@keyframes rpgGroundedIdleV100{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-1px)}
+}
+/* Small retro life across the page, without adding a futuristic scanner effect. */
+body.aeris-v100-ready .reveal{
+  animation:rpgPageRevealV100 .55s steps(5,end) both;
+}
+body.aeris-v100-ready .card,
+body.aeris-v100-ready .gallery figure,
+body.aeris-v100-ready .sectionCard{
+  transition:transform .18s steps(3,end),filter .18s steps(3,end);
+}
+body.aeris-v100-ready .card:hover,
+body.aeris-v100-ready .gallery figure:hover,
+body.aeris-v100-ready .sectionCard:hover{
+  transform:translateY(-4px);
+  filter:brightness(1.06);
+}
+body.aeris-v100-ready .nav a,
+body.aeris-v100-ready .btn,
+body.aeris-v100-ready button{
+  transition:transform .14s steps(2,end),filter .14s steps(2,end);
+}
+body.aeris-v100-ready .heroLogo,
+body.aeris-v100-ready .brandLogo{
+  animation:rpgLogoBreathV100 3.6s steps(8,end) infinite;
+}
+@keyframes rpgPageRevealV100{
+  0%{opacity:0;transform:translateY(8px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+@keyframes rpgLogoBreathV100{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+@media(max-width:560px){
+  .aerisGameRpg .rpgEncounter{box-sizing:border-box!important;max-width:calc(100% - 12px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.aeris-v100-ready .reveal,
+  body.aeris-v100-ready .heroLogo,
+  body.aeris-v100-ready .brandLogo,
+  .aerisGameRpg .rpgGuardianPlayer img,
+  .aerisGameRpg .rpgGuardianPlayer,
+  .aerisGameRpg .rpgGuardianPlayer:after{animation:none!important}
+}
+</style>
 </head>
-<body data-aeris-version="51.2">
+<body data-aeris-version="100">
 <div aria-labelledby="arcadeTitle" aria-modal="true" class="guardianBriefing arcadeStart" id="guardianBriefing" role="dialog">
   <div class="arcadePanel">
     <div class="arcadeMeta"><span>P1 <b>■ ■ ■</b></span><span>RÍO CAUCA // ONLINE</span><span>P2 <b>■ ■ ■</b></span></div>
@@ -3769,6 +3894,45 @@ if(world){
 const observer=new IntersectionObserver(entries=>entries.forEach(en=>{if(en.isIntersecting){en.target.style.animation='v98RetroReveal .34s steps(5,end) both';observer.unobserve(en.target)}}),{threshold:.12});
 $$('section, .sectionCard, .infoCard, .featureCard').forEach(el=>observer.observe(el));
 document.addEventListener('click',e=>{const b=e.target.closest('button,.rpgChoice,.navTab');if(!b)return;const r=b.getBoundingClientRect();const parent=b.closest('.rpgWorld,section,body');if(parent){const pr=parent.getBoundingClientRect();burst(parent,r.left+r.width/2-pr.left,r.top+r.height/2-pr.top,4)}});
+})();
+</script>
+
+<script id="aeris-v100-motion-state">
+(function(){
+  document.body.classList.add('aeris-v100-ready');
+  const world=document.getElementById('rpgWorld');
+  const player=document.getElementById('rpgGuardianPlayer');
+  if(!world||!player)return;
+  let lastX=null,lastStep=0;
+  const dust=(x,y)=>{
+    const el=document.createElement('i');
+    el.className='rpgFootDust';
+    el.style.left=x+'%';el.style.top=y+'%';
+    el.style.width=(3+Math.random()*4)+'px';
+    el.style.height=(2+Math.random()*3)+'px';
+    world.appendChild(el);
+    setTimeout(()=>el.remove(),450);
+  };
+  const emitStep=()=>{
+    const wr=world.getBoundingClientRect(),pr=player.getBoundingClientRect();
+    const x=((pr.left+pr.width*.5-wr.left)/wr.width)*100;
+    const y=((pr.bottom-wr.top)/wr.height)*100-1;
+    dust(x-2,y);dust(x+2,y);
+  };
+  const observer=new MutationObserver(()=>{
+    const moving=player.classList.contains('moving');
+    if(moving){
+      const now=performance.now();
+      if(now-lastStep>110){emitStep();lastStep=now;}
+    }
+  });
+  observer.observe(player,{attributes:true,attributeFilter:['class','style']});
+  let lastFrame=0;
+  function tick(now){
+    if(player.classList.contains('moving')&&now-lastFrame>120){emitStep();lastFrame=now;}
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 })();
 </script>
 </body>
