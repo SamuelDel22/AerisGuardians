@@ -1346,6 +1346,123 @@ body.aeris-v100-ready .brandLogo{
   .aerisGameRpg .rpgGuardianPlayer:after{animation:none!important}
 }
 </style>
+<style id="aeris-v101-polish">
+/* =========================================================
+   AERIS V101 — PREMIUM RETRO RPG POLISH
+   Scoped enhancements: visual hierarchy, motion, responsive layout
+   ========================================================= */
+:root{
+  --aeris-neon:#baff72;
+  --aeris-water:#56dcff;
+  --aeris-gold:#ffd166;
+  --aeris-night:#06131d;
+  --aeris-panel:rgba(6,24,31,.92);
+}
+html{scroll-padding-top:92px}
+body{background:
+  radial-gradient(circle at 12% 8%,rgba(114,245,213,.08),transparent 26rem),
+  radial-gradient(circle at 88% 32%,rgba(85,217,255,.07),transparent 28rem),
+  var(--paper);}
+body:after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.075;
+  background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.6) 4px);
+  mix-blend-mode:multiply;
+}
+.nav{border-color:rgba(186,244,123,.28);box-shadow:0 12px 40px rgba(0,0,0,.25),0 0 0 1px rgba(85,217,255,.06);transition:background .25s,border-color .25s,transform .25s}
+.nav:hover{border-color:rgba(186,244,123,.6)}
+.brand .logo{box-shadow:0 0 0 3px rgba(186,244,123,.06),0 0 28px rgba(114,245,213,.18);animation:aerisLogoPulse 4s steps(8,end) infinite}
+.links a,.langSwitch{transition:transform .16s,background .16s,border-color .16s}
+.links a:hover,.langSwitch:hover{transform:translateY(-2px);border-color:rgba(186,244,123,.5)}
+.hero:before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+  background-image:radial-gradient(rgba(186,244,123,.7) 1px,transparent 1px);
+  background-size:28px 28px;mask-image:linear-gradient(to bottom,black,transparent 72%);
+  animation:aerisStarDrift 28s linear infinite;
+}
+.hero>*{position:relative;z-index:1}
+.hero h1,.hero h2{ text-shadow:4px 4px 0 rgba(0,0,0,.28),0 0 24px rgba(186,244,123,.12)}
+button,a,.card,.panel,.choice,.missionNode{ -webkit-tap-highlight-color:transparent}
+button,.links a,.langSwitch,.choice,.missionNode{position:relative;overflow:hidden}
+button:after,.links a:after,.langSwitch:after,.choice:after,.missionNode:after{
+  content:"";position:absolute;inset:0;transform:translateX(-110%);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.14),transparent);
+  transition:transform .45s ease;pointer-events:none;
+}
+button:hover:after,.links a:hover:after,.langSwitch:hover:after,.choice:hover:after,.missionNode:hover:after{transform:translateX(110%)}
+section{scroll-margin-top:95px}
+section:not(.hero){position:relative}
+section:not(.hero):before{
+  content:"";position:absolute;left:7%;right:7%;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(85,217,255,.28),rgba(186,244,123,.35),transparent);
+  pointer-events:none;
+}
+.card,.panel,.infoCard,.factCard{
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.card:hover,.panel:hover,.infoCard:hover,.factCard:hover{
+  transform:translateY(-5px);
+  box-shadow:0 14px 0 rgba(6,19,29,.12),0 0 28px rgba(85,217,255,.08);
+}
+.rpgLiveStage,.rpgPlayStage,.rpgGameShell{
+  width:min(100%,1180px);margin-inline:auto;min-width:0;
+}
+.rpgWorld{
+  width:100%;max-width:100%;min-width:0;overflow:hidden;
+  isolation:isolate;
+  box-shadow:0 0 0 1px rgba(85,217,255,.22),0 18px 50px rgba(0,0,0,.28);
+}
+.rpgWorld:before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(180deg,rgba(186,244,123,.04),transparent 28%,rgba(0,0,0,.16));
+  mix-blend-mode:screen;
+}
+.rpgSceneBackground{image-rendering:auto;transition:filter .5s ease}
+.rpgWorld:hover .rpgSceneBackground{filter:saturate(1.06) contrast(1.03)}
+.rpgBossField{transform-origin:50% 100%;animation:aerisBossIdle 3.6s steps(10,end) infinite}
+.rpgBossAura{animation:aerisAura 2.8s steps(12,end) infinite}
+.rpgGuardianPlayer{transform-origin:50% 100%;will-change:transform;filter:drop-shadow(0 9px 0 rgba(0,0,0,.2))}
+.rpgGuardianPlayer img{image-rendering:auto;transform-origin:50% 100%}
+.rpgGuardianPlayer:after{
+  content:"";position:absolute;left:12%;right:12%;bottom:-3px;height:7px;border-radius:50%;
+  background:rgba(0,0,0,.36);filter:blur(2px);z-index:-1;
+  animation:aerisFootShadow 1.05s steps(5,end) infinite;
+}
+.rpgDialogue,.rpgEncounter{
+  max-width:calc(100% - 24px);overflow-wrap:anywhere;
+  box-shadow:8px 8px 0 rgba(0,0,0,.16),0 0 0 1px rgba(255,209,102,.08);
+}
+.rpgChoice{white-space:normal;overflow-wrap:anywhere;transition:transform .15s,border-color .15s,background .15s}
+.rpgChoice:hover{transform:translateX(4px)}
+.rpgControls{z-index:12}
+.rpgMoveWheel{touch-action:none;user-select:none}
+.rpgProgressRail{max-width:100%;overflow:hidden}
+@keyframes aerisLogoPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px) scale(1.025)}}
+@keyframes aerisStarDrift{from{background-position:0 0}to{background-position:112px 56px}}
+@keyframes aerisBossIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes aerisAura{0%,100%{opacity:.55;filter:brightness(1)}50%{opacity:.95;filter:brightness(1.25)}}
+@keyframes aerisFootShadow{0%,100%{transform:scaleX(1);opacity:.35}50%{transform:scaleX(.78);opacity:.23}}
+@media (min-width:901px){
+  .rpgPlayStage,.rpgLiveStage{padding-inline:clamp(10px,2vw,28px)}
+  .rpgWorld{margin-inline:auto}
+  .rpgEncounter{max-width:min(560px,46%);right:clamp(16px,3vw,44px)!important;left:auto!important}
+  .rpgDialogue{max-width:min(430px,36%)}
+  .rpgControls{max-width:230px}
+}
+@media (max-width:900px){
+  .rpgWorld{border-radius:0;min-height:0}
+  .rpgEncounter,.rpgDialogue{max-width:calc(100% - 18px)}
+}
+@media (max-width:560px){
+  body:after{opacity:.045}
+  .hero:before{background-size:22px 22px;opacity:.2}
+  .card:hover,.panel:hover,.infoCard:hover,.factCard:hover{transform:none}
+  .rpgEncounter{font-size:clamp(11px,3.2vw,14px)}
+  .rpgChoice:hover{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+</style>
 </head>
 <body data-aeris-version="100">
 <div aria-labelledby="arcadeTitle" aria-modal="true" class="guardianBriefing arcadeStart" id="guardianBriefing" role="dialog">
@@ -3935,6 +4052,73 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,.rpgChoic
   requestAnimationFrame(tick);
 })();
 </script>
+
+<script>
+/* AERIS V101 — lightweight interaction layer */
+(function(){
+  'use strict';
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.body;
+  if(!root) return;
+
+  // Retro click sparks, kept small and bounded.
+  function spark(x,y){
+    if(reduce) return;
+    const host=document.querySelector('.rpgWorld') || root;
+    const rect=host.getBoundingClientRect();
+    const px=((x-rect.left)/Math.max(1,rect.width))*100;
+    const py=((y-rect.top)/Math.max(1,rect.height))*100;
+    for(let i=0;i<4;i++){
+      const p=document.createElement('i');
+      p.className='aerisClickSpark';
+      p.style.left=px+'%'; p.style.top=py+'%';
+      p.style.setProperty('--sx',(Math.random()*34-17)+'px');
+      p.style.setProperty('--sy',(Math.random()*34-17)+'px');
+      host.appendChild(p);
+      setTimeout(()=>p.remove(),520);
+    }
+  }
+  const style=document.createElement('style');
+  style.textContent='.aerisClickSpark{position:absolute;width:4px;height:4px;background:var(--aeris-gold,#ffd166);box-shadow:0 0 0 1px #fff5;pointer-events:none;z-index:80;animation:aerisSpark .52s steps(5,end) forwards}@keyframes aerisSpark{from{opacity:1;transform:translate(-50%,-50%) scale(1)}to{opacity:0;transform:translate(calc(-50% + var(--sx)),calc(-50% + var(--sy))) scale(.3)}}';
+  document.head.appendChild(style);
+  root.addEventListener('pointerdown',e=>{
+    const target=e.target.closest('button,.links a,.langSwitch,.rpgChoice,.missionNode');
+    if(target) spark(e.clientX,e.clientY);
+  },{passive:true});
+
+  // Reveal only elements that already exist; never hides content if JS is delayed.
+  if(!reduce && 'IntersectionObserver' in window){
+    const candidates=[...document.querySelectorAll('section .card,section .panel,section h2,section h3,.missionNode')];
+    candidates.forEach(el=>{el.classList.add('aerisReveal');});
+    const revealStyle=document.createElement('style');
+    revealStyle.textContent='.aerisReveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}.aerisReveal.aerisVisible{opacity:1;transform:none}';
+    document.head.appendChild(revealStyle);
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('aerisVisible');io.unobserve(entry.target);}});
+    },{threshold:.08});
+    candidates.forEach(el=>io.observe(el));
+    setTimeout(()=>candidates.forEach(el=>el.classList.add('aerisVisible')),1400);
+  }
+
+  // Add a gentle "living" class while the game is active, without touching game logic.
+  const game=document.querySelector('#rpgGameShell,#rpgMissionPlay,.gameSection');
+  if(game){
+    let timer=0;
+    const pulse=()=>{
+      if(document.hidden) return;
+      game.classList.remove('aerisLivingPulse');
+      void game.offsetWidth;
+      game.classList.add('aerisLivingPulse');
+    };
+    const pulseStyle=document.createElement('style');
+    pulseStyle.textContent='.aerisLivingPulse .rpgWorld{animation:aerisWorldBreath 7s steps(12,end) 1}@keyframes aerisWorldBreath{0%,100%{box-shadow:0 0 0 1px rgba(85,217,255,.22),0 18px 50px rgba(0,0,0,.28)}50%{box-shadow:0 0 0 2px rgba(186,244,123,.18),0 18px 54px rgba(0,0,0,.32)}}';
+    document.head.appendChild(pulseStyle);
+    timer=window.setInterval(pulse,9000);
+    window.addEventListener('pagehide',()=>window.clearInterval(timer),{once:true});
+  }
+})();
+</script>
+
 </body>
 
 <style id="aeris-v54-game-polish">
