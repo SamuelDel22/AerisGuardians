@@ -5,6 +5,12 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Cauca Guardians — AERIS Mission</title>
+<meta name="description" content="Cauca Guardians — AERIS Mission interactive environmental RPG and awareness platform"/>
+<meta property="og:title" content="Cauca Guardians — AERIS Mission"/>
+<meta property="og:description" content="Cauca Guardians — AERIS Mission interactive environmental RPG and awareness platform"/>
+<script>
+window.AERIS_CONFIG = window.AERIS_CONFIG || { workerUrl: '' };
+</script>
 <style>
 :root{--bg:#061b24;--bg2:#0b3440;--mint:#72f5d5;--cyan:#55d9ff;--lime:#baf47b;--gold:#ffd166;--white:#f5fffc;--ink:#102b32;--muted:#587078;--paper:#f3faf7}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
@@ -1690,73 +1696,158 @@ const ES_MISSIONS=[
 ];
 const EN_RELICS=[['assets/relics/water-core.png','Water Core','Clean Water',2],['assets/relics/life-seed.png','Life Seed','Restoration',4],['assets/relics/river-shield.png','River Shield','Protection',6],['assets/relics/immortality-rune.png','Immortality Rune','Enduring Care',8],['assets/relics/cauca-crown.png','Cauca Crown','Master Guardian',10]];
 const ES_RELICS=[['assets/relics/water-core.png','Núcleo de Agua','Agua Limpia',2],['assets/relics/life-seed.png','Semilla de Vida','Restauración',4],['assets/relics/river-shield.png','Escudo del Río','Protección',6],['assets/relics/immortality-rune.png','Runa de Inmortalidad','Cuidado Duradero',8],['assets/relics/cauca-crown.png','Corona del Cauca','Guardián Maestro',10]];
+let i=0, answers=Array(EN_MISSIONS.length).fill(null), energy=0, missions=EN_MISSIONS;
+
 function setText(sel,val){const el=document.querySelector(sel);if(el)el.innerHTML=val}
-function applyLanguage(){
- const t=I18N[lang]; document.documentElement.lang=lang; document.title=t.title;
- document.querySelectorAll('#navLinks a').forEach((a,j)=>{ const label=a.querySelector('span'); if(label) label.textContent=t.nav[j]; else a.appendChild(Object.assign(document.createElement('span'),{textContent:t.nav[j]})); });
- document.querySelector('.brandText small').textContent=t.brandSmall; document.querySelector('.aerisBadge').innerHTML='<img src="aeris-logo.jpeg" alt=""> '+t.aerisBadge;
- setText('.tag', '<span class="dot"></span> '+t.tag); setText('.heroKicker',t.kicker); setText('.hero h1',t.heroTitle); setText('.heroInner > p',t.heroP); setText('.classCard',t.classCard);
- document.querySelectorAll('.problemFlow span').forEach((x,j)=>x.textContent=t.flow[j*2]||x.textContent); document.querySelectorAll('.problemFlow b').forEach((x,j)=>x.textContent=t.flow[j*2+1]);
- setText('.actions .primary',t.start); setText('.actions .ghost',t.enter); setText('#live',t.live);
- const s=document.querySelector('#story'); setText('#story .eyebrow',t.storyEyebrow); setText('#story h2',t.storyH2); setText('#story .lead',t.storyLead); setText('#story .caption',t.storyCaption); setText('#story .dark .eyebrow',t.why); setText('#story .dark h2',t.whyH2); setText('#story .dark > p',t.whyP);
- document.querySelectorAll('#story .step').forEach((e,j)=>{e.querySelector('strong').textContent=t.steps[j][0];e.querySelector('span:not(.num)').textContent=t.steps[j][1]}); setText('#story .quote b',t.guardianRule); setText('#story .quote', '<b>'+t.guardianRule+'</b> '+t.guardianRuleP);
- const quick=document.getElementById('facts'); setText('#facts .eyebrow',t.quickEyebrow); setText('#facts h2',t.quickH2); document.querySelectorAll('#facts .card').forEach((e,j)=>{e.querySelector('b').textContent=t.facts[j][0];e.querySelector('.small').textContent=t.facts[j][1]});
- setText('#gallery .eyebrow',t.realEyebrow); setText('#gallery h2',t.realH2); setText('#gallery .lead',t.realLead); document.querySelectorAll('#gallery figure').forEach((e,j)=>{e.querySelector('b').textContent=t.gallery[j][0];e.querySelector('figcaption').innerHTML='<b>'+t.gallery[j][0]+'</b><br>'+t.gallery[j][1]});
- setText('#mercury .eyebrow',t.mercuryEyebrow); setText('#mercury h2',t.mercuryH2); setText('#mercury .top .lead',t.mercuryLead); setText('#mercury .caption',t.mercuryCaption); setText('#mercury .dark .eyebrow',t.mercuryWhy); setText('#mercury .dark h2',t.mercuryWhyH2); setText('#mercury .dark > p',t.mercuryWhyP);
- document.querySelectorAll('#mercury .dark .step').forEach((e,j)=>{e.querySelector('strong').textContent=t.mercurySteps[j][0];e.querySelector('span:not(.num)').textContent=t.mercurySteps[j][1]}); setText('#mercury .dark .quote', '<b>'+t.caucaFact+'</b> '+t.caucaFactP); document.querySelectorAll('#mercury .gallery figure').forEach((e,j)=>{e.querySelector('figcaption').innerHTML='<b>'+t.fishGallery[j][0]+'</b><br>'+t.fishGallery[j][1]}); setText('#mercury > .wrap > .quote', '<b>'+t.whyMatter+'</b> '+t.whyMatterP);
- setText('#game .eyebrow',t.gameEyebrow); setText('#game h2',t.gameH2); setText('#game .lead',t.gameLead); setText('#play .hud b',t.energy); setText('#play .hud .mini', '✦ <span id="count">'+document.getElementById('count').textContent+'</span>/5 '+t.relics); setText('#play .hud > div:last-child',' '+t.level+' <span id="level">'+document.getElementById('level').textContent+'</span>');
- setText('#back',t.back); setText('#next', i===missions.length-1?t.finish:t.next); setText('#result > div:first-child',t.complete); setText('#result .title',t.guardianTitle+' <b id="title">'+document.getElementById('title').textContent+'</b>'); setText('#again',t.replay); setText('#result .actions .ghost',t.top);
- const moves=document.querySelector('#moves'); if(moves){setText('#moves .eyebrow',t.movesEyebrow); setText('#moves h2',t.movesH2); moves.querySelectorAll('.card').forEach((e,j)=>{e.querySelector('b').textContent=t.moves[j][0];e.querySelector('.small').textContent=t.moves[j][1]})}
- setText('footer .wrap > div:first-child p',t.footerP); setText('footer h3',t.sources); const fh=document.querySelectorAll('footer h3'); if(fh[1])fh[1].textContent=t.imageCredits; const fp=document.querySelectorAll('footer .wrap > div:nth-child(3) p'); if(fp[0])fp[0].textContent=t.wm; if(fp[1])fp[1].querySelector('a').textContent=t.caucaFile;
- const amb=document.getElementById('ambient'); amb.setAttribute('aria-label',t.ariaAmbient);amb.title=t.titleAmbient; const fx=document.getElementById('soundFX');fx.setAttribute('aria-label',t.ariaFX);fx.title=t.titleFX; const mm=document.getElementById('mobileMenu');if(mm)mm.setAttribute('aria-label',t.ariaMenu);
- document.getElementById('langSwitch').textContent=t.langBtn; render(); renderRelicsLanguage();
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  if(t){
+    t.textContent=msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer=setTimeout(()=>t.classList.remove('show'),2600);
+  }
 }
-// The original quiz is kept as the English source; the bilingual renderer selects English or Spanish.
+window.showToast=showToast;
+
 function renderRelicsLanguage(){
- const data=lang==='en'?EN_RELICS:ES_RELICS;
- const nodes=document.querySelectorAll('#relics .relic');
- nodes.forEach((el,idx)=>{const r=data[idx];if(!r)return; const b=el.querySelector('b'), span=el.querySelector('span'); if(b)b.textContent=r[1]; if(span)span.textContent=`${r[2]} · ${r[3]} ${I18N[lang].energy.toLowerCase()}`; el.classList.toggle('unlocked',energy>=r[3]); if(energy>=r[3])el.setAttribute('data-unlocked',I18N[lang].unlocked); else el.removeAttribute('data-unlocked');});
+  const data=lang==='en'?EN_RELICS:ES_RELICS;
+  const nodes=document.querySelectorAll('#relics .relic');
+  nodes.forEach((el,idx)=>{
+    const r=data[idx];if(!r)return;
+    const b=el.querySelector('b'), span=el.querySelector('span');
+    if(b)b.textContent=r[1];
+    if(span)span.textContent=`${r[2]} · ${r[3]} ${(I18N[lang]||I18N.en).energy.toLowerCase()}`;
+    el.classList.toggle('unlocked',energy>=r[3]);
+    if(energy>=r[3])el.setAttribute('data-unlocked',(I18N[lang]||I18N.en).unlocked);
+    else el.removeAttribute('data-unlocked');
+  });
 }
-const oldRender=render; render=function(){
- const data=lang==='en'?EN_MISSIONS:ES_MISSIONS; missions=data; const relicData=lang==='en'?EN_RELICS:ES_RELICS;  let m=missions[i]; document.getElementById('label').textContent=`${I18N[lang].mission} ${i+1} / ${missions.length}`;document.getElementById('q').textContent=m[0];document.getElementById('gameProgressBar').style.width=((i+1)/missions.length*100)+'%';document.getElementById('options').innerHTML=m[1].map((x,n)=>`<button class="option ${answers[i]===n?'selected':''}" onclick="choose(${n})">${String.fromCharCode(65+n)}. ${x}</button>`).join('');document.getElementById('back').disabled=i===0;document.getElementById('next').textContent=i===missions.length-1?I18N[lang].finish:I18N[lang].next;document.getElementById('count').textContent=relicData.filter(r=>energy>=r[3]).length;document.getElementById('level').textContent=Math.min(5,1+Math.floor(energy/2));document.getElementById('energy').textContent=energy;document.querySelectorAll('.relic.unlocked').forEach(x=>{x.setAttribute('data-unlocked',I18N[lang].unlocked)});
-};
-// Rebind language-aware feedback while preserving the original game behavior.
-const oldShowToast=showToast; showToast=function(msg){ oldShowToast(msg); };
-const oldFinish=finish; finish=function(){
- let correct=answers.reduce((s,a,n)=>s+(a===missions[n][2]?1:0),0);energy=correct;document.getElementById('play').style.display='none';document.getElementById('result').style.display='block';document.getElementById('finalScore').textContent=correct+'/10';const t=I18N[lang];document.getElementById('finalText').textContent=correct===10?t.result[0]:correct>=8?t.result[1]:correct>=6?t.result[2]:correct>=4?t.result[3]:t.result[4];document.getElementById('title').textContent=correct===10?t.titles[0]:correct>=8?t.titles[1]:correct>=6?t.titles[2]:correct>=4?t.titles[3]:t.titles[4];drawRelics();document.getElementById('result').scrollIntoView({behavior:'smooth',block:'center'});
-};
-// Update feedback strings without changing the original mechanics.
+window.renderRelicsLanguage=renderRelicsLanguage;
+
+function drawRelics(){
+  renderRelicsLanguage();
+}
+window.drawRelics=drawRelics;
+
+function choose(n){
+  answers[i]=n;
+  render();
+}
+window.choose=choose;
+
+function render(){
+  const data=lang==='en'?EN_MISSIONS:ES_MISSIONS;
+  missions=data;
+  const relicData=lang==='en'?EN_RELICS:ES_RELICS;
+  let m=missions[i]||missions[0];
+  const t=I18N[lang]||I18N.en;
+  const lbl=document.getElementById('label'); if(lbl) lbl.textContent=`${t.mission} ${i+1} / ${missions.length}`;
+  const qEl=document.getElementById('q'); if(qEl&&m) qEl.textContent=m[0];
+  const bar=document.getElementById('gameProgressBar'); if(bar) bar.style.width=((i+1)/missions.length*100)+'%';
+  const opt=document.getElementById('options'); if(opt&&m) opt.innerHTML=m[1].map((x,n)=>`<button class="option ${answers[i]===n?'selected':''}" onclick="choose(${n})">${String.fromCharCode(65+n)}. ${x}</button>`).join('');
+  const back=document.getElementById('back'); if(back) back.disabled=i===0;
+  const nxt=document.getElementById('next'); if(nxt) nxt.textContent=i===missions.length-1?t.finish:t.next;
+  const cnt=document.getElementById('count'); if(cnt) cnt.textContent=relicData.filter(r=>energy>=r[3]).length;
+  const lvl=document.getElementById('level'); if(lvl) lvl.textContent=Math.min(5,1+Math.floor(energy/2));
+  const en=document.getElementById('energy'); if(en) en.textContent=energy;
+  document.querySelectorAll('.relic.unlocked').forEach(x=>{x.setAttribute('data-unlocked',t.unlocked)});
+}
+window.render=render;
+
+function finish(){
+  let correct=answers.reduce((s,a,n)=>s+(a===missions[n]?.[2]?1:0),0);
+  energy=correct;
+  const pl=document.getElementById('play'); if(pl) pl.style.display='none';
+  const res=document.getElementById('result'); if(res) res.style.display='block';
+  const fs=document.getElementById('finalScore'); if(fs) fs.textContent=correct+'/10';
+  const t=I18N[lang]||I18N.en;
+  const ft=document.getElementById('finalText'); if(ft) ft.textContent=correct===10?t.result[0]:correct>=8?t.result[1]:correct>=6?t.result[2]:correct>=4?t.result[3]:t.result[4];
+  const tit=document.getElementById('title'); if(tit) tit.textContent=correct===10?t.titles[0]:correct>=8?t.titles[1]:correct>=6?t.titles[2]:correct>=4?t.titles[3]:t.titles[4];
+  drawRelics();
+  if(res) res.scrollIntoView({behavior:'smooth',block:'center'});
+}
+window.finish=finish;
+
+function applyLanguage(){
+ const t=I18N[lang]||I18N.en; document.documentElement.lang=lang; document.title=t.title;
+ document.querySelectorAll('#navLinks a').forEach((a,j)=>{ const label=a.querySelector('span'); if(label && t.nav?.[j]) label.textContent=t.nav[j]; else if(t.nav?.[j]) a.appendChild(Object.assign(document.createElement('span'),{textContent:t.nav[j]})); });
+ const bt=document.querySelector('.brandText small'); if(bt) bt.textContent=t.brandSmall;
+ const ab=document.querySelector('.aerisBadge'); if(ab) ab.innerHTML='<img src="aeris-logo.jpeg" alt=""> '+t.aerisBadge;
+ setText('.tag', '<span class="dot"></span> '+t.tag); setText('.heroKicker',t.kicker); setText('.hero h1',t.heroTitle); setText('.heroInner > p',t.heroP); setText('.classCard',t.classCard);
+ document.querySelectorAll('.problemFlow span').forEach((x,j)=>{ if(t.flow?.[j*2]) x.textContent=t.flow[j*2]; }); document.querySelectorAll('.problemFlow b').forEach((x,j)=>{ if(t.flow?.[j*2+1]) x.textContent=t.flow[j*2+1]; });
+ setText('.actions .primary',t.start); setText('.actions .ghost',t.enter); setText('#live',t.live);
+ setText('#story .eyebrow',t.storyEyebrow); setText('#story h2',t.storyH2); setText('#story .lead',t.storyLead); setText('#story .caption',t.storyCaption); setText('#story .dark .eyebrow',t.why); setText('#story .dark h2',t.whyH2); setText('#story .dark > p',t.whyP);
+ document.querySelectorAll('#story .step').forEach((e,j)=>{const st=e.querySelector('strong'); if(st&&t.steps?.[j]) st.textContent=t.steps[j][0]; const sp=e.querySelector('span:not(.num)'); if(sp&&t.steps?.[j]) sp.textContent=t.steps[j][1];}); setText('#story .quote b',t.guardianRule); setText('#story .quote', '<b>'+t.guardianRule+'</b> '+t.guardianRuleP);
+ const quick=document.getElementById('facts'); setText('#facts .eyebrow',t.quickEyebrow); setText('#facts h2',t.quickH2); document.querySelectorAll('#facts .card').forEach((e,j)=>{if(t.facts?.[j]){const b=e.querySelector('b');if(b)b.textContent=t.facts[j][0];const sm=e.querySelector('.small');if(sm)sm.textContent=t.facts[j][1];}});
+ setText('#gallery .eyebrow',t.realEyebrow); setText('#gallery h2',t.realH2); setText('#gallery .lead',t.realLead); document.querySelectorAll('#gallery figure').forEach((e,j)=>{if(t.gallery?.[j]){const b=e.querySelector('b');if(b)b.textContent=t.gallery[j][0];const cap=e.querySelector('figcaption');if(cap)cap.innerHTML='<b>'+t.gallery[j][0]+'</b><br>'+t.gallery[j][1];}});
+ setText('#mercury .eyebrow',t.mercuryEyebrow); setText('#mercury h2',t.mercuryH2); setText('#mercury .top .lead',t.mercuryLead); setText('#mercury .caption',t.mercuryCaption); setText('#mercury .dark .eyebrow',t.mercuryWhy); setText('#mercury .dark h2',t.mercuryWhyH2); setText('#mercury .dark > p',t.mercuryWhyP);
+ document.querySelectorAll('#mercury .dark .step').forEach((e,j)=>{if(t.mercurySteps?.[j]){const st=e.querySelector('strong');if(st)st.textContent=t.mercurySteps[j][0];const sp=e.querySelector('span:not(.num)');if(sp)sp.textContent=t.mercurySteps[j][1];}}); setText('#mercury .dark .quote', '<b>'+t.caucaFact+'</b> '+t.caucaFactP); document.querySelectorAll('#mercury .gallery figure').forEach((e,j)=>{if(t.fishGallery?.[j]){const cap=e.querySelector('figcaption');if(cap)cap.innerHTML='<b>'+t.fishGallery[j][0]+'</b><br>'+t.fishGallery[j][1];}}); setText('#mercury > .wrap > .quote', '<b>'+t.whyMatter+'</b> '+t.whyMatterP);
+ setText('#game .eyebrow',t.gameEyebrow); setText('#game h2',t.gameH2); setText('#game .lead',t.gameLead);
+ const countEl=document.getElementById('count'), countVal=countEl?countEl.textContent:'0';
+ const levelEl=document.getElementById('level'), levelVal=levelEl?levelEl.textContent:'1';
+ const titleEl=document.getElementById('title'), titleVal=titleEl?titleEl.textContent:'';
+ setText('#play .hud b',t.energy); setText('#play .hud .mini', '✦ <span id="count">'+countVal+'</span>/5 '+t.relics); setText('#play .hud > div:last-child',' '+t.level+' <span id="level">'+levelVal+'</span>');
+ setText('#back',t.back); setText('#next', i===missions.length-1?t.finish:t.next); setText('#result > div:first-child',t.complete); setText('#result .title',t.guardianTitle+' <b id="title">'+titleVal+'</b>'); setText('#again',t.replay); setText('#result .actions .ghost',t.top);
+ const moves=document.querySelector('#moves'); if(moves){setText('#moves .eyebrow',t.movesEyebrow); setText('#moves h2',t.movesH2); moves.querySelectorAll('.card').forEach((e,j)=>{if(t.moves?.[j]){const b=e.querySelector('b');if(b)b.textContent=t.moves[j][0];const sm=e.querySelector('.small');if(sm)sm.textContent=t.moves[j][1];}})}
+ setText('footer .wrap > div:first-child p',t.footerP); setText('footer h3',t.sources); const fh=document.querySelectorAll('footer h3'); if(fh[1])fh[1].textContent=t.imageCredits; const fp=document.querySelectorAll('footer .wrap > div:nth-child(3) p'); if(fp[0])fp[0].textContent=t.wm; if(fp[1]&&fp[1].querySelector('a'))fp[1].querySelector('a').textContent=t.caucaFile;
+ const amb=document.getElementById('ambient'); if(amb){ amb.setAttribute('aria-label',t.ariaAmbient); amb.title=t.titleAmbient; }
+ const fx=document.getElementById('soundFX'); if(fx){ fx.setAttribute('aria-label',t.ariaFX); fx.title=t.titleFX; }
+ const mm=document.getElementById('mobileMenu'); if(mm) mm.setAttribute('aria-label',t.ariaMenu);
+ const ls=document.getElementById('langSwitch'); if(ls) ls.textContent=t.langBtn;
+ render();
+ renderRelicsLanguage();
+}
+window.applyLanguage=applyLanguage;
+
 const nextButton=document.getElementById('next');
-nextButton.type='button';
-nextButton.addEventListener('click',(event)=>{
-  event.preventDefault();
-  event.stopPropagation();
-  if(answers[i]===null){
-    showToast(lang==='es'?'Elige una respuesta primero.':'Choose an answer first.');
-    return;
-  }
-  const selected=answers[i],correct=selected===missions[i][2];
-  const quizScroll=window.scrollY;
-  showToast(correct?I18N[lang].toast.correct:I18N[lang].toast.wrong);
-  playFX(correct?'correct':'wrong');
-  nextButton.disabled=true;
-  if(i<missions.length-1){
-    setTimeout(()=>{
-      i++;
-      render();
-      nextButton.disabled=false;
-      // Keep the learner inside the quiz instead of jumping to the top.
-      window.scrollTo({top:Math.max(0,quizScroll),behavior:'instant'});
-      requestAnimationFrame(()=>{
-        const q=document.getElementById('q');
-        if(q){q.classList.remove('missionPulse');void q.offsetWidth;q.classList.add('missionPulse');}
-      });
-    },650);
-  }else{
-    setTimeout(()=>{nextButton.disabled=false;finish()},650);
-  }
-},{capture:true});
-document.getElementById('again').onclick=()=>{i=0;answers=Array(missions.length).fill(null);energy=0;document.getElementById('result').style.display='none';document.getElementById('play').style.display='block';render();drawRelics();renderRelicsLanguage();document.getElementById('game').scrollIntoView({behavior:'smooth',block:'center'})};
+if(nextButton){
+  nextButton.type='button';
+  nextButton.addEventListener('click',(event)=>{
+    event.preventDefault();
+    event.stopPropagation();
+    if(answers[i]===null){
+      showToast(lang==='es'?'Elige una respuesta primero.':'Choose an answer first.');
+      return;
+    }
+    const selected=answers[i],correct=selected===missions[i][2];
+    const quizScroll=window.scrollY;
+    showToast(correct?I18N[lang].toast.correct:I18N[lang].toast.wrong);
+    if(typeof playFX==='function') playFX(correct?'correct':'wrong');
+    nextButton.disabled=true;
+    if(i<missions.length-1){
+      setTimeout(()=>{
+        i++;
+        render();
+        nextButton.disabled=false;
+        window.scrollTo({top:Math.max(0,quizScroll),behavior:'instant'});
+        requestAnimationFrame(()=>{
+          const q=document.getElementById('q');
+          if(q){q.classList.remove('missionPulse');void q.offsetWidth;q.classList.add('missionPulse');}
+        });
+      },650);
+    }else{
+      setTimeout(()=>{nextButton.disabled=false;finish()},650);
+    }
+  },{capture:true});
+}
+
+const againBtn=document.getElementById('again');
+if(againBtn){
+  againBtn.onclick=()=>{
+    i=0;
+    answers=Array(missions.length).fill(null);
+    energy=0;
+    const pl=document.getElementById('play'); if(pl) pl.style.display='block';
+    const res=document.getElementById('result'); if(res) res.style.display='none';
+    render();
+    drawRelics();
+    renderRelicsLanguage();
+    const gm=document.getElementById('game');
+    if(gm) gm.scrollIntoView({behavior:'smooth',block:'center'});
+  };
+}
 // Translate generated unlocked badge and live messages.
 // Keep relic DOM stable during quiz interactions; drawRelics is called only when the collection actually changes.
 const liveTimer=setInterval(()=>{const el=document.getElementById('live');if(el)el.textContent=I18N[lang].messages[Math.floor(Math.random()*I18N[lang].messages.length)]},3000);
@@ -2080,10 +2171,29 @@ document.getElementById('aiForm')?.addEventListener('submit',async e=>{
 });
 aiWelcome();
 const oldApplyWithAI=applyLanguage;
-applyLanguage=function(){oldApplyWithAI();aiRenderSuggestions();const langNow=window.currentLang||'en';document.getElementById('aiStatus').textContent=langNow==='es'?'Asistente educativo · Bajo Cauca':'Educational assistant · Bajo Cauca';document.getElementById('aiInput').placeholder=langNow==='es'?'Haz una pregunta sobre el río Cauca...':'Ask a question about the Cauca River...';document.getElementById('aiInput').setAttribute('aria-label',langNow==='es'?'Pregunta a Cauca Guardian AI':'Ask Cauca Guardian AI');document.getElementById('aiSend').textContent=langNow==='es'?'Enviar':'Send';document.getElementById('aiNote').textContent=langNow==='es'?'Respuestas educativas basadas en los temas de este proyecto. El asistente usa el contexto educativo del proyecto y una API de IA cuando está configurada. No reemplaza las fuentes científicas o gubernamentales oficiales.':'Educational answers based on the topics covered in this project. The assistant uses the project educational context and an AI API when configured. It does not replace official scientific or government sources.'};
+applyLanguage=function(){
+  if(typeof oldApplyWithAI==='function') oldApplyWithAI();
+  if(typeof aiRenderSuggestions==='function') aiRenderSuggestions();
+  const langNow=window.currentLang||'en';
+  const st=document.getElementById('aiStatus'); if(st) st.textContent=langNow==='es'?'Asistente educativo · Bajo Cauca':'Educational assistant · Bajo Cauca';
+  const inp=document.getElementById('aiInput'); if(inp){ inp.placeholder=langNow==='es'?'Haz una pregunta sobre el río Cauca...':'Ask a question about the Cauca River...'; inp.setAttribute('aria-label',langNow==='es'?'Pregunta a Cauca Guardian AI':'Ask Cauca Guardian AI'); }
+  const snd=document.getElementById('aiSend'); if(snd) snd.textContent=langNow==='es'?'Enviar':'Send';
+  const nt=document.getElementById('aiNote'); if(nt) nt.textContent=langNow==='es'?'Respuestas educativas basadas en los temas de este proyecto. El asistente usa el contexto educativo del proyecto y una API de IA cuando está configurada. No reemplaza las fuentes científicas o gubernamentales oficiales.':'Educational answers based on the topics covered in this project. The assistant uses the project educational context and an AI API when configured. It does not replace official scientific or government sources.';
+};
 
-const oldApply=applyLanguage; document.getElementById('langSwitch').addEventListener('click',()=>{lang=lang==='en'?'es':'en';window.currentLang=lang;applyLanguage();updateAlt();updateFooterLinks()});
-applyLanguage();updateAlt();updateFooterLinks();
+const lsBtn=document.getElementById('langSwitch');
+if(lsBtn){
+  lsBtn.addEventListener('click',()=>{
+    lang=lang==='en'?'es':'en';
+    window.currentLang=lang;
+    if(typeof applyLanguage==='function') applyLanguage();
+    if(typeof updateAlt==='function') updateAlt();
+    if(typeof updateFooterLinks==='function') updateFooterLinks();
+  });
+}
+if(typeof applyLanguage==='function') applyLanguage();
+if(typeof updateAlt==='function') updateAlt();
+if(typeof updateFooterLinks==='function') updateFooterLinks();
 </script>
 <script>
 /* ===== AERIS V3 · GUARDIAN PROFILE + MISSION MAP ===== */
@@ -2274,6 +2384,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;opac
 'use strict';
 const $=id=>document.getElementById(id);
 const qs=(sel,root=document)=>[...root.querySelectorAll(sel)];
+const lang=()=>window.currentLang==='es'?'es':'en';
 const storageKey='aeris_guardian_v14';
 let state={labStep:0,fish:'bocachico',what:0};
 try{Object.assign(state,JSON.parse(localStorage.getItem(storageKey)||'{}'))}catch(e){}
@@ -2282,20 +2393,45 @@ const fishData={
  en:{bocachico:['Bocachico','Feeds within aquatic food webs and can be exposed when methylmercury is present in its environment.'],moncholo:['Moncholo','A predatory freshwater fish; its position in the food web makes it useful for learning about bioaccumulation pathways.'],catfish:['Catfish','A predatory fish example. Diet and habitat can influence exposure, so real measurements are important.']},
  es:{bocachico:['Bocachico','Forma parte de las redes alimentarias acuáticas y puede estar expuesto cuando hay metilmercurio en su ambiente.'],moncholo:['Moncholo','Pez de agua dulce depredador; su posición en la red alimentaria ayuda a entender las rutas de bioacumulación.'],catfish:['Bagre','Ejemplo de pez depredador. La dieta y el hábitat pueden influir en la exposición, por eso son importantes las mediciones reales.']}
 };
-function renderFish(){const d=fishData[lang()][state.fish];$('fishReadout').innerHTML=`<strong>${d[0]}</strong><p>${d[1]}</p><div class="miniFlow"><span>${lang()==='es'?'agua':'water'}</span><i>→</i><span>${lang()==='es'?'red alimentaria':'food web'}</span><i>→</i><span>${lang()==='es'?'tejido del pez':'fish tissue'}</span></div>`;qs('.fishChoice').forEach(b=>b.classList.toggle('active',b.dataset.fish===state.fish))}
+function renderFish(){
+  const l=lang();
+  const f=fishData[l]||fishData.en;
+  const d=f[state.fish]||f.bocachico;
+  const readout=$('fishReadout');
+  if(readout&&d) readout.innerHTML=`<strong>${d[0]}</strong><p>${d[1]}</p><div class="miniFlow"><span>${l==='es'?'agua':'water'}</span><i>→</i><span>${l==='es'?'red alimentaria':'food web'}</span><i>→</i><span>${l==='es'?'tejido del pez':'fish tissue'}</span></div>`;
+  qs('.fishChoice').forEach(b=>b.classList.toggle('active',b.dataset.fish===state.fish));
+}
 qs('.fishChoice').forEach(b=>b.addEventListener('click',()=>{state.fish=b.dataset.fish;save();renderFish();window.playFX?.('select')}));
 const whatText={en:{titles:['UNDER PRESSURE','EARLY TRANSITION','BUILDING PROTECTION','HEALTHIER SYSTEM'],water:['At risk','Changing','Improving','More protected'],fish:['Exposed','Under pressure','Recovering','Better protected'],nature:['Vulnerable','Recovering','Strengthening','More resilient'],people:['Needed','Mobilizing','Coordinating','Leading'],note:'This visual shows a conceptual direction, not a numerical prediction. Real environmental recovery depends on local conditions, monitoring, restoration and sustained action.'},es:{titles:['BAJO PRESIÓN','TRANSICIÓN INICIAL','PROTECCIÓN EN MARCHA','SISTEMA MÁS SALUDABLE'],water:['En riesgo','Cambiando','Mejorando','Más protegido'],fish:['Expuestos','Bajo presión','Recuperándose','Mejor protegidos'],nature:['Vulnerable','Recuperándose','Fortaleciéndose','Más resiliente'],people:['Necesaria','Movilizándose','Coordinándose','Liderando'],note:'Esta visualización muestra una dirección conceptual, no una predicción numérica. La recuperación ambiental real depende de las condiciones locales, el monitoreo, la restauración y la acción sostenida.'}};
-function renderWhat(){const t=whatText[lang()];const v=Number(state.what)||0;const idx=v<25?0:v<50?1:v<75?2:3;$('whatSlider').value=v;$('whatPercent').textContent=v+'%';$('whatStateTitle').textContent=t.titles[idx];$('metricWater').textContent=t.water[idx];$('metricFish').textContent=t.fish[idx];$('metricNature').textContent=t.nature[idx];$('metricPeople').textContent=t.people[idx];$('whatNote').textContent=t.note}
+function renderWhat(){
+  const l=lang();
+  const t=whatText[l]||whatText.en;
+  const v=Number(state.what)||0;
+  const idx=v<25?0:v<50?1:v<75?2:3;
+  const ws=$('whatSlider'); if(ws) ws.value=v;
+  const wp=$('whatPercent'); if(wp) wp.textContent=v+'%';
+  const wt=$('whatStateTitle'); if(wt&&t.titles) wt.textContent=t.titles[idx];
+  const mw=$('metricWater'); if(mw&&t.water) mw.textContent=t.water[idx];
+  const mf=$('metricFish'); if(mf&&t.fish) mf.textContent=t.fish[idx];
+  const mn=$('metricNature'); if(mn&&t.nature) mn.textContent=t.nature[idx];
+  const mp=$('metricPeople'); if(mp&&t.people) mp.textContent=t.people[idx];
+  const wn=$('whatNote'); if(wn&&t.note) wn.textContent=t.note;
+}
 $('whatSlider')?.addEventListener('input',e=>{state.what=Number(e.target.value);save();renderWhat()});
 const badgeDefs={en:[['explorer','assets/guardian-badges/aeris_badge_explorer.png','Explorer','Explore the Guardian mission route.'],['scientist','assets/guardian-badges/aeris_badge_evidence-scout.png','Evidence Scout','Complete the evidence pathway.'],['guardian','assets/guardian-badges/aeris_badge_river-guardian.png','River Guardian','Finish the Guardian Challenge.'],['champion','assets/guardian-badges/aeris_badge_mission-champion.png','Mission Champion','Score 8/10 or higher.']],es:[['explorer','assets/guardian-badges/aeris_badge_explorer.png','Explorador','Explora la ruta de la misión del Guardián.'],['scientist','assets/guardian-badges/aeris_badge_evidence-scout.png','Explorador de evidencia','Completa la ruta de evidencia.'],['guardian','assets/guardian-badges/aeris_badge_river-guardian.png','Guardián del río','Termina el desafío.'],['champion','assets/guardian-badges/aeris_badge_mission-champion.png','Campeón de misión','Obtén 8/10 o más.']]};
 function getProfile(){let p={name:'Guardian',best:0,energy:0,relics:0,badges:[]};try{const raw=JSON.parse(localStorage.getItem('aeris_guardian_v3')||'{}');Object.assign(p,raw)}catch(e){};const name=localStorage.getItem('aeris_guardian_name_v6');if(name)p.name=name;return p}
 function renderPassport(){}
 
+function applyV14Text(){
+  renderFish();
+  renderWhat();
+}
+window.applyV14Text=applyV14Text;
+
 // Add an unobtrusive passport refresh whenever the user finishes a mission.
 const oldApply=window.applyLanguage;
-if(oldApply){window.applyLanguage=function(){oldApply();applyV14Text();renderFish();renderWhat();}}
+if(oldApply){window.applyLanguage=function(){oldApply();applyV14Text();}}
 applyV14Text();
-renderFish();renderWhat();
 })();
 </script>
 <script id="aeris-v16-polish-script">
@@ -2306,10 +2442,66 @@ const qs=(s,r=document)=>[...r.querySelectorAll(s)];
 const lang=()=>window.currentLang==='es'?'es':'en';
 const routeText={en:[['01 · Territory','Start with the river and understand the context before entering the challenge.'],['02 · Mercury','Trace the environmental pathway step by step.'],['03 · Evidence','Check the evidence before turning a claim into a conclusion.'],['04 · Challenge','Use what you learned and earn Guardian Energy.'],],es:[['01 · Territorio','Empieza por el río y entiende el contexto antes del desafío.'],['02 · Mercurio','Sigue paso a paso la ruta ambiental.'],['03 · Evidencia','Comprueba la evidencia antes de convertir una afirmación en conclusión.'],['04 · Desafío','Usa lo aprendido y gana Energía del Guardián.'],]};
 function getProgress(){let p={best:0,relics:0,badges:[]};try{Object.assign(p,JSON.parse(localStorage.getItem('aeris_guardian_v3')||'{}'))}catch(e){};return p}
-function renderProgress(){const p=getProgress(),best=Math.max(0,Number(p.best)||0),energy=Math.max(Number(p.energy)||0,Number(p.relics||0)*2),badges=new Set(p.badges||[]);if(best>=0)badges.add('explorer');if(best>=5)badges.add('scientist');if(best>=7)badges.add('guardian');if(best>=9)badges.add('champion');const knowledge=Math.min(100,Math.round(best*7+Math.min(5,Number(p.relics)||0)*6+badges.size*5));const xp=Math.min(100,Math.round(best*7+(Number(p.relics)||0)*8+badges.size*8));const rank=xp>=85?'RIVER LEGEND':xp>=60?'WATERSHED DEFENDER':xp>=35?'FIELD GUARDIAN':'RIVER ROOKIE';$('v16Knowledge').textContent=knowledge+'%';$('v16XP').textContent=xp;$('v16XPFill').style.width=xp+'%';$('v16Rank').textContent=rank;const defs=lang()==='es'?[['assets/guardian-badges/aeris_badge_explorer.png','Explorador','Explora la ruta de la misión'],['assets/guardian-badges/aeris_badge_evidence-scout.png','Explorador de evidencia','Completa la ruta del laboratorio'],['assets/guardian-badges/aeris_badge_river-guardian.png','Guardián del río','Termina el desafío'],['assets/guardian-badges/aeris_badge_mission-champion.png','Campeón','Logra 8/10 o más']]:[['assets/guardian-badges/aeris_badge_explorer.png','Explorer','Explore the Guardian mission route'],['assets/guardian-badges/aeris_badge_evidence-scout.png','Evidence Scout','Complete the lab pathway'],['assets/guardian-badges/aeris_badge_river-guardian.png','River Guardian','Finish the challenge'],['assets/guardian-badges/aeris_badge_mission-champion.png','Mission Champion','Score 8/10 or higher']];const host=$('v16Achievements');if(!host)return;const signature=defs.map((d,i)=>{const key=['explorer','scientist','guardian','champion'][i];return key+':'+(badges.has(key)?'1':'0')+':'+d[1]+':'+d[2]}).join('|');if(host.dataset.renderSignature!==signature){host.innerHTML=defs.map((d,i)=>{const key=['explorer','scientist','guardian','champion'][i],on=badges.has(key);return `<div class="v16-ach ${on?'on':''}" data-badge-key="${key}"><span class="ico"><img src="${d[0]}" alt="" aria-hidden="true"></span><div><b>${d[1]}</b><small>${d[2]}</small></div><span>${on?'✓':'○'}</span></div>`}).join('');host.dataset.renderSignature=signature}else{host.querySelectorAll('[data-badge-key]').forEach((card,i)=>{const key=['explorer','scientist','guardian','champion'][i],on=badges.has(key);card.classList.toggle('on',on);const parts=card.querySelectorAll('b,small');if(parts[0])parts[0].textContent=defs[i][1];if(parts[1])parts[1].textContent=defs[i][2];const status=card.querySelector(':scope > span:last-child');if(status)status.textContent=on?'✓':'○'})}}
-qs('#v16Route button').forEach((b,i)=>b.addEventListener('click',()=>{qs('#v16Route button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const t=routeText[lang()][i];$('v16RouteDetail').innerHTML=`<strong>${t[0]}</strong><p>${t[1]}</p>`;const target=$(b.dataset.target);if(target){target.classList.add('v16-navPulse');target.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>target.classList.remove('v16-navPulse'),750)}}));
+function renderProgress(){
+  const p=getProgress(),best=Math.max(0,Number(p.best)||0),energy=Math.max(Number(p.energy)||0,Number(p.relics||0)*2),badges=new Set(p.badges||[]);
+  if(best>=0)badges.add('explorer');
+  if(best>=5)badges.add('scientist');
+  if(best>=7)badges.add('guardian');
+  if(best>=9)badges.add('champion');
+  const knowledge=Math.min(100,Math.round(best*7+Math.min(5,Number(p.relics)||0)*6+badges.size*5));
+  const xp=Math.min(100,Math.round(best*7+(Number(p.relics)||0)*8+badges.size*8));
+  const rank=xp>=85?'RIVER LEGEND':xp>=60?'WATERSHED DEFENDER':xp>=35?'FIELD GUARDIAN':'RIVER ROOKIE';
+  const vk=$('v16Knowledge'); if(vk) vk.textContent=knowledge+'%';
+  const vx=$('v16XP'); if(vx) vx.textContent=xp;
+  const vf=$('v16XPFill'); if(vf) vf.style.width=xp+'%';
+  const vr=$('v16Rank'); if(vr) vr.textContent=rank;
+  const defs=lang()==='es'?[['assets/guardian-badges/aeris_badge_explorer.png','Explorador','Explora la ruta de la misión'],['assets/guardian-badges/aeris_badge_evidence-scout.png','Explorador de evidencia','Completa la ruta del laboratorio'],['assets/guardian-badges/aeris_badge_river-guardian.png','Guardián del río','Termina el desafío'],['assets/guardian-badges/aeris_badge_mission-champion.png','Campeón','Logra 8/10 o más']]:[['assets/guardian-badges/aeris_badge_explorer.png','Explorer','Explore the Guardian mission route'],['assets/guardian-badges/aeris_badge_evidence-scout.png','Evidence Scout','Complete the lab pathway'],['assets/guardian-badges/aeris_badge_river-guardian.png','River Guardian','Finish the challenge'],['assets/guardian-badges/aeris_badge_mission-champion.png','Mission Champion','Score 8/10 or higher']];
+  const host=$('v16Achievements');if(!host)return;
+  const signature=defs.map((d,i)=>{const key=['explorer','scientist','guardian','champion'][i];return key+':'+(badges.has(key)?'1':'0')+':'+d[1]+':'+d[2]}).join('|');
+  if(host.dataset.renderSignature!==signature){
+    host.innerHTML=defs.map((d,i)=>{const key=['explorer','scientist','guardian','champion'][i],on=badges.has(key);return `<div class="v16-ach ${on?'on':''}" data-badge-key="${key}"><span class="ico"><img src="${d[0]}" alt="" aria-hidden="true"></span><div><b>${d[1]}</b><small>${d[2]}</small></div><span>${on?'✓':'○'}</span></div>`}).join('');
+    host.dataset.renderSignature=signature;
+  }else{
+    host.querySelectorAll('[data-badge-key]').forEach((card,i)=>{
+      const key=['explorer','scientist','guardian','champion'][i],on=badges.has(key);
+      card.classList.toggle('on',on);
+      const parts=card.querySelectorAll('b,small');
+      if(parts[0])parts[0].textContent=defs[i][1];
+      if(parts[1])parts[1].textContent=defs[i][2];
+      const status=card.querySelector(':scope > span:last-child');
+      if(status)status.textContent=on?'✓':'○';
+    });
+  }
+}
+qs('#v16Route button').forEach((b,i)=>b.addEventListener('click',()=>{
+  qs('#v16Route button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  const t=routeText[lang()]?.[i];
+  const rd=$('v16RouteDetail');
+  if(rd&&t) rd.innerHTML=`<strong>${t[0]}</strong><p>${t[1]}</p>`;
+  const target=$(b.dataset.target);
+  if(target){
+    target.classList.add('v16-navPulse');
+    target.scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>target.classList.remove('v16-navPulse'),750);
+  }
+}));
 qs('#v16AITools button').forEach(b=>b.addEventListener('click',()=>{const input=$('aiInput');if(!input)return;input.value=b.dataset.q;input.focus();$('aiForm')?.requestSubmit()}));
-const oldApply=window.applyLanguage;if(oldApply){window.applyLanguage=function(){oldApply();renderProgress();const es=lang()==='es';const buttons=qs('#v16Route button');const labels=es?['Territorio','Mercurio','Evidencia','Desafío','Legado']:['Territory','Mercury','Evidence','Challenge','Legacy'];const subs=es?['Explora','Investiga','Verifica','Juega','Desbloquea']:['Explore','Investigate','Verify','Play','Unlock'];buttons.forEach((b,i)=>{b.querySelector('b').textContent=labels[i];b.querySelector('small').textContent=subs[i]});}}
+const oldApply=window.applyLanguage;
+if(oldApply){
+  window.applyLanguage=function(){
+    oldApply();
+    renderProgress();
+    const es=lang()==='es';
+    const buttons=qs('#v16Route button');
+    const labels=es?['Territorio','Mercurio','Evidencia','Desafío','Legado']:['Territory','Mercury','Evidence','Challenge','Legacy'];
+    const subs=es?['Explora','Investiga','Verifica','Juega','Desbloquea']:['Explore','Investigate','Verify','Play','Unlock'];
+    buttons.forEach((b,i)=>{
+      const bb=b.querySelector('b'); if(bb&&labels[i]) bb.textContent=labels[i];
+      const bs=b.querySelector('small'); if(bs&&subs[i]) bs.textContent=subs[i];
+    });
+  };
+}
 function celebrate(){const host=document.createElement('div');host.className='v16-celebrate';for(let i=0;i<34;i++){const s=document.createElement('span');s.className='v16-confetti';s.textContent=['✦','•','','',''][i%5];s.style.left=(5+Math.random()*90)+'%';s.style.setProperty('--dx',(Math.random()*220-110)+'px');s.style.animationDelay=(Math.random()*.35)+'s';host.appendChild(s)}document.body.appendChild(host);setTimeout(()=>host.remove(),2200)}
 const oldFinish=window.finish;if(typeof oldFinish==='function'){window.finish=function(){oldFinish();setTimeout(()=>{renderProgress();celebrate()},730)}}
 renderProgress();
@@ -2969,6 +3161,7 @@ footer .brandLogo{box-shadow:0 10px 30px rgba(102,242,207,.12)}
     game:['05 / Guardian Challenge','Prove you can be a Guardian.','Test the evidence. Earn energy. Unlock your Guardian legacy.','Guardian Challenge · initializing…','GUARDIAN','READY?','MISSION COMPLETE','MISSION COMPLETE · KNOWLEDGE → ACTION','Guardian title:','YOUR NEXT MOVE','What kind of Guardian will you be?','Your score is one part of the mission. Your choice shapes the ending.','RESTORE','Help ecosystems recover.','VERIFY','Follow evidence before acting.','PROTECT','Turn knowledge into action.','GUARDIAN ENDING','River Guardian','Your mission continues with evidence, care and action.','SCORE','PATH','RANK','Continue mission →','Replay mission ↻','Back to top ↑'],
     ai:['09 / Cauca Guardian AI','Cauca Guardian AI','Ask questions about the Cauca River, Caucasia, illegal mining, mercury, fish and environmental protection.','Educational assistant · Bajo Cauca',' Mercury',' Mining','🐟 Fish',' Protection','Ask a question about the Cauca River...','Send','Educational answers based on the topics covered in this project. The assistant uses the project educational context and an AI API when configured. It does not replace official scientific or government sources.','FIELD INTELLIGENCE READY','Offline learning mode remains available.'],
     moves:['06 / Guardian moves','Small actions. Bigger impact.','Learn & share','Use reliable information when talking about environmental problems.','Restore nature','Support restoration and protection of vegetation and waterways.','Check claims','Verify dramatic environmental claims before sharing them.','Protect together','Healthy rivers need informed people and responsible action.'],
+    passport:['08 / Guardian Passport','Your mission becomes a legacy.','Your progress stays on this device. Complete the experience and watch your Guardian identity evolve.','CAUCA GUARDIAN PASSPORT','FIELD RECORD','MISSION PROGRESS','BEST SCORE','RELICS','BADGES','STATUS','ACHIEVEMENTS','Unlock your Guardian identity.','Refresh passport ↻'],
     footer:['An educational interactive about the Cauca River and environmental impacts associated with illegal mining.','Sources','Image credits','Field photographs provided by the project team · Caucasia, Antioquia. External scientific images retain their corresponding credits.','Cauca River file']
   };
   const ES={
@@ -2981,6 +3174,7 @@ footer .brandLogo{box-shadow:0 10px 30px rgba(102,242,207,.12)}
     game:['05 / Desafío del Guardián','Demuestra que puedes ser un Guardián.','Comprueba la evidencia. Gana energía. Desbloquea tu legado de Guardián.','Desafío del Guardián · iniciando…','GUARDIÁN','¿LISTO?','MISIÓN COMPLETA','MISIÓN COMPLETA · CONOCIMIENTO → ACCIÓN','Título de Guardián:','TU PRÓXIMO PASO','¿Qué tipo de Guardián serás?','Tu puntuación es una parte de la misión. Tu elección define el final.','RESTAURAR','Ayuda a recuperar los ecosistemas.','VERIFICAR','Sigue la evidencia antes de actuar.','PROTEGER','Convierte el conocimiento en acción.','FINAL DEL GUARDIÁN','Guardián del río','Tu misión continúa con evidencia, cuidado y acción.','PUNTUACIÓN','RUTA','RANGO','Continuar misión →','Repetir misión ↻','Volver arriba ↑'],
     ai:['09 / IA del Guardián del Cauca','IA del Guardián del Cauca','Haz preguntas sobre el río Cauca, Caucasia, la minería ilegal, el mercurio, los peces y la protección ambiental.','Asistente educativo · Bajo Cauca',' Mercurio',' Minería','🐟 Peces',' Protección','Haz una pregunta sobre el río Cauca...','Enviar','Respuestas educativas basadas en los temas cubiertos en este proyecto. El asistente usa el contexto educativo del proyecto y una API de IA cuando está configurada. No reemplaza las fuentes científicas u oficiales.','INTELIGENCIA DE CAMPO LISTA','El modo de aprendizaje sin conexión sigue disponible.'],
     moves:['10 / Acciones del Guardián','Pequeñas acciones. Mayor impacto.','Aprende y comparte','Usa información confiable cuando hables sobre problemas ambientales.','Restaura la naturaleza','Apoya la restauración y protección de la vegetación y los cuerpos de agua.','Verifica las afirmaciones','Comprueba las afirmaciones ambientales impactantes antes de compartirlas.','Protejan juntos','Los ríos saludables necesitan personas informadas y acciones responsables.'],
+    passport:['08 / Pasaporte del Guardián','Tu misión se convierte en un legado.','Tu progreso permanece en este dispositivo. Completa la experiencia y observa cómo evoluciona tu identidad de Guardián.','PASAPORTE DEL GUARDIÁN DEL CAUCA','REGISTRO DE CAMPO','PROGRESO DE MISIÓN','MEJOR PUNTUACIÓN','RELIQUIAS','INSIGNIAS','ESTADO','LOGROS','Desbloquea tu identidad de Guardián.','Actualizar pasaporte ↻'],
     footer:['Una experiencia educativa interactiva sobre el río Cauca y los impactos ambientales asociados con la minería ilegal.','Fuentes','Créditos de imágenes','Fotografías de campo proporcionadas por el equipo del proyecto · Caucasia, Antioquia. Las imágenes científicas externas mantienen sus créditos correspondientes.','Archivo del río Cauca']
   };
   function txt(sel,v){document.querySelectorAll(sel).forEach(e=>e.textContent=v)}
@@ -2988,18 +3182,21 @@ footer .brandLogo{box-shadow:0 10px 30px rgba(102,242,207,.12)}
   function apply(){
     const es=(window.currentLang||'en')==='es',t=es?ES:EN;
     document.documentElement.lang=es?'es':'en';
-    document.querySelectorAll('#navLinks a span').forEach((e,i)=>{if(t.nav[i])e.textContent=t.nav[i]});
+    if(t.nav) document.querySelectorAll('#navLinks a span').forEach((e,i)=>{if(t.nav[i])e.textContent=t.nav[i]});
     txt('#information .v16-head>p',t.infoHead);
-    const r=t.route;txt('#information .v16-route button:nth-child(1) b',r[0]);txt('#information .v16-route button:nth-child(1) small',r[1]);txt('#information .v16-route button:nth-child(2) b',r[2]);txt('#information .v16-route button:nth-child(2) small',r[3]);txt('#information .v16-route button:nth-child(3) b',r[4]);txt('#information .v16-route button:nth-child(3) small',r[5]);txt('#information .v16-route button:nth-child(4) b',r[6]);txt('#information .v16-route button:nth-child(4) small',r[7]);txt('#information .v16-route button:nth-child(5) b',r[8]);txt('#information .v16-route button:nth-child(5) small',r[9]);
-    const e=t.evidence; ['#evidence .eyebrow','#evidence h2','#evidence .top .lead','.evidencePulse','#evidence .evidenceHero h3','#evidence .evidenceHero>p','#evidenceStats div:nth-child(1) span','#evidenceStats div:nth-child(2) span','#evidenceStats div:nth-child(3) span','#evidenceGrid article:nth-child(1) .sourceType','#evidenceGrid article:nth-child(1) h3','#evidenceGrid article:nth-child(2) .sourceType','#evidenceGrid article:nth-child(2) h3','#evidenceGrid article:nth-child(3) .sourceType','#evidenceGrid article:nth-child(3) h3','.sourceVaultHead .sourceType','.sourceVaultHead h3','.sourceVaultHead>p'].forEach((s,i)=>{if(e[i]!==undefined)txt(s,e[i])});
-    const h=t.hq; ['#hq .eyebrow','#hq h2','#hq .hqGuardianTitle .lead','#hq .missionTelemetry div:nth-child(1) span','#hq .missionTelemetry div:nth-child(1) small','#hq .missionTelemetry div:nth-child(2) span','#hq .missionTelemetry div:nth-child(2) small','#hq .missionTelemetry div:nth-child(3) span','#hq .missionTelemetry div:nth-child(3) small','#hq .missionTelemetry div:nth-child(4) span','#hq .missionTelemetry div:nth-child(4) small','.missionMapHead .sourceType','#mapTitle','#mapIntro','#mapNodes .mapNode:nth-child(1) b','#mapNodes .mapNode:nth-child(1) small','#mapNodes .mapNode:nth-child(2) b','#mapNodes .mapNode:nth-child(2) small','#mapNodes .mapNode:nth-child(3) b','#mapNodes .mapNode:nth-child(3) small','#mapNodes .mapNode:nth-child(4) b','#mapNodes .mapNode:nth-child(4) small','#mapNodes .mapNode:nth-child(5) b','#mapNodes .mapNode:nth-child(5) small','#xpLabel','#guardianLevelStrip .levelCopy small','#profileMissions+span','#profileVisited+span','#profileKnowledge+span','#profileEnergy+span','#profileScoreLabel','#profileRelicsLabel','#profileBadgesLabel','#hqStart','#hqReset'].forEach((s,i)=>{if(h[i]!==undefined)txt(s,h[i])});
+    const r=t.route;
+    if(r){
+      txt('#information .v16-route button:nth-child(1) b',r[0]);txt('#information .v16-route button:nth-child(1) small',r[1]);txt('#information .v16-route button:nth-child(2) b',r[2]);txt('#information .v16-route button:nth-child(2) small',r[3]);txt('#information .v16-route button:nth-child(3) b',r[4]);txt('#information .v16-route button:nth-child(3) small',r[5]);txt('#information .v16-route button:nth-child(4) b',r[6]);txt('#information .v16-route button:nth-child(4) small',r[7]);txt('#information .v16-route button:nth-child(5) b',r[8]);txt('#information .v16-route button:nth-child(5) small',r[9]);
+    }
+    const e=t.evidence; if(e) ['#evidence .eyebrow','#evidence h2','#evidence .top .lead','.evidencePulse','#evidence .evidenceHero h3','#evidence .evidenceHero>p','#evidenceStats div:nth-child(1) span','#evidenceStats div:nth-child(2) span','#evidenceStats div:nth-child(3) span','#evidenceGrid article:nth-child(1) .sourceType','#evidenceGrid article:nth-child(1) h3','#evidenceGrid article:nth-child(2) .sourceType','#evidenceGrid article:nth-child(2) h3','#evidenceGrid article:nth-child(3) .sourceType','#evidenceGrid article:nth-child(3) h3','.sourceVaultHead .sourceType','.sourceVaultHead h3','.sourceVaultHead>p'].forEach((s,i)=>{if(e[i]!==undefined)txt(s,e[i])});
+    const h=t.hq; if(h) ['#hq .eyebrow','#hq h2','#hq .hqGuardianTitle .lead','#hq .missionTelemetry div:nth-child(1) span','#hq .missionTelemetry div:nth-child(1) small','#hq .missionTelemetry div:nth-child(2) span','#hq .missionTelemetry div:nth-child(2) small','#hq .missionTelemetry div:nth-child(3) span','#hq .missionTelemetry div:nth-child(3) small','#hq .missionTelemetry div:nth-child(4) span','#hq .missionTelemetry div:nth-child(4) small','.missionMapHead .sourceType','#mapTitle','#mapIntro','#mapNodes .mapNode:nth-child(1) b','#mapNodes .mapNode:nth-child(1) small','#mapNodes .mapNode:nth-child(2) b','#mapNodes .mapNode:nth-child(2) small','#mapNodes .mapNode:nth-child(3) b','#mapNodes .mapNode:nth-child(3) small','#mapNodes .mapNode:nth-child(4) b','#mapNodes .mapNode:nth-child(4) small','#mapNodes .mapNode:nth-child(5) b','#mapNodes .mapNode:nth-child(5) small','#xpLabel','#guardianLevelStrip .levelCopy small','#profileMissions+span','#profileVisited+span','#profileKnowledge+span','#profileEnergy+span','#profileScoreLabel','#profileRelicsLabel','#profileBadgesLabel','#hqStart','#hqReset'].forEach((s,i)=>{if(h[i]!==undefined)txt(s,h[i])});
 
-    const w=t.what; ['#whatif .eyebrow','#whatif h2','#whatif .top .lead','#whatif .sourceType','#whatStateTitle','#whatPercent+span','#whatif .whatLabels span:nth-child(1)','#whatif .whatLabels span:nth-child(2)','#whatif .whatLabels span:nth-child(3)','#metricWater','#metricWater+small','#metricFish','#metricFish+small','#metricNature','#metricNature+small','#metricPeople','#metricPeople+small','#whatNote'].forEach((s,i)=>{if(w[i]!==undefined)txt(s,w[i])});
-    const g=t.game; ['#game .eyebrow','#game h2','#game .top .lead','#quizStatus','#result>div:first-child','.completionRibbon','#result .title','#legacyEyebrow','#legacyTitle','#legacyIntro','.legacyBtn[data-ending="restore"] strong','.legacyBtn[data-ending="restore"] small','.legacyBtn[data-ending="verify"] strong','.legacyBtn[data-ending="verify"] small','.legacyBtn[data-ending="protect"] strong','.legacyBtn[data-ending="protect"] small','#endingEyebrow','#endingTitle','#endingText','#endingScore+small','#endingPath+small','#endingRank+small','#endingContinue','#again','#result .actions .ghost'].forEach((s,i)=>{if(g[i]!==undefined)txt(s,g[i])});
-    const p=t.passport; ['#passport .eyebrow','#passport h2','#passport .top .lead','#passportCardLabel','.passportTagline','#passportProgressLabel','#passScore+span','#passRelics+span','#passBadges+span','#passportStatus','#achievements','#achievementTitle','#passportRefresh'].forEach((s,i)=>{if(p[i]!==undefined)txt(s,p[i])});
-    const a=t.ai; ['#guardianAI .eyebrow','#guardianAI h2','#guardianAI .top .lead','#aiStatus','#v16AITools button:nth-child(1)','#v16AITools button:nth-child(2)','#v16AITools button:nth-child(3)','#v16AITools button:nth-child(4)','#aiInput','#aiSend','#aiNote','#aiPublicStatusText','#guardianAI .aiPublicStatus small'].forEach((s,i)=>{if(a[i]!==undefined){if(s==='#aiInput'){document.querySelector(s)?.setAttribute('placeholder',a[i]);}else txt(s,a[i])}});
-    const m=t.moves; ['#moves .eyebrow','#moves h2','#moves .card:nth-child(1)>b','#moves .card:nth-child(1) .small','#moves .card:nth-child(2)>b','#moves .card:nth-child(2) .small','#moves .card:nth-child(3)>b','#moves .card:nth-child(3) .small','#moves .card:nth-child(4)>b','#moves .card:nth-child(4) .small'].forEach((s,i)=>{if(m[i]!==undefined)txt(s,m[i])});
-    const f=t.footer;txt('footer .wrap>div:first-child p',f[0]);txt('footer h3',f[1]);txt('footer .wrap>div:nth-child(3) h3',f[2]);txt('footer .wrap>div:nth-child(3) p',f[3]);txt('footer .wrap>div:nth-child(3) a',f[4]);
+    const w=t.what; if(w) ['#whatif .eyebrow','#whatif h2','#whatif .top .lead','#whatif .sourceType','#whatStateTitle','#whatPercent+span','#whatif .whatLabels span:nth-child(1)','#whatif .whatLabels span:nth-child(2)','#whatif .whatLabels span:nth-child(3)','#metricWater','#metricWater+small','#metricFish','#metricFish+small','#metricNature','#metricNature+small','#metricPeople','#metricPeople+small','#whatNote'].forEach((s,i)=>{if(w[i]!==undefined)txt(s,w[i])});
+    const g=t.game; if(g) ['#game .eyebrow','#game h2','#game .top .lead','#quizStatus','#result>div:first-child','.completionRibbon','#result .title','#legacyEyebrow','#legacyTitle','#legacyIntro','.legacyBtn[data-ending="restore"] strong','.legacyBtn[data-ending="restore"] small','.legacyBtn[data-ending="verify"] strong','.legacyBtn[data-ending="verify"] small','.legacyBtn[data-ending="protect"] strong','.legacyBtn[data-ending="protect"] small','#endingEyebrow','#endingTitle','#endingText','#endingScore+small','#endingPath+small','#endingRank+small','#endingContinue','#again','#result .actions .ghost'].forEach((s,i)=>{if(g[i]!==undefined)txt(s,g[i])});
+    const p=t.passport; if(p) ['#passport .eyebrow','#passport h2','#passport .top .lead','#passportCardLabel','.passportTagline','#passportProgressLabel','#passScore+span','#passRelics+span','#passBadges+span','#passportStatus','#achievements','#achievementTitle','#passportRefresh'].forEach((s,i)=>{if(p[i]!==undefined)txt(s,p[i])});
+    const a=t.ai; if(a) ['#guardianAI .eyebrow','#guardianAI h2','#guardianAI .top .lead','#aiStatus','#v16AITools button:nth-child(1)','#v16AITools button:nth-child(2)','#v16AITools button:nth-child(3)','#v16AITools button:nth-child(4)','#aiInput','#aiSend','#aiNote','#aiPublicStatusText','#guardianAI .aiPublicStatus small'].forEach((s,i)=>{if(a[i]!==undefined){if(s==='#aiInput'){document.querySelector(s)?.setAttribute('placeholder',a[i]);}else txt(s,a[i])}});
+    const m=t.moves; if(m) ['#moves .eyebrow','#moves h2','#moves .card:nth-child(1)>b','#moves .card:nth-child(1) .small','#moves .card:nth-child(2)>b','#moves .card:nth-child(2) .small','#moves .card:nth-child(3)>b','#moves .card:nth-child(3) .small','#moves .card:nth-child(4)>b','#moves .card:nth-child(4) .small'].forEach((s,i)=>{if(m[i]!==undefined)txt(s,m[i])});
+    const f=t.footer; if(f){txt('footer .wrap>div:first-child p',f[0]);txt('footer h3',f[1]);txt('footer .wrap>div:nth-child(3) h3',f[2]);txt('footer .wrap>div:nth-child(3) p',f[3]);txt('footer .wrap>div:nth-child(3) a',f[4]);}
     document.querySelectorAll('.badge').forEach(b=>{const k=b.dataset.badge,n=es?{explorer:'Explorador',scientist:'Explorador de evidencia',guardian:'Guardián del río',champion:'Campeón de misión'}:{explorer:'Explorer',scientist:'Evidence Scout',guardian:'River Guardian',champion:'Mission Champion'};if(n[k])b.textContent=(b.textContent.match(/^\p{Extended_Pictographic}/u)||[''])[0]+' '+n[k]});
     // Accessibility strings
     const input=document.getElementById('aiInput');if(input)input.setAttribute('aria-label',es?'Pregunta a Cauca Guardian AI':'Ask Cauca Guardian AI');
