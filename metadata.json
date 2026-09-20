@@ -1,6 +1,0 @@
-{
-  "name": "Cauca Guardians",
-  "description": "Cauca Guardians — AERIS Mission interactive environmental RPG and awareness platform",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
