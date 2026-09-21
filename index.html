@@ -440,9 +440,6 @@ html{scroll-behavior:smooth}.v16-progress{scroll-margin-top:86px;padding:76px 0;
 @media(max-width:620px){.introTelemetry{font-size:7px}.missionTelemetry{gap:7px}.missionTelemetry>div{padding:11px}.missionTelemetry b{font-size:1.08rem}.missionTelemetry small{font-size:.56rem}.sourceVault{padding:15px}.sourceVaultHead{display:block}.sourceVaultHead p{margin-top:7px}.sourceVaultGrid{grid-template-columns:1fr}.sourceVaultCard{padding:12px}}
 @media(prefers-reduced-motion:reduce){.guardianBriefing .introBrand,.guardianBriefing .briefingKicker,.guardianBriefing #briefingTitle,.guardianBriefing #briefingText,.guardianBriefing .guardianActivation,.guardianBriefing .briefingMission,.guardianBriefing .briefingIdentity,.guardianBriefing #briefingEnter,.introTelemetry i,.guardianOrb.active,.briefingEnter.ready:before{animation:none!important}}
 </style>
-<link rel="stylesheet" href="assets/aeris-v31-core.css">
-<script src="assets/aeris-v31-core.js"></script>
-<link rel="stylesheet" href="assets/aeris-v40.css">
 
 <style id="aeris-v40-youth-palette">
 /* V40 YOUTH PALETTE — energetic, clean, river-inspired */
@@ -938,10 +935,6 @@ body{padding-bottom:92px}
 }
 @media(prefers-reduced-motion:reduce){.hero:after,.card,.btn,.aerisTopLink{transition:none!important;animation:none!important}}
 </style>
-<link rel="stylesheet" href="assets/aeris-v43.css">
-<link rel="stylesheet" href="assets/aeris-v45-design.css">
-<link rel="stylesheet" href="assets/aeris-v49-responsive.css">
-<link rel="stylesheet" href="assets/aeris-v50-responsive-fix.css">
 
 <style id="aeris-v51-field-photography">
 .fieldGallery figure{border:1px solid rgba(98,232,255,.12)}
@@ -2603,7 +2596,6 @@ body.aeris-single-mode .aerisTopLink.active{background:#72f5d51a;color:#72f5d5}
 }
 </style>
 
-<script id="aeris-v40-product-layer" src="assets/aeris-v40.js"></script>
 <script id="aeris-v42-config">
 /* V42: Worker configuration stays outside the public interface. */
 window.AERIS_CONFIG=window.AERIS_CONFIG||{workerUrl:''};
@@ -2634,7 +2626,6 @@ window.AERIS_CONFIG=window.AERIS_CONFIG||{workerUrl:''};
   }
 })();
 </script>
-<script id="aeris-v43-final" src="assets/aeris-v43.js"></script>
 
 <style id="aeris-v46-youth-motion">
 /* ===== AERIS V46 · YOUTH MOTION SYSTEM ===== */
@@ -3049,7 +3040,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}.a48-progress{transition:none}}
 
 </style>
-<script id="aeris-v48-youth-alive">
+<script id="aeris-v48-youth-alive-js">
 (function(){
   const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function boot(){
@@ -3933,6 +3924,21 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,.rpgChoic
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
+})();
+</script>
+<script id="aeris-v100-bugfix-guards">
+(function(){
+  "use strict";
+  // Prevent stale audio playback when the page is hidden or navigation leaves the game.
+  const audio=document.getElementById("aerisRetroBgm");
+  if(!audio)return;
+  const stopOutsideGame=()=>{
+    const mode=document.body&&document.body.dataset?document.body.dataset.aerisMode:"";
+    if(mode!=="game" && !audio.paused) audio.pause();
+  };
+  document.addEventListener("visibilitychange",()=>{if(document.hidden)audio.pause();});
+  new MutationObserver(stopOutsideGame).observe(document.body,{attributes:true,attributeFilter:["data-aeris-mode"]});
+  stopOutsideGame();
 })();
 </script>
 </body>
