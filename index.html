@@ -1578,6 +1578,21 @@ body.aeris-v100-ready .gallery figure:hover img{
 }
 </style>
 
+
+<style id="aeris-five-missions-visibility-fix">
+/* Five-mission campaign integrity: nodes remain part of the map even when locked. */
+.rpgMissionMap [data-mission="4"],
+.rpgMissionMap [data-mission="5"],
+.rpgMissionMap [data-mission-id="4"],
+.rpgMissionMap [data-mission-id="5"],
+.rpgMapScreen [data-mission="4"],
+.rpgMapScreen [data-mission="5"],
+.rpgMapScreen [data-mission-id="4"],
+.rpgMapScreen [data-mission-id="5"]{
+  display:block;
+}
+</style>
+
 </head>
 <body data-aeris-version="100" data-aeris-final-polish="retro-future">
 <div aria-labelledby="arcadeTitle" aria-modal="true" class="guardianBriefing arcadeStart" id="guardianBriefing" role="dialog">
@@ -4223,6 +4238,103 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,.rpgChoic
       if(r.addedNodes && r.addedNodes.length) changed = true;
     });
     if(changed) stableImages();
+  });
+  observer.observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
+
+<script id="aeris-five-missions-integrity-fix">
+(function(){
+  'use strict';
+
+  const REQUIRED = 5;
+
+  function missionElements(){
+    return Array.from(document.querySelectorAll(
+      '[data-mission], [data-mission-id], .rpgMissionNode, .missionNode, .mission'
+    ));
+  }
+
+  function getMissionNumber(el){
+    const raw = el.getAttribute('data-mission') ||
+                el.getAttribute('data-mission-id') ||
+                el.dataset && (el.dataset.mission || el.dataset.missionId);
+    const n = parseInt(raw,10);
+    if(Number.isFinite(n)) return n;
+    const text = (el.textContent || '').match(/MISSION\s*([1-5])/i);
+    return text ? parseInt(text[1],10) : null;
+  }
+
+  function normalizeMissionProgress(){
+    // Never let a malformed/legacy saved value define the number of missions.
+    // The campaign itself always has exactly five missions.
+    try{
+      const keys = Object.keys(localStorage);
+      keys.forEach(function(key){
+        const value = localStorage.getItem(key);
+        if(!value) return;
+        if(!/mission|aeris.*progress|progress/i.test(key)) return;
+
+        // Repair only obvious "current mission" values outside the valid range.
+        if(/current|active|selected/i.test(key)){
+          const n = parseInt(value,10);
+          if(Number.isFinite(n) && (n < 1 || n > REQUIRED)){
+            localStorage.setItem(key, '1');
+          }
+        }
+      });
+    }catch(e){}
+  }
+
+  function protectMissionMap(){
+    const nodes = missionElements();
+
+    // If the existing map already renders five nodes, do not interfere.
+    const numbered = nodes.map(getMissionNumber).filter(n => n !== null);
+    const unique = new Set(numbered);
+
+    if(unique.size >= REQUIRED) return;
+
+    // Do not create fake visual missions. Instead expose a diagnostic marker
+    // so the app's own renderer can be repaired without destroying its data.
+    const map = document.querySelector('.rpgMapScreen, #rpgMapScreen, .rpgMissionMap, [data-rpg-map]');
+    if(map) map.setAttribute('data-aeris-missions-required','5');
+  }
+
+  function sanitizeCurrentMission(){
+    const ids = [
+      'rpgPlayMissionLabel',
+      'rpgMissionLabel'
+    ];
+    ids.forEach(function(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      const match = (el.textContent || '').match(/MISSION\s+(\d+)/i);
+      if(!match) return;
+      let n = parseInt(match[1],10);
+      if(n < 1 || n > REQUIRED) n = 1;
+      // Do not overwrite mission names; only correct an invalid numeric marker.
+      el.dataset.missionNumber = String(n);
+    });
+  }
+
+  function boot(){
+    normalizeMissionProgress();
+    protectMissionMap();
+    sanitizeCurrentMission();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded',boot,{once:true});
+  }else{
+    boot();
+  }
+
+  // Recheck after the game's own renderer changes the map.
+  const observer = new MutationObserver(function(){
+    protectMissionMap();
+    sanitizeCurrentMission();
   });
   observer.observe(document.body,{childList:true,subtree:true});
 })();
