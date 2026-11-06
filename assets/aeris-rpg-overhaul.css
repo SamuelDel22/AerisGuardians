@@ -233,3 +233,56 @@ body.aeris-rpg-overhaul .rpgMarker.current{animation:aerisMarkerPulse 1.5s steps
 .aerisVictoryParticles i:nth-child(3n + 1){background:#e6f2d5;width:4px;height:4px}
 @keyframes aerisPixelReward{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.55)}}
 @media(prefers-reduced-motion:reduce){body.aeris-rpg-overhaul .rpgDossier:not([hidden]),body.aeris-rpg-overhaul .rpgMissionPlay:not([hidden]),body.aeris-rpg-overhaul .rpgComplete:not([hidden]),body.aeris-rpg-overhaul .rpgMarker.current,.aerisVictoryParticles i{animation:none!important}}
+
+/* Performance pass: preserve the 16-bit look without a full-screen scanline layer. */
+body.aeris-rpg-overhaul::before,
+body.aeris-rpg-overhaul::after,
+body::before,
+body::after {
+  background-image: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 0 !important;
+  animation: none !important;
+}
+/* Keep original source artwork clean: no CSS pixelation or animated sheen on photographs. */
+body.aeris-rpg-overhaul img,
+body.aeris-rpg-overhaul .photo img,
+body.aeris-rpg-overhaul .gallery img,
+body.aeris-rpg-overhaul .factPhoto img,
+body.aeris-rpg-overhaul .fieldGallery img {
+  image-rendering: auto !important;
+  backface-visibility: hidden;
+}
+body.aeris-rpg-overhaul .photo:before,
+body.aeris-rpg-overhaul .gallery figure:before,
+body.aeris-rpg-overhaul .factPhoto:after {
+  display: none !important;
+  animation: none !important;
+}
+/* Large scene photographs stay still; character and boss sprites keep their RPG animation. */
+body.aeris-rpg-overhaul .rpgSceneBackground {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+  will-change: auto !important;
+}
+body.aeris-rpg-overhaul .rpgWorld::before,
+body.aeris-rpg-overhaul .rpgFxWave,
+body.aeris-rpg-overhaul .rpgFxHaze {
+  animation: none !important;
+}
+body.aeris-rpg-overhaul .aerisMissionControls,
+body.aeris-rpg-overhaul [data-aeris-move],
+body.aeris-rpg-overhaul .rpgMoveBtn {
+  display: none !important;
+}
+body.aeris-rpg-overhaul .rpgWheelControls { display: flex !important; }
+@media (max-width: 700px) {
+  body.aeris-rpg-overhaul .rpgWorldDialogue { backdrop-filter: none !important; }
+  body.aeris-rpg-overhaul .rpgEncounter { backdrop-filter: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.aeris-rpg-overhaul .rpgAmbient i,
+  body.aeris-rpg-overhaul .rpgBossAura,
+  body.aeris-rpg-overhaul .rpgGuardianPlayer img { animation: none !important; }
+}

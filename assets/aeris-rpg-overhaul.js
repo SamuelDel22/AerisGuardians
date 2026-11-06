@@ -51,8 +51,7 @@
     }
     if(!$('aerisMapHint')){const hint=document.createElement('div');hint.className='aerisMapHint';hint.id='aerisMapHint';hint.textContent=t('Choose the glowing waypoint. Complete both knowledge trials to claim its relic.','Elige el punto iluminado. Supera las dos pruebas de conocimiento para reclamar su reliquia.');$('rpgMapScreen').append(hint);}
     if(!$('aerisResetProgress')){const reset=document.createElement('button');reset.type='button';reset.className='aerisResetProgress';reset.id='aerisResetProgress';reset.textContent=t('RESET CAMPAIGN PROGRESS','REINICIAR PROGRESO');$('rpgMapScreen').append(reset);}
-    if(!$('aerisMissionControls')){const controls=document.createElement('div');controls.className='aerisMissionControls';controls.id='aerisMissionControls';controls.innerHTML='<button type="button" data-aeris-move="left" aria-label="Move left">◀</button><button type="button" data-aeris-move="right" aria-label="Move right">▶</button>';$('rpgMissionPlay').append(controls);}
-    if(!$('aerisMissionNotice')){const notice=document.createElement('div');notice.className='aerisMissionNotice';notice.id='aerisMissionNotice';notice.textContent=t('CONTROLS: use the wheel, arrow buttons or keyboard arrows / A and D. Reach the signal to begin the knowledge trial.','CONTROLES: usa la rueda, los botones o las flechas del teclado / A y D. Llega a la señal para iniciar la prueba.');$('rpgMissionPlay').append(notice);}
+    if(!$('aerisMissionNotice')){const notice=document.createElement('div');notice.className='aerisMissionNotice';notice.id='aerisMissionNotice';notice.textContent=t('CONTROLS: drag the joystick left or right to reach the signal.','CONTROLES: mueve el joystick a izquierda o derecha para llegar a la señal.');$('rpgMissionPlay').append(notice);}
   }
   function renderHud(){
     const count=state.completed.length,percent=Math.round(count/missions.length*100),rank=state.xp>=850?'CAUCA LEGEND':state.xp>=500?'WATERSHED KEEPER':state.xp>=250?'RIVER SENTINEL':state.xp>=100?'FIELD SCOUT':'RIVER ROOKIE';
@@ -76,14 +75,14 @@
     $('rpgBackMap').textContent=t('← BACK TO MAP','← VOLVER AL MAPA');
   }
   function resetPlayer(){
-    clearTimeout(window.__aerisBossIntro);root.classList.remove('boss-cinematic');$('rpgEncounter').hidden=true;$('rpgEncounter').innerHTML='';$('rpgControls').hidden=false;if($('aerisMissionControls'))$('aerisMissionControls').hidden=false;if($('aerisMissionNotice'))$('aerisMissionNotice').hidden=false;if($('rpgWorldDialogue'))$('rpgWorldDialogue').hidden=false;
+    clearTimeout(window.__aerisBossIntro);root.classList.remove('boss-cinematic');$('rpgEncounter').hidden=true;$('rpgEncounter').innerHTML='';$('rpgControls').hidden=false;if($('rpgWorldDialogue'))$('rpgWorldDialogue').hidden=false;
     state.playerX=8;state.encounter=false;state.finished=false;state.round=0;state.mistakes=0;state.answerLocked=false;
     $('rpgGuardianPlayer').style.left='8%';$('rpgGuardianPlayer').classList.remove('moving','atBoss','facingLeft');$('rpgDistanceFill').style.width='8%';$('rpgDistanceText').textContent='8%';$('rpgObjective').textContent=t('REACH THE SIGNAL','LLEGA A LA SEÑAL');
   }
   function startMission(){
     const m=missions[state.selected];$('rpgDossier').hidden=true;$('rpgMapScreen').hidden=true;$('rpgMissionPlay').hidden=false;$('rpgComplete').hidden=true;resetPlayer();
     $('rpgPlayMissionLabel').textContent=t('MISSION ','MISIÓN ')+(state.selected+1)+' // '+name(m).toUpperCase();$('rpgPlayXP').textContent=state.xp;$('rpgSceneImage').src=m.img;$('rpgSceneImage').alt=name(m)+' — '+place(m);$('rpgSceneLocation').textContent=place(m);$('rpgSceneTitle').textContent=name(m);$('rpgBossName').textContent=boss(m);$('rpgBossLevel').textContent='LV. '+(10+state.selected*3);$('rpgBossImage').src=m.bossImg;$('rpgDialogueSpeaker').textContent=t('AERIS GUIDE','GUÍA AERIS');$('rpgDialogueText').textContent=es()?m.introEs:m.intro;
-    $('aerisMissionNotice').textContent=t('CONTROLS: use the wheel, arrow buttons or keyboard arrows / A and D. Reach the signal to begin the knowledge trial.','CONTROLES: usa la rueda, los botones o las flechas del teclado / A y D. Llega a la señal para iniciar la prueba.');
+    $('aerisMissionNotice').textContent=t('CONTROLS: drag the joystick left or right to reach the signal.','CONTROLES: mueve el joystick a izquierda o derecha para llegar a la señal.');
     $('rpgGuardianPlayer').querySelector('img').src='assets/rpg/guardian/guardian-idle.png';$('rpgGuardianPlayer').querySelector('img').alt=t('AERIS Guardian','Guardián AERIS');
     $('rpgPlayXP').textContent=state.xp;requestAnimationFrame(()=>{$('rpgGuardianPlayer').focus({preventScroll:true})});
   }
@@ -96,7 +95,7 @@
     if(state.playerX>=75)beginEncounter();
   }
   function beginEncounter(){
-    if(state.encounter)return;state.encounter=true;state.playerX=77;$('rpgGuardianPlayer').style.left='77%';$('rpgGuardianPlayer').classList.remove('moving');$('rpgGuardianPlayer').classList.add('atBoss');$('rpgGuardianPlayer').querySelector('img').src='assets/rpg/guardian/guardian-ready.png';$('rpgObjective').textContent=t('FIELD TRIAL','PRUEBA DE CAMPO');$('rpgControls').hidden=true;if($('aerisMissionControls'))$('aerisMissionControls').hidden=true;if($('aerisMissionNotice'))$('aerisMissionNotice').hidden=true;if($('rpgWorldDialogue'))$('rpgWorldDialogue').hidden=true;
+    if(state.encounter)return;state.encounter=true;state.playerX=77;$('rpgGuardianPlayer').style.left='77%';$('rpgGuardianPlayer').classList.remove('moving');$('rpgGuardianPlayer').classList.add('atBoss');$('rpgGuardianPlayer').querySelector('img').src='assets/rpg/guardian/guardian-ready.png';$('rpgObjective').textContent=t('FIELD TRIAL','PRUEBA DE CAMPO');$('rpgControls').hidden=true;if($('rpgWorldDialogue'))$('rpgWorldDialogue').hidden=true;
     const enc=$('rpgEncounter');enc.hidden=false;enc.innerHTML='<div class="aerisBattlePanel" id="aerisBattlePanel" aria-live="polite"><div class="aerisBattleTop"><span id="aerisBattleStage">FIELD TRIAL 1 / 2</span><span id="aerisBattleThreat">THREAT 100%</span></div><div class="aerisBattleMeter"><i id="aerisBattleMeterFill" style="width:100%"></i></div><h4 class="aerisBattleQuestion" id="aerisBattleQuestion"></h4><p class="aerisBattleHint" id="aerisBattleHint"></p><div class="aerisBattleAnswers" id="aerisBattleAnswers"></div><div class="aerisBattleFeedback" id="aerisBattleFeedback" hidden></div><button type="button" class="aerisBattleNext" id="aerisBattleNext" hidden></button></div>';
     root.classList.remove('boss-cinematic');void root.offsetWidth;root.classList.add('boss-cinematic');const m=missions[state.selected];$('rpgDialogueText').textContent=t('The threat is in range. Two decisions stand between this river and a safer future.','La amenaza está a tu alcance. Dos decisiones separan a este río de un futuro más seguro.');renderRound();
   }
@@ -140,10 +139,8 @@
     if(e.target.closest('#rpgBackMap')||e.target.closest('#rpgQuitMission')||e.target.closest('#rpgContinueMap')){e.preventDefault();e.stopImmediatePropagation();renderMap();return;}
     const answer=e.target.closest('.aerisBattleAnswer');if(answer){e.preventDefault();e.stopImmediatePropagation();chooseAnswer(Number(answer.dataset.answer));return;}
     if(e.target.closest('#aerisBattleNext')){e.preventDefault();e.stopImmediatePropagation();nextBattleStep();return;}
-    const moveButton=e.target.closest('[data-aeris-move]');if(moveButton){e.preventDefault();e.stopImmediatePropagation();move(moveButton.dataset.aerisMove);return;}
     if(e.target.closest('#aerisResetProgress')){e.preventDefault();e.stopImmediatePropagation();if(window.confirm(t('Reset all AERIS campaign progress and relics on this device?','¿Reiniciar todo el progreso y las reliquias de AERIS en este dispositivo?'))){state.completed=[];state.relics=[];state.xp=0;persist();renderMap();notify(t('Campaign progress reset.','Progreso reiniciado.'));}return;}
   },true);
-  window.addEventListener('keydown',e=>{if($('rpgMissionPlay').hidden)return;if(['ArrowLeft','a','A','ArrowRight','d','D'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();move(['ArrowLeft','a','A'].includes(e.key)?'left':'right');}},true);
   window.aerisRpgMove=move;window.aerisMove=move;
   window.addEventListener('aeris:language',applyLanguage);
   const switcher=$('langSwitch');if(switcher)switcher.addEventListener('click',()=>setTimeout(applyLanguage,140));
