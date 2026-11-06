@@ -5,22 +5,14 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Cauca Guardians — AERIS Mission</title>
-<meta name="description" content="Explore the Cauca River, understand environmental pressures in the Bajo Cauca, and become a guardian through interactive learning missions.">
-<meta name="theme-color" content="#061b24">
-<meta name="color-scheme" content="light">
-<link rel="preload" as="image" href="assets/field/field-01-river-mining-structure.webp" fetchpriority="high">
 <style>
 :root{--bg:#061b24;--bg2:#0b3440;--mint:#72f5d5;--cyan:#55d9ff;--lime:#baf47b;--gold:#ffd166;--white:#f5fffc;--ink:#102b32;--muted:#587078;--paper:#f3faf7}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
-:focus-visible{outline:3px solid #079b82!important;outline-offset:3px}
-.skip-link{position:fixed;z-index:10000;left:12px;top:12px;padding:10px 14px;border-radius:10px;background:#fff;color:#061b24;font-weight:800;transform:translateY(-160%);transition:transform .2s}
-.skip-link:focus{transform:translateY(0)}
-body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 8% 12%,#72f5d51c,transparent 22%),radial-gradient(circle at 90% 35%,#55d9ff18,transparent 24%)}
 .nav{position:fixed;z-index:99;top:13px;left:50%;transform:translateX(-50%);width:min(1140px,94%);padding:10px 13px 10px 16px;border:1px solid #ffffff24;border-radius:19px;background:#061b24e9;backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 45px #0005}
 .brand{display:flex;align-items:center;gap:9px;color:#fff;text-decoration:none;font-weight:1000}.logo{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--mint),var(--cyan));display:grid;place-items:center;color:var(--bg);font-size:21px}.links{display:flex;gap:4px}.links a{color:#eafffa;text-decoration:none;font-size:.82rem;padding:8px 10px;border-radius:10px}.links a:hover{background:#fff1}@media(max-width:700px){.links{display:none}}
 .langSwitch{border:1px solid #ffffff33;background:#ffffff10;color:#fff;border-radius:11px;padding:8px 10px;font-weight:900;cursor:pointer;font-size:.76rem;white-space:nowrap}.langSwitch:hover{background:#fff2}@media(max-width:700px){.langSwitch{font-size:.7rem;padding:7px 8px}}
-.hero{min-height:94vh;position:relative;display:flex;align-items:flex-end;color:white;overflow:hidden;background:linear-gradient(180deg,#061b2466,#061b24bd 55%,#061b24f5),url("assets/field/field-01-river-mining-structure.webp") center/cover}
+.hero{min-height:94vh;position:relative;display:flex;align-items:flex-end;color:white;overflow:hidden;background:linear-gradient(180deg,#061b2466,#061b24bd 55%,#061b24f5),url("assets/field/field-01-river-mining-structure.jpg") center/cover}
 .hero:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-80px;height:180px;background:radial-gradient(ellipse,#55d9ff40 0 30%,transparent 31%) 0/38% 100%;filter:blur(4px);animation:wave 9s linear infinite}@keyframes wave{to{transform:translateX(10%)}}
 .heroInner{width:min(1140px,92%);margin:auto;padding:150px 0 100px;position:relative;z-index:2}.tag{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid #fff3;border-radius:999px;background:#061b2499;font-size:.74rem;font-weight:950;text-transform:uppercase;letter-spacing:.08em}.dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 16px var(--mint);animation:pulse 1.5s infinite}@keyframes pulse{50%{transform:scale(1.5);opacity:.55}}
 h1{font-size:clamp(3.4rem,9vw,7.5rem);line-height:.86;letter-spacing:-.065em;margin:22px 0 18px}h1 span{color:var(--mint)}.hero p{max-width:720px;font-size:1.1rem;color:#e3f7f3}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.btn{border:0;border-radius:14px;padding:13px 17px;font-weight:950;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.2s}.btn:hover{transform:translateY(-2px)}.primary{background:var(--mint);color:var(--bg);box-shadow:0 10px 30px #72f5d544}.ghost{background:#061b2499;border:1px solid #fff3;color:white}.live{position:absolute;z-index:5;bottom:17px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#061b24b8;border:1px solid #fff3;padding:9px 14px;border-radius:999px;font-size:.79rem;backdrop-filter:blur(10px)}
@@ -127,7 +119,7 @@ section{scroll-margin-top:80px}
 /* ===== ULTIMATE YOUTHFUL UI ===== */
 :root{--violet:#9b8cff;--electric:#69e8ff}
 body{background:linear-gradient(180deg,#f4fcf9 0%,#edf8f5 100%)}
-.hero{background-image:linear-gradient(180deg,#061b2455,#061b24c7 58%,#061b24f8),url("assets/field/field-01-river-mining-structure.webp")}
+.hero{background-image:linear-gradient(180deg,#061b2455,#061b24c7 58%,#061b24f8),url("assets/field/field-01-river-mining-structure.jpg")}
 .heroInner{padding-bottom:125px}
 .hero h1{max-width:900px;text-shadow:0 5px 35px #0008}
 .hero p{font-weight:550}
@@ -290,7 +282,7 @@ footer .brandLogo{width:38px;height:38px}
   background:
     linear-gradient(90deg,rgba(1,8,18,.78) 0%,rgba(1,8,18,.46) 34%,rgba(1,8,18,.58) 68%,rgba(1,8,18,.82) 100%),
     linear-gradient(180deg,rgba(0,6,18,.30) 0%,rgba(0,6,18,.08) 38%,rgba(0,5,15,.74) 100%),
-    url('assets/field/field-05-sunset-riverbank.webp') center/cover no-repeat !important;
+    url('assets/field/field-05-sunset-riverbank.jpg') center/cover no-repeat !important;
   transform:scale(1.03) !important;
 }
 .guardianBriefing:after{
@@ -490,7 +482,7 @@ body:before{
   background:linear-gradient(135deg,#ffffff12,#42c9ff10)!important;
 }
 .hero{
-  background:linear-gradient(180deg,#07182766,#071827b8 55%,#071827ef),url("assets/field/field-01-river-mining-structure.webp") center/cover!important;
+  background:linear-gradient(180deg,#07182766,#071827b8 55%,#071827ef),url("assets/field/field-01-river-mining-structure.jpg") center/cover!important;
 }
 .hero h1 span{background:linear-gradient(90deg,#38e6c2,#42c9ff 48%,#b9f36b 82%,#ffcf5a)!important;-webkit-background-clip:text;background-clip:text}
 .heroKicker{border-left-color:var(--coral)!important;background:#071827aa!important}
@@ -838,7 +830,7 @@ body:before{background:
     linear-gradient(180deg,rgba(5,18,34,.25) 0%,rgba(5,18,34,.38) 28%,rgba(6,25,39,.72) 70%,rgba(5,17,31,.96) 100%),
     radial-gradient(circle at 76% 22%,rgba(139,124,255,.25),transparent 25%),
     radial-gradient(circle at 18% 36%,rgba(32,224,178,.22),transparent 28%),
-    url("assets/field/field-01-river-mining-structure.webp");
+    url("assets/field/field-01-river-mining-structure.jpg");
   background-position:center;
   background-size:cover;
 }
@@ -1392,17 +1384,17 @@ body.aeris-v100-ready .brandLogo{
     </div>
   </div>
 </div>
-<nav class="nav"><a class="brand" href="#top"><img alt="Aeris order logo" class="brandLogo" src="aeris-logo.webp"/><span class="brandText"><strong>AERIS</strong><small>CAUCA // GUARDIANS</small></span></a><button aria-label="Open menu" class="mobileMenu" id="mobileMenu">☰</button>
+<nav class="nav"><a class="brand" href="#top"><img alt="Aeris order logo" class="brandLogo" src="aeris-logo.jpeg"/><span class="brandText"><strong>AERIS</strong><small>CAUCA // GUARDIANS</small></span></a><button aria-label="Open menu" class="mobileMenu" id="mobileMenu">☰</button>
 <div class="links" id="navLinks">
-<a class="aerisTopLink active" href="#information" title="Information"><img class="aerisNavIcon" src="assets/section-icons/information.webp" alt="Information" aria-hidden="true"><span>Information</span></a>
-<a class="aerisTopLink" href="#game" title="Game"><img class="aerisNavIcon" src="assets/section-icons/game.webp" alt="Game" aria-hidden="true"><span>Game</span></a>
+<a class="aerisTopLink active" href="#information" title="Information"><img class="aerisNavIcon" src="assets/section-icons/information.png" alt="Information" aria-hidden="true"><span>Information</span></a>
+<a class="aerisTopLink" href="#game" title="Game"><img class="aerisNavIcon" src="assets/section-icons/game.png" alt="Game" aria-hidden="true"><span>Game</span></a>
 </div><button class="langSwitch" id="langSwitch" type="button">🇪🇸 Español</button></nav>
 <button aria-label="Toggle ambient sound" class="ambient" id="ambient" title="Toggle ambient sound">♫</button>
 <button aria-label="Toggle game sound effects" class="soundFX" id="soundFX" title="Toggle game sound effects">🔊</button>
 <div class="toast" id="toast"></div>
 <header class="hero" id="top"><div class="heroInner">
-<img alt="Aeris order emblem" class="heroLogo" src="aeris-logo.webp"/>
-<div class="aerisBadge"><img alt="" src="aeris-logo.webp"/> AERIS ORDER · 10 ENGLISH</div>
+<img alt="Aeris order emblem" class="heroLogo" src="aeris-logo.jpeg"/>
+<div class="aerisBadge"><img alt="" src="aeris-logo.jpeg"/> AERIS ORDER · 10 ENGLISH</div>
 <span class="tag"><span class="dot"></span> Environmental mission · Bajo Cauca</span>
 <div class="heroKicker">THE CAUCA RIVER IS MORE THAN WATER</div>
 <h1>When mining harms the river,<br/><span>everyone feels it.</span></h1>
@@ -1410,25 +1402,25 @@ body.aeris-v100-ready .brandLogo{
 <div class="actions"><a class="btn primary" href="#game">Open Mission Map ↓</a><a class="btn ghost" href="#game">Enter the game ✦</a></div>
 </div><div class="live"><span class="dot" style="display:inline-block;margin-right:7px"></span><span id="live">The river is alive — keep learning.</span></div></header>
 <section id="story"><div class="wrap"><div class="top"><div><div class="eyebrow">01 / Learn</div><h2>One river. Many lives.</h2></div><p class="lead">The Cauca connects ecosystems, communities, wildlife, agriculture and cities. What happens to the water can matter far beyond one location.</p></div>
-<div class="story"><div class="photo reveal"><img alt="Cauca River" src="assets/field/field-04-riverbank-view.webp"/><div class="caption">Cauca River · real field photograph · Caucasia, Antioquia</div></div>
+<div class="story"><div class="photo reveal"><img alt="Cauca River" src="assets/field/field-04-riverbank-view.jpg"/><div class="caption">Cauca River · real field photograph · Caucasia, Antioquia</div></div>
 <div class="dark reveal"><div class="eyebrow" style="color:var(--mint)">Why it matters</div><h2>When the land changes, the river feels it.</h2><p>Illegal mining can involve excavation, vegetation loss, increased sediment and, in some contexts, hazardous substances such as mercury.</p>
 <div class="steps"><div class="step"><span class="num">1</span><div><strong>Land gets disturbed</strong><span>Excavation can reshape soil, riverbanks and habitats.</span></div></div><div class="step"><span class="num">2</span><div><strong>Water carries material</strong><span>Sediment and pollutants can move through connected waterways.</span></div></div><div class="step"><span class="num">3</span><div><strong>Life is affected</strong><span>Plants, animals and communities can feel the consequences.</span></div></div></div>
 <div class="quote"><b>Guardian rule:</b> knowledge comes first. You cannot protect what you do not understand.</div></div></div></div></section>
 <section id="facts"><div class="wrap"><div class="top"><div><div class="eyebrow">02 / Quick facts</div><h2>Facts worth knowing.</h2></div></div><div class="cards">
-<div class="card reveal"><div class="factPhoto"><img src="assets/field/field-02-mining-boat.webp" alt="Illegal mining landscape in Colombia"></div><div class="big">3,123 g</div><b>Mercury reported seized</b><p class="small">A 2024 report described a mercury seizure in Caucasia.</p><div class="photoCredit">Real field photograph · Caucasia, Antioquia</div></div>
-<div class="card reveal"><div class="factPhoto"><img src="assets/field/field-08-egrets-river.webp" alt="Vegetation recovery in Colombia"></div><div class="big">30 ha</div><b>Environmental recovery</b><p class="small">A 2024 report described phytoremediation over 30 hectares in Caucasia.</p><div class="photoCredit">Real photograph · vegetation recovery in Colombia</div></div>
-<div class="card reveal"><div class="factPhoto"><img src="assets/field/field-06-waste-riverbank.webp" alt="Excavator used in illegal mining in Colombia"></div><div class="big">5</div><b>Mining units destroyed</b><p class="small">A 2026 report described an operation against illegal mining in Caucasia.</p><div class="photoCredit">Real field photograph · Caucasia, Antioquia</div></div>
-<div class="card reveal"><div class="factPhoto"><img src="assets/field/field-04-riverbank-view.webp" alt="Cauca River in Caucasia"></div><div class="big">1 basin</div><b>Connected territory</b><p class="small">Water connects places: upstream events can matter downstream.</p><div class="photoCredit">Real field photograph · Caucasia, Antioquia</div></div>
+<div class="card reveal"><div class="factPhoto"><img src="assets/field/field-02-mining-boat.jpg" alt="Illegal mining landscape in Colombia"></div><div class="big">3,123 g</div><b>Mercury reported seized</b><p class="small">A 2024 report described a mercury seizure in Caucasia.</p><div class="photoCredit">Real field photograph · Caucasia, Antioquia</div></div>
+<div class="card reveal"><div class="factPhoto"><img src="assets/field/field-08-egrets-river.jpg" alt="Vegetation recovery in Colombia"></div><div class="big">30 ha</div><b>Environmental recovery</b><p class="small">A 2024 report described phytoremediation over 30 hectares in Caucasia.</p><div class="photoCredit">Real photograph · vegetation recovery in Colombia</div></div>
+<div class="card reveal"><div class="factPhoto"><img src="assets/field/field-06-waste-riverbank.jpg" alt="Excavator used in illegal mining in Colombia"></div><div class="big">5</div><b>Mining units destroyed</b><p class="small">A 2026 report described an operation against illegal mining in Caucasia.</p><div class="photoCredit">Real field photograph · Caucasia, Antioquia</div></div>
+<div class="card reveal"><div class="factPhoto"><img src="assets/field/field-04-riverbank-view.jpg" alt="Cauca River in Caucasia"></div><div class="big">1 basin</div><b>Connected territory</b><p class="small">Water connects places: upstream events can matter downstream.</p><div class="photoCredit">Real field photograph · Caucasia, Antioquia</div></div>
 </div></div></section>
 <section id="gallery" style="background:#edf6f3"><div class="wrap"><div class="top"><div><div class="eyebrow">03 / Real world</div><h2>See the territory.</h2></div><p class="lead">Real photographs help turn an environmental issue into something visible.</p></div>
-<div class="gallery fieldGallery"><figure class="reveal"><img alt="Cauca River and riverbank" src="assets/field/field-04-riverbank-view.webp"/><figcaption><b>The Cauca River</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Mining activity on the Cauca River" src="assets/field/field-02-mining-boat.webp"/><figcaption><b>Mining activity</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Waste along the Cauca River bank" src="assets/field/field-06-waste-riverbank.webp"/><figcaption><b>Riverbank waste</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Pipe and waste beside the river" src="assets/field/field-03-pipe-riverbank.webp"/><figcaption><b>Riverbank pressure</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Egrets near waste on the riverbank" src="assets/field/field-07-egrets-waste.webp"/><figcaption><b>Wildlife and waste</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Riverbank waste at sunset" src="assets/field/field-05-sunset-riverbank.webp"/><figcaption><b>Evidence at sunset</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Wide view of the river and waste" src="assets/field/field-09-wide-river-waste.webp"/><figcaption><b>River in context</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
-<figure class="reveal"><img alt="Riverbank with egrets and debris" src="assets/field/field-10-riverbank-egrets.webp"/><figcaption><b>Life beside the river</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure></div></div></section>
+<div class="gallery fieldGallery"><figure class="reveal"><img alt="Cauca River and riverbank" src="assets/field/field-04-riverbank-view.jpg"/><figcaption><b>The Cauca River</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
+<figure class="reveal"><img alt="Mining activity on the Cauca River" src="assets/field/field-02-mining-boat.jpg"/><figcaption><b>Mining activity</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
+<figure class="reveal"><img alt="Waste along the Cauca River bank" src="assets/field/field-06-waste-riverbank.jpg"/><figcaption><b>Riverbank waste</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
+<figure class="reveal"><img alt="Pipe and waste beside the river" src="assets/field/field-03-pipe-riverbank.jpg"/><figcaption><b>Riverbank pressure</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
+<figure class="reveal"><img alt="Egrets near waste on the riverbank" src="assets/field/field-07-egrets-waste.jpg"/><figcaption><b>Wildlife and waste</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
+<figure class="reveal"><img alt="Riverbank waste at sunset" src="assets/field/field-05-sunset-riverbank.jpg"/><figcaption><b>Evidence at sunset</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
+<figure class="reveal"><img alt="Wide view of the river and waste" src="assets/field/field-09-wide-river-waste.jpg"/><figcaption><b>River in context</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure>
+<figure class="reveal"><img alt="Riverbank with egrets and debris" src="assets/field/field-10-riverbank-egrets.jpg"/><figcaption><b>Life beside the river</b><br/>Real field photograph · Caucasia, Antioquia</figcaption></figure></div></div></section>
 <section id="mercury" style="background:#f6fbfa"><div class="wrap"><div class="top"><div><div class="eyebrow">04 / Mercury and Fish · Cauca River</div><h2>What does mercury do to fish in the Cauca River?</h2></div><p class="lead">In the Bajo Cauca region of Antioquia, gold mining has been an important source of mercury pollution. Studies in the Bajo Cauca River have found methylmercury concentrations in fish exposed to mining areas.</p></div>
 <div class="story"><div class="photo reveal"><img alt="Gold-mining area in Bajo Cauca, Antioquia" src="https://imagenes2.eltiempo.com/files/image_600_455/uploads/2023/03/18/6416254c09dc8.jpeg"/><div class="caption">Bajo Cauca, Antioquia · gold mining and mercury pollution</div></div>
 <div class="dark reveal"><div class="eyebrow" style="color:var(--mint)">What happens in the Cauca</div><h2>Mercury can enter the food chain.</h2><p>In aquatic environments, some mercury can be transformed into methylmercury. This form can build up in fish tissues and increase as it moves from one organism to another through the food web.</p>
@@ -1441,7 +1433,7 @@ body.aeris-v100-ready .brandLogo{
 <section class="gameSection aerisGameRpg" id="game">
 <div class="wrap">
   <div class="top gameIntroTop">
-    <div class="destinationHeading"><img class="destinationIcon gameIcon" src="assets/section-icons/game.webp" alt="" aria-hidden="true"><div><div class="eyebrow">05 / CAUCA GUARDIANS RPG</div><h2>Choose your mission.</h2></div></div>
+    <div class="destinationHeading"><img class="destinationIcon gameIcon" src="assets/section-icons/game.png" alt="" aria-hidden="true"><div><div class="eyebrow">05 / CAUCA GUARDIANS RPG</div><h2>Choose your mission.</h2></div></div>
     <p class="lead">Explore the Bajo Cauca map, complete each mission and unlock the next chapter.</p>
   </div>
 
@@ -1449,7 +1441,7 @@ body.aeris-v100-ready .brandLogo{
     <div class="rpgMapScreen" id="rpgMapScreen">
       <div class="rpgMapTopbar"><div><span class="rpgKicker">AERIS // GUARDIAN OS</span><h3>BAJO CAUCA — MISSION MAP</h3></div><div class="rpgStats"><span>MISSION <b id="rpgProgress">1 / 5</b></span><span>XP <b id="rpgXP">0</b></span></div></div>
       <div class="rpgMapViewport">
-        <img id="rpgMapImage" src="assets/rpg/bajo-cauca-mission-map.webp" alt="Retro mission map inspired by the Bajo Cauca and Río Cauca">
+        <img id="rpgMapImage" src="assets/rpg/bajo-cauca-mission-map.png" alt="Retro mission map inspired by the Bajo Cauca and Río Cauca">
         <div class="rpgMapRetroFX" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <svg class="rpgMapRoute" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="42,19 65,34 61,55 31,65 50,82" /></svg>
         <div class="rpgMapScan" aria-hidden="true"></div>
@@ -1462,8 +1454,8 @@ body.aeris-v100-ready .brandLogo{
     <div class="rpgDossier" id="rpgDossier" hidden>
       <button class="rpgBack" id="rpgBackMap" type="button">← BACK TO MAP</button>
       <div class="rpgDossierGrid">
-        <div class="rpgMissionArt"><img id="rpgDossierImage" src="assets/field/field-01-river-mining-structure.webp" alt="Mission scenario"><div class="rpgArtBadge" id="rpgDossierBadge">MISSION 1</div></div>
-        <div class="rpgDossierCopy"><span class="rpgKicker" id="rpgDossierLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgDossierTitle">River Pressure</h3><p id="rpgDossierStory"></p><div class="rpgBossCard"><img id="rpgDossierBoss" src="assets/rpg/bosses/boss-excavator.webp" alt="Mission boss"><div><small>BOSS</small><strong id="rpgDossierBossName">The Polluter</strong><span id="rpgDossierBossType">ENVIRONMENTAL PRESSURE</span></div></div><div class="rpgMissionMeta"><span>REWARD <b id="rpgDossierReward">+100 XP</b></span><span>RELIC <b id="rpgDossierRelic">WATER CORE</b></span></div><button class="rpgStartBtn" id="rpgStartMission" type="button">START MISSION <span>▶</span></button></div>
+        <div class="rpgMissionArt"><img id="rpgDossierImage" src="assets/field/field-01-river-mining-structure.jpg" alt="Mission scenario"><div class="rpgArtBadge" id="rpgDossierBadge">MISSION 1</div></div>
+        <div class="rpgDossierCopy"><span class="rpgKicker" id="rpgDossierLocation">CAUCASIA · RÍO CAUCA</span><h3 id="rpgDossierTitle">River Pressure</h3><p id="rpgDossierStory"></p><div class="rpgBossCard"><img id="rpgDossierBoss" src="assets/rpg/bosses/boss-excavator.png" alt="Mission boss"><div><small>BOSS</small><strong id="rpgDossierBossName">The Polluter</strong><span id="rpgDossierBossType">ENVIRONMENTAL PRESSURE</span></div></div><div class="rpgMissionMeta"><span>REWARD <b id="rpgDossierReward">+100 XP</b></span><span>RELIC <b id="rpgDossierRelic">WATER CORE</b></span></div><button class="rpgStartBtn" id="rpgStartMission" type="button">START MISSION <span>▶</span></button></div>
       </div>
     </div>
 
@@ -1475,7 +1467,7 @@ body.aeris-v100-ready .brandLogo{
       </div>
       <div class="rpgPlayStage rpgLiveStage">
         <div class="rpgScene rpgWorld" id="rpgWorld">
-          <img id="rpgSceneImage" class="rpgSceneBackground" src="assets/rpg/scenarios/mission-01-polluter.webp" alt="Mission scenario">
+          <img id="rpgSceneImage" class="rpgSceneBackground" src="assets/rpg/scenarios/mission-01-polluter.jpeg" alt="Mission scenario">
           <div class="rpgWorldVignette" aria-hidden="true"></div>
           <div class="rpgAmbient" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <div class="rpgWorldHud">
@@ -1485,15 +1477,15 @@ body.aeris-v100-ready .brandLogo{
           <div class="rpgBossField" id="rpgBossField" aria-label="Boss arena">
             <div class="rpgBossMarker" aria-hidden="true">BOSS ZONE</div>
             <div class="rpgBossAura"></div>
-            <img id="rpgBossImage" src="assets/rpg/bosses/boss-polluter.webp" alt="Mission boss">
+            <img id="rpgBossImage" src="assets/rpg/bosses/boss-polluter.png" alt="Mission boss">
             <div class="rpgBossNameplate"><small>BOSS</small><b id="rpgBossName">The Polluter</b><span id="rpgBossLevel">LV. 10</span></div>
           </div>
           <div class="rpgGuardianPlayer" id="rpgGuardianPlayer" tabindex="0" role="img" aria-label="Guardian player character">
             <div class="rpgPlayerGlow"></div>
-            <img src="assets/rpg/guardian/guardian-idle.webp" alt="Guardian player">
+            <img src="assets/rpg/guardian/guardian-idle.png" alt="Guardian player">
           </div>
           <div class="rpgDialogue rpgWorldDialogue" id="rpgWorldDialogue">
-            <img src="assets/rpg/guardian/guardian-ready.webp" alt="Guardian">
+            <img src="assets/rpg/guardian/guardian-ready.png" alt="Guardian">
             <div><small id="rpgDialogueSpeaker">GUARDIAN</small><p id="rpgDialogueText">Move toward the boss. Use the controls to advance.</p></div>
           </div>
           <div class="rpgBossCinematic" id="rpgBossCinematic" aria-hidden="true">
@@ -1521,7 +1513,7 @@ body.aeris-v100-ready .brandLogo{
     </div>
 
     <div class="rpgComplete" id="rpgComplete" hidden>
-      <div class="rpgVictoryGuardian"><img src="assets/rpg/guardian/guardian-victory.webp" alt="Guardian victory pose"></div><div class="rpgCompleteIcon">✓</div><span class="rpgKicker">MISSION COMPLETE</span><h3 id="rpgCompleteTitle">River protected.</h3><p id="rpgCompleteText"></p><div class="rpgRewardRow"><div><small>XP</small><b id="rpgCompleteXP">+100</b></div><div><small>RELIC</small><b id="rpgCompleteRelic">WATER CORE</b></div><div><small>NEXT</small><b id="rpgCompleteNext">ZARAGOZA</b></div></div><button class="rpgContinue" id="rpgContinueMap" type="button">RETURN TO MAP →</button></div>
+      <div class="rpgVictoryGuardian"><img src="assets/rpg/guardian/guardian-victory.png" alt="Guardian victory pose"></div><div class="rpgCompleteIcon">✓</div><span class="rpgKicker">MISSION COMPLETE</span><h3 id="rpgCompleteTitle">River protected.</h3><p id="rpgCompleteText"></p><div class="rpgRewardRow"><div><small>XP</small><b id="rpgCompleteXP">+100</b></div><div><small>RELIC</small><b id="rpgCompleteRelic">WATER CORE</b></div><div><small>NEXT</small><b id="rpgCompleteNext">ZARAGOZA</b></div></div><button class="rpgContinue" id="rpgContinueMap" type="button">RETURN TO MAP →</button></div>
   </div>
 </div>
 </section>
@@ -1533,7 +1525,7 @@ body.aeris-v100-ready .brandLogo{
 <div class="card reveal"><div class="emoji"></div><b>Check claims</b><p class="small">Verify dramatic environmental claims before sharing them.</p></div>
 <div class="card reveal"><div class="emoji"></div><b>Protect together</b><p class="small">Healthy rivers need informed people and responsible action.</p></div>
 </div></div></section>
-<footer><div class="wrap footerGrid"><div><div class="brand"><img alt="Aeris order logo" class="brandLogo" src="aeris-logo.webp"/><span class="brandText"><strong>AERIS</strong><small>CAUCA // GUARDIANS</small></span></div><p>An educational interactive about the Cauca River and environmental impacts associated with illegal mining.</p></div><div><h3>Sources</h3><p><a href="https://www.minambiente.gov.co/impacto-ambiental-del-bajo-cauca-se-vive-a-escala-nacional/" target="_blank">Ministry of Environment · Bajo Cauca and Cauca River</a></p><p><a href="https://revistas.unal.edu.co/index.php/actabiol/article/view/83092" target="_blank">National University · methylmercury in fish from Bajo Cauca</a></p><p><a href="https://www.elespectador.com/ambiente/blog-el-rio/detectan-contaminacion-con-mercury-plomo-arsenico-y-cadmio-en-fish-del-rio-cauca/" target="_blank">El Espectador · fish from the Cauca River</a></p><p><a href="https://caracol.com.co/2024/12/04/con-plantas-nativas-recuperaron-30-hectareas-contaminadas-por-mercury-en-caucasia/" target="_blank">Caracol Radio · 2024</a></p><p><a href="https://caracol.com.co/2026/07/16/destruida-maquinaria-avaluada-en-350-millones-durante-operacion-contra-mineria-ilegal-en-antioquia/" target="_blank">Caracol Radio · 2026</a></p></div><div><h3>Image credits</h3><p>Field photographs provided by the project team · Caucasia, Antioquia.</p><p><a href="#gallery">Field photography · Caucasia, Antioquia</a></p></div></div></footer>
+<footer><div class="wrap footerGrid"><div><div class="brand"><img alt="Aeris order logo" class="brandLogo" src="aeris-logo.jpeg"/><span class="brandText"><strong>AERIS</strong><small>CAUCA // GUARDIANS</small></span></div><p>An educational interactive about the Cauca River and environmental impacts associated with illegal mining.</p></div><div><h3>Sources</h3><p><a href="https://www.minambiente.gov.co/impacto-ambiental-del-bajo-cauca-se-vive-a-escala-nacional/" target="_blank">Ministry of Environment · Bajo Cauca and Cauca River</a></p><p><a href="https://revistas.unal.edu.co/index.php/actabiol/article/view/83092" target="_blank">National University · methylmercury in fish from Bajo Cauca</a></p><p><a href="https://www.elespectador.com/ambiente/blog-el-rio/detectan-contaminacion-con-mercury-plomo-arsenico-y-cadmio-en-fish-del-rio-cauca/" target="_blank">El Espectador · fish from the Cauca River</a></p><p><a href="https://caracol.com.co/2024/12/04/con-plantas-nativas-recuperaron-30-hectareas-contaminadas-por-mercury-en-caucasia/" target="_blank">Caracol Radio · 2024</a></p><p><a href="https://caracol.com.co/2026/07/16/destruida-maquinaria-avaluada-en-350-millones-durante-operacion-contra-mineria-ilegal-en-antioquia/" target="_blank">Caracol Radio · 2026</a></p></div><div><h3>Image credits</h3><p>Field photographs provided by the project team · Caucasia, Antioquia.</p><p><a href="#gallery">Field photography · Caucasia, Antioquia</a></p></div></div></footer>
 
 <style id="aeris-v89-score-rules">
 .aerisGameRpg .rpgScoreRule{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:7px 0 10px;padding:6px 8px;border:1px solid rgba(255,200,87,.18);background:rgba(255,200,87,.035);font:900 7px "Courier New",monospace;color:#9bb3c6;text-transform:uppercase;letter-spacing:.06em}.aerisGameRpg .rpgScoreRule b{color:#72f5d5}.aerisGameRpg .rpgScoreRule small{color:#71889d;font-size:6px;text-align:right}.aerisGameRpg .rpgChoice.bad{animation:rpgMiss .18s steps(2,end) 2}.aerisGameRpg .rpgChoice.good{animation:rpgHit .35s steps(3,end) 1}@keyframes rpgMiss{50%{transform:translateX(-5px)}}@keyframes rpgHit{50%{transform:translateX(5px);box-shadow:0 0 22px rgba(114,245,213,.28)}}
@@ -1689,13 +1681,13 @@ const EN_MISSIONS=[
 const ES_MISSIONS=[
 ['¿Qué actividad puede aumentar los sedimentos en un río?',['Sembrar árboles','Excavación y alteración del suelo','Recolectar agua de lluvia','Energía solar'],1],['¿Qué sustancia peligrosa ha sido reportada en contextos de minería ilegal de oro en Colombia?',['Mercurio','Oxígeno','Helio','Calcio'],0],['¿Por qué la contaminación río arriba puede importar río abajo?',['El agua puede transportar materiales','Los ríos solo se mueven hacia arriba','Los peces detienen todos los contaminantes','El agua río arriba nunca viaja'],0],['¿Qué puede ocurrir cuando se elimina la vegetación de las orillas?',['Más hábitat de inmediato','Más erosión y pérdida de hábitat','El agua se vuelve potable','La biodiversidad siempre aumenta'],1],['¿Qué describió un informe de 2024 en Caucasia?',['Un océano nuevo','Una incautación de mercurio','Una estación de esquí','Un volcán nuevo'],1],['¿Qué acción es más responsable?',['Ignorar el problema','Aumentar la extracción sin control','Apoyar el monitoreo, la restauración y las prácticas responsables','Eliminar toda la vegetación de las orillas'],2],['¿Cuál es la mejor mentalidad de un Guardián?',['Conocer el problema, verificar las fuentes y proteger la cuenca','Creer cada publicación viral','Preocuparse solo por un lugar pequeño','Suponer que la naturaleza arregla todo'],0],['¿Por qué son importantes los humedales y las orillas de los ríos?',['Pueden proporcionar hábitat y ayudar a regular el agua','Hacen desaparecer la contaminación de inmediato','Detienen toda la lluvia','No tienen ninguna función ecológica'],0],['¿Qué pueden intentar recuperar los proyectos de restauración?',['Ecosistemas y vegetación dañados','Solo señales de carretera','La velocidad de internet','Maquinaria minera'],0],['¿Qué conecta los lugares de una cuenca hidrográfica?',['El agua y los procesos ecológicos','Solo las carreteras','Las señales telefónicas','Nada'],0]
 ];
-const EN_RELICS=[['assets/relics/water-core.webp','Water Core','Clean Water',2],['assets/relics/life-seed.webp','Life Seed','Restoration',4],['assets/relics/river-shield.webp','River Shield','Protection',6],['assets/relics/immortality-rune.webp','Immortality Rune','Enduring Care',8],['assets/relics/cauca-crown.webp','Cauca Crown','Master Guardian',10]];
-const ES_RELICS=[['assets/relics/water-core.webp','Núcleo de Agua','Agua Limpia',2],['assets/relics/life-seed.webp','Semilla de Vida','Restauración',4],['assets/relics/river-shield.webp','Escudo del Río','Protección',6],['assets/relics/immortality-rune.webp','Runa de Inmortalidad','Cuidado Duradero',8],['assets/relics/cauca-crown.webp','Corona del Cauca','Guardián Maestro',10]];
+const EN_RELICS=[['assets/relics/water-core.png','Water Core','Clean Water',2],['assets/relics/life-seed.png','Life Seed','Restoration',4],['assets/relics/river-shield.png','River Shield','Protection',6],['assets/relics/immortality-rune.png','Immortality Rune','Enduring Care',8],['assets/relics/cauca-crown.png','Cauca Crown','Master Guardian',10]];
+const ES_RELICS=[['assets/relics/water-core.png','Núcleo de Agua','Agua Limpia',2],['assets/relics/life-seed.png','Semilla de Vida','Restauración',4],['assets/relics/river-shield.png','Escudo del Río','Protección',6],['assets/relics/immortality-rune.png','Runa de Inmortalidad','Cuidado Duradero',8],['assets/relics/cauca-crown.png','Corona del Cauca','Guardián Maestro',10]];
 function setText(sel,val){const el=document.querySelector(sel);if(el)el.innerHTML=val}
 function applyLanguage(){
  const t=I18N[lang]; document.documentElement.lang=lang; document.title=t.title;
  document.querySelectorAll('#navLinks a').forEach((a,j)=>{ const label=a.querySelector('span'); if(label) label.textContent=t.nav[j]; else a.appendChild(Object.assign(document.createElement('span'),{textContent:t.nav[j]})); });
- document.querySelector('.brandText small').textContent=t.brandSmall; document.querySelector('.aerisBadge').innerHTML='<img src="aeris-logo.webp" alt=""> '+t.aerisBadge;
+ document.querySelector('.brandText small').textContent=t.brandSmall; document.querySelector('.aerisBadge').innerHTML='<img src="aeris-logo.jpeg" alt=""> '+t.aerisBadge;
  setText('.tag', '<span class="dot"></span> '+t.tag); setText('.heroKicker',t.kicker); setText('.hero h1',t.heroTitle); setText('.heroInner > p',t.heroP); setText('.classCard',t.classCard);
  document.querySelectorAll('.problemFlow span').forEach((x,j)=>x.textContent=t.flow[j*2]||x.textContent); document.querySelectorAll('.problemFlow b').forEach((x,j)=>x.textContent=t.flow[j*2+1]);
  setText('.actions .primary',t.start); setText('.actions .ghost',t.enter); setText('#live',t.live);
@@ -1763,12 +1755,12 @@ document.getElementById('again').onclick=()=>{i=0;answers=Array(missions.length)
 const liveTimer=setInterval(()=>{const el=document.getElementById('live');if(el)el.textContent=I18N[lang].messages[Math.floor(Math.random()*I18N[lang].messages.length)]},3000);
 // Keep image sources exactly as in the original file; only translate accessible text.
 const altMap={
- 'aeris-logo.webp':['Logo de la orden Aeris','Aeris order logo'],
- 'assets/field/field-01-river-mining-structure.webp':['Río Cauca','Cauca River'],
- 'assets/field/field-04-riverbank-view.webp':['Río Cauca','Cauca River'],
+ 'aeris-logo.jpeg':['Logo de la orden Aeris','Aeris order logo'],
+ 'assets/field/field-01-river-mining-structure.jpg':['Río Cauca','Cauca River'],
+ 'assets/field/field-04-riverbank-view.jpg':['Río Cauca','Cauca River'],
  'https://imagenes2.eltiempo.com/files/image_600_455/uploads/2023/03/18/6416254c09dc8.jpeg':['Zona de minería de oro en el Bajo Cauca, Antioquia','Gold-mining area in Bajo Cauca, Antioquia'],
- 'assets/field/field-02-mining-boat.webp':['Minería ilegal en Colombia','Illegal mining in Colombia'],
- 'assets/field/field-06-waste-riverbank.webp':['Maquinaria minera','Mining machinery'],
+ 'assets/field/field-02-mining-boat.jpg':['Minería ilegal en Colombia','Illegal mining in Colombia'],
+ 'assets/field/field-06-waste-riverbank.jpg':['Maquinaria minera','Mining machinery'],
  'https://estaticos.elcolombiano.com/documents/10157/0/994x600/0c0/0d0/none/11101/JKLH/image_content_22166378_20141121143459.jpg':['Mapa e infografía sobre la contaminación por mercurio en los ríos y peces de Antioquia','Map and infographic about mercury pollution in Antioquia rivers and fish'],
  'https://caracol.com.co/resizer/v2/OOUPQ47KIZGGVPJQPA7YPGUZBM.jpeg?auth=14aa75aab4a4f90c5c8c89b6d5e72b5e76a5cad226ee821a9eeb65098a441c4a&height=900&quality=70&smart=true&width=1200':['Peces capturados en el Bajo Cauca','Fish caught in Bajo Cauca']
 };
@@ -2058,13 +2050,9 @@ async function aiAskAPI(q){
 }
 document.getElementById('aiForm')?.addEventListener('submit',async e=>{
  e.preventDefault();
- if(window.__aerisAiBusy)return;
- window.__aerisAiBusy=true;
- const sendButton=document.getElementById('aiSend');
- if(sendButton){sendButton.disabled=true;sendButton.setAttribute('aria-busy','true');}
  const input=document.getElementById('aiInput');
  const q=input.value.trim();
- if(!q){window.__aerisAiBusy=false;if(sendButton){sendButton.disabled=false;sendButton.removeAttribute('aria-busy');}return;}
+ if(!q)return;
  aiAddMessage(q,'user'); input.value='';
  const typing=document.createElement('div'); typing.className='aiMsg bot aiTyping';
  typing.textContent=aiDetectLanguage(q)==='es'?'Consultando al asistente…':'Checking the AI assistant…';
@@ -2081,10 +2069,6 @@ document.getElementById('aiForm')?.addEventListener('submit',async e=>{
    // Local educational fallback keeps the demo usable if the backend/API is unavailable.
    aiAddMessage(aiAnswer(q),'bot');
    console.error(err);
- }finally{
-   window.__aerisAiBusy=false;
-   if(sendButton){sendButton.disabled=false;sendButton.removeAttribute('aria-busy');}
-   input?.focus();
  }
 });
 aiWelcome();
@@ -2131,9 +2115,7 @@ applyLanguage();updateAlt();updateFooterLinks();
   document.querySelectorAll('.mapNode').forEach(n=>n.addEventListener('click',()=>{const i=Number(n.dataset.map);if(i===4 && state.best<7){showToast((window.currentLang==='es'?'🔒 Consigue al menos 7/10 para desbloquear Acción.':'🔒 Reach at least 7/10 to unlock Action.'));return}setMap(i)}));
   $('hqReset')?.addEventListener('click',()=>{if(!confirm((window.currentLang==='es'?'¿Reiniciar todo el progreso de Guardian?':'Reset all Guardian progress?')))return;state={...defaultState};save();setMap(0);showToast(window.currentLang==='es'?'Perfil reiniciado.':'Profile reset.')});
   function syncFromQuiz(){
-    let savedBest=0;
-    try{savedBest=Number(localStorage.getItem('aeris_best_score_v2')||0)||0}catch(e){}
-    const best=Math.max(savedBest,Number(state.best)||0);
+    const best=Math.max(Number(localStorage.getItem('aeris_best_score_v2')||0),Number(state.best)||0);
     state.best=best; state.relics=Math.max(state.relics,Number($('count')?.textContent||0)); state.score=Math.max(state.score,best);
     const badges=new Set(state.badges); badges.add('explorer'); if(best>=5)badges.add('scientist'); if(best>=7)badges.add('guardian'); if(best>=9)badges.add('champion'); state.badges=[...badges]; save();
   }
@@ -2298,7 +2280,7 @@ qs('.fishChoice').forEach(b=>b.addEventListener('click',()=>{state.fish=b.datase
 const whatText={en:{titles:['UNDER PRESSURE','EARLY TRANSITION','BUILDING PROTECTION','HEALTHIER SYSTEM'],water:['At risk','Changing','Improving','More protected'],fish:['Exposed','Under pressure','Recovering','Better protected'],nature:['Vulnerable','Recovering','Strengthening','More resilient'],people:['Needed','Mobilizing','Coordinating','Leading'],note:'This visual shows a conceptual direction, not a numerical prediction. Real environmental recovery depends on local conditions, monitoring, restoration and sustained action.'},es:{titles:['BAJO PRESIÓN','TRANSICIÓN INICIAL','PROTECCIÓN EN MARCHA','SISTEMA MÁS SALUDABLE'],water:['En riesgo','Cambiando','Mejorando','Más protegido'],fish:['Expuestos','Bajo presión','Recuperándose','Mejor protegidos'],nature:['Vulnerable','Recuperándose','Fortaleciéndose','Más resiliente'],people:['Necesaria','Movilizándose','Coordinándose','Liderando'],note:'Esta visualización muestra una dirección conceptual, no una predicción numérica. La recuperación ambiental real depende de las condiciones locales, el monitoreo, la restauración y la acción sostenida.'}};
 function renderWhat(){const t=whatText[lang()];const v=Number(state.what)||0;const idx=v<25?0:v<50?1:v<75?2:3;$('whatSlider').value=v;$('whatPercent').textContent=v+'%';$('whatStateTitle').textContent=t.titles[idx];$('metricWater').textContent=t.water[idx];$('metricFish').textContent=t.fish[idx];$('metricNature').textContent=t.nature[idx];$('metricPeople').textContent=t.people[idx];$('whatNote').textContent=t.note}
 $('whatSlider')?.addEventListener('input',e=>{state.what=Number(e.target.value);save();renderWhat()});
-const badgeDefs={en:[['explorer','assets/guardian-badges/aeris_badge_explorer.webp','Explorer','Explore the Guardian mission route.'],['scientist','assets/guardian-badges/aeris_badge_evidence-scout.webp','Evidence Scout','Complete the evidence pathway.'],['guardian','assets/guardian-badges/aeris_badge_river-guardian.webp','River Guardian','Finish the Guardian Challenge.'],['champion','assets/guardian-badges/aeris_badge_mission-champion.webp','Mission Champion','Score 8/10 or higher.']],es:[['explorer','assets/guardian-badges/aeris_badge_explorer.webp','Explorador','Explora la ruta de la misión del Guardián.'],['scientist','assets/guardian-badges/aeris_badge_evidence-scout.webp','Explorador de evidencia','Completa la ruta de evidencia.'],['guardian','assets/guardian-badges/aeris_badge_river-guardian.webp','Guardián del río','Termina el desafío.'],['champion','assets/guardian-badges/aeris_badge_mission-champion.webp','Campeón de misión','Obtén 8/10 o más.']]};
+const badgeDefs={en:[['explorer','assets/guardian-badges/aeris_badge_explorer.png','Explorer','Explore the Guardian mission route.'],['scientist','assets/guardian-badges/aeris_badge_evidence-scout.png','Evidence Scout','Complete the evidence pathway.'],['guardian','assets/guardian-badges/aeris_badge_river-guardian.png','River Guardian','Finish the Guardian Challenge.'],['champion','assets/guardian-badges/aeris_badge_mission-champion.png','Mission Champion','Score 8/10 or higher.']],es:[['explorer','assets/guardian-badges/aeris_badge_explorer.png','Explorador','Explora la ruta de la misión del Guardián.'],['scientist','assets/guardian-badges/aeris_badge_evidence-scout.png','Explorador de evidencia','Completa la ruta de evidencia.'],['guardian','assets/guardian-badges/aeris_badge_river-guardian.png','Guardián del río','Termina el desafío.'],['champion','assets/guardian-badges/aeris_badge_mission-champion.png','Campeón de misión','Obtén 8/10 o más.']]};
 function getProfile(){let p={name:'Guardian',best:0,energy:0,relics:0,badges:[]};try{const raw=JSON.parse(localStorage.getItem('aeris_guardian_v3')||'{}');Object.assign(p,raw)}catch(e){};const name=localStorage.getItem('aeris_guardian_name_v6');if(name)p.name=name;return p}
 function renderPassport(){}
 
@@ -2317,7 +2299,7 @@ const qs=(s,r=document)=>[...r.querySelectorAll(s)];
 const lang=()=>window.currentLang==='es'?'es':'en';
 const routeText={en:[['01 · Territory','Start with the river and understand the context before entering the challenge.'],['02 · Mercury','Trace the environmental pathway step by step.'],['03 · Evidence','Check the evidence before turning a claim into a conclusion.'],['04 · Challenge','Use what you learned and earn Guardian Energy.'],],es:[['01 · Territorio','Empieza por el río y entiende el contexto antes del desafío.'],['02 · Mercurio','Sigue paso a paso la ruta ambiental.'],['03 · Evidencia','Comprueba la evidencia antes de convertir una afirmación en conclusión.'],['04 · Desafío','Usa lo aprendido y gana Energía del Guardián.'],]};
 function getProgress(){let p={best:0,relics:0,badges:[]};try{Object.assign(p,JSON.parse(localStorage.getItem('aeris_guardian_v3')||'{}'))}catch(e){};return p}
-function renderProgress(){const p=getProgress(),best=Math.max(0,Number(p.best)||0),energy=Math.max(Number(p.energy)||0,Number(p.relics||0)*2),badges=new Set(p.badges||[]);if(best>=0)badges.add('explorer');if(best>=5)badges.add('scientist');if(best>=7)badges.add('guardian');if(best>=9)badges.add('champion');const knowledge=Math.min(100,Math.round(best*7+Math.min(5,Number(p.relics)||0)*6+badges.size*5));const xp=Math.min(100,Math.round(best*7+(Number(p.relics)||0)*8+badges.size*8));const rank=xp>=85?'RIVER LEGEND':xp>=60?'WATERSHED DEFENDER':xp>=35?'FIELD GUARDIAN':'RIVER ROOKIE';$('v16Knowledge').textContent=knowledge+'%';$('v16XP').textContent=xp;$('v16XPFill').style.width=xp+'%';$('v16Rank').textContent=rank;const defs=lang()==='es'?[['assets/guardian-badges/aeris_badge_explorer.webp','Explorador','Explora la ruta de la misión'],['assets/guardian-badges/aeris_badge_evidence-scout.webp','Explorador de evidencia','Completa la ruta del laboratorio'],['assets/guardian-badges/aeris_badge_river-guardian.webp','Guardián del río','Termina el desafío'],['assets/guardian-badges/aeris_badge_mission-champion.webp','Campeón','Logra 8/10 o más']]:[['assets/guardian-badges/aeris_badge_explorer.webp','Explorer','Explore the Guardian mission route'],['assets/guardian-badges/aeris_badge_evidence-scout.webp','Evidence Scout','Complete the lab pathway'],['assets/guardian-badges/aeris_badge_river-guardian.webp','River Guardian','Finish the challenge'],['assets/guardian-badges/aeris_badge_mission-champion.webp','Mission Champion','Score 8/10 or higher']];const host=$('v16Achievements');if(!host)return;const signature=defs.map((d,i)=>{const key=['explorer','scientist','guardian','champion'][i];return key+':'+(badges.has(key)?'1':'0')+':'+d[1]+':'+d[2]}).join('|');if(host.dataset.renderSignature!==signature){host.innerHTML=defs.map((d,i)=>{const key=['explorer','scientist','guardian','champion'][i],on=badges.has(key);return `<div class="v16-ach ${on?'on':''}" data-badge-key="${key}"><span class="ico"><img src="${d[0]}" alt="" aria-hidden="true"></span><div><b>${d[1]}</b><small>${d[2]}</small></div><span>${on?'✓':'○'}</span></div>`}).join('');host.dataset.renderSignature=signature}else{host.querySelectorAll('[data-badge-key]').forEach((card,i)=>{const key=['explorer','scientist','guardian','champion'][i],on=badges.has(key);card.classList.toggle('on',on);const parts=card.querySelectorAll('b,small');if(parts[0])parts[0].textContent=defs[i][1];if(parts[1])parts[1].textContent=defs[i][2];const status=card.querySelector(':scope > span:last-child');if(status)status.textContent=on?'✓':'○'})}}
+function renderProgress(){const p=getProgress(),best=Math.max(0,Number(p.best)||0),energy=Math.max(Number(p.energy)||0,Number(p.relics||0)*2),badges=new Set(p.badges||[]);if(best>=0)badges.add('explorer');if(best>=5)badges.add('scientist');if(best>=7)badges.add('guardian');if(best>=9)badges.add('champion');const knowledge=Math.min(100,Math.round(best*7+Math.min(5,Number(p.relics)||0)*6+badges.size*5));const xp=Math.min(100,Math.round(best*7+(Number(p.relics)||0)*8+badges.size*8));const rank=xp>=85?'RIVER LEGEND':xp>=60?'WATERSHED DEFENDER':xp>=35?'FIELD GUARDIAN':'RIVER ROOKIE';$('v16Knowledge').textContent=knowledge+'%';$('v16XP').textContent=xp;$('v16XPFill').style.width=xp+'%';$('v16Rank').textContent=rank;const defs=lang()==='es'?[['assets/guardian-badges/aeris_badge_explorer.png','Explorador','Explora la ruta de la misión'],['assets/guardian-badges/aeris_badge_evidence-scout.png','Explorador de evidencia','Completa la ruta del laboratorio'],['assets/guardian-badges/aeris_badge_river-guardian.png','Guardián del río','Termina el desafío'],['assets/guardian-badges/aeris_badge_mission-champion.png','Campeón','Logra 8/10 o más']]:[['assets/guardian-badges/aeris_badge_explorer.png','Explorer','Explore the Guardian mission route'],['assets/guardian-badges/aeris_badge_evidence-scout.png','Evidence Scout','Complete the lab pathway'],['assets/guardian-badges/aeris_badge_river-guardian.png','River Guardian','Finish the challenge'],['assets/guardian-badges/aeris_badge_mission-champion.png','Mission Champion','Score 8/10 or higher']];const host=$('v16Achievements');if(!host)return;const signature=defs.map((d,i)=>{const key=['explorer','scientist','guardian','champion'][i];return key+':'+(badges.has(key)?'1':'0')+':'+d[1]+':'+d[2]}).join('|');if(host.dataset.renderSignature!==signature){host.innerHTML=defs.map((d,i)=>{const key=['explorer','scientist','guardian','champion'][i],on=badges.has(key);return `<div class="v16-ach ${on?'on':''}" data-badge-key="${key}"><span class="ico"><img src="${d[0]}" alt="" aria-hidden="true"></span><div><b>${d[1]}</b><small>${d[2]}</small></div><span>${on?'✓':'○'}</span></div>`}).join('');host.dataset.renderSignature=signature}else{host.querySelectorAll('[data-badge-key]').forEach((card,i)=>{const key=['explorer','scientist','guardian','champion'][i],on=badges.has(key);card.classList.toggle('on',on);const parts=card.querySelectorAll('b,small');if(parts[0])parts[0].textContent=defs[i][1];if(parts[1])parts[1].textContent=defs[i][2];const status=card.querySelector(':scope > span:last-child');if(status)status.textContent=on?'✓':'○'})}}
 qs('#v16Route button').forEach((b,i)=>b.addEventListener('click',()=>{qs('#v16Route button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const t=routeText[lang()][i];$('v16RouteDetail').innerHTML=`<strong>${t[0]}</strong><p>${t[1]}</p>`;const target=$(b.dataset.target);if(target){target.classList.add('v16-navPulse');target.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>target.classList.remove('v16-navPulse'),750)}}));
 qs('#v16AITools button').forEach(b=>b.addEventListener('click',()=>{const input=$('aiInput');if(!input)return;input.value=b.dataset.q;input.focus();$('aiForm')?.requestSubmit()}));
 const oldApply=window.applyLanguage;if(oldApply){window.applyLanguage=function(){oldApply();renderProgress();const es=lang()==='es';const buttons=qs('#v16Route button');const labels=es?['Territorio','Mercurio','Evidencia','Desafío','Legado']:['Territory','Mercury','Evidence','Challenge','Legacy'];const subs=es?['Explora','Investiga','Verifica','Juega','Desbloquea']:['Explore','Investigate','Verify','Play','Unlock'];buttons.forEach((b,i)=>{b.querySelector('b').textContent=labels[i];b.querySelector('small').textContent=subs[i]});}}
@@ -2522,7 +2504,7 @@ body.aeris-single-mode .aerisTopLink.active{background:#72f5d51a;color:#72f5d5}
   // Always restore the exact two navigation labels after language changes.
   function fixNavLabels(){
     const labels=['Information','Game'];
-    const icons=['assets/section-icons/information.webp','assets/section-icons/game.webp'];
+    const icons=['assets/section-icons/information.png','assets/section-icons/game.png'];
     navLinks.forEach((a,i)=>{
       if(!a) return;
       let img=a.querySelector('.aerisNavIcon');
@@ -3213,7 +3195,7 @@ body.aeris-single-mode[data-aeris-mode="chatbot"] #guardianAI *{pointer-events:a
   min-height:100svh;
   align-items:center;
   isolation:isolate;
-  background-image:url("assets/field/field-01-river-mining-structure.webp");
+  background-image:url("assets/field/field-01-river-mining-structure.jpg");
   background-position:center center;
   background-size:cover;
 }
@@ -3928,24 +3910,20 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,.rpgChoic
     const y=((pr.bottom-wr.top)/wr.height)*100-1;
     dust(x-2,y);dust(x+2,y);
   };
-  let queued=false;
   const observer=new MutationObserver(()=>{
-    if(!player.classList.contains('moving')||queued||document.hidden)return;
-    const now=performance.now();
-    if(now-lastStep<115)return;
-    queued=true;
-    requestAnimationFrame(()=>{
-      queued=false;
-      if(!document.hidden&&player.classList.contains('moving')){
-        emitStep();
-        lastStep=performance.now();
-      }
-    });
+    const moving=player.classList.contains('moving');
+    if(moving){
+      const now=performance.now();
+      if(now-lastStep>110){emitStep();lastStep=now;}
+    }
   });
   observer.observe(player,{attributes:true,attributeFilter:['class','style']});
-  document.addEventListener('visibilitychange',()=>{
-    if(document.hidden)queued=false;
-  });
+  let lastFrame=0;
+  function tick(now){
+    if(player.classList.contains('moving')&&now-lastFrame>120){emitStep();lastFrame=now;}
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 })();
 </script>
 <script id="aeris-v100-bugfix-guards">
@@ -3963,32 +3941,6 @@ document.addEventListener('click',e=>{const b=e.target.closest('button,.rpgChoic
   stopOutsideGame();
 })();
 </script>
-
-<script id="aeris-maintenance-patch">
-(function(){
-  'use strict';
-  const menuButton=document.getElementById('mobileMenu');
-  const nav=document.getElementById('navLinks');
-  if(menuButton&&nav){
-    const sync=()=>menuButton.setAttribute('aria-expanded',String(nav.classList.contains('open')));
-    menuButton.setAttribute('aria-controls','navLinks');
-    sync();
-    const observer=new MutationObserver(sync);
-    observer.observe(nav,{attributes:true,attributeFilter:['class']});
-    menuButton.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('open');sync();menuButton.focus();}});
-    nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove('open');sync();}});
-  }
-  // Prevent browser scroll gestures from accidentally triggering horizontal game movement.
-  const wheel=document.getElementById('rpgMoveWheel');
-  if(wheel){wheel.style.touchAction='none';wheel.setAttribute('aria-label','Move guardian left or right');}
-  // External source links open safely in a new tab.
-  document.querySelectorAll('a[target="_blank"]').forEach(a=>{
-    const rel=new Set((a.getAttribute('rel')||'').split(/\s+/).filter(Boolean));
-    rel.add('noopener');rel.add('noreferrer');a.setAttribute('rel',[...rel].join(' '));
-  });
-})();
-</script>
-
 </body>
 
 <style id="aeris-v54-game-polish">
@@ -4568,11 +4520,11 @@ footer a{color:var(--cyan)!important}
 <script id="aeris-rpg-live-v78-js">
 (function(){
   const missions=[
-    {name:'River Pressure',nameEs:'Presión sobre el río',location:'Caucasia · Río Cauca',locationEs:'Caucasia · Río Cauca',boss:'The Polluter',bossEs:'El Contaminador',type:'RIVER PRESSURE',img:'assets/rpg/scenarios/mission-01-polluter.webp',bossImg:'assets/rpg/bosses/boss-polluter.webp',reward:100,relic:'Water Core',relicEs:'Núcleo de Agua',dialogue:'The river is under pressure. Move forward, observe carefully and face the problem with evidence.',dialogueEs:'El río está bajo presión. Avanza, observa con cuidado y enfrenta el problema con evidencia.',prompt:'The riverbank shows visible pressure. Choose the responsible response.',promptEs:'La ribera muestra una presión evidente. Elige una respuesta responsable.',choices:[{a:'A · Document the riverbank',aEs:'A · Documenta la ribera',b:'Record visible waste from a safe place and verify what is happening.',bEs:'Registra los residuos visibles desde un lugar seguro y verifica lo que ocurre.',damage:22,good:true},{a:'B · Throw the waste back into the river',aEs:'B · Devuelve los residuos al río',b:'Move the waste into the water so the bank looks cleaner.',bEs:'Mueve los residuos al agua para que la ribera parezca más limpia.',damage:5,good:false},{a:'C · Organize a safe cleanup response',aEs:'C · Organiza una limpieza segura',b:'Plan a safe community response and keep waste away from the river.',bEs:'Planea una respuesta comunitaria segura y mantén los residuos lejos del río.',damage:30,good:true}]},
-    {name:'Illegal Mining',nameEs:'Minería ilegal',location:'Zaragoza · Río Cauca',locationEs:'Zaragoza · Río Cauca',boss:'The Excavator',bossEs:'El Excavador',type:'ILLEGAL MINING',img:'assets/rpg/scenarios/mission-02-excavator.webp',bossImg:'assets/rpg/bosses/boss-excavator.webp',reward:150,relic:'River Shield',relicEs:'Escudo del Río',dialogue:'Mining pressure has changed the landscape. Move forward and separate observation from assumption.',dialogueEs:'La presión minera ha cambiado el paisaje. Avanza y separa la observación de la suposición.',prompt:'You reach the mining zone. Choose a safe, evidence-based move.',promptEs:'Llegas a la zona minera. Elige un movimiento seguro y basado en evidencia.',choices:[{a:'A · Observe and report evidence',aEs:'A · Observa y reporta evidencia',b:'Document visible environmental changes from a safe distance and use reliable channels.',bEs:'Documenta cambios ambientales visibles desde una distancia segura y usa canales confiables.',damage:24,good:true},{a:'B · Enter the mining area',aEs:'B · Entra a la zona minera',b:'Approach active machinery or unstable ground to investigate by yourself.',bEs:'Acércate a maquinaria activa o terreno inestable para investigar por tu cuenta.',damage:4,good:false},{a:'C · Protect the river edge',aEs:'C · Protege la ribera',b:'Prioritize safety and support actions that reduce pressure on the river.',bEs:'Prioriza la seguridad y apoya acciones que reduzcan la presión sobre el río.',damage:30,good:true}]},
-    {name:'Mercury Contamination',nameEs:'Contaminación por mercurio',location:'Nechí · Cauca watershed',locationEs:'Nechí · Cuenca del Cauca',boss:'The Mercury Serpent',bossEs:'La Serpiente de Mercurio',type:'MERCURY CONTAMINATION',img:'assets/rpg/scenarios/mission-03-mercury.webp',bossImg:'assets/rpg/bosses/boss-mercury-serpent.webp',reward:200,relic:'Life Seed',relicEs:'Semilla de Vida',dialogue:'Mercury claims require evidence. Keep moving, then choose the action that respects scientific information.',dialogueEs:'Las afirmaciones sobre mercurio necesitan evidencia. Avanza y elige una acción que respete la información científica.',prompt:'The contamination challenge is here. Think before you act.',promptEs:'El desafío de contaminación está aquí. Piensa antes de actuar.',choices:[{a:'A · Follow scientific evidence',aEs:'A · Sigue la evidencia científica',b:'Use measured information and reliable research before making a claim about mercury.',bEs:'Usa información medida e investigación confiable antes de afirmar algo sobre mercurio.',damage:30,good:true},{a:'B · Judge by appearance',aEs:'B · Decide por la apariencia',b:'Assume the water or fish are safe or unsafe just by looking at them.',bEs:'Supón que el agua o los peces son seguros o peligrosos solo por su apariencia.',damage:5,good:false},{a:'C · Share verified guidance',aEs:'C · Comparte orientación verificada',b:'Communicate verified information and avoid unsupported claims.',bEs:'Comparte información verificada y evita afirmaciones sin respaldo.',damage:25,good:true}]},
-    {name:'Waste & Pollution',nameEs:'Residuos y contaminación',location:'Cáceres · Riverbank',locationEs:'Cáceres · Ribera del río',boss:'The Waste Lord',bossEs:'El Señor de los Residuos',type:'WASTE & POLLUTION',img:'assets/rpg/scenarios/mission-04-waste-lord.webp',bossImg:'assets/rpg/bosses/boss-waste-lord.webp',reward:250,relic:'Immortality Rune',relicEs:'Runa de Inmortalidad',dialogue:'The waste is visible. Move through the riverbank and turn concern into a practical, responsible response.',dialogueEs:'Los residuos son visibles. Avanza por la ribera y convierte la preocupación en una respuesta práctica y responsable.',prompt:'The Waste Lord blocks the path. Choose the action that protects the river.',promptEs:'El Señor de los Residuos bloquea el camino. Elige la acción que protege el río.',choices:[{a:'A · Sort and contain the waste',aEs:'A · Separa y contiene los residuos',b:'Keep waste contained and organize a safe disposal or collection response.',bEs:'Mantén los residuos contenidos y organiza una respuesta segura de disposición o recolección.',damage:30,good:true},{a:'B · Push everything into the water',aEs:'B · Empuja todo al agua',b:'Move the waste downstream to make the area look cleaner.',bEs:'Mueve los residuos río abajo para que la zona parezca más limpia.',damage:4,good:false},{a:'C · Protect the riverbank first',aEs:'C · Protege primero la ribera',b:'Keep the river clear of new waste while coordinating a responsible response.',bEs:'Evita nuevos residuos en el río mientras coordinas una respuesta responsable.',damage:25,good:true}]},
-    {name:'Habitat Loss',nameEs:'Pérdida de hábitat',location:'Tarazá · Bajo Cauca',locationEs:'Tarazá · Bajo Cauca',boss:'The Deforester',bossEs:'El Deforestador',type:'HABITAT LOSS',img:'assets/rpg/scenarios/mission-05-deforester.webp',bossImg:'assets/rpg/bosses/boss-deforester.webp',reward:300,relic:'Cauca Crown',relicEs:'Corona del Cauca',dialogue:'The final zone shows habitat loss. Reach the arena and think beyond a quick fix: restoration needs long-term care.',dialogueEs:'La zona final muestra pérdida de hábitat. Llega a la arena y piensa más allá de una solución rápida: restaurar requiere cuidado a largo plazo.',prompt:'The final confrontation is here. Choose the move that supports lasting restoration.',promptEs:'El enfrentamiento final está aquí. Elige el movimiento que apoya una restauración duradera.',choices:[{a:'A · Protect remaining habitat',aEs:'A · Protege el hábitat restante',b:'Preserve remaining vegetation and plan restoration around the damaged area.',bEs:'Protege la vegetación restante y planifica la restauración alrededor del área afectada.',damage:30,good:true},{a:'B · Clear more land',aEs:'B · Despeja más terreno',b:'Remove more vegetation to make the area easier to use immediately.',bEs:'Elimina más vegetación para que el área sea más fácil de usar de inmediato.',damage:5,good:false},{a:'C · Restore and monitor',aEs:'C · Restaura y monitorea',b:'Support native vegetation recovery and monitor the area over time.',bEs:'Apoya la recuperación de vegetación nativa y monitorea el área con el tiempo.',damage:28,good:true}]}
+    {name:'River Pressure',nameEs:'Presión sobre el río',location:'Caucasia · Río Cauca',locationEs:'Caucasia · Río Cauca',boss:'The Polluter',bossEs:'El Contaminador',type:'RIVER PRESSURE',img:'assets/rpg/scenarios/mission-01-polluter.jpeg',bossImg:'assets/rpg/bosses/boss-polluter.png',reward:100,relic:'Water Core',relicEs:'Núcleo de Agua',dialogue:'The river is under pressure. Move forward, observe carefully and face the problem with evidence.',dialogueEs:'El río está bajo presión. Avanza, observa con cuidado y enfrenta el problema con evidencia.',prompt:'The riverbank shows visible pressure. Choose the responsible response.',promptEs:'La ribera muestra una presión evidente. Elige una respuesta responsable.',choices:[{a:'A · Document the riverbank',aEs:'A · Documenta la ribera',b:'Record visible waste from a safe place and verify what is happening.',bEs:'Registra los residuos visibles desde un lugar seguro y verifica lo que ocurre.',damage:22,good:true},{a:'B · Throw the waste back into the river',aEs:'B · Devuelve los residuos al río',b:'Move the waste into the water so the bank looks cleaner.',bEs:'Mueve los residuos al agua para que la ribera parezca más limpia.',damage:5,good:false},{a:'C · Organize a safe cleanup response',aEs:'C · Organiza una limpieza segura',b:'Plan a safe community response and keep waste away from the river.',bEs:'Planea una respuesta comunitaria segura y mantén los residuos lejos del río.',damage:30,good:true}]},
+    {name:'Illegal Mining',nameEs:'Minería ilegal',location:'Zaragoza · Río Cauca',locationEs:'Zaragoza · Río Cauca',boss:'The Excavator',bossEs:'El Excavador',type:'ILLEGAL MINING',img:'assets/rpg/scenarios/mission-02-excavator.jpeg',bossImg:'assets/rpg/bosses/boss-excavator.png',reward:150,relic:'River Shield',relicEs:'Escudo del Río',dialogue:'Mining pressure has changed the landscape. Move forward and separate observation from assumption.',dialogueEs:'La presión minera ha cambiado el paisaje. Avanza y separa la observación de la suposición.',prompt:'You reach the mining zone. Choose a safe, evidence-based move.',promptEs:'Llegas a la zona minera. Elige un movimiento seguro y basado en evidencia.',choices:[{a:'A · Observe and report evidence',aEs:'A · Observa y reporta evidencia',b:'Document visible environmental changes from a safe distance and use reliable channels.',bEs:'Documenta cambios ambientales visibles desde una distancia segura y usa canales confiables.',damage:24,good:true},{a:'B · Enter the mining area',aEs:'B · Entra a la zona minera',b:'Approach active machinery or unstable ground to investigate by yourself.',bEs:'Acércate a maquinaria activa o terreno inestable para investigar por tu cuenta.',damage:4,good:false},{a:'C · Protect the river edge',aEs:'C · Protege la ribera',b:'Prioritize safety and support actions that reduce pressure on the river.',bEs:'Prioriza la seguridad y apoya acciones que reduzcan la presión sobre el río.',damage:30,good:true}]},
+    {name:'Mercury Contamination',nameEs:'Contaminación por mercurio',location:'Nechí · Cauca watershed',locationEs:'Nechí · Cuenca del Cauca',boss:'The Mercury Serpent',bossEs:'La Serpiente de Mercurio',type:'MERCURY CONTAMINATION',img:'assets/rpg/scenarios/mission-03-mercury.jpeg',bossImg:'assets/rpg/bosses/boss-mercury-serpent.png',reward:200,relic:'Life Seed',relicEs:'Semilla de Vida',dialogue:'Mercury claims require evidence. Keep moving, then choose the action that respects scientific information.',dialogueEs:'Las afirmaciones sobre mercurio necesitan evidencia. Avanza y elige una acción que respete la información científica.',prompt:'The contamination challenge is here. Think before you act.',promptEs:'El desafío de contaminación está aquí. Piensa antes de actuar.',choices:[{a:'A · Follow scientific evidence',aEs:'A · Sigue la evidencia científica',b:'Use measured information and reliable research before making a claim about mercury.',bEs:'Usa información medida e investigación confiable antes de afirmar algo sobre mercurio.',damage:30,good:true},{a:'B · Judge by appearance',aEs:'B · Decide por la apariencia',b:'Assume the water or fish are safe or unsafe just by looking at them.',bEs:'Supón que el agua o los peces son seguros o peligrosos solo por su apariencia.',damage:5,good:false},{a:'C · Share verified guidance',aEs:'C · Comparte orientación verificada',b:'Communicate verified information and avoid unsupported claims.',bEs:'Comparte información verificada y evita afirmaciones sin respaldo.',damage:25,good:true}]},
+    {name:'Waste & Pollution',nameEs:'Residuos y contaminación',location:'Cáceres · Riverbank',locationEs:'Cáceres · Ribera del río',boss:'The Waste Lord',bossEs:'El Señor de los Residuos',type:'WASTE & POLLUTION',img:'assets/rpg/scenarios/mission-04-waste-lord.jpeg',bossImg:'assets/rpg/bosses/boss-waste-lord.png',reward:250,relic:'Immortality Rune',relicEs:'Runa de Inmortalidad',dialogue:'The waste is visible. Move through the riverbank and turn concern into a practical, responsible response.',dialogueEs:'Los residuos son visibles. Avanza por la ribera y convierte la preocupación en una respuesta práctica y responsable.',prompt:'The Waste Lord blocks the path. Choose the action that protects the river.',promptEs:'El Señor de los Residuos bloquea el camino. Elige la acción que protege el río.',choices:[{a:'A · Sort and contain the waste',aEs:'A · Separa y contiene los residuos',b:'Keep waste contained and organize a safe disposal or collection response.',bEs:'Mantén los residuos contenidos y organiza una respuesta segura de disposición o recolección.',damage:30,good:true},{a:'B · Push everything into the water',aEs:'B · Empuja todo al agua',b:'Move the waste downstream to make the area look cleaner.',bEs:'Mueve los residuos río abajo para que la zona parezca más limpia.',damage:4,good:false},{a:'C · Protect the riverbank first',aEs:'C · Protege primero la ribera',b:'Keep the river clear of new waste while coordinating a responsible response.',bEs:'Evita nuevos residuos en el río mientras coordinas una respuesta responsable.',damage:25,good:true}]},
+    {name:'Habitat Loss',nameEs:'Pérdida de hábitat',location:'Tarazá · Bajo Cauca',locationEs:'Tarazá · Bajo Cauca',boss:'The Deforester',bossEs:'El Deforestador',type:'HABITAT LOSS',img:'assets/rpg/scenarios/mission-05-deforester.jpeg',bossImg:'assets/rpg/bosses/boss-deforester.png',reward:300,relic:'Cauca Crown',relicEs:'Corona del Cauca',dialogue:'The final zone shows habitat loss. Reach the arena and think beyond a quick fix: restoration needs long-term care.',dialogueEs:'La zona final muestra pérdida de hábitat. Llega a la arena y piensa más allá de una solución rápida: restaurar requiere cuidado a largo plazo.',prompt:'The final confrontation is here. Choose the move that supports lasting restoration.',promptEs:'El enfrentamiento final está aquí. Elige el movimiento que apoya una restauración duradera.',choices:[{a:'A · Protect remaining habitat',aEs:'A · Protege el hábitat restante',b:'Preserve remaining vegetation and plan restoration around the damaged area.',bEs:'Protege la vegetación restante y planifica la restauración alrededor del área afectada.',damage:30,good:true},{a:'B · Clear more land',aEs:'B · Despeja más terreno',b:'Remove more vegetation to make the area easier to use immediately.',bEs:'Elimina más vegetación para que el área sea más fácil de usar de inmediato.',damage:5,good:false},{a:'C · Restore and monitor',aEs:'C · Restaura y monitorea',b:'Support native vegetation recovery and monitor the area over time.',bEs:'Apoya la recuperación de vegetación nativa y monitorea el área con el tiempo.',damage:28,good:true}]}
   ];
   const root=document.getElementById('rpgGameShell'); if(!root)return;
   const $=id=>document.getElementById(id); const key='aeris_rpg_campaign_v1';
