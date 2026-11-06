@@ -60,3 +60,13 @@ El entorno de pruebas bloquea la navegación normal a direcciones locales de Chr
 ## Nota sobre el asistente IA
 
 El frontend comprueba `/health` en el mismo origen de Pages, como estaba previsto en el código original. Si el Worker está desplegado en otro dominio, configura `window.AERIS_CONFIG.workerUrl` con la URL real del Worker en el punto de configuración existente. No se inventó ni se sustituyó una URL de backend.
+
+## Performance and joystick-only pass (2026-11-06)
+- Kept every original image, illustration, audio file, and image URL unchanged.
+- Added native lazy loading and asynchronous image decoding to below-the-fold HTML images.
+- Removed the full-screen CRT/scanline overlay that was tinting image areas and could appear as green horizontal streaks; removed the animated photo sheen as well.
+- Stopped continuous scene-background movement and costly image filters while preserving character/boss RPG animations and joystick feedback.
+- Removed the permanent animation-frame loop used for footsteps; footstep effects now react to actual movement changes.
+- Removed repeated telemetry polling, global pointer-follow effects, card tilt listeners, and pointer-move particle generation.
+- Removed the extra left/right movement buttons and keyboard movement handlers. The joystick is the only way to move the Guardian; mission answers and navigation buttons remain because they are required to play the campaign.
+- Updated the on-screen control hint to explain joystick-only movement.
