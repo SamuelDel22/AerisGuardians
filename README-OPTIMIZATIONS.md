@@ -1,58 +1,71 @@
-# AERIS — Cauca Guardians
+# AERIS — Cauca Guardians | Stage 2
 
-Proyecto estudiantil bilingüe de concientización ambiental sobre el Río Cauca, con enfoque en Caucasia y el Bajo Cauca antioqueño. La experiencia combina información ambiental, fotografías de campo y una campaña educativa en formato retro RPG.
+Proyecto estudiantil bilingüe de concientización ambiental sobre la contaminación del Río Cauca, con énfasis en Caucasia y el Bajo Cauca antioqueño. La experiencia mantiene una identidad retro RPG / pixel-art y utiliza el juego como recurso educativo.
 
-## Identidad y alcance
+## Alcance de esta entrega
 
-- Mantener la estética retro / pixel-art / RPG como identidad central.
-- El juego es un recurso educativo: las misiones convierten temas ambientales en retos de aprendizaje.
-- El contenido debe distinguir entre resultados de estudios publicados, observaciones locales y recomendaciones.
-- El sitio no es una plataforma de monitoreo ambiental ni ofrece mediciones en tiempo real.
-- Los recursos gráficos y de audio originales se conservan.
+Se trabajó únicamente en las cinco prioridades solicitadas:
 
-## Estructura técnica observada
+1. Pulido visual del sitio y del universo RPG.
+2. Mejora del juego: progresión, controles, accesibilidad y contenido de las misiones.
+3. Refuerzo educativo y científico de las cinco misiones.
+4. Mejoras prudentes de rendimiento y reducción de efectos costosos en pantallas táctiles.
+5. Ajustes responsive para móviles y pantallas pequeñas.
 
-- `index.html`: página principal, contenido, traducciones y buena parte de la lógica integrada.
-- `assets/aeris-v2.css`: hoja de estilos principal heredada.
-- `assets/aeris-rpg-overhaul.css`: capa visual retro RPG y mejoras de accesibilidad.
-- `assets/aeris-v2-fixes.js`: correcciones auxiliares.
-- `assets/aeris-rpg-overhaul.js`: campaña RPG y progreso.
-- `assets/`: imágenes, mapas, personajes, insignias, reliquias y audio.
+**No se modificó el chatbot ni el asistente de IA.** Tampoco se cambió su integración o sus scripts.
 
-El proyecto usa HTML/CSS/JavaScript estáticos. El ZIP recibido no contiene el código del Worker ni un backend desplegable.
+## Cambios principales
 
-## Revisión de calidad aplicada
+### 1. Identidad visual y presentación
+- Se conserva la estética retro RPG, los colores de bosque/agua, los bordes pixelados y los recursos originales.
+- Se refinan jerarquías tipográficas, navegación, tarjetas, galería, estados hover y focos de teclado.
+- Se refuerza la presentación del mapa, marcadores, dossier, paneles de batalla y recompensas.
+- No se sustituyeron ni editaron imágenes, ilustraciones, mapas o audio.
 
-- Reparación de etiquetas HTML void mal formadas (`img`, etc.).
-- Eliminación de un cierre `</style>` huérfano en el encabezado.
-- Añadido un destino real para el enlace de navegación `Information`.
-- Añadido un enlace para saltar al contenido y un landmark `main`.
-- Protección `rel="noopener noreferrer"` para enlaces que abren pestañas nuevas.
-- Precisión del texto sobre metilmercurio para atribuirlo a un estudio publicado de la cuenca baja Cauca–Magdalena.
-- Nota educativa que explica el alcance de la muestra: 160 peces en total, incluidos 38 del grupo Bajo Cauca; no es un análisis en tiempo real de todo el río.
-- Añadidas referencias de la OMS y Universidad del Valle junto con el estudio de Acta Biológica Colombiana.
-- La nota de evidencia cambia entre inglés y español.
-- Añadidos ajustes de accesibilidad que conservan el lenguaje visual RPG.
+### 2. Juego y controles
+- Cada una de las cinco misiones ahora tiene tres pruebas educativas, en lugar de dos.
+- La progresión de batalla calcula dinámicamente el número de pruebas y el medidor de amenaza.
+- Se agregan controles de teclado: flechas izquierda/derecha y A/D cuando el Guardián o el joystick tienen el foco.
+- El joystick táctil mantiene el control por arrastre y recibe mejoras de interacción táctil.
+- La barra de avance ahora expone su valor como una barra de progreso accesible.
+- Se corrige el punto inicial del indicador de distancia para comenzar en 0%.
 
-## Validaciones ejecutadas en esta revisión
+### 3. Educación ambiental
+Se añadieron preguntas y explicaciones bilingües sobre:
+- Función ecológica de la vegetación ribereña.
+- Seguridad y documentación responsable ante posibles actividades mineras.
+- Metilmercurio, evidencia científica y orientación de autoridades sanitarias.
+- Manejo seguro de residuos peligrosos o desconocidos.
+- Restauración de hábitats con especies nativas y orientación ecológica local.
 
-- 34 bloques JavaScript inline: `node --check` sin errores de sintaxis.
-- 2 archivos JavaScript externos: `node --check` sin errores de sintaxis.
-- Hojas CSS: analizadas con `tinycss2`, sin errores de parseo.
-- HTML analizado con parser tolerante: 106 IDs en DOM, sin IDs duplicados.
-- Referencias locales de `src` y `href`: 34 revisadas, ninguna faltante.
-- Etiquetas void mal formadas restantes: 0.
-- Estructura `main` y `body`: etiquetas de apertura y cierre balanceadas.
+El juego evita presentar observaciones aisladas como prueba automática de ilegalidad, y no recomienda manipular maquinaria, residuos desconocidos ni agua potencialmente contaminada.
 
-La ejecución de Chromium headless no pudo completarse en el entorno de auditoría porque el proceso del navegador falló al inicializar el subsistema gráfico. Por tanto, esta entrega no afirma que se haya realizado una prueba funcional completa en navegador.
+### 4. Rendimiento
+- Se reducen efectos hover que no aportan en dispositivos táctiles.
+- Se evita reservar `will-change` de forma permanente; se aplica al personaje mientras se mueve.
+- Se mantienen los recursos y efectos visuales principales.
+- Se incorpora respeto global a `prefers-reduced-motion`.
+- Las imágenes originales mantienen sus atributos de carga existentes.
 
-## Pendiente de validar en producción
+### 5. Experiencia móvil
+- Se refinan los tamaños y disposición del mapa, marcadores, leyenda y barras.
+- Se mejora el espacio de juego, el panel de preguntas y las respuestas en pantallas pequeñas.
+- Se mejora el tamaño del joystick táctil y se declara `touch-action: none` para evitar gestos de scroll accidentales sobre él.
+- Se limita el desbordamiento horizontal y se ajustan los controles para anchos muy pequeños.
 
-- URL pública de Cloudflare Pages y su comportamiento en dispositivos reales.
-- Worker: `GET /health`, `POST /api/chat`, CORS, límites de uso y gestión de secretos.
-- Respuesta y disponibilidad de imágenes alojadas en dominios externos.
-- Pruebas manuales de todas las misiones, joystick, persistencia, traducción y audio en móvil y escritorio.
+## Validaciones técnicas realizadas
 
-## Despliegue estático
+- 35 bloques JavaScript inline: sin errores de sintaxis con `node --check`.
+- 5 archivos JavaScript externos: sin errores de sintaxis.
+- Hojas CSS: sin errores de parseo con `tinycss2`.
+- HTML parseado: 108 IDs y sin IDs duplicados.
+- 34 referencias locales revisadas: ninguna faltante.
+- Datos del juego: 5 misiones, 3 rondas por misión, exactamente una respuesta correcta por ronda y contenido bilingüe en todas las rondas.
+- Recursos originales: ningún archivo de imagen, ilustración, mapa o audio fue modificado.
+- Integridad del ZIP: verificada.
 
-Para Cloudflare Pages, mantener `index.html` en la raíz del directorio publicado. Si el sitio usa un Worker separado, conservar su configuración y desplegarlo por separado; no colocar claves privadas en el HTML público.
+## Limitaciones de verificación
+
+Estas validaciones son estáticas y de datos. No equivalen a una prueba manual completa en iPhone, Android o escritorio. La prueba automatizada de navegador no se completó en este entorno, así que el comportamiento visual final debe confirmarse en los dispositivos reales y en el despliegue de Cloudflare Pages.
+
+El código del Worker no forma parte del ZIP y queda fuera de esta entrega. El chatbot/asistente de IA tampoco fue intervenido, tal como se solicitó.

@@ -175,13 +175,13 @@
             <div class="rpgChoices" id="rpgChoices"></div>
           </div>
           <div class="rpgControls rpgWheelControls" id="rpgControls" aria-label="Retro game movement wheel">
-            <div class="rpgWheel" id="rpgMoveWheel" role="group" tabindex="0" aria-label="Directional joystick. Drag left or right to move the Guardian.">
+            <div class="rpgWheel" id="rpgMoveWheel" role="group" tabindex="0" aria-label="Directional joystick. Drag left or right to move the Guardian. Use the left and right arrow keys or A and D." aria-keyshortcuts="ArrowLeft ArrowRight A D">
               <div class="rpgWheelNotch notchTop"></div><div class="rpgWheelNotch notchBottom"></div>
               <div class="rpgWheelArc arcLeft" aria-hidden="true"></div><div class="rpgWheelArc arcRight" aria-hidden="true"></div>
               <div class="rpgWheelHub" aria-hidden="true"></div>
             </div>
           </div>
-          <div class="rpgProgressRail" aria-hidden="true"><i id="rpgDistanceFill"></i><b id="rpgDistanceText">0%</b></div>
+          <div class="rpgProgressRail" id="rpgDistanceProgress" role="progressbar" aria-label="Distance to the mission signal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="rpgDistanceFill"></i><b id="rpgDistanceText">0%</b></div>
         </div>
       </div>
     </div>
