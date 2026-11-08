@@ -315,3 +315,354 @@ a[target="_blank"]:focus-visible{outline-offset:4px}
 @media(prefers-reduced-motion:reduce){
   .aerisSkipLink{transition:none!important}
 }
+
+
+/* =========================================================
+   AERIS STAGE 2 — WORLD-CLASS STUDENT PROJECT POLISH
+   Preserve the retro RPG / pixel-art identity.
+   ========================================================= */
+:root{
+  --aeris-ink:#07140f;
+  --aeris-panel:#0d2418;
+  --aeris-panel-raised:#143321;
+  --aeris-leaf:#9bd58a;
+  --aeris-water:#78c9c3;
+  --aeris-sun:#f2ce78;
+  --aeris-paper:#e8efd9;
+}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body.aeris-rpg-overhaul{
+  background-color:var(--aeris-ink);
+  color:var(--aeris-paper);
+  overflow-x:clip;
+  text-rendering:optimizeLegibility;
+}
+body.aeris-rpg-overhaul ::selection{background:#f2ce78;color:#102015}
+body.aeris-rpg-overhaul :focus-visible{
+  outline:3px solid var(--aeris-sun);
+  outline-offset:4px;
+}
+body.aeris-rpg-overhaul .nav{
+  border:1px solid #71965d;
+  box-shadow:4px 4px 0 #020905,0 12px 30px #0005;
+}
+body.aeris-rpg-overhaul .nav a{
+  transition:color .16s ease,background-color .16s ease,transform .16s ease;
+}
+body.aeris-rpg-overhaul .nav a:hover{
+  color:var(--aeris-sun);
+  background:#173b28;
+}
+body.aeris-rpg-overhaul .hero{
+  isolation:isolate;
+  background-color:#102b1d;
+}
+body.aeris-rpg-overhaul .hero:after{
+  content:"";
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,#06140ed9 0%,#06140e80 48%,#06140e20 100%),
+             linear-gradient(0deg,#07140f 0%,transparent 30%);
+}
+body.aeris-rpg-overhaul .heroInner{position:relative;z-index:1}
+body.aeris-rpg-overhaul .hero h1{
+  text-wrap:balance;
+  text-shadow:4px 4px 0 #07140f,0 8px 28px #0009;
+}
+body.aeris-rpg-overhaul .hero p{max-width:58ch;line-height:1.75}
+body.aeris-rpg-overhaul section{position:relative}
+body.aeris-rpg-overhaul section:nth-of-type(even){
+  background-image:linear-gradient(180deg,#10271922,#07140f00 42%,#10271922);
+}
+body.aeris-rpg-overhaul .top{align-items:end;gap:clamp(16px,3vw,36px)}
+body.aeris-rpg-overhaul .top h2{
+  text-wrap:balance;
+  line-height:1.08;
+  letter-spacing:-.035em;
+}
+body.aeris-rpg-overhaul .lead{max-width:58ch;line-height:1.75}
+body.aeris-rpg-overhaul .card,
+body.aeris-rpg-overhaul .story,
+body.aeris-rpg-overhaul .quote{
+  border:1px solid #52794f;
+  background:linear-gradient(145deg,#173824,#0b1e14 78%);
+  box-shadow:4px 4px 0 #020905;
+}
+body.aeris-rpg-overhaul .card{
+  position:relative;
+  overflow:hidden;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+body.aeris-rpg-overhaul .card:before{
+  content:"";
+  position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--aeris-leaf);opacity:.75;
+}
+body.aeris-rpg-overhaul .card:hover{
+  transform:translateY(-4px);
+  border-color:var(--aeris-sun);
+  box-shadow:5px 7px 0 #020905;
+}
+body.aeris-rpg-overhaul .card p,
+body.aeris-rpg-overhaul .story p{line-height:1.75}
+body.aeris-rpg-overhaul .gallery figure{
+  border:2px solid #52794f;
+  box-shadow:4px 4px 0 #020905;
+  overflow:hidden;
+  background:#0b1e14;
+}
+body.aeris-rpg-overhaul .gallery img{
+  transition:transform .35s ease,filter .35s ease;
+}
+body.aeris-rpg-overhaul .gallery figure:hover img{
+  transform:scale(1.035);
+  filter:saturate(1.08);
+}
+body.aeris-rpg-overhaul a{ text-underline-offset:3px }
+body.aeris-rpg-overhaul a:hover{color:var(--aeris-sun)}
+body.aeris-rpg-overhaul .rpgGameShell{
+  border:3px solid #71965d;
+  box-shadow:8px 8px 0 #020905,0 28px 72px #0008;
+}
+body.aeris-rpg-overhaul .rpgMapTopbar{
+  padding:clamp(14px,2.5vw,24px);
+}
+body.aeris-rpg-overhaul .rpgMapViewport{
+  isolation:isolate;
+  overflow:hidden;
+}
+body.aeris-rpg-overhaul .rpgMapImage{
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:320px;
+  object-fit:cover;
+}
+body.aeris-rpg-overhaul .rpgMapMarkers{z-index:4}
+body.aeris-rpg-overhaul .rpgMarker{
+  min-width:42px;min-height:42px;
+  transition:transform .16s ease,filter .16s ease,box-shadow .16s ease;
+}
+body.aeris-rpg-overhaul .rpgMarker:not(:disabled):hover{
+  transform:translate(-50%,-50%) scale(1.12);
+  filter:brightness(1.12);
+  box-shadow:5px 5px 0 #020905,0 0 0 4px #f2ce7850;
+}
+body.aeris-rpg-overhaul .rpgDossier,
+body.aeris-rpg-overhaul .rpgComplete{
+  background:linear-gradient(145deg,#102b1d,#08170f);
+}
+body.aeris-rpg-overhaul .rpgDossierCopy,
+body.aeris-rpg-overhaul .rpgComplete{
+  line-height:1.7;
+}
+body.aeris-rpg-overhaul .rpgStartBtn,
+body.aeris-rpg-overhaul .rpgContinue,
+body.aeris-rpg-overhaul .rpgBack,
+body.aeris-rpg-overhaul .aerisBattleNext,
+body.aeris-rpg-overhaul .aerisBattleAnswer{
+  min-height:46px;
+  transition:transform .14s ease,filter .14s ease,border-color .14s ease;
+}
+body.aeris-rpg-overhaul .rpgStartBtn:hover,
+body.aeris-rpg-overhaul .rpgContinue:hover,
+body.aeris-rpg-overhaul .aerisBattleNext:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.12);
+}
+body.aeris-rpg-overhaul .aerisBattleAnswer{
+  text-align:left;
+  line-height:1.5;
+  border-color:#52794f;
+  background:#10291b;
+}
+body.aeris-rpg-overhaul .aerisBattleAnswer:disabled{opacity:1}
+body.aeris-rpg-overhaul .aerisBattleAnswer.good{
+  border-color:#a6e39b;
+  background:#173e2a;
+}
+body.aeris-rpg-overhaul .aerisBattleAnswer.bad{
+  border-color:#d88c76;
+  background:#39221d;
+}
+body.aeris-rpg-overhaul .rpgWheel{
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  cursor:grab;
+}
+body.aeris-rpg-overhaul .rpgWheel.is-active{cursor:grabbing}
+body.aeris-rpg-overhaul .rpgProgressRail{
+  overflow:hidden;
+}
+body.aeris-rpg-overhaul .rpgProgressRail b{
+  font-variant-numeric:tabular-nums;
+}
+body.aeris-rpg-overhaul .aerisEvidenceNote{
+  max-width:78ch;
+  border-left:3px solid var(--aeris-water);
+  background:#0c241a;
+  line-height:1.75;
+}
+body.aeris-rpg-overhaul img{
+  max-width:100%;
+}
+@media(max-width:800px){
+  body.aeris-rpg-overhaul .hero:after{
+    background:linear-gradient(90deg,#06140ebf,#06140e35),
+               linear-gradient(0deg,#07140f 0%,transparent 42%);
+  }
+  body.aeris-rpg-overhaul .rpgMapImage{min-height:300px}
+  body.aeris-rpg-overhaul .rpgMapLegend{
+    max-width:calc(100% - 16px);
+    line-height:1.45;
+  }
+  body.aeris-rpg-overhaul .rpgPlayStage{min-height:440px}
+  body.aeris-rpg-overhaul .rpgWorldHud{gap:8px}
+  body.aeris-rpg-overhaul .rpgObjective{max-width:42%;text-align:right}
+}
+@media(max-width:600px){
+  html{scroll-padding-top:76px}
+  body.aeris-rpg-overhaul .nav{
+    max-width:calc(100vw - 12px);
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+  }
+  body.aeris-rpg-overhaul .nav::-webkit-scrollbar{display:none}
+  body.aeris-rpg-overhaul .heroInner{padding-top:108px;padding-bottom:108px}
+  body.aeris-rpg-overhaul .top{align-items:flex-start}
+  body.aeris-rpg-overhaul .top h2{font-size:clamp(1.8rem,8vw,2.5rem)}
+  body.aeris-rpg-overhaul .rpgGameShell{
+    width:100%;
+    max-width:100%;
+    box-shadow:4px 4px 0 #020905,0 18px 42px #0007;
+  }
+  body.aeris-rpg-overhaul .rpgMapTopbar{
+    padding:12px;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  body.aeris-rpg-overhaul .rpgStats{
+    display:flex;justify-content:space-between;gap:10px;
+  }
+  body.aeris-rpg-overhaul .rpgMapViewport{
+    min-height:290px;
+  }
+  body.aeris-rpg-overhaul .rpgMapImage{
+    min-height:290px;
+    object-fit:cover;
+  }
+  body.aeris-rpg-overhaul .rpgMarker{
+    min-width:34px;min-height:34px;
+    font-size:.68rem;
+  }
+  body.aeris-rpg-overhaul .rpgMarkerLabel{
+    max-width:104px;
+    white-space:normal;
+    line-height:1.2;
+    font-size:.48rem;
+  }
+  body.aeris-rpg-overhaul .rpgMapLegend{
+    gap:5px;
+    padding:6px;
+    font-size:.48rem;
+  }
+  body.aeris-rpg-overhaul .rpgMapFooter{
+    padding:9px 10px;
+    font-size:.48rem;
+    line-height:1.5;
+  }
+  body.aeris-rpg-overhaul .rpgMissionPlay{padding:7px}
+  body.aeris-rpg-overhaul .rpgPlayTop{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    gap:7px;
+    min-width:0;
+  }
+  body.aeris-rpg-overhaul #rpgPlayMissionLabel{
+    min-width:0;
+    overflow-wrap:anywhere;
+    text-align:center;
+    line-height:1.35;
+  }
+  body.aeris-rpg-overhaul .rpgPlayStage{min-height:390px}
+  body.aeris-rpg-overhaul .rpgWorldHud{
+    left:9px;right:9px;top:9px;
+    padding:8px;
+    gap:6px;
+  }
+  body.aeris-rpg-overhaul .rpgWorldHud strong{font-size:.75rem}
+  body.aeris-rpg-overhaul .rpgHudTag{font-size:.47rem}
+  body.aeris-rpg-overhaul .rpgObjective{font-size:.48rem;max-width:38%}
+  body.aeris-rpg-overhaul .rpgBossField{right:4%;width:36%}
+  body.aeris-rpg-overhaul .rpgBossField>img{max-width:100%;height:auto}
+  body.aeris-rpg-overhaul .rpgGuardianPlayer{width:19%;max-width:84px}
+  body.aeris-rpg-overhaul .rpgControls{
+    left:10px;bottom:12px;
+  }
+  body.aeris-rpg-overhaul .rpgWheel{
+    width:84px;height:84px;
+    min-width:84px;min-height:84px;
+  }
+  body.aeris-rpg-overhaul .rpgProgressRail{
+    left:10px;right:10px;bottom:4px;
+  }
+  body.aeris-rpg-overhaul .aerisBattlePanel{
+    max-height:min(76svh,620px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+  }
+  body.aeris-rpg-overhaul .aerisBattleQuestion{
+    font-size:clamp(.95rem,4.4vw,1.2rem);
+    line-height:1.35;
+  }
+  body.aeris-rpg-overhaul .aerisBattleAnswer{
+    min-height:48px;
+    padding:11px 10px;
+    font-size:.76rem;
+  }
+  body.aeris-rpg-overhaul .rpgRewardRow{
+    grid-template-columns:1fr 1fr;
+  }
+  body.aeris-rpg-overhaul .rpgRewardRow>div:last-child{
+    grid-column:1/-1;
+  }
+}
+@media(max-width:380px){
+  body.aeris-rpg-overhaul .rpgMapViewport,
+  body.aeris-rpg-overhaul .rpgMapImage{min-height:260px}
+  body.aeris-rpg-overhaul .rpgMarkerLabel{max-width:82px}
+  body.aeris-rpg-overhaul .rpgWheel{width:76px;height:76px;min-width:76px;min-height:76px}
+  body.aeris-rpg-overhaul .rpgWorldHud{padding:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  body.aeris-rpg-overhaul *,
+  body.aeris-rpg-overhaul *:before,
+  body.aeris-rpg-overhaul *:after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+}
+
+/* Stage 2 performance safeguards for touch devices and animated scenes. */
+body.aeris-rpg-overhaul .rpgGuardianPlayer.moving{will-change:left,transform}
+body.aeris-rpg-overhaul .rpgAmbient i,
+body.aeris-rpg-overhaul .rpgBossAura{pointer-events:none}
+@media(hover:none) and (pointer:coarse){
+  body.aeris-rpg-overhaul .card:hover,
+  body.aeris-rpg-overhaul .gallery figure:hover img,
+  body.aeris-rpg-overhaul .rpgMarker:not(:disabled):hover{
+    transform:none;
+    filter:none;
+  }
+}
+@media(max-width:600px){
+  body.aeris-rpg-overhaul .rpgAmbient i{opacity:.35}
+  body.aeris-rpg-overhaul .rpgBossAura{opacity:.55}
+  body.aeris-rpg-overhaul .rpgGameShell{transform:translateZ(0)}
+}
