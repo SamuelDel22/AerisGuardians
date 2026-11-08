@@ -52,7 +52,7 @@
   let active = null;
 
   function open() { modal.hidden = false; document.body.classList.add('aerisLearnOpen'); }
-  function close() { modal.hidden = true; document.body.classList.remove('aerisLearnOpen'); active = null; }
+  function close() { modal.hidden = true; document.body.classList.remove('aerisLearnOpen'); active = null; const closeButton = modal.querySelector('.aerisLearnX'); if (closeButton) closeButton.hidden = false; }
   function action(label, fn, cls) {
     const b = document.createElement('button'); b.type = 'button'; b.className = 'aerisLearnButton ' + (cls || ''); b.textContent = label; b.addEventListener('click', fn); return b;
   }
@@ -61,6 +61,7 @@
     $('aerisLearnTitle').textContent = t('guideTitle');
     $('aerisLearnBody').innerHTML = `<div class="aerisLearnGuideGrid"><article><b>01 / ${t('before')}</b><p>${t('beforeText')}</p></article><article><b>02 / ${t('during')}</b><p>${t('duringText')}</p></article><article><b>03 / ${t('after')}</b><p>${t('afterText')}</p></article></div><p class="aerisLearnNote">${t('unavailable')}</p>`;
     $('aerisLearnFeedback').textContent = '';
+    const closeButton = modal.querySelector('.aerisLearnX'); if (closeButton) closeButton.hidden = false;
     $('aerisLearnActions').replaceChildren(action(t('close'), close, 'primary'));
     open();
   }
@@ -88,6 +89,7 @@
     const record = getMission(missionId); const existing = record.verified[cardId];
     if (existing && existing.done) { if (typeof opts.onVerified === 'function') opts.onVerified(existing); return Promise.resolve(existing); }
     active = { card, missionId, cardId, record, attempts: 0, resolve: null, opts };
+    const closeButton = modal.querySelector('.aerisLearnX'); if (closeButton) closeButton.hidden = true;
     paintActiveCard(active);
     open();
     return new Promise(resolve => { active.resolve = resolve; });
@@ -144,8 +146,8 @@
     const r = getMission(String(missionId)); return (cardIds || []).every(id => r.verified[String(id)] && r.verified[String(id)].done);
   }
   function showGuide() { renderGuide(); }
-  modal.addEventListener('click', e => { if (e.target.closest('[data-learn-close]')) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+  modal.addEventListener('click', e => { if (e.target.closest('[data-learn-close]') && !active) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden && !active) close(); });
   window.addEventListener('aeris:language', () => { if (modal.hidden) return; if (active) paintActiveCard(active); else renderGuide(); });
   window.AERISLearning = { showGuide, showCard, stats, allVerified, close, get language() { return lang(); } };
 
