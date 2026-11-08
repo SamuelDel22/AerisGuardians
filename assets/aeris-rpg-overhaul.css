@@ -666,3 +666,29 @@ body.aeris-rpg-overhaul .rpgBossAura{pointer-events:none}
   body.aeris-rpg-overhaul .rpgBossAura{opacity:.55}
   body.aeris-rpg-overhaul .rpgGameShell{transform:translateZ(0)}
 }
+
+
+/* Mobile battle feedback: keep the entire question/result in ONE touch-scroll area.
+   The previous nested scroll containers could trap touch gestures after answering. */
+@media (max-width: 600px), (hover: none) and (pointer: coarse) {
+  body.aeris-rpg-overhaul .rpgEncounter {
+    max-height: min(76svh, 620px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+    scrollbar-width: thin;
+    scroll-padding-block: 12px;
+  }
+  body.aeris-rpg-overhaul .aerisBattlePanel {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    touch-action: pan-y;
+  }
+  body.aeris-rpg-overhaul .aerisBattleFeedback,
+  body.aeris-rpg-overhaul .aerisBattleNext {
+    scroll-margin-block: 12px;
+  }
+}
